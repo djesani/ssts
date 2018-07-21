@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <br/>
+    <!-- <% events.forEach(event => { %>
+      <hr/>
+      <section>
+        <h1><%= event.name %></h1>
+        <div>
+          Start date: <%= new Date(event.startDate).toISOString().split('T')[0] %><br/>
+          End date: <%= new Date(event.endDate).toISOString().split('T')[0] %>
+          <br/><br/>
+          <%= event.description %>
+      </section>
+    <% }); %> -->
+    <a href="/events">
+  </body>
+</html>
