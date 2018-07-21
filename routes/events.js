@@ -8,8 +8,7 @@ router.get('/', function(req, res, next) {
     const events = JSON.stringify(rows);
     console.log('Got events:');
     console.log(events);
-    // res.render('index', { title: 'SSTS', events: rows });
-    res.send(events);
+    res.render('events', { title: 'SSTS', events: rows });
   });
 });
 
