@@ -11,4 +11,8 @@ router.get('/about-us', function(req, res, next) {
   res.render('about-us', { title: 'SSTS' });
 });
 
+router.get('/about-lordSwaminarayan', function(req, res, next) {
+  res.render('about-lordSwaminarayan', { title: 'SSTS' });
+});
+
 module.exports = router;
