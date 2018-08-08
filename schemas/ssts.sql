@@ -49,7 +49,9 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (3,'Event test 1','This is an event description','/path/to/image/img.png',1530938992000,1530938992000,1530417300000,1),(4,'Event test 2','This is ANOTHER event description','/path/to/image/img2.png',1530417300000,1530417300000,1530417300000,1),(7,'Test event4','This is YET ANOTHER test event','/path/to/image/img2.png',1530417300,1530417300,1530417300,1);
+INSERT INTO `event` VALUES (3,'Event test 1','This is an event description','/path/to/image/img.png',1530938992000,1530938992000,1530417300000,1),
+(4,'Event test 2','This is ANOTHER event description','/path/to/image/img2.png',1530417300000,1530417300000,1530417300000,1),
+(7,'Test event4','This is YET ANOTHER test event','/path/to/image/img2.png',1530417300,1530417300,1530417300,1);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

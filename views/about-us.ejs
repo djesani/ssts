@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <br/>
-    <a href="/events">Events</a>
-  </body>
+<head>
+<!--  <title><%= title %></title>-->
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<header>
+  <% include partials/header %>
+</header>
+<body>
+  <p>Welcome to <%= title %></p>
+</body>
+<footer>
+  <% include partials/footer %>
+</footer>
 </html>

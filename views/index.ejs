@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <!--  <title><%= title %></title>-->
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+  <header>
+    <% include partials/header %>
+  </header>
   <body>
-    <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <br/>
+    <!--
     <a href="/events">Events</a><br/>
     <a href="/about-us">About us</a><br/>
+    <a href="/acharyas">Acharyas</a><br/>
     <a href="/about-lordSwaminarayan">About Lord Swaminarayan</a><br/>
     <a href="/mandir-history">Mandir History</a><br/>
     <a href="/history">History</a><br/>
     <a href="/donations">Donations</a><br/>
     <a href="/useful-links">Useful Links</a><br/>
+  -->
   </body>
+  <footer>
+    <% include partials/footer %>
+  </footer>
 </html>
