@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link rel="stylesheet" href="css/vendor.min.css">
+  <link rel="stylesheet" href="css/app.styles.min.css">
+  <title></title>
+</head>
+
+<body ng-app="sstsApp" ng-cloak="">
+  <div ng-controller="MainCtrl">
+    <div ng-include="'modules/core/header/header.html'"></div>
+    <div ui-view=""></div>
+  </div>
+  <script src="js/vendor.min.js"></script>
+  <script src="js/app.min.js"></script>
+</body>
+
+</html>

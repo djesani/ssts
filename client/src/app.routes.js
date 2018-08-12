@@ -1,4 +1,5 @@
-angular.module('sstsApp')
+angular
+    .module('sstsApp')
     .config(function($stateProvider) {
         $stateProvider
             .state('events', {
@@ -10,7 +11,7 @@ angular.module('sstsApp')
                 url: '/all',
                 controller: 'EventsAllCtrl',
                 controllerAs: 'vm',
-                templateUrl:'modules/events.all/events.all.html',
+                templateUrl:'./modules/events.all/events.all.html',
             })
     });
 
