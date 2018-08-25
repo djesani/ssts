@@ -16,7 +16,8 @@
         <h1><%= event.name %></h1>
         <div>
           Start date: <%= new Date(event.startDate).toISOString().split('T')[0] %><br/>
-          End date: <%= new Date(event.endDate).toISOString().split('T')[0] %>
+          End date: <%= new Date(event.endDate).toISOString().split('T')[0] %><br/>
+          <image src="<%= event.imageurl %>"/>
           <br/><br/>
           <%= event.description %>
       </section>
