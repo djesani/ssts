@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-<!--  <title><%= title %></title>-->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <header>
     <% include partials/header %>
-  </header>
+  </head>
   <body>
+    <% include partials/menu %>
     <h1><%= title %> Events</h1>
     <br/>
     <% events.forEach(event => { %>
@@ -23,4 +20,7 @@
       </section>
     <% }); %>
   </body>
+  <footer>
+    <% include partials/footer %>
+  </footer>
 </html>
