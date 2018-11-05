@@ -1,0 +1,80 @@
+.upcoming {
+  background-color: rgb(220, 255, 220);
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+  background: linear-gradient(to right, #22c1c3, #fdbb2d);
+}
+
+.upcoming.row>.article {
+  background-color: lime;
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+  /* background: linear-gradient(to right, #22c1c3, #fdbb2d); */
+  border-color: rgb(220, 255, 220);
+}
+
+.recent {
+  background-color: rgb(255, 245, 246);
+}
+
+.recent.row>.col {
+  background-color: pink
+}
+
+.past {
+  background-color: rgb(229, 247, 247);
+}
+
+.past.row>.col {
+  background-color: aqua
+}
+
+.article {
+  width: unset;
+  height: unset;
+  padding: 0px;
+  margin-right: 0;
+}
+
+.card-body {
+  padding: 0px;
+}
+.card-text {
+  font-size: 1.5em;
+}
+.inlinepopup{
+  /* background: linear-gradient(to right, #ff9966, #ff5e62); */
+  /* background: linear-gradient(to right, #e0eafc, #cfdef3); */
+  /* background: linear-gradient(to right, #b24592, #f15f79); */
+}
+
+.inlinepopup_content h2 {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.name, .date{
+  margin-top: -13px;
+  font-size: 40px;
+}
+
+.name{
+  padding-left: 0;
+  /* color: #eee; */
+}
+
+.date {
+  color: orangered;
+  padding-right: 30px;
+  padding-left: 0px;
+}
+.card-text{
+  /* color: #ddd; */
+  padding-right: 20px;
+}
+
+
+
+@media (max-width: 768px) { 
+  .inlinepopup img.card-img-top {
+    display:none;
+  } 
+}

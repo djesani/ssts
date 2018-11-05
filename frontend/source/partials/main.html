@@ -1,0 +1,29 @@
+<div class="events" ng-controller="EventsAllCtrl">
+    <div class="row upcoming">
+        <div class="article col-xl-3 col-lg-3 col-md-3 col-sm-12" ng-repeat="event in events">
+            <img class="card-img-top" src="{{event.imageurl}}">
+            <div class="card-body">
+                <div class="ip-details">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6 col-sm-12">
+                            <img class="card-img-top" src="{{event.imageurl}}">
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-auto mr-auto name">
+                                    {{event.name}}
+                                </div>
+                                <div class="col-auto date">
+                                    {{event.startDate | date :  "dd MMM y"}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="card-text">{{event.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

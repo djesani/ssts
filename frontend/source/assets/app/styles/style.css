@@ -1,0 +1,110 @@
+body {
+  background-color: #d9d9d9;
+  font-family:"Source Sans Pro",sans-serif;
+}
+header {
+  margin: 0 30px 30px;
+  position: relative;
+  text-align: center;
+}
+header::after {
+  background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+  bottom: 0;
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.7);
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+header h1 {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+  margin: 20px 0;
+}
+#ip-container {
+  position: relative;
+}
+.article {
+  font: 100 14px/150% "Source Sans Pro",sans-serif;
+  border: 1px solid #c2c2c2;
+  color: #585858;
+  width: 270px;
+  height: 270px;
+  float: left;
+  background: #fff;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  padding: 15px;
+  cursor: pointer;
+}
+.article > h2 {
+  margin: 0 0 10px;
+  font: 100 24px/125% "Source Sans Pro",sans-serif;
+  color: #337ab7;
+}
+.article span {
+  display: block;
+  padding-bottom: 5px;
+}
+.article strong {
+  color: #d7342f;
+}
+.ip-details {
+  display: none;
+}
+.inlinepopup {
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #c2c2c2;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
+  position: relative;
+  border-top: 5px solid #cc0a0a;
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.5);
+}
+.inlinepopup_content {
+  margin: 20px;
+  color: #585858;
+}
+.inlinepopup_arrow {
+  background: url("images/arrow-top.png") no-repeat scroll center 0;
+  height: 32px;
+  position: absolute;
+  top: -34px;
+  width: 32px;
+}
+.inlinepopupClose {
+  background: url("images/close.png") no-repeat scroll 0 0;
+  cursor: pointer;
+  height: 16px;
+  position: absolute;
+  right: 5px;
+  text-indent: -9999px;
+  top: 10px;
+  width: 16px;
+  z-index: 99;
+  overflow: hidden;
+  transition: all 0.5s ease 0s;
+}
+.inlinepopupClose:hover {
+  transform: rotate(180deg);
+}
+.inlinepopup_content h2 {
+  color: #585858;
+  font: 100 26px/140% "Source Sans Pro",sans-serif;
+  margin: 0;
+  padding: 0 0 10px;
+}
+.inlinepopup_content ul, .inlinepopup_content ol {
+  margin: 0 0 20px;
+  padding: 0 0 0 20px;
+}
+.inlinepopup_content .img-middle img {
+  margin: 5px auto;
+}
+.inlinepopup_content a.go-button {
+  background: rgba(0, 0, 0, 0) url("images/arrow-right.png") no-repeat scroll right center / 18% auto;
+  color: #585858;
+  font: 600 18px/150% "Source Sans Pro",sans-serif;
+  padding: 5px 30px 5px 0;
+}

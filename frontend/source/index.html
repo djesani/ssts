@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title></title>
+
+    <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./assets/app/styles/style.css" rel="stylesheet" type="text/css">
+    <link href="./assets/app/styles/layout.css" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <script src="assets/vendors/jquery/dist/jquery.js"></script>
+    <script src="assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendors/jquery-migrate/dist/jquery-migrate.js"></script>
+    <script src="assets/vendors/jquery-inline-popup/dist/jquery-inline-popup.js"></script>
+    <script src="assets/vendors/angular/angular.js"></script>
+    <script>angular.module('sstsApp', []);</script>
+</head>
+
+
+<body ng-app="sstsApp" ng-cloak="">
+
+    <div class="container-fluid">
+        <!-- <header class="clearfix">
+            <div ng-include="'partials/header.html'"></div>
+        </header>
+
+        <nav class="clearfix">
+            <div ng-include="'partials/navigation.html'"></div>
+        </nav> -->
+
+        <main class="clearfix">
+            <div ng-include="'partials/main.html'"></div>
+        </main>
+
+        <!-- <footer class="clearfix">
+            <div ng-include="'partials/footer.html'"></div>
+        </footer> -->
+    </div>
+
+    <script>
+        angular
+            .module('sstsApp')
+            .constant('apiUrl', 'api');
+
+        angular
+            .module('sstsApp')
+            .controller('EventsAllCtrl', function ($scope, $http, apiUrl) {
+                $http.get(apiUrl + '/data.json').then(function successCallBack(response) {
+                    $scope.events = response.data.events;
+                    $(function () {
+                        $(".events").inlinePopup({
+                            itemSelector: ".article",
+                            closeinnerelem: "X",
+                            activeFirst: false
+                        })
+                    });
+                })
+            });
+
+
+    </script>
+</body>
+
+</html>

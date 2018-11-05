@@ -1,0 +1,9 @@
+{
+    "path": {
+        "styles": {
+            "sourceFolder": "saas/",
+            "sourceIndex": "index.scss",
+            "destinationFolder": "styles"
+        }
+    }
+}
