@@ -1,14 +1,15 @@
 .upcoming {
-  background-color: rgb(220, 255, 220);
-  background: linear-gradient(to right, #ff9966, #ff5e62);
-  background: linear-gradient(to right, #22c1c3, #fdbb2d);
+  /* background: linear-gradient(to right, #fceabb, #f8b500); */
+  /* background: linear-gradient(to right, #42275a, #734b6d);  */
+  /* background: linear-gradient(to right, #e0eafc, #cfdef3); */
 }
 
 .upcoming.row>.article {
-  background-color: lime;
-  background: linear-gradient(to right, #ff9966, #ff5e62);
-  /* background: linear-gradient(to right, #22c1c3, #fdbb2d); */
-  border-color: rgb(220, 255, 220);
+  /* background: linear-gradient(to bottom, #f8b500, #fceabb); */
+  border-color: #f8dd9b;
+  padding: 10px;
+  margin: 0;
+  background-color: #fceabb
 }
 
 .recent {
@@ -40,10 +41,11 @@
 .card-text {
   font-size: 1.5em;
 }
-.inlinepopup{
-  /* background: linear-gradient(to right, #ff9966, #ff5e62); */
-  /* background: linear-gradient(to right, #e0eafc, #cfdef3); */
-  /* background: linear-gradient(to right, #b24592, #f15f79); */
+
+.inlinepopup {
+  border: 0px solid #f8dd9b; 
+  border-top: 5px solid #f8b500;
+  background: linear-gradient(to right,  #734b6d, #42275a); 
 }
 
 .inlinepopup_content h2 {
@@ -51,27 +53,35 @@
   font-size: 30px;
 }
 
-.name, .date{
-  margin-top: -13px;
+
+.inlinepopup .col-auto {
+  width: fit-content;
+}
+.name, .date {
   font-size: 40px;
+  line-height: 50px;
 }
 
-.name{
+.name {
   padding-left: 0;
-  /* color: #eee; */
+  color: #fceabb;
 }
 
 .date {
   color: orangered;
+  color: #f8b500;;
   padding-right: 30px;
   padding-left: 0px;
 }
+
 .card-text{
-  /* color: #ddd; */
+  color: #ddd;
   padding-right: 20px;
 }
 
-
+body {
+  background: linear-gradient(to top, #fceabb, #f8b500);
+}
 
 @media (max-width: 768px) { 
   .inlinepopup img.card-img-top {
