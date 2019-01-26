@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'SSTS' });
+  res.redirect(301, '/events');
 });
 
 router.get('/about-us', function(req, res, next) {
