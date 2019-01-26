@@ -1,0 +1,29 @@
+{
+  "name": "sstsApp",
+  "authors": [
+    ""
+  ],
+  "description": "",
+  "main": "",
+  "keywords": [
+    ""
+  ],
+  "license": "",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.0",
+    "angular-bootstrap": "^2.5.0",
+    "angular-ui-router": "^1.0.17",
+    "jquery": "^3.3.1",
+    "bootstrap-material-design": "^4.1.1",
+    "gridtab": "^2.1.1"
+  }
+}
