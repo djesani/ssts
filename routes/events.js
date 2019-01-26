@@ -6,7 +6,6 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 
-const eventArray = [];
 const eventFilePath = path.join(__dirname, '../public/events/');
 
 router.get('/', function(req, res, next) {
@@ -20,6 +19,7 @@ router.get('/', function(req, res, next) {
       res.render('events', { title: 'SSTS', events: rows });
     });
   }else{
+    const eventArray = [];
     fs.readdir(eventFilePath, function(err, files) {
       console.log(files);
       if(err) console.log(err);
