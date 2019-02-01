@@ -1,47 +1,86 @@
-footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem; }
+.upcoming {
+  /* background-color: rgb(220, 255, 220); */
+  /* background: linear-gradient(to right, #ff9966, #ff5e62); */
+  /* background: linear-gradient(to right, #22c1c3, #fdbb2d); */
+}
 
-footer p {
-  margin-bottom: .25rem; }
+.upcoming.row>.article {
+  /* background-color: lime; */
+  /* background: linear-gradient(to right, #ff9966, #ff5e62); */
+  /* background: linear-gradient(to right, #22c1c3, #fdbb2d); */
+  border-color: rgb(220, 255, 220);
+}
 
-.box-shadow {
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); }
+.recent {
+  background-color: rgb(255, 245, 246);
+}
 
-.card {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+.recent.row>.col {
+  background-color: pink
+}
+
+.past {
+  background-color: rgb(229, 247, 247);
+}
+
+.past.row>.col {
+  background-color: aqua
+}
+
+.article {
+  width: unset;
+  height: unset;
+  padding: 0px;
+  margin-right: 0;
+}
 
 .card-body {
-  padding: 0.25rem;
-  background-color: orange; }
+  padding: 0px;
+}
+.card-text {
+  font-size: 1.5em;
+}
+.inlinepopup{
+  /* background: linear-gradient(to right, #ff9966, #ff5e62); */
+  /* background: linear-gradient(to right, #e0eafc, #cfdef3); */
+  /* background: linear-gradient(to right, #b24592, #f15f79); */
+}
 
-.h5, h5 {
-  margin-bottom: 0;
-  color: #fff;
-  font-size: 1.15rem; }
+.inlinepopup_content h2 {
+  font-weight: bold;
+  font-size: 30px;
+}
 
-.card-body a:hover {
-  text-decoration: none !important; }
+.name, .date{
+  /* margin-top: -13px; */
+  font-size: 40px;
+}
 
-#events-container {
-  margin-right: 0px; }
+.name{
+  padding-left: 0;
+  /* color: #eee; */
+}
 
-#events-container .col-sm-12 {
-  margin-bottom: 15px;
-  margin-top: 15px;
-  padding-bottom: 0px; }
+.date {
+  color: orangered;
+  color: #ccc;
+  font-size: 24px;
+  padding-right: 30px;
+  padding-left: 0px;
+}
+.card-text{
+  /* color: #ddd; */
+  padding-right: 20px;
+}
 
-.mb-4, .my-4 {
-  margin-bottom: 0 !important; }
+@media (max-width: 768px) { 
+  .inlinepopup img.card-img-top {
+    display:none;
+  } 
+}
 
-.content {
-  background-color: #eee;
-  color: #333;
-  padding: 10px;
-  font-size: 1rem;
-  line-height: 1.2rem; }
 
-.grid-block {
-  width: 100%;
-  height: 100%;
-  background-color: #ffa5000f; }
+.events { position:relative; }
+.items { width:250px; height:250px; float:left; }
+.ip-details { display:none; }
+.inlinepopup {  width:100%; float:left; }

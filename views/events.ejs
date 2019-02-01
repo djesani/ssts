@@ -6,36 +6,51 @@
   <body>
     <% include partials/menu %>
     <h1><%= title %> Events</h1>
-    <div class="container-fluid" id="gridtab-container">
-        <div class="row">
-            <% events.forEach(event => { %>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                <img class="card-img-top" src="<%= event.imageurl %>"/>
-                <div class="card-body">
-                    <a data-toggle="collapse" href="#a1">
-                        <h5 class="card-title"><%= event.name %></h5>
-                        <h5 class="card-title-date start">Start date: <%= new Date(event.startDate).toISOString().split('T')[0] %></h5>
-                        <!-- <h5 class="card-title-date end">End date: <%= new Date(event.endDate).toISOString().split('T')[0] %></h5> -->
-                    </a>
-                    <div class="collapse" id="a1">
-                        <p class="card-text"><%= event.description %></p>
+    <div class="container">
+        <div class="events">
+            <div class="row upcoming">
+                <% events.forEach(event => { %>
+                    <div class="article col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <img class="card-img-top" src="<%= event.imageurl %>"/>
+                        <div class="card-body">
+                            <div class="ip-details">
+                                <div class="row">
+                                    <div class="col-xl-6 col-md-6 col-sm-12">
+                                        <img class="card-img-top" src="<%= event.imageurl %>"/>
+                                    </div>
+                                    <div class="col-xl-6 col-md-6 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-auto mr-auto name">
+                                                <%= event.name %>
+                                            </div>
+                                            <div class="col-auto date">
+                                                    Start date: <%= new Date(event.startDate).toISOString().split('T')[0] %>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p class="card-text"><%= event.description %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                <% }); %>
             </div>
-            <% }); %>
         </div>
-      </div>
-      <script src="/javascripts/gridtab.min.js"></script>
-      <script>
-          $('#gridtab-container').gridtab({
-              grid: 3,
-              tabPadding: 0,
-              borderWidth: 30,
-              contentPadding: 40
-          });
-      </script>
-  </body>
-  <footer>
+    </div>
+    <footer>
     <% include partials/footer %>
-  </footer>
+    </footer>
+
+    <script>
+        $(function () {
+            $(".events").inlinePopup({
+                itemSelector: ".article",
+                closeinnerelem: "X",
+                activeFirst: false
+            })
+        });
+    </script>
+  </body>
 </html>
