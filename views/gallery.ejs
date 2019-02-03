@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!--  <title><%= title %></title>-->
-    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <% if(renderType === 'photo' ) { %>
-      <script src="/galleria/galleria-1.5.7.min.js"></script>
-      <script type='text/javascript' src='/javascripts/page.js'></script>
-    <% } %>
-  </head>
-  <body>
-    <% if(renderType === 'empty' ) { %>
-      <div class="not-found">
-      Unable to load album or photos!
-      </div>
-    <% } %>
 
-    <% if(renderType === 'album' ) { %>
+<head>
+  <!--  <title><%= title %></title>-->
+  <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <% if(renderType === 'photo' ) { %>
+  <script src="/galleria/galleria-1.5.7.min.js"></script>
+  <script type='text/javascript' src='/javascripts/page.js'></script>
+  <% } %>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <% if(renderType === 'empty' ) { %>
+      <div class="not-found">
+        Unable to load album or photos!
+      </div>
+      <% } %>
+
+      <% if(renderType === 'album' ) { %>
       <h2>Albums</h2>
       <ul class="albums">
         <% galleryOutput.forEach(album => { %>
-          <li class="thumb">
-            <a href="<%= galleryRoot %>/<%= album.url %>">
-              <figure>
-                <img src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>"/>
-                <figcaption><%= album.name %></figcaption>
-              </figure>
-            </a>
-          </li>
+        <li class="thumb">
+          <a href="<%= galleryRoot %>/<%= album.url %>">
+            <figure>
+              <img src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" />
+              <figcaption>
+                <%= album.name %>
+              </figcaption>
+            </figure>
+          </a>
+        </li>
         <% }) %>
       </ul>
-    <% } %>
+      <% } %>
 
-    <% if(renderType === 'photo' ) { %>
+      <% if(renderType === 'photo' ) { %>
       <h2>Photos</h2>
       <div class="galleria">
-      <% galleryOutput.forEach(photo => { %>
+        <% galleryOutput.forEach(photo => { %>
         <img src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
-      <% }); %>
+        <% }); %>
       </div>
-    <% } %>
+      <% } %>
 
-  </body>
-  <footer>
-    <div style="clear: both;"></div>
-    <% include partials/footer %>
-  </footer>
+      <footer>
+        <% include partials/footer %>
+      </footer>
+    </div>
+</body>
+
 </html>
