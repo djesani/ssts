@@ -2,10 +2,9 @@
 <html>
 
 <head>
-  <!--  <title><%= title %></title>-->
-  <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  <% include partials/header %>
+
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <link rel="stylesheet" href="/stylesheets/style.css">
   <% if(renderType === 'photo' ) { %>
   <script src="/galleria/galleria-1.5.7.min.js"></script>
   <script type='text/javascript' src='/javascripts/page.js'></script>
@@ -13,9 +12,8 @@
 </head>
 
 <body>
+  <% include partials/menu %>
 
-  <div class="container">
-    <div class="row">
       <% if(renderType === 'empty' ) { %>
       <div class="not-found">
         Unable to load album or photos!
@@ -23,6 +21,8 @@
       <% } %>
 
       <% if(renderType === 'album' ) { %>
+        <div class="container">
+          <div class="row">
       <h2>Albums</h2>
       <ul class="albums">
         <% galleryOutput.forEach(album => { %>
@@ -38,21 +38,27 @@
         </li>
         <% }) %>
       </ul>
+    </div>
+  </div>
       <% } %>
 
       <% if(renderType === 'photo' ) { %>
-      <h2>Photos</h2>
-      <div class="galleria">
+        <div class="container">
+          <div class="row galleria">
         <% galleryOutput.forEach(photo => { %>
         <img src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
         <% }); %>
       </div>
+    </div>
       <% } %>
 
+      <div class="container">
+        <div class="row">
       <footer>
         <% include partials/footer %>
       </footer>
     </div>
+  </div>
 </body>
 
 </html>

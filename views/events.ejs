@@ -6,14 +6,10 @@
 </head>
 
 <body>
+    <% include partials/menu %>
+
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <% include partials/menu %>
-                <h1>
-                    <%= title %> Events</h1>
-            </div>
-        </div>
+        <div class="row">&nbsp;</div>
         <div class="events">
             <div class="row upcoming">
                 <% events.forEach(event => { %>
