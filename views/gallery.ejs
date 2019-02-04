@@ -21,7 +21,7 @@
       <% } %>
 
       <% if(renderType === 'album' ) { %>
-        <div class="container">
+        <div class="container bg-light">
           <div class="row">
       <h2>Albums</h2>
       <ul class="albums">
@@ -43,7 +43,7 @@
       <% } %>
 
       <% if(renderType === 'photo' ) { %>
-        <div class="container">
+        <div class="container bg-light">
           <div class="row galleria">
         <% galleryOutput.forEach(photo => { %>
         <img src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
@@ -52,13 +52,7 @@
     </div>
       <% } %>
 
-      <div class="container">
-        <div class="row">
-      <footer>
-        <% include partials/footer %>
-      </footer>
-    </div>
-  </div>
+      <% include partials/footer %>
 </body>
 
 </html>

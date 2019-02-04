@@ -8,7 +8,7 @@
 <body>
     <% include partials/menu %>
 
-    <div class="container">
+    <div class="container bg-light">
         <div class="row">&nbsp;</div>
         <div class="events">
             <div class="row upcoming">
@@ -48,10 +48,10 @@
                 <% }); %>
             </div>
         </div>
-        <footer>
-            <% include partials/footer %>
-        </footer>
     </div>
+
+    <% include partials/footer %>
+    
     <script>
         $(function () {
             $(".events").inlinePopup({

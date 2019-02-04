@@ -14,6 +14,13 @@ a {
 
 }
 
+.white-border {
+    border-bottom: 2px solid white !important;
+    border-top: 2px solid white !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+
 /* Gallery styles */
 .galleria{
     max-width: 100%;
