@@ -22,29 +22,28 @@
 
       <% if(renderType === 'album' ) { %>
         <div class="container bg-light">
-          <div class="row">
-      <h2>Albums</h2>
-      <ul class="albums">
-        <% galleryOutput.forEach(album => { %>
-        <li class="thumb">
-          <a href="<%= galleryRoot %>/<%= album.url %>">
-            <figure>
-              <img src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" />
-              <figcaption>
-                <%= album.name %>
-              </figcaption>
-            </figure>
-          </a>
-        </li>
-        <% }) %>
-      </ul>
-    </div>
-  </div>
+          <div class="row">&nbsp;</div>
+          <div class="events">
+              <div class="row upcoming">
+                <% galleryOutput.forEach(album => { %>
+                <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12" data-row="1">
+                  <!-- <div class="row"> -->
+                  <div class="grid-image col-sm-12">
+                    <a href="<%= galleryRoot %>/<%= album.url %>">
+                      <img class="card-img-top" src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" /><br/>
+                      <div style="text-align: center"><%= album.name %></div>
+                    </a>
+                  </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
       <% } %>
 
       <% if(renderType === 'photo' ) { %>
-        <div class="container bg-light">
-          <div class="row galleria">
+        <div class="container-fluid">
+          <div class="galleria" style="width:100%">
         <% galleryOutput.forEach(photo => { %>
         <img src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
         <% }); %>
