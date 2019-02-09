@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!--  <title><%= title %></title>-->
-    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <% include partials/header %>
+
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <link rel="stylesheet" href="/stylesheets/style.css">
     <% if(renderType === 'photo' ) { %>
       <script src="/galleria/galleria-1.5.7.min.js"></script>
       <script type='text/javascript' src='/javascripts/page.js'></script>
     <% } %>
   </head>
   <body>
+    <% include partials/menu %>
+
     <% if(renderType === 'empty' ) { %>
       <div class="not-found">
       Unable to load album or photos!
@@ -18,33 +19,36 @@
     <% } %>
 
     <% if(renderType === 'album' ) { %>
-      <h2>Albums</h2>
-      <ul class="albums">
-        <% galleryOutput.forEach(album => { %>
-          <li class="thumb">
-            <a href="<%= dailyDarshanRoot %>/<%= album.url %>">
-              <figure>
-                <img src="<%= dailyDarshanRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>"/>
-                <figcaption><%= album.name %></figcaption>
-              </figure>
-            </a>
-          </li>
-        <% }) %>
-      </ul>
+      <div class="container bg-light">
+        <div class="row">&nbsp;</div>
+        <div class="events">
+            <div class="row upcoming">
+              <% galleryOutput.forEach(album => { %>
+              <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12" data-row="1">
+                <!-- <div class="row"> -->
+                <div class="grid-image col-sm-12">
+                  <a href="<%= dailyDarshanRoot %>/<%= album.url %>">
+                    <img class="card-img-top" src="<%= dailyDarshanRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" /><br/>
+                    <div style="text-align: center"><%= album.name %></div>
+                  </a>
+                </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
     <% } %>
 
     <% if(renderType === 'photo' ) { %>
-      <h2>Photos</h2>
-      <div class="galleria">
+      <div class="container-fluid">
+        <div class="galleria" style="width:100%">
       <% galleryOutput.forEach(photo => { %>
         <img src="<%= dailyDarshanRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
       <% }); %>
       </div>
+    </div>
     <% } %>
 
-    <footer>
-        <% include partials/footer %>
-      </footer>
-    </div>
+    <% include partials/footer %>
   </body>
   </html>

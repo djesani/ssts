@@ -14,6 +14,20 @@ a {
 
 }
 
+.white-border {
+    border-bottom: 2px solid white !important;
+    border-top: 2px solid white !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+
+div.top-grid {
+  border: 1px solid #838fa5 !important;
+  padding-top: 10px;
+  text-align: center;
+  height: 100%;
+}
+
 /* Gallery styles */
 .galleria{
     max-width: 100%;
@@ -22,12 +36,12 @@ a {
 }
 
 ul li.thumb img{
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 235px;
+    max-height: 225px;
 }
 ul li.thumb figure {
-    width: 250px;
-    height: 250px;
+    width: 225px;
+    height: 225px;
     padding: 0px 0px 10px 0px;
     margin: 0;
 }
@@ -35,7 +49,7 @@ ul li.thumb {
     text-align: center;
     list-style: none;
     float: left;
-    width: 250px;
+    width: 255px;
     min-height: 270px;
     height: 270px;
     margin: 10px;
