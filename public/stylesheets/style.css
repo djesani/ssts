@@ -21,6 +21,13 @@ a {
     border-right: 0px !important;
 }
 
+div.top-grid {
+  border: 1px solid #838fa5 !important;
+  padding-top: 10px;
+  text-align: center;
+  height: 100%;
+}
+
 /* Gallery styles */
 .galleria{
     max-width: 100%;
