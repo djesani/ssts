@@ -12,14 +12,95 @@
     <div class="container bg-light">
         <div class="row">&nbsp;</div>
         <div class="events">
+            <div class="row">
+              <h4 class="col-md-12">What's happening...</h4>
+              <% if(eventToday.startDate != "") { %>
+                <h5 class="col-md-3 today-header">Today</h5>
+              <% } %>
+              <h5 class="col-md-9">Next...</h5>
+            </div>
             <div class="row upcoming">
-                <% events.forEach(event => { %>
+              <% if(eventToday.startDate != "") { %>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <!-- <div class="row"> -->
+                    <div class="today-body grid-image col-sm-12">
+                        <img class="card-img-top" src="<%= eventToday.imageurl %>" />
+                    </div>
+                    <div class="card-body">
+                        <div class="ip-details">
+                            <div class="row">
+                                <div class="col-xl-4 col-md-4 col-sm-12">
+                                    <img class="card-img-top" src="<%= eventToday.imageurl %>" />
+                                </div>
+                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-auto-x mr-auto name">
+                                            <%= eventToday.name %>
+                                        </div>
+                                        <div class="col-auto-x date">
+                                            Start date:
+                                            <%= new Date(eventToday.startDate).toISOString().split('T')[0] %>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="card-text">
+                                            <%= eventToday.description %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <% } %>
+
+              <% futureEvents.forEach(event => { %>
+                <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="grid-image col-sm-12">
                         <img class="card-img-top" src="<%= event.imageurl %>" />
                     </div>
-                    <!-- </div> -->
+                    <div class="card-body">
+                        <div class="ip-details">
+                            <div class="row">
+                                <div class="col-xl-4 col-md-4 col-sm-12">
+                                    <img class="card-img-top" src="<%= event.imageurl %>" />
+                                </div>
+                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-auto-x mr-auto name">
+                                            <%= event.name %>
+                                        </div>
+                                        <div class="col-auto-x date">
+                                            Start date:
+                                            <%= new Date(event.startDate).toISOString().split('T')[0] %>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="card-text">
+                                            <%= event.description %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="container bg-light">
+        <div class="row">&nbsp;</div>
+        <div class="events">
+          <div class="row">
+            <h5 class="col-md-12">Past events</h5>
+          </div>
+            <div class="row upcoming">
+                <% pastEvents.forEach(event => { %>
+                <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                    <div class="grid-image col-sm-12">
+                        <img class="card-img-top" src="<%= event.imageurl %>" />
+                    </div>
                     <div class="card-body">
                         <div class="ip-details">
                             <div class="row">

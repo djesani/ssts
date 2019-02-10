@@ -10,8 +10,22 @@ a {
 .pageBottom{
 
   bottom: 0;
-  width: 100%
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  font-size: larger;
+  font-weight: bold;
+  color: hsla(0,0%,100%,.5);
+}
 
+.today-header {
+  text-align: center;
+  background-color: #6b82f2;
+  padding: 5px;
+}
+
+.today-body {
+  border: 5px solid red !important;
 }
 
 .white-border {
