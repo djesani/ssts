@@ -32,11 +32,9 @@
                                             <%= event.name %>
                                         </div>
                                         <div class="col-auto-x date">
-                                            Start date:
                                           <!--  <%= new Date(event.startDate).toISOString().split('T')[0] %>
                                             <%= new Date(event.startDate).toISOString().split('T')[0] %>;
                                           -->
-
                                             <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()%>-<%= new Date(event.startDate).getFullYear()%>
                                         </div>
                                     </div>
