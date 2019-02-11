@@ -33,6 +33,12 @@ router.get('/', function(req, res, next) {
     const eventArray = [];
     const futureEvents = [];
     const pastEvents = [];
+    const placeholderEvent = {
+      "startDate": 946645200000,
+      "endDate": 946645200000,
+      "name": "Future event placeholder",
+      "imageurl": "https://via.placeholder.com/260x370.png?text=No%20future%20event"
+    }
     let eventToday = {};
 
     fs.readdir(eventFilePath, function(err, files) {
@@ -56,6 +62,15 @@ router.get('/', function(req, res, next) {
           pastEvents.push(event);
         }
       });
+
+      console.log(`Future events: ${futureEvents.length}`);
+      if(futureEvents.length < 3){
+        console.log(`Future events: ${futureEvents.length}. We need to add placeholder to fill the row!`);
+        for (let i = futureEvents.length; i < 3; i++){
+          console.log("Adding placeholderEvent");
+          futureEvents.push(placeholderEvent);
+        }
+      }
 
       console.log("Future events:");
       console.log(futureEvents);
