@@ -8,6 +8,17 @@ const router = express.Router();
 
 const eventFilePath = path.join(__dirname, '../public/events/');
 
+const now = new Date();
+const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+const compareByDate = function (a,b) {
+  if (a.startDate < b.startDate)
+    return 1;
+  if (a.startDate > b.startDate)
+    return -1;
+  return 0;
+}
+
 router.get('/', function(req, res, next) {
   if(env.DB_ENABLED){
     db.query('SELECT * FROM event where enabled = 1', (err,rows) => {
@@ -20,6 +31,17 @@ router.get('/', function(req, res, next) {
     });
   }else{
     const eventArray = [];
+    const futureEvents = [];
+    const pastEvents = [];
+    const placeholderEvent = {
+      "startDate": 946645200000,
+      "endDate": 946645200000,
+      "name": "Future event placeholder",
+      "imageurl": "https://via.placeholder.com/260x370.png?text=No%20future%20event",
+      "isPlaceholder" : true
+    }
+    let eventToday = placeholderEvent;
+
     fs.readdir(eventFilePath, function(err, files) {
       console.log(files);
       if(err) console.log(err);
@@ -27,10 +49,40 @@ router.get('/', function(req, res, next) {
         const eventJson = JSON.parse(fs.readFileSync(`${eventFilePath}/${file}`, 'utf8'));
         eventArray.push(eventJson);
       });
-      console.log("Got events:");
-      console.log(eventArray);
+
+      console.log("Today's date: " + todayDate);
+      eventArray.sort(compareByDate).forEach(event => {
+        console.log("Event startDate: " + event.startDate);
+        if(event.startDate > todayDate){
+          console.log("A future event exists, adding to future list.");
+          futureEvents.push(event);
+        }else if(event.startDate === todayDate){
+          console.log("An event is on today!");
+          eventToday = event;
+          eventToday['isEventToday'] = true;
+        }else{
+          pastEvents.push(event);
+        }
+      });
+
+      console.log(`Future events: ${futureEvents.length}`);
+      if(futureEvents.length < 4){
+        const maxEvents = eventToday.isEventToday === true ? 3 : 4;
+        console.log(`Future events: ${futureEvents.length}. We need to add placeholder to fill the row!`);
+
+        for (let i = futureEvents.length; i < maxEvents; i++){
+          console.log("Adding placeholderEvent to future events");
+          futureEvents.push(placeholderEvent);
+        }
+      }
+
+      console.log("Future events:");
+      console.log(futureEvents);
+      console.log("Past events:");
+      console.log(pastEvents);
+
       console.log("DB not enabled. Returning events from file system");
-      res.render('events', { title: 'SSTS', events: eventArray });
+      res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday });
     });
   }
 });
