@@ -18,9 +18,30 @@ a {
   color: hsla(0,0%,100%,.5);
 }
 
+.main-header {
+  padding: 0px 10px;
+  color: #585858;
+  font: 100 14px/150% "Source Sans Pro",sans-serif;
+}
+
 .today-header {
   text-align: center;
-  background-color: #6b82f2;
+  background-color: #ea4a38;
+  color: #ffffff !important;
+  font-weight: bold;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.next-header {
+  background-color: #f9d1cc;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.past-header {
+  background-color: #d2e5f5;
+  font-weight: bold;
   padding: 5px;
 }
 
