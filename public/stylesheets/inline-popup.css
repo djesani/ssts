@@ -109,3 +109,30 @@ body {
     font: 600 18px/150% "Source Sans Pro",sans-serif;
     padding: 5px 30px 5px 0;
   }
+
+  .inlinepopup_arrow {
+    background: unset;
+    top: -15px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top: 10px solid;
+    border-right: 10px solid;
+    margin: 0px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    color: #be3827;
+    box-sizing: border-box;
+    -webkit-transform: rotate(-45deg);
+}
+
+body.darken  .article:not(.active) {
+  opacity: 0.5;
+}
+
+body.darken  .article.active {
+  /* opacity: 1; */
+}
+
+
