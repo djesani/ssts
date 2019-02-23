@@ -47,22 +47,23 @@ body {
     padding-bottom: 5px;
   }
   .article strong {
-    color: #d7342f;
+    color: #563c71;
   }
   .ip-details {
     display: none;
   }
   .inlinepopup {
     /*background: #fff none repeat scroll 0 0;*/
-    background: linear-gradient(#ffffff, #86ade8);
-    border: 1px solid #c2c2c2;
+    background: linear-gradient(#ffffff, #d5934a);
+    border: 1px solid #51437082;
     float: left;
     width: 100%;
     margin-bottom: 15px;
     position: relative;
-    border-top: 5px solid #cc0a0a;
+    border-top: 5px solid #563c71;
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.5);
   }
+
   .inlinepopup_content {
     margin: 20px;
     color: #585858;
@@ -75,16 +76,16 @@ body {
     width: 32px;
   }
   .inlinepopupClose {
-    background: url("images/close.png") no-repeat scroll 0 0;
+    color: #563c71;
     cursor: pointer;
-    height: 16px;
+    height: 20px;
     position: absolute;
     right: 5px;
-    text-indent: -9999px;
     top: 10px;
     width: 16px;
     z-index: 99;
     overflow: hidden;
+    font-weight: bold;
     transition: all 0.5s ease 0s;
   }
   .inlinepopupClose:hover {
@@ -103,13 +104,6 @@ body {
   .inlinepopup_content .img-middle img {
     margin: 5px auto;
   }
-  .inlinepopup_content a.go-button {
-    background: rgba(0, 0, 0, 0) url("images/arrow-right.png") no-repeat scroll right center / 18% auto;
-    color: #585858;
-    font: 600 18px/150% "Source Sans Pro",sans-serif;
-    padding: 5px 30px 5px 0;
-  }
-
   .inlinepopup_arrow {
     background: unset;
     top: -15px;
@@ -122,17 +116,30 @@ body {
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    color: #be3827;
+    color: #563c71;
     box-sizing: border-box;
     -webkit-transform: rotate(-45deg);
 }
 
 body.darken  .article:not(.active) {
-  opacity: 0.5;
+  /* opacity: 0.6; */
 }
 
-body.darken  .article.active {
-  /* opacity: 1; */
+.grid-image:hover{
+  opacity: 0.75;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
+.active .grid-image:hover{
+  opacity: 0.9;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
 
+.other-pages img {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.other-pages p {
+  font-size: 1.2rem;
+}
