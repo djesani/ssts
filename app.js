@@ -7,16 +7,18 @@ const media = require('./routes/media');
 
 const home = require('./routes/index');
 const events = require('./routes/events');
+const dailyDarshan = require('./routes/dailydarshan');
+// const gallery = require('./routes/gallery');
 
 const webRoot = 'http://localhost:3000';
 const galleryRoot = 'public/photo-gallery';
 const dailyDarshanRoot = 'public/daily-darshan';
 
-const gallery = require('node-gallery')({
-  staticFiles : galleryRoot,
-  urlRoot : '/',
-  render : false
-});
+// const gallery = require('node-gallery')({
+//   staticFiles : galleryRoot,
+//   urlRoot : '/',
+//   render : false
+// });
 
 // const dailyDarshan = require('node-gallery')({
 //   staticFiles : dailyDarshanRoot,
@@ -38,12 +40,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', home);
 app.use('/events', events);
+app.use('/daily-darshan', dailyDarshan);
+// app.use('/gallery', gallery);
 
-app.use('/gallery', gallery, function(req, res, next){
-    console.log("Data from gallery:");
-    console.log(req.data);
-    media.renderGallery(req, res, 'gallery');
-});
+// app.use('/gallery', gallery, function(req, res, next){
+//     console.log("Data from gallery:");
+//     console.log(req.data);
+//     media.renderGallery(req, res, 'gallery');
+// });
 
 // app.use('/daily-darshan', dailyDarshan, function(req, res, next){
 //   console.log("Data from gallery:");
