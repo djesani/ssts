@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+</head>
+
+<body>
+  <% include partials/menu %>
+  <div class="container bg-light">
+    <div class="row">
+      <div class="col-sm-12">
+        <form id="adminForm">
+          <h1>New Event:</h1>
+          <div class="form-group">
+            <label for="startDate">Event Start Date</label>
+            <input type="date" class="form-control" id="startDate" placeholder="Start Date">
+          </div>
+          <div class="form-group">
+            <label for="endDate">Event End Date</label>
+            <input type="date" class="form-control" id="endDate" placeholder="End Date">
+          </div>
+          <div class="form-group">
+            <label for="eventName">Event Name</label>
+            <input type="text" class="form-control" id="eventName" placeholder="Event Name">
+          </div>
+          <div class="form-group">
+            <label for="eventDescription">Event Description</label>
+            <input type="text" class="form-control" id="eventDescription" placeholder="Event Description">
+          </div>
+          <div class="form-group">
+            <label for="imageURL">Image URL</label>
+            <input type="url" class="form-control" id="imageURL" placeholder="Image URL">
+          </div>
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <% include partials/footer %>
+</body>
+
+</html>

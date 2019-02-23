@@ -34,4 +34,8 @@ router.get('/useful-links', function(req, res, next) {
   res.render('useful-links', { title: 'Useful Links' });
 });
 
+router.get('/admin', function(req, res, next) {
+  res.render('admin', { title: 'admin' });
+});
+
 module.exports = router;
