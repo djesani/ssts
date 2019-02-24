@@ -19,6 +19,11 @@ const compareByDate = function (a,b) {
   return 0;
 }
 
+const getNoEventImg = function(){
+    // Add random image function
+    return "/images/events/no-event.png";
+}
+
 router.get('/', function(req, res, next) {
   if(env.DB_ENABLED){
     db.query('SELECT * FROM event where enabled = 1', (err,rows) => {
@@ -37,7 +42,7 @@ router.get('/', function(req, res, next) {
       "startDate": 946645200000,
       "endDate": 946645200000,
       "name": "Future event placeholder",
-      "imageurl": "https://via.placeholder.com/260x370.png?text=No%20future%20event",
+      "imageurl": getNoEventImg(),
       "isPlaceholder" : true
     }
     let eventToday = placeholderEvent;
