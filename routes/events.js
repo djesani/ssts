@@ -20,8 +20,12 @@ const compareByDate = function (a,b) {
 }
 
 const getNoEventImg = function(){
-    // Add random image function
-    return "/images/events/no-event.png";
+    var min=1;
+    var max=4;
+    console.log("Generating random number");
+    var random = Math.floor(Math.random() * (+max - +min)) + +min;
+    console.log("Random number generated: " + random);
+    return `/images/no-events/${random}.png`;
 }
 
 router.get('/', function(req, res, next) {
@@ -38,14 +42,12 @@ router.get('/', function(req, res, next) {
     const eventArray = [];
     const futureEvents = [];
     const pastEvents = [];
-    const placeholderEvent = {
+    let eventToday = {
       "startDate": 946645200000,
       "endDate": 946645200000,
       "name": "Future event placeholder",
-      "imageurl": getNoEventImg(),
       "isPlaceholder" : true
     }
-    let eventToday = placeholderEvent;
 
     fs.readdir(eventFilePath, function(err, files) {
       console.log(files);
@@ -77,7 +79,14 @@ router.get('/', function(req, res, next) {
 
         for (let i = futureEvents.length; i < maxEvents; i++){
           console.log("Adding placeholderEvent to future events");
-          futureEvents.push(placeholderEvent);
+          var newFutureEvent = {
+            "startDate": 946645200000,
+            "endDate": 946645200000,
+            "name": "Future event placeholder",
+            "imageurl": getNoEventImg(),
+            "isPlaceholder" : true
+          };
+          futureEvents.push(newFutureEvent);
         }
       }
 
