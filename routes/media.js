@@ -7,13 +7,21 @@ const viewsPath = path.join(__dirname, '../views');
 const galleryRoot = 'public/media';
 const webRoot = 'http://localhost:3000';
 
-const gallery = require('node-gallery')({
+const galleryMiddleware = require('node-gallery')({
   staticFiles : galleryRoot,
   urlRoot : '/',
   render : false
 });
 
-router.use('/', gallery, function(req, res, next) {
+const compareByDate = function (a,b) {
+  if (new Date(a.name) < new Date(b.name))
+    return 1;
+  if (new Date(a.name) > new Date(b.name))
+    return -1;
+  return 0;
+}
+
+router.use('/', galleryMiddleware, function(req, res, next) {
     console.log("Data from gallery:");
     console.log(req.data);
 
@@ -23,7 +31,10 @@ router.use('/', gallery, function(req, res, next) {
     if(req.data.albums.length > 0){
         console.log("Returning album view");
         renderType = "album";
-        galleryOutput = req.data.albums;
+        const sortedAlbums = req.data.albums.sort(compareByDate);
+        // console.log("Sorted albums:");
+        // console.log(sortedAlbums);
+        galleryOutput = sortedAlbums;
     }else if(req.data.photos.length > 0){
         console.log("Returning photo view");
         renderType = "photo";
