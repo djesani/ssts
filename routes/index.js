@@ -34,4 +34,12 @@ router.get('/useful-links', function(req, res, next) {
   res.render('useful-links', { title: 'Useful Links' });
 });
 
+router.get('/test-upload', function(req, res, next) {
+  res.render('admin/test-upload', { title: 'test-upload' });
+});
+
+router.get('/api-docs', function(req, res, next) {
+  res.render('admin/api-docs', { title: 'api-docs' });
+});
+
 module.exports = router;
