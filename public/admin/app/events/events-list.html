@@ -1,0 +1,19 @@
+<button class="btn btn-primary float-right" ui-sref="admin.events.add">
+    <i class="fas fa-plus"></i>
+</button>
+
+<div class="event-list">
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="event in vm.events">
+            <a class="name" ui-sref="admin.events.detail({ id: event.id })">
+                <span class="first">{{event.name.first}},</span>
+                <span class="last">{{event.name.last}}</span>
+                <span class="suffix">{{event.name.suffix}}</span>
+            </a>
+
+            <button class="btn btn-link" ui-sref="admin.events.edit({ id: event.id })">
+                edit
+            </button>
+        </li>
+    </ul>
+</div>
