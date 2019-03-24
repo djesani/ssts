@@ -42,4 +42,9 @@ router.get('/api-docs', function(req, res, next) {
   res.render('admin/api-docs', { title: 'api-docs' });
 });
 
+
+router.get('/admin', function(req, res, next) {
+  res.render('admin/index', { title: 'index' });
+});
+
 module.exports = router;

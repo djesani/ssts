@@ -1,25 +1,22 @@
 <form role="form" name="vm.forms.form" novalidate>
 
-    <div>
+<!-- <div>{{ vm.event | json}} </div> -->
+
+    <div
         <div class="row">
-            <label class="col-sm-1">id</label>
-            <input class="col-sm-4" ng-model="vm.event.id" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.id}}</span>
+            <label class="col-sm-1">Name</label>
+            <input class="col-sm-4" ng-model="vm.event.name" ng-show="vm.view.edit">
+            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.name}}</span>
         </div>
         <div class="row">
-            <label class="col-sm-1">First Name</label>
-            <input class="col-sm-4" ng-model="vm.event.name.first" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.name.first}}</span>
+            <label class="col-sm-1">Start Date</label>
+            <input class="col-sm-4" ng-model="vm.event.startDate" ng-show="vm.view.edit">
+            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.startDate}}</span>
         </div>
         <div class="row">
-            <label class="col-sm-1">Last Name</label>
-            <input class="col-sm-4" ng-model="vm.event.name.last" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.name.last}}</span>
-        </div>
-        <div class="row">
-            <label class="col-sm-1">Suffix</label>
-            <input class="col-sm-4" ng-model="vm.event.name.suffix" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.name.suffix}}</span>
+            <label class="col-sm-1">Filename</label>
+            <input class="col-sm-4" ng-model="vm.event.filename" ng-show="vm.view.edit">
+            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.filename}}</span>
         </div>
     </div>
 
@@ -27,7 +24,7 @@
         <button class="btn btn-link" ng-click="vm.cancel()" ng-show="vm.view.edit">Cancel</button>
         <button type="submit" class="btn btn-primary" ng-click="vm.save(vm.event)" ng-show="vm.view.edit">Save
         </button>
-        <button ui-sref="admin.events.edit({ id: vm.event.id })" class="btn btn-primary" ng-show="vm.view.readOnly">Edit
+        <button ui-sref="admin.events.edit({ id: vm.eventId })" class="btn btn-primary" ng-show="vm.view.readOnly">Edit
         </button>
     </div>
 
