@@ -4,16 +4,19 @@
 
 <div class="event-list">
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="event in vm.events">
-            <a class="name" ui-sref="admin.events.detail({ id: event.id })">
-                <span class="first">{{event.name.first}},</span>
-                <span class="last">{{event.name.last}}</span>
-                <span class="suffix">{{event.name.suffix}}</span>
+        <li class="list-group-item" ng-repeat="event in vm.events track by $index">
+
+            <a class="col link" ui-sref="admin.events.detail({ id: $index })">
+                <span class="col">{{event.name}},</span>
+                <span class="col">{{event.startDate}}</span>
+                <span class="col">{{event.filename}}</span>
             </a>
 
-            <button class="btn btn-link" ui-sref="admin.events.edit({ id: event.id })">
-                edit
-            </button>
+            <div class="col">
+                <button class="btn btn-link" ui-sref="admin.events.edit({ id: $index })">
+                    edit
+                </button>
+            </div>
         </li>
     </ul>
 </div>
