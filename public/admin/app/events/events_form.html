@@ -1,5 +1,7 @@
 <form role="form" name="vm.forms.form" novalidate>
 
+<!-- <div>{{ vm.event | json}} </div> -->
+
     <div
         <div class="row">
             <label class="col-sm-1">Name</label>
@@ -22,7 +24,7 @@
         <button class="btn btn-link" ng-click="vm.cancel()" ng-show="vm.view.edit">Cancel</button>
         <button type="submit" class="btn btn-primary" ng-click="vm.save(vm.event)" ng-show="vm.view.edit">Save
         </button>
-        <button ui-sref="admin.events.edit({ id: vm.event.id })" class="btn btn-primary" ng-show="vm.view.readOnly">Edit
+        <button ui-sref="admin.events.edit({ id: vm.eventId })" class="btn btn-primary" ng-show="vm.view.readOnly">Edit
         </button>
     </div>
 

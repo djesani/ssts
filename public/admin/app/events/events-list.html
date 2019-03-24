@@ -16,6 +16,9 @@
                 <button class="btn btn-link" ui-sref="admin.events.edit({ id: $index })">
                     edit
                 </button>
+                <button class="btn btn-link" ng-click="vm.deleteEvent(event, $index)">
+                    delete
+                </button>
             </div>
         </li>
     </ul>
