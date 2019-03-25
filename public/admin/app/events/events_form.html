@@ -1,26 +1,30 @@
 <form role="form" name="vm.forms.form" novalidate>
 
-<!-- <div>{{ vm.event | json}} </div> -->
-
-    <div
-        <div class="row">
-            <label class="col-sm-1">Name</label>
-            <input class="col-sm-4" ng-model="vm.event.name" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.name}}</span>
-        </div>
-        <div class="row">
-            <label class="col-sm-1">Start Date</label>
-            <input class="col-sm-4" ng-model="vm.event.startDate" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.startDate}}</span>
-        </div>
-        <div class="row">
-            <label class="col-sm-1">Filename</label>
-            <input class="col-sm-4" ng-model="vm.event.filename" ng-show="vm.view.edit">
-            <span class="col-sm-4" ng-hide="vm.view.edit">{{vm.event.filename}}</span>
+    <div class="form-group row">
+        <label class="col-lg-1 col-form-label">Name</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.name" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.name}}</span>
         </div>
     </div>
 
-    <div>
+    <div class="form-group row">
+        <label class="col-lg-1 col-form-label">Start Date</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.startDate" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.startDate | date}}</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-1 col-form-label">Filename</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.filename" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.filename}}</span>
+        </div>
+    </div>
+
+    <div class="action-buttons float-right">
         <button class="btn btn-link" ng-click="vm.cancel()" ng-show="vm.view.edit">Cancel</button>
         <button type="submit" class="btn btn-primary" ng-click="vm.save(vm.event)" ng-show="vm.view.edit">Save
         </button>

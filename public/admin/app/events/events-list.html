@@ -1,25 +1,30 @@
-<button class="btn btn-primary float-right" ui-sref="admin.events.add">
-    <i class="fas fa-plus"></i>
-</button>
-
-<div class="event-list">
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="event in vm.events track by $index">
-
-            <a class="col link" ui-sref="admin.events.detail({ id: $index })">
-                <span class="col">{{event.name}},</span>
-                <span class="col">{{event.startDate}}</span>
-                <span class="col">{{event.filename}}</span>
-            </a>
-
-            <div class="col">
-                <button class="btn btn-link" ui-sref="admin.events.edit({ id: $index })">
-                    edit
-                </button>
-                <button class="btn btn-link" ng-click="vm.deleteEvent(event, $index)">
-                    delete
-                </button>
-            </div>
-        </li>
-    </ul>
+<div class="card">
+    <div class="card-header">
+        <h3 class="float-left">Events</h3>
+        <button class="btn btn-primary float-right" ui-sref="admin.events.add">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div class="card-body event-list">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" ng-repeat="event in vm.events track by $index">
+                <div class="row">
+                    <div class="col-lg read-only">
+                        {{event.name}}
+                    </div>
+                    <div class="col-lg read-only">
+                        {{event.startDate | date}}
+                    </div>
+                    <div class="col-lg read-only">
+                        {{event.filename}}
+                    </div>
+                    <div class="col-lg">
+                        <button class="btn btn-link" ui-sref="admin.events.detail({id:$index})">details</button>
+                        <button class="btn btn-link" ui-sref="admin.events.edit({id: $index})">edit</button>
+                        <button class="btn btn-link" ng-click="vm.deleteEvent(event,$index)">delete</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
