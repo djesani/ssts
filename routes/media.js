@@ -1,11 +1,9 @@
 const express = require('express');
-const media = require('./media');
 const path = require('path');
 
 const router = express.Router();
 const viewsPath = path.join(__dirname, '../views');
 const galleryRoot = 'public/media';
-const webRoot = 'http://localhost:3000';
 
 const galleryMiddleware = require('node-gallery')({
   staticFiles : galleryRoot,
@@ -42,7 +40,7 @@ router.use('/', galleryMiddleware, function(req, res, next) {
     }else{
         console.log("No photo or album found");
     }
-    res.render(`${viewsPath}/gallery`, { title: 'SSTS', galleryRoot: `${webRoot}/media`, galleryOutput, renderType });
+    res.render(`${viewsPath}/gallery`, { title: 'SSTS', galleryRoot: '/media', galleryOutput, renderType });
 });
 
 module.exports = router;
