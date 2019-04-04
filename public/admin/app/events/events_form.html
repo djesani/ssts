@@ -9,10 +9,26 @@
     </div>
 
     <div class="form-group row">
+        <label class="col-lg-1 col-form-label">Description</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.description" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.description}}</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-lg-1 col-form-label">Start Date</label>
         <div class="col-lg-4">
             <input class="form-control" ng-model="vm.event.startDate" ng-show="vm.view.edit">
-            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.startDate | date}}</span>
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.startDate | dateFormat }}</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-1 col-form-label">End Date</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.endDate" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.endDate | dateFormat }}</span>
         </div>
     </div>
 
@@ -23,6 +39,36 @@
             <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.filename}}</span>
         </div>
     </div>
+
+    <div class="form-group row">
+        <label class="col-lg-1 col-form-label">Image URL</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.imageurl" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.imageurl}}</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-1 col-form-label">Unpublished</label>
+        <div class="col-lg-4">
+            <input class="form-control" ng-model="vm.event.unpublished" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.unpublished}}</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-12 col-form-label">Unpublished Date</label>
+        <div class="col-lg-12">
+            <input class="form-control" ng-model="vm.event.unpublishedDate" ng-show="vm.view.edit">
+            <span class="form-control-plaintext" ng-hide="vm.view.edit">{{vm.event.unpublishedDate}}</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
 
     <div class="action-buttons float-right">
         <button class="btn btn-link" ng-click="vm.cancel()" ng-show="vm.view.edit">Cancel</button>
