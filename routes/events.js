@@ -60,19 +60,32 @@ router.get('/', function(req, res, next) {
       console.log("Today's date: " + todayDate);
       eventArray.sort(compareByDate).forEach(event => {
         console.log("Event startDate: " + event.startDate);
-        if(event.startDate > todayDate){
-          console.log("A future event exists, adding to future list.");
-          futureEvents.push(event);
-        }else if(event.startDate === todayDate){
-          console.log("An event is on today!");
-          eventToday = event;
-          eventToday['isEventToday'] = true;
+        console.log("Event publishDate: " + event.publishDate);
+        const publishEvent = event.publishDate == undefined || event.publishDate <= todayDate ? true : false;
+
+        if(publishEvent && !event.unpublished){
+            if(event.startDate > todayDate){
+              console.log("A future event exists, adding to future list.");
+              futureEvents.push(event);
+            }else if(event.startDate === todayDate || (event.startDate <= todayDate && event.endDate >= todayDate)){
+              console.log("An event is on today!");
+              eventToday = event;
+              eventToday['isEventToday'] = true;
+            }else{
+              pastEvents.push(event);
+            }
         }else{
-          pastEvents.push(event);
+            console.log(`Event: ${event.name} NOT PUBLISHED. Publish date in future or event marked as Unpublished!`);
         }
       });
 
       console.log(`Future events: ${futureEvents.length}`);
+
+      // Reverse order for future events only
+      if(futureEvents.length > 0){
+          futureEvents.reverse();
+      }
+
       if(futureEvents.length < 4){
         const maxEvents = eventToday.isEventToday === true ? 3 : 4;
         console.log(`Future events: ${futureEvents.length}. We need to add placeholder to fill the row!`);
@@ -80,8 +93,8 @@ router.get('/', function(req, res, next) {
         for (let i = futureEvents.length; i < maxEvents; i++){
           console.log("Adding placeholderEvent to future events");
           var newFutureEvent = {
-            "startDate": 946645200000,
-            "endDate": 946645200000,
+            "startDate": 2524568400000,
+            "endDate": 2524568400000,
             "name": "Future event placeholder",
             "imageurl": getNoEventImg(),
             "isPlaceholder" : true

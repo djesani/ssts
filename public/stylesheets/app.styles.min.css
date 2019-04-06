@@ -91,6 +91,7 @@
 body {
   padding: 0px;
   background-image: url('/images/web-assets/background.jpg');
+  /* background-color: blue; */
   background-repeat: no-repeat;
   background-attachment: fixed;
   /* background-position: center;  */
