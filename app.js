@@ -7,6 +7,7 @@ const media = require('./routes/media');
 const admin = require('./routes/admin/index');
 const home = require('./routes/index');
 const events = require('./routes/events');
+const events = require('./routes/users');
 const ddPreview = require('./routes/ddPreview');
 
 const app = express();
@@ -25,6 +26,7 @@ app.use('/', home);
 app.use('/events', events);
 app.use('/media', media);
 app.use('/admin', admin);
+app.use('/users', users);
 app.use('/dd-preview', ddPreview);
 
 // catch 404 and forward to error handler
