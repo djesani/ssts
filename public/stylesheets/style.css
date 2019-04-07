@@ -57,6 +57,7 @@ div.top-grid {
     padding-top: 10px;
     text-align: center;
     height: 100%;
+    cursor: default;
 }
 
 div.other-pages {
