@@ -1,0 +1,45 @@
+<style>
+.ball-loader {
+  width: 50px;
+  height: 10.33333px;
+  position: absolute;
+
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.grid-image:hover .ball-loader-ball {
+  will-change: transform;
+  height: 10.33333px;
+  width: 10.33333px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  animation: grow 1s ease-in-out infinite alternate;
+}
+/* .ball-loader-ball.ball1 {
+left: 0;
+transform-origin: 100% 50%;
+} */
+.grid-image:hover .ball-loader-ball.ball2 {
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  animation-delay: 0.33s;
+}
+.grid-image:hover .ball-loader-ball.ball3 {
+  right: 0;
+  animation-delay: 0.66s;
+}
+@keyframes grow {
+  to {
+    transform: translateX(-50%) scale(0);
+  }
+}
+
+</style>
+
+
+<div class="ball-loader" style="bottom:0; right: 0;">
+  <div class="ball-loader-ball ball1" ></div>
+  <div class="ball-loader-ball ball2" ></div>
+  <div class="ball-loader-ball ball3"></div>
+</div>
