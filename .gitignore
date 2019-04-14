@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#nohup logs for production server
+nohup.out
+
 # Runtime data
 pids
 *.pid
