@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #nohup logs for production server
-nohup
+nohup.out
 
 # Runtime data
 pids
