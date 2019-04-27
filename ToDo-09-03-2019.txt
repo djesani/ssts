@@ -1,11 +1,12 @@
 Items:
 1. UX polish up (potentially remove top grid)
 2. DONE - Publish date logic - use end date to determine if event should still show as today
-3. Menu for mobile
-4. When less than 4 grid on future grid, hide no future events (in UI - use class no-event)
-5. Gallery change black background to same as events container
-6. Admin section:
-    UI:
+3. DONE Menu for mobile
+4. When there are no future events and its all filled with placeholders, then we should hide the entire grid as there's no event
+5. When in mobile view, only show future events where isPlaceholder is not "TRUE"
+6. Gallery change black background to same as events container
+7. Admin section:
+    DONE - UI:
         first view: username/password
         second view: all events in grid - update/(unpublish/publish toggle) buttons
         "create new" view: show a form with all fields needed for json file
