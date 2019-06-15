@@ -1,0 +1,24 @@
+Hiten:
+- 3 dots to be reversed
+- apply dots to future events
+- Change 'Gallery' menu to 'media' and drop down to 'Gallery' and 'daily darshan'
+- Fix colours for sub nav
+- Apply new gallery
+- Hide images in mobile view
+- Hide 'no future event' image for mobile
+
+Mahesh:
+- Switch to angular 2
+- Get login view in place
+- Image upload
+- Daily darshan upload
+  -> multi image selection + upload
+
+Dev:
+- Auth layer for login
+  -> expose endpoint '/auth' which accepts email/password as object
+  -> return OK if passed or error message if fails
+  -> change admin endpoints to validate auth header (create middleware)
+- subcribe user
+  -> create simple user db
+  -> store user to db
