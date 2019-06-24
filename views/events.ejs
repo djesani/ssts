@@ -33,6 +33,7 @@
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="today-body grid-image col-sm-12">
                         <img class="card-img-top" src="<%= eventToday.imageurl %>" />
+                        <% include partials/moreSymbol5 %>
                     </div>
                     <div class="card-body">
                         <div class="ip-details">
@@ -66,6 +67,7 @@
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="grid-image col-sm-12">
                         <img class="card-img-top" src="<%= event.imageurl %>" />
+                        <% include partials/moreSymbol5 %>
                     </div>
                     <% if (!event.isPlaceholder) { %>
                     <div class="card-body">
@@ -111,7 +113,7 @@
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="grid-image col-sm-12">
                         <img class="card-img-top" src="<%= event.imageurl %>" />
-                          <% include partials/moreSymbol2 %>
+                          <% include partials/moreSymbol5 %>
                     </div>
                     <div class="card-body">
                         <div class="ip-details">

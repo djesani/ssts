@@ -1,0 +1,70 @@
+<style>
+#arrowAnim {
+  width: 10px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+}
+
+.arrow {
+  width: 15px;
+  height: 15px;
+  border: 2.5px solid;
+  border-color: red transparent transparent red;
+  transform: rotate(-135deg);
+}
+
+
+.arrowSliding {
+  position: absolute;
+  -webkit-animation: slide 4s linear infinite;
+          animation: slide 4s linear infinite;
+}
+
+.delay1 {
+  -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+.delay2 {
+  -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+}
+.delay3 {
+  -webkit-animation-delay: 3s;
+    animation-delay: 3s;
+}
+
+@-webkit-keyframes slide {
+    0% { opacity:0; transform: translateY(-15px); }
+   20% { opacity:1; transform: translateY(-9px); }
+   80% { opacity:1; transform: translateY(9px); }
+  100% { opacity:0; transform: translateY(15px); }
+}
+@keyframes slide {
+    0% { opacity:0; transform: translateY(-15px); }
+   20% { opacity:1; transform: translateY(-9px); }
+   80% { opacity:1; transform: translateY(9px); }
+  100% { opacity:0; transform: translateY(15px); }
+}
+
+</style>
+
+
+<div id="arrowAnim">
+  <div class="arrowSliding">
+    <div class="arrow"></div>
+  </div>
+  <div class="arrowSliding delay1">
+    <div class="arrow"></div>
+  </div>
+  <div class="arrowSliding delay2">
+    <div class="arrow"></div>
+  </div>
+  <div class="arrowSliding delay3">
+    <div class="arrow"></div>
+  </div>
+</div>

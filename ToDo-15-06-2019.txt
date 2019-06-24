@@ -1,7 +1,7 @@
 Hiten:
-- 3 dots to be reversed
-- apply dots to future events
-- Change 'Gallery' menu to 'media' and drop down to 'Gallery' and 'daily darshan'
+-d 3 dots to be reversed
+-d apply dots to future events
+-d Change 'Gallery' menu to 'media' and drop down to 'Gallery' and 'daily darshan'
 - Fix colours for sub nav
 - Apply new gallery
 - Hide images in mobile view
