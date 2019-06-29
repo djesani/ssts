@@ -29,16 +29,6 @@ const getNoEventImg = function(){
 }
 
 router.get('/', function(req, res, next) {
-  if(env.DB_ENABLED){
-    db.query('SELECT * FROM event where enabled = 1', (err,rows) => {
-      if(err) throw err;
-      const events = JSON.stringify(rows);
-      console.log('Got events:');
-      console.log(events);
-
-      res.render('events', { title: 'SSTS', events: rows });
-    });
-  }else{
     const eventArray = [];
     const futureEvents = [];
     const pastEvents = [];
@@ -111,7 +101,6 @@ router.get('/', function(req, res, next) {
       console.log("DB not enabled. Returning events from file system");
       res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday });
     });
-  }
 });
 
 module.exports = router;
