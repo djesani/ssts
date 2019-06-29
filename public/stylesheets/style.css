@@ -4,8 +4,12 @@ body {
     background-color: #fff6e4;
 }
 
-.dropdown-item{
-  background: rgba(86, 60, 113, 0.76);
+.nav-item{
+  background : #563c71;
+}
+.dropdown-item:hover{
+  background: blue;
+  color: white;
 }
 .pageBottom {
     bottom: 0;
