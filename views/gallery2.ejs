@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/header %>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+  <link rel="stylesheet" href="/stylesheets/grid-gallery.css">
+  <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
+
+
+</head>
+<body>
+<% include partials/menu %>
+  <section class="gallery-block grid-gallery11">
+    <div class="container">
+      <div class="row">
+        <% if(renderType === 'album' ) { %>
+          <div class="container bg-light">
+            <div class="row">&nbsp;</div>
+            <div class="events">
+              <div class="row upcoming">
+                <% galleryOutput.forEach(album => { %>
+                  <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12" data-row="1">
+                    <!-- <div class="row"> -->
+                    <div class="grid-image col-sm-12">
+                      <a href="<%= galleryRoot %>/<%= album.url %>">
+                        <img class="card-img-top" src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" /><br/>
+                        <div style="text-align: center"><%= album.name %></div>
+                      </a>
+                    </div>
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+            <% } %>
+
+            <% if(renderType === 'photo' ) { %>
+              <div class="container-fluid">
+                <div class="galleria" style="width:100%">
+                  <% galleryOutput.forEach(photo => { %>
+                    <img src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
+                    <% }); %>
+                  </div>
+                </div>
+                <% } %>
+      </div>
+    </div>
+  </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script>
+    baguetteBox.run('.grid-gallery11', { animation: 'slideIn'});
+    </script>
+</body>
+</html>
