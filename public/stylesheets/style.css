@@ -4,13 +4,7 @@ body {
     background-color: #fff6e4;
 }
 
-.nav-item{
-  background : #563c71;
-}
-.dropdown-item:hover{
-  background: blue;
-  color: white;
-}
+
 .pageBottom {
     bottom: 0;
     width: 100%;
@@ -113,6 +107,17 @@ ul li.thumb {
 
 figure.photo {
     margin: 0;
+}
+
+.nav-item{
+  background : #563c71;
+}
+.dropdown-item{
+  color: white;
+}
+.dropdown-item:hover{
+  background: white; 
+  color: white;
 }
 
 .navbar-nav.social {
