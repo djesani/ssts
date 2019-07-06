@@ -4,6 +4,10 @@ body {
     background-color: #fff6e4;
 }
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
 
 .pageBottom {
     bottom: 0;
@@ -115,9 +119,11 @@ figure.photo {
 .dropdown-item{
   color: white;
 }
+
 .dropdown-item:hover{
-  background: white; 
+  background: none;
   color: white;
+  font-weight: bold;
 }
 
 .navbar-nav.social {
@@ -130,11 +136,6 @@ figure.photo {
 
 .navbar-nav.social a:hover {
     color: orange;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
 }
 
 #return-to-top {
