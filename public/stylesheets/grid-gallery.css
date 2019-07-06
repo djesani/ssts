@@ -21,6 +21,7 @@
 .gallery-block.grid-gallery .item img{
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
   transition: 0.4s;
+  padding: 10px;
 }
 
 .gallery-block.grid-gallery .item{
