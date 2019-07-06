@@ -2,60 +2,54 @@
 <html>
 <head>
   <% include partials/header %>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
   <link rel="stylesheet" href="/stylesheets/grid-gallery.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
-
-
 </head>
 <body>
 <% include partials/menu %>
-<% include partials/buttons/goBack %>
-<section class="gallery-block grid-gallery">
-  <div class="container">
-    <% if(renderType === 'album' ) { %>
-      <div class="container bg-light">
-        <div class="row">&nbsp;</div>
-        <div class="events">
-            <div class="row upcoming">
-              <% galleryOutput.forEach(album => { %>
-              <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12" data-row="1">
-                <!-- <div class="row"> -->
-                <div class="grid-image col-sm-12">
-                  <a href="<%= galleryRoot %>/<%= album.url %>">
-                    <img class="card-img-top" src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" /><br/>
-                    <div style="text-align: center"><%= album.name %></div>
-                  </a>
-                </div>
+  <section class="gallery-block grid-gallery">
+    <div class="container">
+      <% include partials/buttons/goBack %>
+      <% if(renderType === 'album' ) { %>
+        <div class="container bg-light ">
+          <div class="row">&nbsp;</div>
+          <div class="events">
+              <div class="row upcoming">
+                <% galleryOutput.forEach(album => { %>
+                <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12" data-row="1">
+                  <!-- <div class="row"> -->
+                  <div class="grid-image col-sm-12">
+                    <a href="<%= galleryRoot %>/<%= album.url %>">
+                      <img class="card-img-top"  src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" /><br/>
+                      <div style="text-align: center"><%= album.name %></div>
+                    </a>
+                  </div>
+              </div>
+              <% }) %>
             </div>
-            <% }) %>
           </div>
         </div>
-      </div>
-    <% } %>
-    <% if(renderType === 'photo' ) { %>
-      <div class="row">
-          <div class="col-sm-12 item">
-              <% galleryOutput.forEach(photo => { %>
-                <a class="lightbox" href="<%= galleryRoot %>/<%= photo.src %>">
-                  <img class="img-fluid image scale-on-hover col-sm-3" style="height:200px" src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
-                </a>
-              <% }); %>
+      <% } %>
+      <% if(renderType === 'photo' ) { %>
+        <div class="container ">
+          <div class="row">
+              <div class="col-sm-12 item">
+                  <% galleryOutput.forEach(photo => { %>
+                    <a class="lightbox" href="<%= galleryRoot %>/<%= photo.src %>">
+                      <img class="img-fluid scale-on-hover col-sm-3" src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
+                    </a>
+                  <% }); %>
+              </div>
           </div>
-      </div>
-    <% } %>
-  </div>
-</section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-<script>
-    baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
-</script>
+        </div>
+      <% } %>
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+  <script>
+      baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
+  </script>
     <% include partials/footer %>
     <% include partials/buttons/scroll %>
 </body>
