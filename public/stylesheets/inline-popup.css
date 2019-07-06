@@ -54,7 +54,10 @@ body {
   }
   .inlinepopup {
     /*background: #fff none repeat scroll 0 0;*/
-    background: linear-gradient(#ffffff, #d5934a);
+    background: url("/images/web-assets/background.jpg") no-repeat scroll center 0;
+    /* -webkit-filter: blur(1px); */
+    /* background: linear-gradient(#ffffff, #d5934a); */
+    /* background: linear-gradient(#ffffff, #d5934a); */
     border: 1px solid #51437082;
     float: left;
     width: 100%;
