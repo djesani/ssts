@@ -1,5 +1,3 @@
-const env = process.env;
-
 const db = require('../../lib/db');
 const express = require('express');
 const router = express.Router();
@@ -9,8 +7,7 @@ router.post('/subscribe', function(req, res, next) {
     console.log("Got subscriber:");
     console.log(subscriber);
 
-    if(env.DB_ENABLED){
-      db.query(`SELECT * FROM subscriber where email = '${subscriber.email}'`, (err,rows) => {
+    db.query(`SELECT * FROM subscriber where email = '${subscriber.email}'`, (err,rows) => {
         if(err) throw err;
         console.log('Got email rows:');
         console.log(rows);
@@ -28,10 +25,7 @@ router.post('/subscribe', function(req, res, next) {
             res.send("OK");
           })
         }
-      });
-    }else{
-      res.send("OK");
-    }
+    });
 });
 
 module.exports = router;
