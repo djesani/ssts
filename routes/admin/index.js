@@ -1,5 +1,6 @@
 const events = require('./events');
 const users = require('./users');
+const auth = require('./auth');
 const path = require('path');
 const formidable = require('formidable');
 const express = require('express');
@@ -9,6 +10,7 @@ const eventsImagePath = path.join(__dirname, '../../public/images/events');
 
 router.use('/events', events);
 router.use('/users', users);
+router.use('/auth', auth);
 
 router.post('/fileupload', function (req, res){
     var form = new formidable.IncomingForm();
