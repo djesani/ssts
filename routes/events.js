@@ -1,5 +1,3 @@
-const env = process.env;
-
 const db = require('../lib/db');
 const fs = require('fs');
 const path = require('path');

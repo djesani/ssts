@@ -1,5 +1,3 @@
-const env = process.env;
-
 const db = require('../../lib/db');
 const { basicAuth, localAuth } = require('../../utils/strategies');
 const express = require('express');
