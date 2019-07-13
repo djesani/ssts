@@ -8,11 +8,12 @@
 </head>
 <body>
 <% include partials/menu %>
+<div class="container cont-gal">
   <section class="gallery-block grid-gallery">
-    <div class="container">
+
       <% include partials/buttons/goBack %>
       <% if(renderType === 'album' ) { %>
-        <div class="container bg-light ">
+        <!-- <div class="container bg-light "> -->
           <div class="row">&nbsp;</div>
           <div class="events">
               <div class="row upcoming">
@@ -29,23 +30,24 @@
               <% }) %>
             </div>
           </div>
-        </div>
+        <!-- </div> -->
       <% } %>
       <% if(renderType === 'photo' ) { %>
-        <div class="container ">
+
           <div class="row">
-              <div class="col-sm-12 item">
                   <% galleryOutput.forEach(photo => { %>
-                    <a class="lightbox" href="<%= galleryRoot %>/<%= photo.src %>">
-                      <img class="img-fluid scale-on-hover col-sm-3" src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
-                    </a>
+                    <div class="col-sm-3 item">
+                      <a class="lightbox" href="<%= galleryRoot %>/<%= photo.src %>">
+                        <img class="img-fluid scale-on-hover" src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">
+                      </a>
+                    </div>
                   <% }); %>
-              </div>
           </div>
-        </div>
+
       <% } %>
-    </div>
+
   </section>
+      </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
   <script>
       baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
