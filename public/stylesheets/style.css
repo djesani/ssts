@@ -8,6 +8,9 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
+.cont-gal{
+  padding: 0;
+}
 
 .pageBottom {
     bottom: 0;
