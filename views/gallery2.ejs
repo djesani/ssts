@@ -8,10 +8,9 @@
 </head>
 <body>
 <% include partials/menu %>
+<% include partials/buttons/goBack %>
 <div class="container cont-gal">
   <section class="gallery-block grid-gallery">
-
-      <% include partials/buttons/goBack %>
       <% if(renderType === 'album' ) { %>
         <!-- <div class="container bg-light "> -->
           <div class="row">&nbsp;</div>
@@ -20,10 +19,10 @@
                 <% galleryOutput.forEach(album => { %>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12" data-row="1">
                   <!-- <div class="row"> -->
-                  <div class="grid-image col-sm-12">
+                  <div class="img-fluid scale-on-hover col-sm-12">
                     <a href="<%= galleryRoot %>/<%= album.url %>">
                       <img class="card-img-top"  src="<%= galleryRoot %>/<%= album.url %>?tn=1" alt="<%= album.name %>" /><br/>
-                      <div style="text-align: center"><%= album.name %></div>
+                      <div style="text-align: center; background:red; color:black"><%= album.name %></div>
                     </a>
                   </div>
               </div>
@@ -52,6 +51,7 @@
   <script>
       baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
   </script>
+  <div class="row">&nbsp;</div>
     <% include partials/footer %>
     <% include partials/buttons/scroll %>
 </body>

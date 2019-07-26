@@ -1,4 +1,32 @@
 
-  <input type="button" value="Back" onclick="history.back()" style="background:#563c71de; color:white">
-  <!-- <button onclick="history.back()">Go Back</button> -->
+<!-- <input type="button" value="Back" onclick="history.back()" style="background:#563c71de; color:white"> -->
+<!-- <button onclick="history.back()">Go Back</button> -->
 <!-- <a type="button" class="btn btn-rounded" href="history.back()">Primary</a> -->
+<style>
+.bk-btn {
+  height: 52px;
+  width: 52px;
+  background-color: black;
+  border-radius: 50%;
+}
+.bk-btn .bk-btn-triangle {
+  position: relative;
+  top: 13px;
+  left: 10.4px;
+  width: 0;
+  height: 0;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-right: 13px solid white;
+}
+.bk-btn .bk-btn-bar {
+  position: relative;
+  background-color: white;
+  height: 7.8px;
+  width: 13px;
+  top: -3.64px;
+  left: 22.88px;
+}
+
+</style>
+<div class="bk-btn" onclick="history.back()"><div class="bk-btn-triangle"></div><div class="bk-btn-bar"></div></div>
