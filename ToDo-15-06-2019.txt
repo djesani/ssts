@@ -2,10 +2,10 @@ Hiten:
 -d 3 dots to be reversed
 -d apply dots to future events
 -d Change 'Gallery' menu to 'media' and drop down to 'Gallery' and 'daily darshan'
-- Fix colours for sub nav
-- Apply new gallery
-- Hide images in mobile view
-- Hide 'no future event' image for mobile
+-d Fix colours for sub nav
+-half Apply new gallery
+-d Hide images in mobile view
+-d Hide 'no future event' image for mobile
 
 Mahesh:
 - Switch to angular 2
