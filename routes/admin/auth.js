@@ -5,8 +5,29 @@ const router = express.Router();
 
 router.post('/basic',
     basicAuth.authenticate('basic'), function(req, res, next) {
-    console.log(req.user);
-    res.send('OK');
+    const user = req.user;
+    console.log(user);
+    // db.query(`SELECT * FROM user where username = '${user.username}'`, (err,rows) => {
+    //     if(err) throw err;
+    //     console.log('Got email rows:');
+    //     console.log(rows);
+    //
+    //     const dbPass = rows[0].password;
+    //     if(user.password === dbPass){
+    //         console.log('Password matched db!');
+    //         res.send('OK');
+    //     }else{
+    //         console.log('User not found. Returning 401 error!');
+    //         res.status(401).send('UNAUTHORIZED');
+    //     }
+    // });
+    if(user.password === 'test' && user.username === 'test'){
+        console.log('Password matched!');
+        res.send('OK');
+    }else{
+        console.log('User not matched. Returning 401 error!');
+        res.status(401).send({status: 'UNAUTHORIZED', message: 'Unauthorized to login. Check credentials are correct.'});
+    }
 });
 
 router.post('/local',
