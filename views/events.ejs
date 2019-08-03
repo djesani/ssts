@@ -16,20 +16,17 @@
             <div class="row upcoming">
                 <h4 class="col-md-12">What's happening...</h4>
                 <% if(eventToday.isEventToday) { %>
-                <div class="main-header col-xl-3 col-lg-3 col-md-6 col-sm-12 d-none d-md-block ">
+                <div class="main-header col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <h5 class="today-header">Today</h5>
                 </div>
-                <div class="main-header col-xl-9 col-lg-9 col-md-6 col-sm-12 d-none d-md-block ">
+                <div class="main-header col-xl-9 col-lg-9 col-md-6 col-sm-12">
                     <h5 class="next-header">Next...</h5>
                 </div>
                 <% } else { %>
-                <div class="main-header col-xl-12 col-lg-12 col-md-12 col-sm-12 d-none d-md-block ">
+                <div class="main-header col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <h5 class="next-header">Next...</h5>
                 </div>
                 <% } %>
-                <div class="main-header col-xl-12 col-lg-12 col-md-12 col-sm-12 d-md-none">
-                    <h5 class="today-header">Upcoming...</h5>
-                </div>
             </div>
             <div class="row upcoming upcoming">
                 <% if(eventToday.isEventToday) { %>
