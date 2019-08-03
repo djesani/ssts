@@ -5,10 +5,15 @@ const path = require('path');
 const router = express.Router();
 const ddFilePath = path.join(__dirname, '../public/media/daily-darshan/');
 
+const toDate = (dateStr) => {
+  const [day, month, year] = dateStr.split("-");
+  return new Date(year, month - 1, day);
+}
+
 const compareByDate = function (a,b) {
-  if (new Date(a) < new Date(b))
+  if (toDate(a) < toDate(b))
     return -1;
-  if (new Date(a) > new Date(b))
+  if (toDate(a) > toDate(b))
     return 1;
   return 0;
 }
