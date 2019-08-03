@@ -89,6 +89,12 @@ h1 {
     margin: 0 auto;
 }
 
+.gallery-img-name{
+  background: RGB(86,60,113, 0.7);
+  text-align: center;
+  color:white;
+}
+
 ul li.thumb img {
     max-width: 235px;
     max-height: 225px;
