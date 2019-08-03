@@ -121,13 +121,14 @@ figure.photo {
   background : #563c71;
 }
 .dropdown-item{
-  color: white;
+  /* color: white; */
+color: #a293af;
 }
 
 .dropdown-item:hover{
   background: none;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .navbar-nav.social {
