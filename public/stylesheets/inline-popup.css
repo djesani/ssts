@@ -66,6 +66,10 @@ body {
     border-top: 5px solid #563c71;
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.5);
   }
+  .inlinepopup:focus {
+    background: red;
+  }
+
 
   .inlinepopup_content {
     margin: 20px;

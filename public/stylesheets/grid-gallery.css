@@ -28,6 +28,12 @@
   margin-bottom: 20px;
 }
 
+.gallery-img-name{
+  background: RGB(86,60,113, 0.7);
+  text-align: center;
+  color:white;
+}
+
 @media (min-width: 576px) {
 
   .gallery-block.grid-gallery .scale-on-hover:hover{
