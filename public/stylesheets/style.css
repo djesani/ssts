@@ -1,7 +1,13 @@
 body {
-    padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     background-color: #fff6e4;
+
+}
+.social-icon-align{
+      margin-right: -32px;
+}
+.top-image-padding{
+  padding-top: 30px;
 }
 
 body {
