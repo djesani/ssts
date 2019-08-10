@@ -11558,3 +11558,9 @@ label.col-form-label {
 
 .form-label-group input {
   min-height: 66px; }
+
+.scale-grow {
+  transform: scale(2);
+  margin-left: 10px;
+}
+  

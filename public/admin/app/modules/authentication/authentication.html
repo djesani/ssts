@@ -5,7 +5,7 @@
 <div ng-show="error" class="alert alert-danger">{{error}}</div>
 <form name="form" ng-submit="login()" role="form">
     <div class="form-group">
-        <label for="email">Email a</label>
+        <label for="email">Email</label>
         <!-- <i class="fa fa-key"></i> -->
         <input type="text" name="email" id="email" class="form-control" ng-model="email" value="test" required />
         <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
