@@ -1,3 +1,6 @@
+// Dynamically load images using progressively
+progressively.init();
+
 var submit = document.getElementById('subscribe-submit');
 
 submit.addEventListener("click", function(){

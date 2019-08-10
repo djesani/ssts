@@ -34,9 +34,10 @@
             <div class="row upcoming upcoming">
                 <% if(eventToday.isEventToday) { %>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="today-body grid-image col-sm-12">
+                    <div class="today-body grid-image col-sm-12 progressive">
                       <!-- <h5 class="today-header">Today</h5> -->
-                        <img class="card-img-top" src="<%= eventToday.imageurl %>" />
+                        <!-- <img class="card-img-top" src="<%= eventToday.imageurl %>" /> -->
+                        <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= eventToday.imageurl %>" src="<%= eventToday.lowimageurl %>">
                         <% include partials/moreSymbol5 %>
                     </div>
                     <div class="card-body">
@@ -72,12 +73,14 @@
 
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <% if (event.isPlaceholder){ %>
-                    <div class="grid-image col-sm-12 d-none d-md-block">
-                        <img class="card-img-top" src="<%= event.imageurl %>" />
+                    <div class="grid-image col-sm-12 d-none d-md-block progressive">
+                        <!-- <img class="card-img-top" src="<%= event.imageurl %>" /> -->
+                        <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>">
                     </div>
                   <% } else { %>
-                    <div class="grid-image col-sm-12">
-                        <img class="card-img-top" src="<%= event.imageurl %>" />
+                    <div class="grid-image col-sm-12 progressive">
+                        <!-- <img class="card-img-top" src="<%= event.imageurl %>" /> -->
+                        <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>">
                         <% include partials/moreSymbol5 %>
                     </div>
                 <%  } %>
@@ -124,9 +127,9 @@
                 </div>
                 <% pastEvents.forEach(event => { %>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="grid-image col-sm-12">
-                        <img class="card-img-top" src="<%= event.imageurl %>" />
-                          <% include partials/moreSymbol5 %>
+                    <div class="grid-image col-sm-12 progressive">
+                        <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>">
+                        <% include partials/moreSymbol5 %>
                     </div>
                     <div class="card-body">
                         <div class="ip-details">

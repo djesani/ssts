@@ -18,12 +18,19 @@ const compareByDate = function (a,b) {
 }
 
 const getNoEventImg = function(){
-    var min=1;
-    var max=4;
+    const min=1;
+    const max=4;
     console.log("Generating random number");
-    var random = Math.floor(Math.random() * (+max - +min)) + +min;
+    const random = Math.floor(Math.random() * (+max - +min)) + +min;
     console.log("Random number generated: " + random);
-    return `/images/no-events/${random}.png`;
+
+    const imageurl = `/images/no-events/${random}.png`;
+    const lowimageurl = `/images/no-events/${random}-lowly.png`;
+    return { imageurl, lowimageurl };
+}
+
+const generateLowResImage = function(event){
+    event.lowimageurl = event.imageurl.replace('.jpg', '-lowly.jpg');
 }
 
 router.get('/', function(req, res, next) {
@@ -49,6 +56,8 @@ router.get('/', function(req, res, next) {
       eventArray.sort(compareByDate).forEach(event => {
         console.log("Event startDate: " + event.startDate);
         console.log("Event publishDate: " + event.publishDate);
+        generateLowResImage(event);
+
         const publishEvent = event.publishDate == undefined || event.publishDate <= todayDate ? true : false;
 
         if(publishEvent && !event.unpublished){
@@ -80,11 +89,13 @@ router.get('/', function(req, res, next) {
 
         for (let i = futureEvents.length; i < maxEvents; i++){
           console.log("Adding placeholderEvent to future events");
+          const { imageurl, lowimageurl } = getNoEventImg();
           var newFutureEvent = {
             "startDate": 2524568400000,
             "endDate": 2524568400000,
             "name": "Future event placeholder",
-            "imageurl": getNoEventImg(),
+            "imageurl": imageurl,
+            "lowimageurl": lowimageurl,
             "isPlaceholder" : true
           };
           futureEvents.push(newFutureEvent);
