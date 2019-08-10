@@ -1,5 +1,9 @@
 // Dynamically load images using progressively
-progressively.init();
+document.onreadystatechange = function () {
+  if (document.readyState === 'interactive') {
+    progressively.init();
+  }
+}
 
 var submit = document.getElementById('subscribe-submit');
 
