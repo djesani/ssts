@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
+const compression = require('compression');
 const media = require('./routes/media');
 const admin = require('./routes/admin/index');
 const home = require('./routes/index');
@@ -12,6 +13,9 @@ const events = require('./routes/events');
 const ddPreview = require('./routes/ddPreview');
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +26,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'secret',
