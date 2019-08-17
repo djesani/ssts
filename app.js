@@ -18,8 +18,8 @@ const staticBasePath = path.join(__dirname, 'public');
 const app = express();
 
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(serveStatic(staticBasePath, {'index': false}));
 app.use(compression());
+app.use(serveStatic(staticBasePath, {'index': false}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
