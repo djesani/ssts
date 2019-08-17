@@ -6,15 +6,19 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const compression = require('compression');
+const serveStatic = require('serve-static');
 const media = require('./routes/media');
 const admin = require('./routes/admin/index');
 const home = require('./routes/index');
 const events = require('./routes/events');
 const ddPreview = require('./routes/ddPreview');
 
+const staticBasePath = path.join(__dirname, 'public');
+
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(serveStatic(staticBasePath, {'index': false}));
 app.use(compression());
 
 // view engine setup
