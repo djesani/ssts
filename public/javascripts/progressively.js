@@ -125,7 +125,7 @@
  */
   defaults = {
     throttle: 300, // appropriate value, don't change unless intended
-    delay: 100,
+    delay: 0,
     onLoadComplete: function () {},
     onLoad: function () {},
     smBreakpoint: 600
