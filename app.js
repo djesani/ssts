@@ -46,6 +46,8 @@ app.use('/media', media);
 app.use('/admin', admin);
 app.use('/dd-preview', ddPreview);
 
+app.use('/admin', express.static(path.join(__dirname, 'admin')));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
