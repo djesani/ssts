@@ -46,13 +46,16 @@ router.get('/test-upload', function(req, res, next) {
   res.render('admin/test-upload', { title: 'test-upload' });
 });
 
-router.get('/api-docs', function(req, res, next) {
+router.get('/admin/api-docs', function(req, res, next) {
   res.render('admin/api-docs', { title: 'api-docs' });
 });
 
 
-router.get('/admin', function(req, res, next) {
-  res.render('admin/index', { title: 'index' });
+router.get('/admin3/', function(req, res, next) {
+  res.render('admin3', { title: 'index' });
 });
+
+
+
 
 module.exports = router;
