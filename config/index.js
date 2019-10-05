@@ -9,7 +9,7 @@ const prodConfig = {
     }
 };
 
-const testConfig = {
+const devConfig = {
     db: {
         host: 'ssts.a2hosted.com',
         user: 'sstsahos_webapp',
@@ -18,11 +18,11 @@ const testConfig = {
     }
 };
 
-const getRuntimeConfig = (runtime = 'test') => {
+const getRuntimeConfig = (runtime = 'dev') => {
     if(runtime === 'production'){
         return prodConfig;
     }else{
-        return testConfig;
+        return devConfig;
     }
 };
 
