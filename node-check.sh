@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+PATH=$PATH:/home/sstsahos/bin
+
 if telnet -c localhost 30000 </dev/null 2>&1 | grep -q Escape;
 then
   echo "ssts web port is open."
