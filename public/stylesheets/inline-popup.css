@@ -28,7 +28,7 @@ body {
     font: 100 14px/150% "Source Sans Pro",sans-serif;
     border: 1px solid #c2c2c2;
     color: #585858;
-    width: 270px;
+    /* width: 270px; */
     /* height: 270px; */
     float: left;
     background: #fff;
