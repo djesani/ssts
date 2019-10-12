@@ -38,10 +38,6 @@ router.get('/contact-us', function(req, res, next) {
   res.render('contact-us', { title: 'Contact Us' });
 });
 
-router.get('/contact-us2', function(req, res, next) {
-  res.render('contact-us2', { title: 'Contact Us2' });
-});
-
 router.get('/test-upload', function(req, res, next) {
   res.render('admin/test-upload', { title: 'test-upload' });
 });
