@@ -38,7 +38,7 @@
           <% include partials/buttons/goBack %>
           <div class="row">
                   <% galleryOutput.forEach(photo => { %>
-                    <div class="col-sm-3 item scale-on-hover">
+                    <div class="col-sm-3 scale-on-hover" style="margin-bottom: 20px;margin-top: 10px;">
                       <a class="lightbox" href="<%= galleryRoot %>/<%= photo.src %>">
                           <div class="wrapper">
                         <img class="img-fluid" src="<%= galleryRoot %>/<%= photo.src %>" alt="<%= photo.name %>">

@@ -6,7 +6,8 @@ const prodConfig = {
         user: 'sstsahos_webapp',
         password: '55t5WebApp',
         name: 'sstsahos_ssts'
-    }
+    },
+    galleryRoot: '/media'
 };
 
 const devConfig = {
@@ -15,7 +16,8 @@ const devConfig = {
         user: 'sstsahos_webapp',
         password: '55t5WebApp',
         name: 'sstsahos_ssts-test'
-    }
+    },
+    galleryRoot: 'public/media'
 };
 
 const getRuntimeConfig = (runtime = 'dev') => {
