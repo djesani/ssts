@@ -9,7 +9,7 @@ const prodConfig = {
         name: 'sstsahos_ssts'
     },
     mediaRootDir: `${publicRoot}/media`,
-    eventFilePath: `${publicRoot}/events`,
+    eventFilePath: '/home/sstsahos/ssts-events',
     imageRootDir: `${publicRoot}/images`,
     // imageBasePath: `${publicRoot}/images`
     imageBasePath: 'https://storage.googleapis.com/cloudiq-aviary-dev-cdn/test-site'
