@@ -8,7 +8,7 @@ const prodConfig = {
         password: '55t5WebApp',
         name: 'sstsahos_ssts'
     },
-    mediaRootDir: `${publicRoot}/media`,
+    mediaRootDir: '../public_html/media-content',
     eventFilePath: '/home/sstsahos/ssts-events',
     imageRootDir: `${publicRoot}/images`,
     // imageBasePath: `${publicRoot}/images`
