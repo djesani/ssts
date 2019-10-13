@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
+const { mediaRootDir } = require('../config');
 
 const router = express.Router();
 const viewsPath = path.join(__dirname, '../views');
-const galleryRoot = 'public/media';
 
 const galleryMiddleware = require('node-gallery')({
-  staticFiles : galleryRoot,
+  staticFiles : mediaRootDir,
   urlRoot : '/',
   render : false
 });

@@ -1,4 +1,5 @@
 const env = process.env;
+const publicRoot = '/home/sstsahos/public_html';
 
 const prodConfig = {
     db: {
@@ -7,7 +8,11 @@ const prodConfig = {
         password: '55t5WebApp',
         name: 'sstsahos_ssts'
     },
-    galleryRoot: '/media'
+    mediaRootDir: `${publicRoot}/media`,
+    eventFilePath: `${publicRoot}/events`,
+    imageRootDir: `${publicRoot}/images`,
+    // imageBasePath: `${publicRoot}/images`
+    imageBasePath: 'https://storage.googleapis.com/cloudiq-aviary-dev-cdn/test-site'
 };
 
 const devConfig = {
@@ -17,7 +22,10 @@ const devConfig = {
         password: '55t5WebApp',
         name: 'sstsahos_ssts-test'
     },
-    galleryRoot: 'public/media'
+    mediaRootDir: 'public/media',
+    eventFilePath: 'public/events',
+    imageRootDir: 'public/images',
+    imageBasePath: ''
 };
 
 const getRuntimeConfig = (runtime = 'dev') => {

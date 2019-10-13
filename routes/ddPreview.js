@@ -1,9 +1,10 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { mediaRootDir } = require('../config');
 
 const router = express.Router();
-const ddFilePath = path.join(__dirname, '../public/media/daily-darshan/');
+const ddFilePath = `${mediaRootDir}/daily-darshan`;
 
 const toDate = (dateStr) => {
   const [day, month, year] = dateStr.split("-");
