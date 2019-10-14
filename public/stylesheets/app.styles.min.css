@@ -119,6 +119,7 @@ img.card-img-top {
 .wrapper {
   position: relative;
   overflow: hidden;
+  border: 1px solid #665b9575;
 }
 
 .wrapper:after {

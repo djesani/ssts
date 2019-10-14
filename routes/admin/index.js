@@ -4,9 +4,10 @@ const auth = require('./auth');
 const path = require('path');
 const formidable = require('formidable');
 const express = require('express');
+const { imageRootDir } = require('../../config');
 const router = express.Router();
 
-const eventsImagePath = path.join(__dirname, '../../public/images/events');
+const eventsImagePath = `${imageRootDir}/events`;
 
 router.use('/events', events);
 router.use('/users', users);

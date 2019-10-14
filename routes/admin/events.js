@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { eventFilePath } = require('../../config');
 const router = express.Router();
 
-const eventFilePath = path.join(__dirname, '../../public/events');
 const externalImagePath = "/images/events/";
 const externalImagePathRegex = "^\/images\/events\/";
 

@@ -62,3 +62,12 @@ typings/
 
 # next.js build output
 .next
+
+# DD ftp quota
+.ftpquota
+
+#Ignore public files
+images/events/
+images/no-events/
+events/
+media/

@@ -2,11 +2,8 @@ const db = require('../lib/db');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { eventFilePath, imageBasePath } = require('../config');
 const router = express.Router();
-
-const eventFilePath = path.join(__dirname, '../public/events/');
-// const imageBasePath = '';
-const imageBasePath = 'https://storage.googleapis.com/cloudiq-aviary-dev-cdn';
 
 const now = new Date();
 const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
@@ -26,9 +23,10 @@ const getNoEventImg = function(){
     const random = Math.floor(Math.random() * (+max - +min)) + +min;
     console.log("Random number generated: " + random);
 
-    // const imageurl = `${imageBasePath}/images/no-events/${random}.png`;
-    const imageurl = `${imageBasePath}/events/no-events/${random}.png`;
-    const lowimageurl = `${imageBasePath}/events/no-events/${random}-lowly.png`;
+    const imageurl = `${imageBasePath}/images/no-events/${random}.png`;
+    const lowimageurl = '';
+    // const imageurl = `${imageBasePath}/events/no-events/${random}.png`;
+    // const lowimageurl = `${imageBasePath}/events/no-events/${random}-lowly.png`;
     return { imageurl, lowimageurl };
 }
 
@@ -52,8 +50,7 @@ router.get('/', function(req, res, next) {
       if(err) console.log(err);
       files.forEach(file => {
         const eventJson = JSON.parse(fs.readFileSync(`${eventFilePath}/${file}`, 'utf8'));
-        // eventJson.imageurl = imageBasePath + eventJson.imageurl;
-        eventJson.imageurl = imageBasePath + eventJson.imageurl.replace('images/', '');
+        eventJson.imageurl = imageBasePath + eventJson.imageurl;
         eventArray.push(eventJson);
       });
 
