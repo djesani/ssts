@@ -27,15 +27,12 @@
                     <h5 class="next-header">Next...</h5>
                 </div>
                 <% } %>
-                <div class="main-header col-xl-12 col-lg-12 col-md-12 col-sm-12 d-md-none">
-                    <h5 class="today-header">Upcoming...</h5>
-                </div>
             </div>
             <div class="row upcoming upcoming">
                 <% if(eventToday.isEventToday) { %>
+                <h5 class="today-header d-md-none" style="width:100%;margin:10px;">Today</h5>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="today-body grid-image col-sm-12 progressive">
-                      <!-- <h5 class="today-header">Today</h5> -->
                         <img class="card-img-top" src="<%= eventToday.imageurl %>" />
                         <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= eventToday.imageurl %>" src="<%= eventToday.lowimageurl %>"> -->
                         <% include partials/moreSymbol5 %>
@@ -47,7 +44,7 @@
                                     <img class="card-img-top" src="<%= eventToday.imageurl %>" />
                                     <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= eventToday.imageurl %>" src="<%= eventToday.lowimageurl %>"> -->
                                 </div>
-                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                <div class="col-xl-8 col-md-8 col-sm-12">
                                     <div class="row">
                                         <div class="col-auto-x mr-auto name">
                                             <%= eventToday.name %>
@@ -58,7 +55,7 @@
                                             <%= new Date(eventToday.startDate).getDate()%>-<%= new Date(eventToday.startDate).getMonth()%>-<%= new Date(eventToday.startDate).getFullYear()%>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-top: 10px;">
                                         <p class="card-text">
                                             <%= eventToday.description %>
                                         </p>
@@ -71,7 +68,10 @@
                 <% } %>
 
                 <% futureEvents.forEach(event => { %>
-
+                    <% if(!event.isPlaceholder && !futureEvents.labelApplied){ %>
+                        <h5 class="next-header d-md-none" style="width:100%;margin:10px;">Next...</h5>
+                        <% futureEvents.labelApplied = true %>
+                    <% } %>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <% if (event.isPlaceholder){ %>
                     <div class="grid-image col-sm-12 d-none d-md-block progressive">
@@ -93,7 +93,7 @@
                                     <img class="card-img-top" src="<%= event.imageurl %>" />
                                     <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>"> -->
                                 </div>
-                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                <div class="col-xl-8 col-md-8 col-sm-12">
                                     <div class="row">
                                         <div class="col-auto-x mr-auto name">
                                             <%= event.name %>
@@ -104,9 +104,9 @@
                                             <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()%>-<%= new Date(event.startDate).getFullYear()%>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-top: 10px;">
                                         <p class="card-text">
-                                            <%= event.description %>
+                                            <%- event.description %>
                                         </p>
                                     </div>
                                 </div>
@@ -153,9 +153,9 @@
                                             <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()%>-<%= new Date(event.startDate).getFullYear()%>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-top: 10px;">
                                         <p class="card-text">
-                                            <%= event.description %>
+                                            <%- event.description %>
                                         </p>
                                     </div>
                                 </div>
