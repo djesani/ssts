@@ -1,10 +1,12 @@
+const events = require('./events');
 const express = require('express');
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.redirect(301, '/events');
-});
+// router.get('/', function(req, res, next) {
+//   res.redirect(301, '/events');
+// });
+router.use('/', events);
 
 router.get('/about-us', function(req, res, next) {
   res.render('about-us', { title: 'About Us' });
