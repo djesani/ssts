@@ -21,7 +21,7 @@ router.post('/basic',
     //         res.status(401).send('UNAUTHORIZED');
     //     }
     // });
-    if(user.password === 'test' && user.username === 'test'){
+    if( user.username === 'admin' && user.password === 'Swaminarayan19'){
         console.log('Password matched!');
         res.send('OK');
     }else{
