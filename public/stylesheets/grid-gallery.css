@@ -35,6 +35,8 @@
   background: RGB(86,60,113, 0.7);
   text-align: center;
   color:white;
+  padding: 2px 0;
+  font-weight: bold;
 }
 
 @media (min-width: 576px) {

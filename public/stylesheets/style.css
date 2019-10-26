@@ -19,7 +19,7 @@ body {
 
 .cont-gal {
     padding: 0;
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: rgb(255, 255, 255, 0.4);
 }
 
 .pageBottom {
@@ -216,8 +216,13 @@ figure.photo {
     border: 1px solid #ccc;
 }
 
+.table-openingtimes {
+    border: 0px !important;
+    margin-bottom: 0px !important;
+}
+
 .bg-light {
-    background-color: #f5f5f58c !important;
+    background-color: #f5f5f5c9 !important;
 }
 
 .input-error {

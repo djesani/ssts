@@ -45,7 +45,7 @@
   padding: 0px;
 }
 .card-text {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .inlinepopup{
   /* background: linear-gradient(to right, #ff9966, #ff5e62); */
@@ -70,8 +70,7 @@
 }
 
 .date {
-  color: orangered;
-  color: #ccc;
+  color: #848282;
   font-size: 24px;
   padding-right: 30px;
   padding-left: 0px;

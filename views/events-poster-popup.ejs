@@ -41,7 +41,7 @@
                         <div class="ip-details">
                             <div class="row">
                                 <div class="col-xl-4 col-md-4 col-sm-12">
-                                    <img class="card-img-top" src="<%= eventToday.imageurl %>" />
+                                    <a href="#"><img class="card-img-top" src="<%= eventToday.imageurl %>" data-toggle="modal" data-target="#todayEvent" />
                                     <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= eventToday.imageurl %>" src="<%= eventToday.lowimageurl %>"> -->
                                 </div>
                                 <div class="col-xl-8 col-md-8 col-sm-12">
@@ -52,7 +52,7 @@
                                         <div class="col-auto-x date">
                                             Start date:
                                             <!-- <%= new Date(eventToday.startDate).toISOString().split('T')[0] %> -->
-                                            <%= new Date(eventToday.startDate).getDate()%>-<%= new Date(eventToday.startDate).getMonth()+1%>-<%= new Date(eventToday.startDate).getFullYear()%>
+                                            <%= new Date(eventToday.startDate).getDate()%>-<%= new Date(eventToday.startDate).getMonth()%>-<%= new Date(eventToday.startDate).getFullYear()%>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px;">
@@ -64,10 +64,19 @@
                             </div>
                         </div>
                     </div>
+                    <div id="todayEvent" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content" style="width:110%;">
+                            <div class="modal-body">
+                                <img src="<%= eventToday.imageurl %>" class="img-responsive" style="width:100%">
+                            </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
                 <% } %>
 
-                <% futureEvents.forEach(event => { %>
+                <% futureEvents.forEach((event, index) => { %>
                     <% if(!event.isPlaceholder && !futureEvents.labelApplied){ %>
                         <h5 class="next-header d-md-none" style="width:100%;margin:10px;">Next...</h5>
                         <% futureEvents.labelApplied = true %>
@@ -75,7 +84,7 @@
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <% if (event.isPlaceholder){ %>
                     <div class="grid-image col-sm-12 d-none d-md-block progressive">
-                        <img class="card-img-top" src="<%= event.imageurl %>" style="opacity:0.4" />
+                        <img class="card-img-top" src="<%= event.imageurl %>" />
                         <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>"> -->
                     </div>
                   <% } else { %>
@@ -90,7 +99,7 @@
                         <div class="ip-details">
                             <div class="row">
                                 <div class="col-xl-4 col-md-4 col-sm-12">
-                                    <img class="card-img-top" src="<%= event.imageurl %>" />
+                                    <a href="#"><img class="card-img-top" src="<%= event.imageurl %>" data-toggle="modal" data-target="#futureEvent-<%= index %>" /></a>
                                     <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>"> -->
                                 </div>
                                 <div class="col-xl-8 col-md-8 col-sm-12">
@@ -101,7 +110,7 @@
                                         <div class="col-auto-x date">
                                             Start date:
                                             <!-- <%= new Date(event.startDate).toISOString().split('T')[0] %> -->
-                                            <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()+1%>-<%= new Date(event.startDate).getFullYear()%>
+                                            <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()%>-<%= new Date(event.startDate).getFullYear()%>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px;">
@@ -112,6 +121,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="futureEvent-<%= index %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content" style="width:110%;">
+                            <div class="modal-body">
+                                <img src="<%= event.imageurl %>" class="img-responsive" style="width:100%">
+                            </div>
+                        </div>
+                      </div>
                     </div>
                     <% } %>
                 </div>
@@ -127,7 +145,7 @@
                 <div class="main-header col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <h5 class="past-header">Past events</h5>
                 </div>
-                <% pastEvents.forEach(event => { %>
+                <% pastEvents.forEach((event, index) => { %>
                 <div class="article col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="grid-image col-sm-12 progressive">
                         <img class="card-img-top" src="<%= event.imageurl %>" />
@@ -138,7 +156,8 @@
                         <div class="ip-details">
                             <div class="row">
                                 <div class="col-xl-4 col-md-4 col-sm-12">
-                                    <img class="card-img-top" src="<%= event.imageurl %>" />
+                                    <a href="#"><img class="card-img-top" src="<%= event.imageurl %>" data-toggle="modal" data-target="#pastEvent-<%= index %>" /></a><br/>
+                                    <div style="text-align:center">Click to enlarge</div>
                                     <!-- <img class="card-img-top progressive__img progressive--not-loaded" data-progressive="<%= event.imageurl %>" src="<%= event.lowimageurl %>"> -->
                                 </div>
                                 <div class="col-xl-8 col-md-6 col-sm-12">
@@ -150,7 +169,7 @@
                                             <!--  <%= new Date(event.startDate).toISOString().split('T')[0] %>
                                             <%= new Date(event.startDate).toISOString().split('T')[0] %>;
                                           -->
-                                            <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()+1%>-<%= new Date(event.startDate).getFullYear()%>
+                                            <%= new Date(event.startDate).getDate()%>-<%= new Date(event.startDate).getMonth()%>-<%= new Date(event.startDate).getFullYear()%>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px;">
@@ -161,6 +180,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="pastEvent-<%= index %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content" style="width:110%;">
+                            <div class="modal-body">
+                                <img src="<%= event.imageurl %>" class="img-responsive" style="width:100%">
+                            </div>
+                        </div>
+                      </div>
                     </div>
                 </div>
                 <% }); %>

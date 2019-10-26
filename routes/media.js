@@ -11,10 +11,15 @@ const galleryMiddleware = require('node-gallery')({
   render : false
 });
 
+const toDate = function (dateStr) {
+  var parts = dateStr.split("-");
+  return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
 const compareByDate = function (a,b) {
-  if (new Date(a.name) < new Date(b.name))
+  if (toDate(a.name) < toDate(b.name))
     return 1;
-  if (new Date(a.name) > new Date(b.name))
+  if (toDate(a.name) > toDate(b.name))
     return -1;
   return 0;
 }
