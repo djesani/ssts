@@ -1,7 +1,8 @@
 #!/bin/sh
 PATH=$PATH:/home/sstsahos/bin
 
-if telnet -c localhost 30000 </dev/null 2>&1 | grep -q Escape;
+#if telnet -c localhost 30000 </dev/null 2>&1 | grep -q Escape;
+if [ -n "$(netstat -tupln | grep 3000)" ];
 then
   echo "ssts web port is open."
 else
