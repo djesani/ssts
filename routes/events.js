@@ -85,7 +85,7 @@ router.get('/', function(req, res, next) {
           futureEvents.reverse();
       }
 
-      if(futureEvents.length < 4){
+      if(futureEvents.length > 0 || eventToday.isEventToday){
         const maxEvents = eventToday.isEventToday === true ? 3 : 4;
         console.log(`Future events: ${futureEvents.length}. We need to add placeholder to fill the row!`);
 

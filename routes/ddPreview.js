@@ -23,10 +23,8 @@ router.get('/', function(req, res, next) {
     fs.readdir(ddFilePath, function(err, files) {
         // filter files with '.'
         files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
-        console.log('files before sort:');
-        console.log(files);
         const sortedFiles = files.sort(compareByDate);
-        console.log('files AFTER sort:');
+        // console.log('files AFTER sort:');
         console.log(sortedFiles);
         const latestDDFolder = sortedFiles.pop();
         console.log(latestDDFolder);
