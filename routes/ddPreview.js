@@ -13,14 +13,16 @@ const toDate = (dateStr) => {
 
 const compareByDate = function (a,b) {
   if (toDate(a) < toDate(b))
-    return 1;
-  if (toDate(a) > toDate(b))
     return -1;
+  if (toDate(a) > toDate(b))
+    return 1;
   return 0;
 }
 
 router.get('/', function(req, res, next) {
     fs.readdir(ddFilePath, function(err, files) {
+        // filter files with '.'
+        files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
         console.log('files before sort:');
         console.log(files);
         const sortedFiles = files.sort(compareByDate);
