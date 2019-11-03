@@ -13,9 +13,9 @@ const toDate = (dateStr) => {
 
 const compareByDate = function (a,b) {
   if (toDate(a) < toDate(b))
-    return -1;
-  if (toDate(a) > toDate(b))
     return 1;
+  if (toDate(a) > toDate(b))
+    return -1;
   return 0;
 }
 
@@ -26,6 +26,7 @@ router.get('/', function(req, res, next) {
         const sortedFiles = files.sort(compareByDate);
         console.log('files AFTER sort:');
         console.log(sortedFiles);
+        const latestDDFolder = sortedFiles.pop();
         console.log(latestDDFolder);
 
         if(err) console.log(err);
