@@ -21,8 +21,11 @@ const compareByDate = function (a,b) {
 
 router.get('/', function(req, res, next) {
     fs.readdir(ddFilePath, function(err, files) {
-        const latestDDFolder = files.sort(compareByDate).pop();
+        console.log('files before sort:');
         console.log(files);
+        const sortedFiles = files.sort(compareByDate);
+        console.log('files AFTER sort:');
+        console.log(sortedFiles);
         console.log(latestDDFolder);
 
         if(err) console.log(err);
