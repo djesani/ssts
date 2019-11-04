@@ -36,7 +36,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/image', function(req, res, next) {
     fs.readdir(ddFilePath, function(err, files) {
-        const latestDDFolder = files.sort(compareByDate).pop();
+        files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+        const sortedFiles = files.sort(compareByDate);
+        const latestDDFolder = sortedFiles.pop();
         console.log(files);
         console.log(latestDDFolder);
 
