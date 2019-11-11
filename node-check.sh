@@ -8,5 +8,5 @@ then
 else
   echo "ssts web port is NOT open."
   cd ~/ssts/
-  NODE_ENV=production PORT=30000 pm2 start bin/www --name ssts-app --watch
+  NODE_ENV=production TZ='Australia/Sydney' PORT=30000 pm2 start bin/www --name ssts-app --watch
 fi
