@@ -5,9 +5,6 @@ const express = require('express');
 const { eventFilePath, imageBasePath } = require('../config');
 const router = express.Router();
 
-const now = new Date();
-const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-
 const compareByDate = function (a,b) {
   if (a.startDate < b.startDate)
     return 1;
@@ -38,6 +35,9 @@ router.get('/', function(req, res, next) {
     const eventArray = [];
     const futureEvents = [];
     const pastEvents = [];
+    const now = new Date();
+    const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    
     let eventToday = {
       "startDate": 946645200000,
       "endDate": 946645200000,
