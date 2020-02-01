@@ -11,8 +11,8 @@ const prodConfig = {
     mediaRootDir: '../public_html/media-content',
     eventFilePath: '/home/sstsahos/ssts-events',
     imageRootDir: `${publicRoot}/images`,
-    // imageBasePath: `${publicRoot}/images`
-    imageBasePath: 'https://storage.googleapis.com/cloudiq-aviary-dev-cdn/test-site'
+    imageBasePath: 'http://www.sydneytemple.org'
+    // imageBasePath: 'https://storage.googleapis.com/cloudiq-aviary-dev-cdn/test-site'
 };
 
 const devConfig = {
