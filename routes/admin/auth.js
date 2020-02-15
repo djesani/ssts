@@ -1,5 +1,5 @@
 const db = require('../../lib/db');
-const { basicAuth, localAuth } = require('../../utils/strategies');
+const { basicAuth, localAuth } = require('../../app/utils/strategies');
 const express = require('express');
 const router = express.Router();
 
