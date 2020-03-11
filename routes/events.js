@@ -1,8 +1,13 @@
-//move to router
-router.get('/', function(req, res, next) {
+const express = require('express');
 
-    eventImages();
-    
+const asyncMiddleware = require('../app/utils/asyncMiddleware');
+const { eventImages } = require('../app/controllers');
+
+
+const router = express.Router();
+
+router.get('/', function(req, res, next) {
+    asyncMiddleware(eventImages;
 });
 
 module.exports = router;
