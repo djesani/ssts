@@ -6,6 +6,7 @@ Hiten:
 -half Apply new gallery
 -d Hide images in mobile view
 -d Hide 'no future event' image for mobile
+--#ubuntu trial commit
 
 Mahesh:
 - Switch to angular 2
