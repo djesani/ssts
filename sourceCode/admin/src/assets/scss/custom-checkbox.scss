@@ -1,0 +1,12 @@
+.custom-control-label {
+    &:before,
+    &:after {
+        width: 2.5rem;
+        height: 2.5rem
+    }
+
+    &:before {
+        border-color: #fe911380;
+    }
+}
+
