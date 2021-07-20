@@ -854,3 +854,11 @@ input:checked+.slider:before {
     min-width: 300px;
     min-height: 310px;
 }
+
+.form-check .form-check-input {
+    border: 1px solid #fe911380;
+}
+
+#changeEndDate {
+    margin-left: 28px;
+}
