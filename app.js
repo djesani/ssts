@@ -48,6 +48,8 @@ app.use('/dd-preview', ddPreview);
 
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
+app.use('/admin2', express.static(path.join(__dirname, 'admin2')));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
