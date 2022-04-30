@@ -66,5 +66,10 @@ $secondary: #690f79; // changes secondary color
 /** ngb-datepicker styles and imports */
 @import "assets/scss/ngb-datepicker.scss";
 
+@import "assets/scss/custom-checkbox.scss";
+
 /** app styles and imports */
 @import "styles.css";
+
+
+@import '~quill/dist/quill.bubble.css'; 

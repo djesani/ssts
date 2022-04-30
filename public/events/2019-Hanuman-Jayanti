@@ -4,5 +4,6 @@
   "name": "Hanuman Jayanti",
   "description": "Please join us for the upcoming event, Hanuman Jayanti, full programme details is below. TEST DATA",
   "imageurl": "/images/events/2019-Hanuman-Jayanti.jpg",
-  "filename": "2019-Hanuman-Jayanti"
+  "filename": "2019-Hanuman-Jayanti",
+  "unpublished": true
 }

@@ -2,6 +2,11 @@
 
 /* @import "../node_modules/bootstrap/dist/css/bootstrap.min.css"; */
 
+:root{
+    --primary: orange;
+    --secondary: #690f79;
+}
+
 body {
     font-size: 18px;
     color: saddlebrown;
@@ -199,7 +204,7 @@ h5 {
 .input-group.file-upload input {
     border: 0;
     margin: 0;
-    padding: 0;
+    padding: 2px 8px;
     width: 60% !important;
     margin-right: 15px;
 }
@@ -861,4 +866,13 @@ input:checked+.slider:before {
 
 #changeEndDate {
     margin-left: 28px;
+}
+
+.form-control.description {
+    padding: 0;
+}
+
+.angular-editor-toolbar {
+    background-color: #f7694733 !important;
+    border: 1px solid #fe911380 !important;
 }

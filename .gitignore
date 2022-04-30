@@ -71,3 +71,10 @@ images/events/
 images/no-events/
 events/
 media/
+
+# angular cache
+.angular
+dist
+
+Calendar
+#admin
