@@ -70,6 +70,7 @@ typings/
 images/events/
 images/no-events/
 public/events/
+public/images/events/
 media/
 
 #angular temp folder
