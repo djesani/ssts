@@ -69,7 +69,7 @@ typings/
 #Ignore public files
 images/events/
 images/no-events/
-events/
+public/events/
 media/
 
 # angular cache
