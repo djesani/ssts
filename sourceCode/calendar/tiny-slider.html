@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+
+<!-- https://www.sydneytemple.org/calendar/infoscreen.html -->
+
+<style>
+    .my-slider {
+        /* height: 90vh; */
+        background-color: #ccc;
+    }
+
+    .my-slider .slide {
+        height: 25vh;
+    }
+
+    .my-slider .slide>div {
+        font-family: 'Roboto', sans-serif;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 50px;
+    }
+
+    .s01 {
+        background-image: linear-gradient(to bottom right, #be2012, #f0a49d);
+    }
+
+    .s02 {
+        background-image: linear-gradient(to bottom right, #960fad, #dd9be9);
+    }
+
+    .s03 {
+        background-image: linear-gradient(to bottom right, #0a175f, #b3bdf7);
+    }
+
+    .s04 {
+        background-image: linear-gradient(to bottom right, #16698d, #b5ddee);
+    }
+
+    .s05 {
+        background-image: linear-gradient(to bottom right, #063b15, #d1f5db);
+    }
+
+    [data-action="stop"] {
+        display: none;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<div class="my-slider">
+    <div class="slide s01">
+        <div>1</div>
+    </div>
+    <div class="slide s02">
+        <div>2</div>
+    </div>
+    <div class="slide s03">
+        <div>3</div>
+    </div>
+    <div class="slide s04">
+        <div>4</div>
+    </div>
+    <div class="slide s05">
+        <div>5</div>
+    </div>
+    <div class="slide s01">
+        <div>6</div>
+    </div>
+    <div class="slide s02">
+        <div>7</div>
+    </div>
+    <div class="slide s03">
+        <div>8</div>
+    </div>
+    <div class="slide s04">
+        <div>9</div>
+    </div>
+    <div class="slide s05">
+        <div>10</div>
+    </div>
+    <div class="slide s01">
+        <div>11</div>
+    </div>
+    <div class="slide s02">
+        <div>12</div>
+    </div>
+    <div class="slide s03">
+        <div>13</div>
+    </div>
+    <div class="slide s04">
+        <div>14</div>
+    </div>
+    <div class="slide s05">
+        <div>15</div>
+    </div>
+    <div class="slide s01">
+        <div>16</div>
+    </div>
+    <div class="slide s02">
+        <div>17</div>
+    </div>
+    <div class="slide s03">
+        <div>18</div>
+    </div>
+    <div class="slide s04">
+        <div>19</div>
+    </div>
+    <div class="slide s05">
+        <div>20</div>
+    </div>
+</div>
+
+<script>
+    let slider = tns({
+        container: '.my-slider',
+        slideBy: 1,
+        axis: 'vertical',
+        autoplay: true,
+        controls: false,
+        nav: false,
+        touch: false,
+        autoHeight: false,
+        gutter: 10,
+        items: 10,
+        speed: 2000,
+        autoplayTimeout: 2000
+    });
+</script>
+
+</html>
