@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" ng-app="events">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSTS Upcoming Events</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <link rel="stylesheet" href="ts-index-gCal.css">
+</head>
+
+<body>
+
+    <div ng-controller="EventsController" class="my-slider">
+        <div class="event ng-cloak" ng-repeat="event in events" ng-class="$even ? 'odd' : 'even'"
+            ng-if--="event.eventDate > clock">
+            <div class="slide s01">
+                <div class="date" ng-if="event.eventDate">
+                    <div class="mmm">{{ event.eventDate | date: 'MMM' }} </div>
+                    <div class="dd">{{ event.eventDate | date: 'dd' }} </div>
+                </div>
+                <div class="info">
+                    <div class="info-time">
+                        <div class="day">{{ event.eventDate | date: 'EEE' }} </div>
+                        <div class="time" ng-if="event.hasTime && !event.hasEndTime">
+                            {{ event.eventDate | date: 'hh:mm'}} {{ event.eventDate | date: 'a' }}
+                        </div>
+                        <div class="time" ng-if="event.hasTime &&  event.hasEndTime">
+                            {{ event.eventDate | date: 'hh:mm' }} -
+                            {{ event.eventEndDateTime | date: 'hh:mm' }} {{ event.eventEndDateTime | date: 'a' }} 
+                        </div>
+                    </div>
+                    <div class="title"> 
+                        {{ event.summary }} 
+                        <!-- {{ clock | date: 'hh:mm:ss'}} -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script src="ts-index-gCal.js"></script>
+
+</body>
+
+</html>

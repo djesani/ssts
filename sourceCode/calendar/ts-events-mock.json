@@ -1,0 +1,128 @@
+[{
+        "summary": "Chaturmaas Ends",
+        "start": {
+            "date": "2021-11-14"
+        },
+        "end": {
+            "date": "2021-11-15"
+        }
+    },
+    {
+        "summary": "Tulsi Vivah: Wedding Begins",
+        "start": {
+            "dateTime": "2021-11-16T09:30:00+01:00"
+        },
+        "end": {
+            "dateTime": "2021-11-16T10:30:00+01:00"
+        }
+    },
+    {
+        "summary": "Tulsi Vivah: Mandap Roopan",
+        "start": {
+            "dateTime": "2021-11-16T09:30:00+01:00"
+        },
+        "end": {
+            "dateTime": "2021-11-16T10:30:00+01:00"
+        }
+    },
+    {
+        "summary": "Tulsi Vivah: Lagan",
+        "start": {
+            "dateTime": "2021-11-16T09:30:00+01:00"
+        },
+        "end": {
+            "dateTime": "2021-11-16T10:30:00+01:00"
+        }
+    },
+    {
+        "summary": "Tulsi Vivah: Wedding Ends",
+        "start": {
+            "dateTime": "2021-11-16T09:30:00+01:00"
+        },
+        "end": {
+            "dateTime": "2021-11-16T10:30:00+01:00"
+        }
+    },
+    {
+        "summary": "Mukutotsav Poonam",
+        "start": {
+            "date": "2021-11-17"
+        },
+        "end": {
+            "date": "2021-11-18"
+        }
+    },
+    {
+        "summary": "Partial Lunar Eclipse",
+        "start": {
+            "date": "2021-11-18"
+        },
+        "end": {
+            "date": "2021-11-19"
+        }
+    },
+    {
+        "summary": "Sankasht Choth",
+        "start": {
+            "date": "2021-11-20"
+        },
+        "end": {
+            "date": "2021-11-21"
+        }
+    },
+    {
+        "summary": "Kalashtmi",
+        "start": {
+            "date": "2021-11-22"
+        },
+        "end": {
+            "date": "2021-11-23"
+        }
+    },
+    {
+        "summary": "Utpati Ekadashi Fast",
+        "start": {
+            "date": "2021-11-24"
+        },
+        "end": {
+            "date": "2021-11-25"
+        }
+    },
+    {
+        "summary": "Sankasht Choth",
+        "start": {
+            "date": "2021-11-26"
+        },
+        "end": {
+            "date": "2021-11-27"
+        }
+    },
+    {
+        "summary": "Darsha Amavasya",
+        "start": {
+            "date": "2021-11-28"
+        },
+        "end": {
+            "date": "2021-11-29"
+        }
+    },
+    {
+        "summary": "Vinayaki Choth",
+        "start": {
+            "date": "2021-11-30"
+        },
+        "end": {
+            "date": "2021-12-01"
+        }
+    },
+    {
+        "summary": "Vachnamrut Jayanti",
+        "start": {
+            "date": "2021-12-02"
+        },
+        "end": {
+            "date": "2021-12-03"
+        }
+    }
+
+]

@@ -1,0 +1,558 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"p33sedrsojuav80g\"",
+ "summary": "Sydney Temple Events",
+ "description": "Shree Swaminarayan Temple Sydney Events Calendar",
+ "updated": "2021-11-13T11:33:50.299Z",
+ "timeZone": "Australia/Sydney",
+ "accessRole": "reader",
+ "defaultReminders": [],
+ "nextPageToken": "ElAKRV84ZDlsY2dyZmRwcjZhc2prNjhvamFjOWg2Y3JqZWRwbzZwaDY0YzFvY3BpMzRjMW1jb3I2Mm85aTZjcG1hcDlsNm9wZxiAgLDlv-T0AiIHCAUQ-J6RHA==",
+ "items": [
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk64r3cphgchi32cho6sr6co9j6him4chhchh34p34c4ojidb46pj0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2NHIzY3BoZ2NoaTMyY2hvNnNyNmNvOWo2aGltNGNoaGNoaDM0cDM0YzRvamlkYjQ2cGowIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Chaturmaas Ends",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-15"
+   },
+   "end": {
+    "date": "2021-11-16"
+   },
+   "iCalUID": "CSVConvert166f0dd12876fa34eb21db2dda195d6f",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6kq32c1i6dij0phj6srj4ohkchh36db26ksj0c3674sj0cb66cq0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2a3EzMmMxaTZkaWowcGhqNnNyajRvaGtjaGgzNmRiMjZrc2owYzM2NzRzajBjYjY2Y3EwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Tulsi Wedding Begins",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-15"
+   },
+   "end": {
+    "date": "2021-11-16"
+   },
+   "iCalUID": "CSVConvert541023e0f3772b4db35b5900f9901f34",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk70pjaor261j66c9hcko30db161hj4dpl74r38c9i6komae9i6kr0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams3MHBqYW9yMjYxajY2YzloY2tvMzBkYjE2MWhqNGRwbDc0cjM4YzlpNmtvbWFlOWk2a3IwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Shree Nilkanth Varni - Gadi Abhishek",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-15"
+   },
+   "end": {
+    "date": "2021-11-16"
+   },
+   "iCalUID": "CSVConvert835cb0fc11e005a0c2759641251e9256",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkc8q6cd3564rjao9h60o38d356kpj8chkc4sjee9o6dh3ip9ncoo0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjOHE2Y2QzNTY0cmphbzloNjBvMzhkMzU2a3BqOGNoa2M0c2plZTlvNmRoM2lwOW5jb28wIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Prabodhini Ekadashi Fast",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-15"
+   },
+   "end": {
+    "date": "2021-11-16"
+   },
+   "iCalUID": "CSVConvertb4f4e175a10044e53424a97983b9e7f0",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3272815619016000\"",
+   "id": "2k53dllva936cjg87md78j9bi7",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=Mms1M2RsbHZhOTM2Y2pnODdtZDc4ajliaTcgc3lkbmV5dGVtcGxlMTNAbQ&ctz=Europe/Budapest",
+   "created": "2021-11-08T21:43:29.000Z",
+   "updated": "2021-11-08T21:43:29.508Z",
+   "summary": "Tulsi Vivah Mandap ▫️Mandap Roopan ",
+   "creator": {
+    "email": "manjinitin@gmail.com"
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2021-11-15T09:30:00+01:00",
+    "timeZone": "Australia/Sydney"
+   },
+   "end": {
+    "dateTime": "2021-11-15T10:30:00+01:00",
+    "timeZone": "Australia/Sydney"
+   },
+   "iCalUID": "2k53dllva936cjg87md78j9bi7@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3272815889392000\"",
+   "id": "3v10bid9ng138s00u2emfhovl3",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=M3YxMGJpZDluZzEzOHMwMHUyZW1maG92bDMgc3lkbmV5dGVtcGxlMTNAbQ&ctz=Europe/Budapest",
+   "created": "2021-11-08T21:45:44.000Z",
+   "updated": "2021-11-08T21:45:44.696Z",
+   "summary": " Tulsi Vivah Lagan",
+   "description": "Tuesday 16 November - Tulsi Vivah Lagan\n▫️Jaan Prasthan from 5.30pm. Lagna vidhi thereafter\n▫️Subject to weather conditions. Prasad will be served outdoors. ",
+   "creator": {
+    "email": "manjinitin@gmail.com"
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2021-11-16T07:30:00+01:00",
+    "timeZone": "Australia/Sydney"
+   },
+   "end": {
+    "dateTime": "2021-11-16T10:30:00+01:00",
+    "timeZone": "Australia/Sydney"
+   },
+   "iCalUID": "3v10bid9ng138s00u2emfhovl3@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkccrm2d9p6ph66phkc8qj0chg6tijae9k74rj6e35ckq62dhl6osg",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjY3JtMmQ5cDZwaDY2cGhrYzhxajBjaGc2dGlqYWU5azc0cmo2ZTM1Y2txNjJkaGw2b3NnIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Tulsi Wedding Ends",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-19"
+   },
+   "end": {
+    "date": "2021-11-20"
+   },
+   "iCalUID": "CSVConvertc7a596bcf4b50207e5949738ee4a6569",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkcgs30chi6orjcdpj6cp34cpi6gs34chm68sjadhnc8q32d1lchig",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjZ3MzMGNoaTZvcmpjZHBqNmNwMzRjcGk2Z3MzNGNobTY4c2phZGhuYzhxMzJkMWxjaGlnIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Mukutotsav Poonam",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-19"
+   },
+   "end": {
+    "date": "2021-11-20"
+   },
+   "iCalUID": "CSVConvertd802267673322324822629567b4145de",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3273606460598000\"",
+   "id": "56f1a0rnbirihcanpnrgikch1q",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NTZmMWEwcm5iaXJpaGNhbnBucmdpa2NoMXEgc3lkbmV5dGVtcGxlMTNAbQ&ctz=Europe/Budapest",
+   "created": "2021-11-11T22:35:20.000Z",
+   "updated": "2021-11-13T11:33:50.299Z",
+   "summary": "Partial Lunar Eclipse",
+   "description": "Eclipse Fasting Times\n▪️ For all devotees: Stop eating on Friday 19 November 5.40AM\n\n▪️ Allowance if you cannot do the above: (See guidance from Santo) Stop eating on Friday 19 November 9.18AM\n\n▪️ Sick, elderly, young children, etc: Stop eating on Friday 19 November 3.18PM\n\nEclipse Sutak Times\n▫️Stop drinking water and refrain from touching clothes - Friday 19 November at 6:18PM\n\nShower/Bath Time\n▫️Take shower/bath with any touched clothes - Friday 19 November at 9.47PM\n\nNote: Sandhya Aarti will be at 5.00PM & thereafter katha will be held in Nilkanth Hall.",
+   "creator": {
+    "email": "manjinitin@gmail.com"
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2021-11-19T08:18:00+01:00",
+    "timeZone": "Australia/Sydney"
+   },
+   "end": {
+    "dateTime": "2021-11-19T11:47:00+01:00",
+    "timeZone": "Australia/Sydney"
+   },
+   "iCalUID": "56f1a0rnbirihcanpnrgikch1q@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkcphj2o9kckqj2ohncoo6cd346cr32phg6kr34c1k74pj2dj2clj0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjcGhqMm85a2NrcWoyb2huY29vNmNkMzQ2Y3IzMnBoZzZrcjM0YzFrNzRwajJkajJjbGowIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Sankasht Choth",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-23"
+   },
+   "end": {
+    "date": "2021-11-24"
+   },
+   "iCalUID": "CSVConvertfc1a4e51b7f0f4d361f0562049316bef",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6gr62dhj71gm4e9o6cr6cd1hc8sm4o9n71i36e9g6sr62or56oq0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2Z3I2MmRoajcxZ200ZTlvNmNyNmNkMWhjOHNtNG85bjcxaTM2ZTlnNnNyNjJvcjU2b3EwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Kalashtmi",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-27"
+   },
+   "end": {
+    "date": "2021-11-28"
+   },
+   "iCalUID": "CSVConvert46a638ab9836f41b9ba78d39076ace64",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkc9i3gphncgo6cohg71j32d336kp3goj4chi30cb1coomaob570og",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjOWkzZ3BobmNnbzZjb2hnNzFqMzJkMzM2a3AzZ29qNGNoaTMwY2IxY29vbWFvYjU3MG9nIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Utpati Ekadashi Fast",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-11-30"
+   },
+   "end": {
+    "date": "2021-12-01"
+   },
+   "iCalUID": "CSVConvertbd8f7d0fb08f14c528bddd01af1eae81",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkcpgm6c9l68r68c9gc9imad9ickoj0c1p6gr3cc9i6tj64chlchgg",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjcGdtNmM5bDY4cjY4YzlnYzlpbWFkOWlja29qMGMxcDZncjNjYzlpNnRqNjRjaGxjaGdnIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Darsha Amavasya",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-03"
+   },
+   "end": {
+    "date": "2021-12-04"
+   },
+   "iCalUID": "CSVConvertfac1526d10bee52e1009466127fb25da",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6cp30db46phjeob16tgj0cb6clgm6cr3ccrm2c1n6hgj0dph6sr0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2Y3AzMGRiNDZwaGplb2IxNnRnajBjYjZjbGdtNmNyM2Njcm0yYzFuNmhnajBkcGg2c3IwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Vinayaki Choth",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-07"
+   },
+   "end": {
+    "date": "2021-12-08"
+   },
+   "iCalUID": "CSVConvert3205d6c7aa7a01feac3cc7a074a07176",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6cq32db461i6apb46dj66o9lchh34phpccr3gdho60ojec1i70og",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2Y3EzMmRiNDYxaTZhcGI0NmRqNjZvOWxjaGgzNHBocGNjcjNnZGhvNjBvamVjMWk3MG9nIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Vachnamrut Jayanti",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-07"
+   },
+   "end": {
+    "date": "2021-12-08"
+   },
+   "iCalUID": "CSVConvert3415d0deed3fca5db2f9c68680170281",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6hh3cc1n64o3ecj265j68cb161gj0d1mc5j34c33coo3cdb46or0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2aGgzY2MxbjY0bzNlY2oyNjVqNjhjYjE2MWdqMGQxbWM1ajM0YzMzY29vM2NkYjQ2b3IwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Durgashtmi",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-11"
+   },
+   "end": {
+    "date": "2021-12-12"
+   },
+   "iCalUID": "CSVConvert4b6071072b1fd1a0a046af20cf065d66",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjkc4pmae1lcoo6ap9h60omcohgccsmcp336kpj8opi70s66opm64r0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzamtjNHBtYWUxbGNvbzZhcDloNjBvbWNvaGdjY3NtY3AzMzZrcGo4b3BpNzBzNjZvcG02NHIwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Shree Hari Jayanti",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-12"
+   },
+   "end": {
+    "date": "2021-12-13"
+   },
+   "iCalUID": "CSVConverta3e85f0ee101fb0c9fdc534c288cc616",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6lgjcd1m6phm6or564p64dr275i6ap3168r6ad35cgrj4c9nc8r0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2bGdqY2QxbTZwaG02b3I1NjRwNjRkcjI3NWk2YXAzMTY4cjZhZDM1Y2dyajRjOW5jOHIwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Gita Jayanti",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-14"
+   },
+   "end": {
+    "date": "2021-12-15"
+   },
+   "iCalUID": "CSVConvert5a6466ccce12b7b9deda26e4ed7217b6",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk6ph64ohmcph68e3270rjeor161h30eb26kom2phj6sqj4cpn6ph0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2cGg2NG9obWNwaDY4ZTMyNzByamVvcjE2MWgzMGViMjZrb20ycGhqNnNxajRjcG42cGgwIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Mokshda Ekadashi Fast",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-14"
+   },
+   "end": {
+    "date": "2021-12-15"
+   },
+   "iCalUID": "CSVConvert6bbb6fbd8b877ca0b09b51af3752376b",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3271093380344000\"",
+   "id": "_8d9lcgrfdpr6asjk68ojac9h6crjedpo6ph64c1ocpi34c1mcor62o9i6cpmap9l6opg",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=XzhkOWxjZ3JmZHByNmFzams2OG9qYWM5aDZjcmplZHBvNnBoNjRjMW9jcGkzNGMxbWNvcjYybzlpNmNwbWFwOWw2b3BnIHN5ZG5leXRlbXBsZTEzQG0&ctz=Europe/Budapest",
+   "created": "2021-10-29T22:23:43.000Z",
+   "updated": "2021-10-29T22:31:30.172Z",
+   "summary": "Sadguru Shree Ramanand Swami's Swadham Leela",
+   "creator": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sydneytemple13@gmail.com",
+    "self": true
+   },
+   "start": {
+    "date": "2021-12-15"
+   },
+   "end": {
+    "date": "2021-12-16"
+   },
+   "iCalUID": "CSVConvert21511377786bb08fd206f6aa233ee563",
+   "sequence": 0,
+   "eventType": "default"
+  }
+ ]
+}

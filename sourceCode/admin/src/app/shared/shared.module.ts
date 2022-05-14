@@ -33,6 +33,8 @@ import { FaModule} from './fontawesome/fa.module';
 // used to create fake backend
 import { fakeBackendProvider } from "./auth/fake-backend";
 
+// import { QuillModule } from 'ngx-quill';
+
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: "darkorange", // foreground color
   fgsSize: 80,
@@ -58,6 +60,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUploaderModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxPermissionsModule.forChild(),
+    // QuillModule.forRoot(),
     ReactiveFormsModule,
     DashboardModule,
     FaModule,
@@ -87,7 +90,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ScrollToInvalidControlDirective,
     LoginComponent,
     LogoutComponent,
-    FaModule
+    FaModule,
+    // QuillModule
   ]
 })
 export class SharedModule {}

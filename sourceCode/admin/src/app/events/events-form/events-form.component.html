@@ -1,0 +1,106 @@
+<div id="main-content">
+    <div class="card event" *ngIf="event">
+        <h5 class="card-header">
+            <span *ngIf="isEdit">Edit </span>
+            <span *ngIf="!isEdit">Add </span>
+            <span class="name">Event</span>
+        </h5>
+        <div class="card-body">
+
+            <form [formGroup]="eventForm" (ngSubmit)="eventFormSubmit()" ScrollToInvalidControl>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-control-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" formControlName="name"/>
+                            <div class="invalid-feedback">Name is required</div>
+                        </div>
+                        <div class="form-control-group">
+                            <label>Description</label>
+
+                            <angular-editor class="form-control description" formControlName="description" [config]="editorConfig"></angular-editor>
+
+                            <div class="invalid-feedback">Description is required</div>
+                        </div>
+                        <div class="form-control-group">
+                            <label>Image URL</label>
+                            <div class="input-group file-upload">
+                                <div class="input-group-prepend">
+                                    <img src="{{LOCAL_PATH}}{{event.imageurl}}" class="thumb" *ngIf="isEdit">
+                                </div>
+                                <label class="upload-button">
+                                    <input type="file" class="form-control file" ngFileSelect
+                                        formControlName="imageName" (uploadOutput)="onUploadOutput($event)"
+                                        [uploadInput]="uploadInput" />
+                                    <div class="invalid-feedback">Image URL is required</div>
+                                </label>
+                                <!-- <div class="input-group-append">
+                                    <button type="button" (click)="startUpload()" class="btn btn-primary">Start upload</button>
+                                </div> -->
+                            </div>
+                            <div class="invalid-feedback">Image URL is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-control-group">
+                                    <label>Start date</label>
+                                    <input type="text" class="form-control" formControlName="startDate" ngbDatepicker
+                                        #startDateDatepicker="ngbDatepicker" (click)="startDateDatepicker.toggle()"
+                                        [readonly]="true" (ngModelChange)="setEndDate()" />
+                                    <!-- [minDate]="minStartDate" -->
+                                    <div class="invalid-feedback">Start date is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-control-group">
+                                    <label>Change end date</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input changeEndDate"
+                                            id="changeEndDate" [checked]="( changeEndDate === true )"
+                                            (change)="changeEndDate = $event.target.checked;" />
+                                        <label class="custom-control-label" for="changeEndDate"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-control-group">
+                                    <label>End date</label>
+                                    <input type="text" class="form-control" formControlName="endDate" ngbDatepicker
+                                        #endDateDatepicker="ngbDatepicker" (click)="endDateDatepicker.toggle()"
+                                        [readonly]="true" [disabled]="!changeEndDate" />
+                                    <!-- [minDate]="minEndDate"
+                                        [maxDate]="maxEndDate" -->
+                                    <div class="invalid-feedback">End date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-control-group">
+                                    <label>Published</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input unpublished"
+                                            formControlName="unpublished" id="unpublished" />
+                                        <label class="custom-control-label" for="unpublished"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-default" (click)="cancelEvent()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

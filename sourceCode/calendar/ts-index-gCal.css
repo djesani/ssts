@@ -1,0 +1,30 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+}
+
+.my-slider {
+    background-color: #fff;
+}
+
+.my-slider .slide {
+    height: 20vh;
+}
+
+.my-slider .slide>div {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+}
+
+.s01 {
+    background-image: linear-gradient(to bottom right, #fffae0, #fffae0);
+}
+
+[data-action="stop"] {
+    display: none;
+}
