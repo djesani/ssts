@@ -1,8 +1,9 @@
 {
-  "startDate": 1555682400000,
-  "endDate": 1555682400000,
+  "startDate": 1668085200000,
+  "endDate": 1670849940000,
   "name": "Hanuman Jayanti",
-  "description": "Please join us for the upcoming event, Hanuman Jayanti, full programme details is below. TEST DATA",
+  "description": "Please join us for the upcoming event,&#160;<div>Hanuman Jayanti, full programme details is below.&#160;</div><div>TEST DATA</div>",
   "imageurl": "/images/events/2019-Hanuman-Jayanti.jpg",
-  "filename": "2019-Hanuman-Jayanti"
+  "filename": "2019-Hanuman-Jayanti",
+  "unpublished": true
 }

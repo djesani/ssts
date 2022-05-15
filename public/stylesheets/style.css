@@ -54,7 +54,7 @@ body {
 }
 
 .past-header {
-    background-color: #d2e5f5;
+    background-color: #cec9cc;
     font-weight: bold;
     padding: 5px;
 }
@@ -227,4 +227,33 @@ figure.photo {
 
 .input-error {
     background-color: #f5a4a4;
+}
+
+#subscribe-email,
+#subscribe-name {
+    width: 88%;
+    margin: 0 15px;
+    padding: 4px 10px;
+    border: 1px solid #bbbac4;
+    border-radius: 4px;
+}
+
+#subscribe-email:focus,
+#subscribe-name:focus,
+#subscribe-email:focus-visible,
+#subscribe-name:focus-visible {
+    border: 2px solid #563c71;
+}
+
+#subscribe-submit {
+    background-color: #563c71;
+    color: #fff;
+    border: 1px solid #563c71;
+    padding: 4px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#subscribe-submit:hover {
+    background-color: #381e52;
 }
