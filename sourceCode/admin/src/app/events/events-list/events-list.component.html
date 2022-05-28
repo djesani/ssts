@@ -39,7 +39,7 @@
                     <div class="event-name">{{event.name}}</div>
                 </div>
                 <div class="col-7">
-                    <div class="event-name">{{event.description}}</div>
+                    <div class="event-name" [innerHTML]="event.description"></div>
                 </div>
                 <div class="col-1">
                     <div class="event-name">{{event.startDate}}</div>

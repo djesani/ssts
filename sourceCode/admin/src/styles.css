@@ -55,8 +55,6 @@ body {
 
 .detail .startDate {
     font-size: 18px;
-    /* width: 20%;
-    float: left; */
 }
 
 .detail .description {
@@ -64,7 +62,6 @@ body {
 }
 
 .detail .thumb-img {
-    /* width: 250px; */
     height: auto;
 }
 
@@ -84,7 +81,6 @@ body {
 textarea,
 input {
     font-size: 18px;
-    /* width: 80%; */
     border: 2px solid darksalmon;
     padding: 10px 15px;
     border-radius: 5px;
@@ -111,24 +107,25 @@ h5 {
 }
 
 .col-lg-6 {
-    /* float: left;
-    width: 48%; */
     padding-left: 10px;
     padding-right: 10px;
 }
 
 .col-lg-4 {
-    /* float: left;
-    width: 24%; */
     padding-left: 10px;
     padding-right: 10px;
 }
 
 .col-lg-3 {
-    /* float: left;
-    width: 20.75%; */
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.action-buttons {
+    padding: 15px 15px;
+    clear: both;
+    background-color: #efebef;
+    margin: 0 -15px;
 }
 
 .action-buttons button {
@@ -137,6 +134,7 @@ h5 {
     margin-right: 10px;
     border-radius: 2px;
     font-size: 18px;
+    margin-bottom: 0 !important;
 }
 
 .btn:focus {
@@ -165,11 +163,6 @@ h5 {
     border-color: coral;
     background-color: darkorange;
     color: #fff;
-}
-
-.action-buttons {
-    padding: 15px 0;
-    clear: both;
 }
 
 .row {
@@ -864,15 +857,61 @@ input:checked+.slider:before {
     border: 1px solid #fe911380;
 }
 
-#changeEndDate {
-    margin-left: 28px;
-}
-
 .form-control.description {
     padding: 0;
 }
 
 .angular-editor-toolbar {
     background-color: #f7694733 !important;
-    border: 1px solid #fe911380 !important;
+    border: 0;
+    border-bottom: 1px solid #fe911380 !important;
+}
+
+.angular-editor-toolbar-set:nth-child(9) {
+    margin-left: 5px;
+}
+
+.custom-checkbox {
+    margin: 0;
+}
+
+.event-name {
+    max-height: 50px;
+    overflow: hidden;
+}
+
+#changeEndDate {
+    margin: 2px 10px 0 0;
+    width: 34px;
+    height: 34px;
+}
+
+.changeEndDateWrapper {
+    display: flex;
+}
+
+.changeEndDateWrapper .form-check {
+    padding-left: 0;
+}
+
+.image-url-fcg {
+    margin-top: -6px;
+}
+
+.form-check .form-check-input.unpublished {
+    margin-left: -2px;
+}
+
+.angular-editor-textarea {
+     border: 0 !important;
+}
+
+.form-check .form-check-input {
+    width: 34px;
+    height: 34px;
+    margin-top: 2px;
+}
+
+.nav li a:hover {
+    color: #fff;
 }
