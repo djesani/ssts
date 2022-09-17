@@ -1,0 +1,21 @@
+<div class="container bg-light">
+  <div class="row">&nbsp;</div>
+  <div id="clockdiv"><%= countdownTimer.days %></div>
+</div>
+<br/>
+<script>
+  // const initializeClock = (id, endtime) => {
+    // const clock = document.getElementById('clockdiv');
+    const timer = `<%= countdownTimer %>`;
+    console.log('timer', timer); 
+    // const timeinterval = setInterval(() => {
+    //   clock.innerHTML = 'days: ' + countdownTimer.days + '<br>';
+    //   if (countdownTimer.total <= 0) {
+    //     clearInterval(timeinterval);
+    //   }
+    // },1000);
+    // window.addEventListener('DOMContentLoaded', (event) => {
+    //   initializeClock('clockdiv', deadline);
+    // });
+  // }
+</script>
