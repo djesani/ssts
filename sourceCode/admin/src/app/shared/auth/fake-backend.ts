@@ -16,9 +16,9 @@ const users: User[] = [
   {
     id: 1,
     username: "admin",
-    password: "password",
-    firstName: "Test",
-    lastName: "User"
+    password: "Swaminarayan19",
+    firstName: "",
+    lastName: ""
   }
 ];
 

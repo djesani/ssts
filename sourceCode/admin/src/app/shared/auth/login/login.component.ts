@@ -5,7 +5,6 @@ import { first } from "rxjs/operators";
 
 import { AuthenticationService } from "../authentication.service";
 import { UserProfileService } from '../../../user-profile/user-profile.service';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({ templateUrl: "login.component.html" })
 export class LoginComponent implements OnInit {
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userProfileService: UserProfileService,
-    private permissionsService: NgxPermissionsService,
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -34,7 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ["admin", Validators.required],
-      password: ["password", Validators.required]
+      password: ["Swaminarayan19", Validators.required]
     });
 
     // get return url from route parameters or default to '/'

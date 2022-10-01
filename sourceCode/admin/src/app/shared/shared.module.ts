@@ -11,7 +11,6 @@ import { CustomAdapter, CustomDateParserFormatter } from './services/ng-date-pic
 import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER } from "ngx-ui-loader";
-import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -59,7 +58,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgbDatepickerModule,
     NgxUploaderModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    NgxPermissionsModule.forChild(),
     // QuillModule.forRoot(),
     ReactiveFormsModule,
     DashboardModule,
@@ -84,7 +82,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgbDatepickerModule,
     NgxUploaderModule,
     NgxUiLoaderModule,
-    NgxPermissionsModule,
     ReactiveFormsModule,
     DashboardModule,
     ScrollToInvalidControlDirective,

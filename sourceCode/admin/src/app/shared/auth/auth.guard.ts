@@ -3,7 +3,6 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { AuthenticationService } from "./authentication.service";
 import { UserProfileService } from '../../user-profile/user-profile.service';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 @Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
@@ -15,7 +14,6 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userProfileService: UserProfileService,
-    private permissionsService: NgxPermissionsService,
   ) {
       this.isLoggedIn = this.authenticationService.isLoggedIn;
    }

@@ -6,11 +6,15 @@ $primary: orange; // changes primary color
 $secondary: #690f79; // changes secondary color
 
 /*!
- * Bootstrap v5.0.1 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
+ * Bootstrap v5.2.0 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+@import "~bootstrap/scss/mixins/banner";
+@include bsBanner("");
+
 
 // scss-docs-start import-stack
 // Configuration
@@ -50,6 +54,7 @@ $secondary: #690f79; // changes secondary color
 // @import "~bootstrap/scss/carousel";
 // @import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/offcanvas";
+// @import "~bootstrap/scss/placeholders";
 
 // Helpers
 @import "~bootstrap/scss/helpers";
@@ -57,6 +62,7 @@ $secondary: #690f79; // changes secondary color
 // Utilities
 @import "~bootstrap/scss/utilities/api";
 // scss-docs-end import-stack
+
 
 /**
     To overwrite Bootstrap variables append code before imports.
