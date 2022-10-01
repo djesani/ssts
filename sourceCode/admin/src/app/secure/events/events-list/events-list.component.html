@@ -1,0 +1,61 @@
+<div id="main-content2">
+    <div class="events" *ngIf="events">
+        <div class="header-nav">
+            <header id="header-nav">
+                <div class="row add-wrapper">
+                    <div class="col-sm-1 btn-add-container">
+                        <button class="btn btn-primary btn-add" routerLink="add">Add</button>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="header-search-wrapper">
+                            <input class="header-search-input" [(ngModel)]="query" placeholder="search . . .">
+                            <fa-icon [icon]="['fas', 'search']"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="events-list">
+
+            <div class="row row-event-header">
+                <div class="col-2">
+                    Name
+                </div>
+                <div class="col-7">
+                    Description
+                </div>
+                <div class="col-1">
+                    Start date
+                </div>
+                <div class="col-1">
+                    Published
+                </div>
+                <div class="col-1">
+
+                </div>
+            </div>
+            <div *ngFor="let event of events | search:'name,description,startDate':query" class="row row-event">
+                <div class="col-2">
+                    <div class="event-name">{{event.name}}</div>
+                </div>
+                <div class="col-7">
+                    <div class="event-name" [innerHTML]="event.description"></div>
+                </div>
+                <div class="col-1">
+                    <div class="event-name">{{event.startDate}}</div>
+                </div>
+                <div class="col-1 read-only published-status">
+                    <span class="published" *ngIf="!event.unpublished">
+                        <fa-icon [icon]="['fas', 'check-circle']"></fa-icon>
+                    </span>
+                    <span class="unpublished" *ngIf="event.unpublished">
+                        <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
+                    </span>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary" routerLink="edit/{{event.filename}}">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

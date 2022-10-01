@@ -5,72 +5,258 @@ $enable-rounded: true; // disables rounded corners
 $primary: orange; // changes primary color
 $secondary: #690f79; // changes secondary color
 
-/*!
- * Bootstrap v5.2.0 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+:root {
+    --bs-primary: orange !important;
+    --bs-secondary: #690f79 !important;
+}
 
-@import "~bootstrap/scss/mixins/banner";
-@include bsBanner("");
+/** theme styles assets/scss styles */
+@import "assets/scss/style.scss";
+
+// /*!
+//  * Bootstrap v5.2.0 (https://getbootstrap.com/)
+//  * Copyright 2011-2022 The Bootstrap Authors
+//  * Copyright 2011-2022 Twitter, Inc.
+//  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+//  */
+
+// @import "~bootstrap/scss/mixins/banner";
+// @include bsBanner("");
 
 
-// scss-docs-start import-stack
-// Configuration
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/utilities";
+// // scss-docs-start import-stack
+// // Configuration
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/maps";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/utilities";
 
-// Layout & components
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/reboot";
-// @import "~bootstrap/scss/type";
-@import "~bootstrap/scss/images";
-@import "~bootstrap/scss/containers";
-@import "~bootstrap/scss/grid";
-// @import "~bootstrap/scss/tables";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/transitions";
-@import "~bootstrap/scss/dropdown";
-// @import "~bootstrap/scss/button-group";
-@import "~bootstrap/scss/nav";
-// @import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/card";
-// @import "~bootstrap/scss/accordion";
-// @import "~bootstrap/scss/breadcrumb";
-// @import "~bootstrap/scss/pagination";
-// @import "~bootstrap/scss/badge";
-// @import "~bootstrap/scss/alert";
-// @import "~bootstrap/scss/progress";
-// @import "~bootstrap/scss/list-group";
-@import "~bootstrap/scss/close";
-// @import "~bootstrap/scss/toasts";
-@import "~bootstrap/scss/modal";
-// @import "~bootstrap/scss/tooltip";
-@import "~bootstrap/scss/popover";
-// @import "~bootstrap/scss/carousel";
-// @import "~bootstrap/scss/spinners";
-@import "~bootstrap/scss/offcanvas";
+// // Layout & components
+// @import "~bootstrap/scss/root";
+// @import "~bootstrap/scss/reboot";
+// // @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/containers";
+// @import "~bootstrap/scss/grid";
+// // @import "~bootstrap/scss/tables";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+// // @import "~bootstrap/scss/button-group";
+// @import "~bootstrap/scss/nav";
+// // @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/card";
+// // @import "~bootstrap/scss/accordion";
+// // @import "~bootstrap/scss/breadcrumb";
+// // @import "~bootstrap/scss/pagination";
+// // @import "~bootstrap/scss/badge";
+// // @import "~bootstrap/scss/alert";
+// // @import "~bootstrap/scss/progress";
+// // @import "~bootstrap/scss/list-group";
+// @import "~bootstrap/scss/close";
+// // @import "~bootstrap/scss/toasts";
+// @import "~bootstrap/scss/modal";
+// // @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
+// // @import "~bootstrap/scss/carousel";
+// // @import "~bootstrap/scss/spinners";
+// @import "~bootstrap/scss/offcanvas";
 // @import "~bootstrap/scss/placeholders";
 
-// Helpers
-@import "~bootstrap/scss/helpers";
+// // Helpers
+// @import "~bootstrap/scss/helpers";
 
-// Utilities
-@import "~bootstrap/scss/utilities/api";
-// scss-docs-end import-stack
-
-
-/**
-    To overwrite Bootstrap variables append code before imports.
-    This won't affect Bootstrap source styles, only styles below.
-*/
+// // Utilities
+// @import "~bootstrap/scss/utilities/api";
+// // scss-docs-end import-stack
 
 /** ngb-datepicker styles and imports */
 @import "assets/scss/ngb-datepicker.scss";
 
+/** ngb-datepicker styles */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import "assets/scss/theme/all-themes.scss";
+
 /** app styles and imports */
 @import "styles.css";
+
+
+body {
+    font-size: 16px;
+    background-color: #fb6b460a !important;
+
+    label {
+        font-size: 18px;
+    }
+
+    button,
+    input,
+    select,
+    a {
+        font-size: 16px !important;
+    }
+
+    .angular-editor {
+        button {
+            font-size: 12px !important;
+        }
+    }
+
+    .card-header {
+        font-size: 20px;
+    }
+
+    angular-editor {
+        padding: 0 !important;
+        border: 0 !important;
+
+        .angular-editor-textarea {
+            border: 0 !important;
+        }
+    }
+
+    .angular-editor-toolbar {
+        background-color: #f7694733 !important;
+        border: 0;
+        border-bottom: 1px solid #fe911380 !important;
+    }
+
+    .action-buttons {
+        background-color: #efebef;
+    }
+
+    &.side-closed {
+        .sidebar {
+            width: 50px;
+
+            li.active,
+            li {
+                padding: 0;
+                color: orange;
+                text-decoration: none;
+                transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+            }
+        }
+
+        .add-wrapper {
+            width: 98%;
+        }
+    }
+
+    &.side-closed-hover,
+    &.sideMenuShow {
+        #main-content {
+            margin-left: 200px;
+        }
+
+        .sidebar {
+            width: 250px !important;
+        }
+
+        .add-wrapper {
+            width: 84%;
+        }
+    }
+
+    .sidebar {
+
+        li {
+            padding: 0;
+            color: orange;
+            text-decoration: none;
+            border: 1px solid #fff !important;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+
+            a {
+                font-size: 16px !important;
+                color: #a8550f !important;
+                border: 1px solid fe8a10;
+                padding: 15px 12px !important;
+            }
+
+            .sidebarIcon {
+                stroke-width: 1px;
+                margin-right: 15px;
+                height: 24px !important;
+                width: 24px !important;
+                fill: #ffc10745 !important;
+                color: #feaf1f;
+            }
+
+            &.active,
+            &:hover {
+                background: linear-gradient(45deg, #fe8a10, #feaf1f);
+                border: 1px solid #fe8a10 !important;
+                box-shadow: 0px 0px 3px 0 rgb(255 110 64 / 50%);
+
+                a {
+                    color: #fff !important;
+                    border: 1px solid #fe8a10;
+
+                    .sidebarIcon {
+                        fill: #ffc107 !important;
+                        color: #fff;
+                    }
+
+                }
+            }
+        }
+    }
+
+    #main-content2 {
+        margin-left: 50px;
+        background: #f6edef !important;
+        font-size: 16px;
+    }
+
+    header {
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+        margin: 5px 20px !important;
+
+        .btn-add {
+            min-height: 40px;
+            min-width: 75px !important;
+        }
+    }
+
+    .header-search-input {
+        height: 42px;
+
+        &+.ng-fa-icon {
+            padding: 0px 10px 0px 20px;
+        }
+
+        &::placeholder {
+            font-size: 16px;
+            ;
+        }
+    }
+
+    app-layout-public {
+        #main-content {
+            margin-left: 0 !important;
+        }
+
+        .alert.alert-info {
+            display: none;
+        }
+
+        .login {
+            margin: 0 auto !important;
+
+            .card {
+                margin-top: 50px !important;
+            }
+
+            .form-control {
+                border-radius: 5px;
+                padding: 8px 15px;
+            }
+        }
+    }
+}

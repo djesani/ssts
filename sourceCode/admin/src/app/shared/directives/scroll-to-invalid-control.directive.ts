@@ -1,8 +1,4 @@
-import {
-  Directive,
-  HostListener,
-  ElementRef,
-} from "@angular/core";
+import { Directive, HostListener, ElementRef } from "@angular/core";
 import { FormGroupDirective } from "@angular/forms";
 
 @Directive({
