@@ -1,21 +1,46 @@
-<div class="container bg-light">
-  <div class="row">&nbsp;</div>
-  <div id="clockdiv"><%= countdownTimer.days %></div>
+<div class="container bg-red">
+    <div class="countdown-header">Countdown to Dashabadi Mahotsav...</div>
+    <div id="clockdiv" class="row col-xl-12 col-lg-12 col-md-auto col-sm-auto">
+      <div>
+        <img class="countdown-img" src="images/10th-utsav-logo.png" />
+      </div>
+      <div>
+        <span class="days"></span>
+        <div class="smalltext">Days</div>
+      </div>
+      <div>
+        <span class="hours"></span>
+        <div class="smalltext">Hours</div>
+      </div>
+      <div>
+        <span class="minutes"></span>
+        <div class="smalltext">Minutes</div>
+      </div>
+      <div>
+        <span class="seconds"></span>
+        <div class="smalltext">Seconds</div>
+      </div>
+    </div>
+    <div class="countdown-footer">23rd - 27th December 2022</div>
+  </div>
 </div>
 <br/>
 <script>
-  // const initializeClock = (id, endtime) => {
-    // const clock = document.getElementById('clockdiv');
-    const timer = `<%= countdownTimer %>`;
-    console.log('timer', timer); 
-    // const timeinterval = setInterval(() => {
-    //   clock.innerHTML = 'days: ' + countdownTimer.days + '<br>';
-    //   if (countdownTimer.total <= 0) {
-    //     clearInterval(timeinterval);
-    //   }
-    // },1000);
-    // window.addEventListener('DOMContentLoaded', (event) => {
-    //   initializeClock('clockdiv', deadline);
-    // });
-  // }
+    const updateClock = () => {
+      const timer = getCountdownTimer('2022-12-23 00:00:00');
+      daysSpan.innerHTML = timer.days;
+      hoursSpan.innerHTML = timer.hours;
+      minutesSpan.innerHTML = timer.minutes;
+      secondsSpan.innerHTML = timer.seconds;
+      if (timer.total <= 0) {
+        clearInterval(timeinterval);
+      }
+    }
+    const clock = document.getElementById('clockdiv');
+    const daysSpan = clock.querySelector('.days');
+    const hoursSpan = clock.querySelector('.hours');
+    const minutesSpan = clock.querySelector('.minutes');
+    const secondsSpan = clock.querySelector('.seconds');
+    updateClock();
+    const timeinterval = setInterval(updateClock,1000);
 </script>
