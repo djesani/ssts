@@ -2,7 +2,7 @@
 
 /* @import "../node_modules/bootstrap/dist/css/bootstrap.min.css"; */
 
-:root{
+:root {
     --primary: orange;
     --secondary: #690f79;
 }
@@ -903,7 +903,7 @@ input:checked+.slider:before {
 }
 
 .angular-editor-textarea {
-     border: 0 !important;
+    border: 0 !important;
 }
 
 .form-check .form-check-input {
@@ -914,4 +914,12 @@ input:checked+.slider:before {
 
 .nav li a:hover {
     color: #fff;
+}
+
+.row-calendarIcon {
+    margin: 5px 0;
+}
+
+.thumb {
+    width: 100px;
 }
