@@ -1,1016 +1,109 @@
-<html><head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-	<script src="https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.NnK9YPjtg-w.O/m=client/rt=j/sv=1/d=1/ed=1/rs=AHpOoo9KePDGVlGjp-rlXwDM1kUO2Eh4gg/cb=gapi.loaded_0?le=scs" async=""></script><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+  </head>
 
-	<style>
-		#contain {
-			height: 100vh;
-			overflow-y: scroll;
-		}
+  <body>
+    <div id="contain"></div>
+  </body>
 
-		::-webkit-scrollbar {
-			display: none;
-		}
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://unpkg.com/dayjs@1.11.1/dayjs.min.js"></script>
+  <script>
+    /* This solution makes use of "simple access" to google, providing only an API Key.
+     * This way we can only get access to public calendars. To access a private calendar,
+     * we would need to use OAuth 2.0 access.
+     *
+     * "Simple" vs. "Authorized" access: https://developers.google.com/api-client-library/javascript/features/authentication
+     * Examples of "simple" vs OAuth 2.0 access: https://developers.google.com/api-client-library/javascript/samples/samples#authorizing-and-making-authorized-requests
+     *
+     * We will make use of "Option 1: Load the API discovery document, then assemble the request."
+     * as described in https://developers.google.com/api-client-library/javascript/start/start-js
+     */
 
-		body {
-			padding: 0;
-			margin: 0;
-			background-color: #fffae0;
-		}
+    const filterString = (string) => {
+      const words = string.split(" ");
+      if (words.includes("Fast", "Ekadashi", "Panchmi", "Jayanti")) {
+        return "https://sydneytemple.org/images/calendar/ekadashi-fast.png";
+      }
+      if (words.includes("Rushi Panchmi")) {
+        return "https://sydneytemple.org/images/calendar/ekadashi-fast.png";
+      }
+      if (words.includes("Raas")) {
+        // return "https://sydneytemple.org/images/calendar/Raas.png";
+        return "https://sydneytemple.org/images/events/Raas.png";
+      }
+      if (words.includes("10th")) {
+        // return "https://sydneytemple.org/images/calendar/10thLogo.png";
+        return "https://sydneytemple.org/images/events/10thLogo.png";
+      }
+      return "";
+    };
 
-		:root {
-			--boxHeight: 10vh;
-		}
+    function printCalendar() {
+      // The "Calendar ID" from your calendar settings page, "Calendar Integration" secion:
+      var calendarId = "sydneytemple13@gmail.com";
 
-		.slide {
-			display: flex;
-		}
+      // 1. Create a project using google's wizzard: https://console.developers.google.com/start/api?id=calendar
+      // 2. Create credentials:
+      //    a) Go to https://console.cloud.google.com/apis/credentials
+      //    b) Create Credentials / API key
+      //    c) Since your key will be called from any of your users' browsers, set "Application restrictions" to "None",
+      //       leave "Website restrictions" blank; you may optionally set "API restrictions" to "Google Calendar API"
 
-		.event {
-			display: flex;
-			min-height: var(--boxHeight);
-			color: #74704e;
-			align-items: center;
-			flex-wrap: wrap;
-			border-bottom: 10px solid #fff;
-			align-content: stretch;
-			position: relative;
-			padding: 5px 10px;
-		}
+      // ================================================================
+      // ENTER API KEY BELOW
+      // ================================================================
+      var apiKey = "AIzaSyBKdK0yc1_WfRdKLrtMZ-QASu9C1yl0wGA"; //AIzaSyDAokA9GzBC_hcjQoi0TgidP_oCpcF7TI4
 
-		.date {
-			width: var(--boxHeight);
-			border-right: 1px solid #e9e0b5;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-		}
+      // You can get a list of time zones from here: http://www.timezoneconverter.com/cgi-bin/zonehelp
+      var userTimeZone = "Australia/Sydney";
 
-		.dd {
-			font-size: 48px;
-		}
-
-		.title {
-			font-size: 48px;
-		}
-
-		.mmm,
-		.info-time {
-			color: #b5ae7a;
-		}
-
-		.info {
-			display: flex;
-			flex-direction: column;
-			padding: 0 0 0 15px;
-		}
-
-		.info-time {
-			display: flex;
-			flex-direction: row;
-		}
-
-		.day,
-		.mmm {
-			font-size: 24px;
-			text-transform: uppercase;
-		}
-
-		.day {
-			min-width: 60px;
-		}
-
-		.time {
-			min-width: 200px;
-			font-size: 24px;
-		}
-
-		[data-action="stop"] {
-			display: none;
-		}
-
-		.image {
-			padding-left: 5px;
-		}
-
-		.image img {
-			width: var(--boxHeight);
-			height: var(--boxHeight);
-		}
-
-		.tns-item {
-			display: flex;
-			justify-content: space-between;
-		}
-	</style>
-<style></style></head>
-
-<body>
-	<div id="contain"><div class="tns-outer" id="tns1-ow"><button type="button" data-action="stop"><span class="tns-visually-hidden">stop animation</span>stop</button><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span class="current">32 to 41</span>  of 20</div><div id="tns1-mw" class="tns-ovh" style="height: 1120px;"><div class="tns-inner" id="tns1-iw"><div class="my-slider  tns-slider tns-carousel tns-subpixel tns-calc tns-vertical" id="tns1" style="transform: translate3d(0px, -3472px, 0px);"><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">10 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Shree Swaminarayan Jayanti - Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">10 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Shree Ramnavmi - Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">12 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Kamda Ekadashi Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">16 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Hanuman Jayanti
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">16 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Mukutotsav Poonam
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">19 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Sankasht Choth
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">23 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Kalashtmi
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">26 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Varuthini Ekadashi Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">30 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Darsha Amavasya
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">02 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Monday </div>
-											</div>
-											<div class="title">
-												Chandra Darshan
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Parshuram Jayanti
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Akshay Trutiya
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">04 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Wednesday </div>
-											</div>
-											<div class="title">
-												Vinayaki Choth
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">06 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Friday </div>
-											</div>
-											<div class="title">
-												Ramanuj Jayanti
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">08 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Ganga Poojan
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="event tns-item" id="tns1-item0" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">02 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Chandra Darshan
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item1" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Daylight Saving Time ends
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item2" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Matsya Jayanti
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item3" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">05 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Vinayaki Choth
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item4" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">09 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Durgashtmi
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item5" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">10 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Shree Swaminarayan Jayanti - Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item6" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">10 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Shree Ramnavmi - Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item7" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">12 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Kamda Ekadashi Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item8" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">16 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Hanuman Jayanti
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item9" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">16 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Mukutotsav Poonam
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item10" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">19 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Sankasht Choth
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item11" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">23 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Kalashtmi
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item12" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">26 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Varuthini Ekadashi Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item13" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">30 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Darsha Amavasya
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item14" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">02 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Monday </div>
-											</div>
-											<div class="title">
-												Chandra Darshan
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item" id="tns1-item15" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Parshuram Jayanti
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item tns-slide-active" id="tns1-item16">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Akshay Trutiya
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item tns-slide-active" id="tns1-item17">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">04 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Wednesday </div>
-											</div>
-											<div class="title">
-												Vinayaki Choth
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item tns-slide-active" id="tns1-item18">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">06 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Friday </div>
-											</div>
-											<div class="title">
-												Ramanuj Jayanti
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="event tns-item tns-slide-active" id="tns1-item19">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">08 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Ganga Poojan
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="event tns-item tns-slide-cloned tns-slide-active">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">02 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Chandra Darshan
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned tns-slide-active">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Daylight Saving Time ends
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned tns-slide-active">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">03 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Matsya Jayanti
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned tns-slide-active">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">05 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Vinayaki Choth
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned tns-slide-active">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">09 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Durgashtmi
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned tns-slide-active">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">10 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Shree Swaminarayan Jayanti - Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">10 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Sunday </div>
-											</div>
-											<div class="title">
-												Shree Ramnavmi - Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">12 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Kamda Ekadashi Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">16 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Hanuman Jayanti
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">16 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Mukutotsav Poonam
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">19 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Sankasht Choth
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">23 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Kalashtmi
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">26 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Tuesday </div>
-											</div>
-											<div class="title">
-												Varuthini Ekadashi Fast
-											</div>
-										</div>
-									</div>
-									<div class="image"> 
-										<img src="https://sydneytemple.org/images/calendar/ekadashi-fast.png" class="loaded tns-complete">
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">April </div>
-											<div class="dd">30 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Saturday </div>
-											</div>
-											<div class="title">
-												Darsha Amavasya
-											</div>
-										</div>
-									</div>
-								</div><div class="event tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-									<div class="slide">
-										<div class="date">
-											<div class="mmm">May </div>
-											<div class="dd">02 </div>
-										</div>
-										<div class="info">
-											<div class="info-time">
-												<div class="day">Monday </div>
-											</div>
-											<div class="title">
-												Chandra Darshan
-											</div>
-										</div>
-									</div>
-								</div></div></div></div></div></div>
-
-
-<script src="https://apis.google.com/js/api.js" gapi_processed="true"></script>
-<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-<script>
-	/* This solution makes use of "simple access" to google, providing only an API Key.
-	 * This way we can only get access to public calendars. To access a private calendar,
-	 * we would need to use OAuth 2.0 access.
-	 *
-	 * "Simple" vs. "Authorized" access: https://developers.google.com/api-client-library/javascript/features/authentication
-	 * Examples of "simple" vs OAuth 2.0 access: https://developers.google.com/api-client-library/javascript/samples/samples#authorizing-and-making-authorized-requests
-	 *
-	 * We will make use of "Option 1: Load the API discovery document, then assemble the request."
-	 * as described in https://developers.google.com/api-client-library/javascript/start/start-js
-	 */
-
-	const filterString = string => {
-		const words = string.split(' ');
-		if (words.includes('Fast', 'Ekadashi')) return 'images/calendar/ekadashi-fast.png';
-		return '';
-	}
-
-	function printCalendar() {
-		// The "Calendar ID" from your calendar settings page, "Calendar Integration" secion:
-		var calendarId = 'sydneytemple13@gmail.com';
-
-		// 1. Create a project using google's wizzard: https://console.developers.google.com/start/api?id=calendar
-		// 2. Create credentials:
-		//    a) Go to https://console.cloud.google.com/apis/credentials
-		//    b) Create Credentials / API key
-		//    c) Since your key will be called from any of your users' browsers, set "Application restrictions" to "None",
-		//       leave "Website restrictions" blank; you may optionally set "API restrictions" to "Google Calendar API"
-
-		// ================================================================
-		// ENTER API KEY BELOW
-		// ================================================================
-		var apiKey = 'AIzaSyDAokA9GzBC_hcjQoi0TgidP_oCpcF7TI4';
-
-		// You can get a list of time zones from here: http://www.timezoneconverter.com/cgi-bin/zonehelp
-		var userTimeZone = 'Australia/Sydney';
-
-		// Initializes the client with the API key and the Translate API.
-		gapi.client
-			.init({
-				apiKey: apiKey,
-				// Discovery docs docs: https://developers.google.com/api-client-library/javascript/features/discovery
-				discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
-			})
-			.then(function () {
-				// Use Google's "apis-explorer" for research: https://developers.google.com/apis-explorer/#s/calendar/v3/
-				// Events: list API docs: https://developers.google.com/calendar/v3/reference/events/list
-				return gapi.client.calendar.events.list({
-					calendarId: calendarId,
-					timeZone: userTimeZone,
-					singleEvents: true,
-					timeMin: new Date().toISOString(), //gathers only events not happened yet
-					maxResults: 20,
-					orderBy: 'startTime'
-				});
-			})
-			.then(
-				function (response) {
-					if (response.result.items) {
-						var calendarRows = `<div class="my-slider">`;
-						response.result.items.forEach(function (entry) {
-							const eventImage = filterString(entry.summary);
-							if (eventImage) {
-								calendarRows = calendarRows + `
+      // Initializes the client with the API key and the Translate API.
+      gapi.client
+        .init({
+          apiKey: apiKey,
+          // Discovery docs docs: https://developers.google.com/api-client-library/javascript/features/discovery
+          discoveryDocs: [
+            "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+          ]
+        })
+        .then(function () {
+          // Use Google's "apis-explorer" for research: https://developers.google.com/apis-explorer/#s/calendar/v3/
+          // Events: list API docs: https://developers.google.com/calendar/v3/reference/events/list
+          return gapi.client.calendar.events.list({
+            calendarId: calendarId,
+            timeZone: userTimeZone,
+            singleEvents: true,
+            timeMin: new Date().toISOString(), //gathers only events not happened yet
+            maxResults: 20,
+            orderBy: "startTime"
+          });
+        })
+        .then(
+          function (response) {
+            if (response.result.items) {
+              var calendarRows = `<div class="my-slider">`;
+              response.result.items.forEach(function (entry) {
+                const eventImage = filterString(entry.summary);
+                if (eventImage) {
+                  calendarRows =
+                    calendarRows +
+                    `
 								<div class="event">
 									<div class="slide">
 										<div class="date">
-											<div class="mmm">${dayjs(entry.start.date).format('MMMM')} </div>
-											<div class="dd">${dayjs(entry.start.date).format('DD')} </div>
+											<div class="mmm">${dayjs(entry.start.date).format("MMMM")} </div>
+											<div class="dd">${dayjs(entry.start.date).format("DD")} </div>
 										</div>
 										<div class="info">
 											<div class="info-time">
-												<div class="day">${dayjs(entry.start.date).format('dddd')} </div>
+												<div class="day">${dayjs(entry.start.date).format("dddd")} </div>
 											</div>
 											<div class="title">
 												${entry.summary}
@@ -1022,17 +115,19 @@
 									</div>
 								</div>
 								`;
-							} else {
-								calendarRows = calendarRows + `
+                } else {
+                  calendarRows =
+                    calendarRows +
+                    `
 								<div class="event">
 									<div class="slide">
 										<div class="date">
-											<div class="mmm">${dayjs(entry.start.date).format('MMMM')} </div>
-											<div class="dd">${dayjs(entry.start.date).format('DD')} </div>
+											<div class="mmm">${dayjs(entry.start.date).format("MMMM")} </div>
+											<div class="dd">${dayjs(entry.start.date).format("DD")} </div>
 										</div>
 										<div class="info">
 											<div class="info-time">
-												<div class="day">${dayjs(entry.start.date).format('dddd')} </div>
+												<div class="day">${dayjs(entry.start.date).format("dddd")} </div>
 											</div>
 											<div class="title">
 												${entry.summary}
@@ -1041,39 +136,143 @@
 									</div>
 								</div>
 								`;
-							}
+                }
+              });
+              calendarRows = calendarRows + "</div>";
+            }
 
-						});
-						calendarRows = calendarRows + '</div>';
-					}
+            var body = document.getElementById("contain");
+            body.innerHTML = calendarRows;
 
+            let slider = tns({
+              container: ".my-slider",
+              slideBy: 1,
+              axis: "vertical",
+              autoplay: true,
+              controls: false,
+              nav: false,
+              touch: false,
+              autoHeight: false,
+              gutter: 10,
+              items: 10,
+              speed: 400,
+              autoplayTimeout: 3000
+            });
+          },
+          function (reason) {
+            console.log("Error: " + reason.result.error.message);
+          }
+        );
+    }
 
-					var body = document.getElementById('contain');
-					body.innerHTML = calendarRows;
+    // Loads the JavaScript client library and invokes `start` afterwards.
+    gapi.load("client", printCalendar);
+  </script>
+  <style>
+    #contain {
+      height: 100vh;
+      overflow-y: scroll;
+    }
 
-					let slider = tns({
-						container: '.my-slider',
-						slideBy: 1,
-						axis: 'vertical',
-						autoplay: true,
-						controls: false,
-						nav: false,
-						touch: false,
-						autoHeight: false,
-						gutter: 10,
-						items: 10,
-						speed: 2000,
-						autoplayTimeout: 2000
-					});
-				},
-				function (reason) {
-					console.log('Error: ' + reason.result.error.message);
-				}
-			);
-	}
+    ::-webkit-scrollbar {
+      display: none;
+    }
 
-	// Loads the JavaScript client library and invokes `start` afterwards.
-	gapi.load('client', printCalendar);
-</script>
+    :root {
+      --boxHeight: 10vh;
+      --backgroundColor: #fffae0;
+      --backgroundColor: #e9f9a194;
+      --fontColor: #555;
+      --dayMonthColor: #888;
+    }
 
-<iframe id="apiproxyd700da9ec33c54213e0fb9894153f5d61fe5b7d70.2792833271" name="apiproxyd700da9ec33c54213e0fb9894153f5d61fe5b7d70.2792833271" src="https://content.googleapis.com/static/proxy.html?usegapi=1&amp;jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.lb.en.NnK9YPjtg-w.O%2Fd%3D1%2Frs%3DAHpOoo9KePDGVlGjp-rlXwDM1kUO2Eh4gg%2Fm%3D__features__#parent=https%3A%2F%2Fsydneytemple.org&amp;rpctoken=681768355" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px; display: none;"></iframe></body></html>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: var(--backgroundColor);
+    }
+
+    .slide {
+      display: flex;
+    }
+
+    .event {
+      display: flex;
+      min-height: var(--boxHeight);
+      color: var(--fontColor);
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 10px solid #fff;
+      align-content: stretch;
+      position: relative;
+      padding: 5px 10px;
+    }
+
+    .date {
+      width: var(--boxHeight);
+      min-width: var(--boxHeight);
+      border-right: 1px solid #e9e0b5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dd {
+      font-size: 48px;
+    }
+
+    .title {
+      font-size: 48px;
+    }
+
+    .mmm,
+    .info-time {
+      color: var(--dayMonthColor);
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 0 15px;
+    }
+
+    .info-time {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .day,
+    .mmm {
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    .day {
+      min-width: 60px;
+    }
+
+    .time {
+      min-width: 200px;
+      font-size: 24px;
+    }
+
+    [data-action="stop"] {
+      display: none;
+    }
+
+    .image {
+      padding-left: 5px;
+    }
+
+    .image img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .tns-item {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</html>
