@@ -63,7 +63,7 @@ body {
     width: 100%;
     margin-bottom: 15px;
     position: relative;
-    border-top: 5px solid #563c71;
+    border-top: 5px solid #8f2024;
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.5);
 
 
@@ -86,7 +86,7 @@ body {
     width: 32px;
   }
   .inlinepopupClose {
-    color: #563c71;
+    color: #8f2024;
     cursor: pointer;
     height: 20px;
     position: absolute;
@@ -126,7 +126,7 @@ body {
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    color: #563c71;
+    color: #8f2024;
     box-sizing: border-box;
     -webkit-transform: rotate(-45deg);
 }
