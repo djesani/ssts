@@ -3,11 +3,29 @@
 
 <head>
     <% include partials/header %>
+    <script>
+        const getReadableValue = (value) => {
+            return value < 10 ? `0${value}` : value;
+        }
+
+        const getCountdownTimer = (endDate) => {
+            const total = Date.parse(endDate) - Date.parse(new Date());
+            const timer = {
+                total,
+                seconds: getReadableValue(Math.floor( (total/1000) % 60 )),
+                minutes: getReadableValue(Math.floor( (total/1000/60) % 60 )),
+                hours: getReadableValue(Math.floor( (total/(1000*60*60)) % 24 )),
+                days: getReadableValue(Math.floor( total/(1000*60*60*24) ))
+            };
+            return timer;
+        };
+    </script>
 
 </head>
 
 <body>
     <% include partials/menu %>
+    <% include partials/countdown-timer %>
     <% include partials/top-grid %>
 
     <% if(futureEvents.length > 0) { %>
