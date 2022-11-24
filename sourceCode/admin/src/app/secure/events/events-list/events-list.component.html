@@ -16,7 +16,6 @@
             </header>
         </div>
         <div class="events-list">
-
             <div class="row row-event-header">
                 <div class="col-2">
                     Name
@@ -59,3 +58,42 @@
         </div>
     </div>
 </div>
+
+<style>
+    table {
+        width: 100%;
+    }
+
+    .mat-table {
+        background: transparent;
+    }
+
+    .mat-header-row {
+        border-bottom: 2px solid #690f79;
+        padding: 10px 0;
+        color: var(--bs-secondary);
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+        font-size: 16px;
+        color: #5b1e67;
+        padding: 0 10px;
+    }
+
+    .mat-header-cell {
+        font-size: 18px;
+    }
+
+    .events-list {
+        padding: 80px 0px 0;
+        margin: 0 20px;
+    }
+
+    td.mat-cell:first-of-type,
+    td.mat-footer-cell:first-of-type {
+        padding-left: 0px;
+    }
+</style>

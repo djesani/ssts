@@ -15,6 +15,8 @@ import { EventsService } from './events.service';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
+import { MatTableModule } from '@angular/material/table';
+
 @NgModule({
   declarations: [
     EventsDetailComponent,
@@ -30,6 +32,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ReactiveFormsModule,
     SharedModule,
     AngularEditorModule,
+    MatTableModule
   ],
   exports: [
     EventsDetailComponent,

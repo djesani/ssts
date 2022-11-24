@@ -198,7 +198,7 @@ export class EventsFormComponent implements OnInit {
     this.maxEndDate = { year: parseInt(startDateArray[2]) + 1, month: parseInt(startDateArray[1]), day: parseInt(startDateArray[0]) }; // one year
   }
 
-  onChangeEndDate (event) {
+  onChangeEndDate(event) {
     this.changeEndDate = event.target.checked;
   }
 
@@ -237,14 +237,20 @@ export class EventsFormComponent implements OnInit {
         .subscribe(
           data => { console.log('edit-data', data) },
           error => { this.router.navigate(['events']) },
-          () => { console.log('success'); this.router.navigate(['events']) }
+          () => {
+            console.log('success');
+            this.router.navigate(['events']);
+          }
         );
     } else {
       this.eventsService.add(this.event)
         .subscribe(
           data => { console.log('add-data', data) },
           error => { this.router.navigate(['events']) },
-          () => { console.log('success'); this.router.navigate(['events']) }
+          () => {
+            console.log('success');
+            this.router.navigate(['events']);
+          }
         );
     }
   }

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   error = '';
 
   hide = true;
-  userPermissions: any;
+  // userPermissions: any;
   loading = false;
   returnUrl: string;
 
