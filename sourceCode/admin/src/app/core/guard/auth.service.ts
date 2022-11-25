@@ -26,7 +26,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`${environment.CONTEXT_PATH}/authenticate`, {
+      .post<any>(`${environment.CONTEXT_PATH}/auth/basic`, {
         username,
         password,
       })
