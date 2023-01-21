@@ -1,4 +1,5 @@
 const events = require('./events');
+const calendaricons = require('./calendaricons');
 const users = require('./users');
 const auth = require('./auth');
 const path = require('path');
@@ -10,6 +11,7 @@ const router = express.Router();
 const eventsImagePath = `${imageRootDir}/events`;
 
 router.use('/events', events);
+router.use('/calendaricons', calendaricons);
 router.use('/users', users);
 router.use('/auth', auth);
 

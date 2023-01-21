@@ -34,7 +34,6 @@ const getEvents = async (req, res, next) => {
     const eventArray = [];
     const futureEvents = [];
     const pastEvents = [];
-    const streamEvent = {};
     const now = new Date();
     const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
     const countdownTimer = getCountdownTimer('2022-12-23 00:00:00');
@@ -74,19 +73,6 @@ const getEvents = async (req, res, next) => {
             }else{
               pastEvents.push(event);
             }
-        }else if (event.unpublished && event.name === "[LIVE STREAM ONLY]: NOT FOR PUBLISHING") {
-          // If description = OFF, it means we don't want to show the Live Stream panel on website
-          if (event.description === "OFF") {
-            streamEvent["isEnabled"] = false;
-          } else {
-            console.log("Found LIVE STREAM Enabled");
-            const streamArray = event.description.split("~");
-            streamArray.forEach(data => {
-              const [key, value] = data.split('|');
-              streamEvent[key] = value;
-            })
-            streamEvent["isEnabled"] = true;
-          }
         }else{
             console.log(`Event: ${event.name} NOT PUBLISHED. Publish date in future or event marked as Unpublished!`);
         }
@@ -124,7 +110,7 @@ const getEvents = async (req, res, next) => {
     //   console.log(pastEvents);
 
       console.log("DB not enabled. Returning events from file system");
-      res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday, streamEvent });
+      res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday, countdownTimer });
     });
 };
 
