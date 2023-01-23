@@ -3,7 +3,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
-import { NgxMaskModule } from "ngx-mask";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -19,7 +18,6 @@ const materialModules = [
   MatTooltipModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  NgxMaskModule.forRoot(),
   MatButtonToggleModule,
   MatFormFieldModule,
   MatSlideToggleModule,
