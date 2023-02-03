@@ -2,6 +2,7 @@ const db = require('../../../lib/db');
 const fs = require('fs');
 const path = require('path');
 const { eventFilePath, imageBasePath } = require('../../../config');
+const { getCountdownTimer } = require('./countdown');
 
 const compareByDate = (a,b) => {
   if (a.startDate < b.startDate)
@@ -33,8 +34,10 @@ const getEvents = async (req, res, next) => {
     const eventArray = [];
     const futureEvents = [];
     const pastEvents = [];
+    const streamEvent = {};
     const now = new Date();
     const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const countdownTimer = getCountdownTimer('2022-12-23 00:00:00');
     
     let eventToday = {
       "startDate": 946645200000,
@@ -44,7 +47,7 @@ const getEvents = async (req, res, next) => {
     }
 
     fs.readdir(eventFilePath, function(err, files) {
-      console.log(files);
+    //   console.log(files);
       if(err) console.log(err);
       files.forEach(file => {
         const eventJson = JSON.parse(fs.readFileSync(`${eventFilePath}/${file}`, 'utf8'));
@@ -54,8 +57,8 @@ const getEvents = async (req, res, next) => {
 
       console.log("Today's date: " + todayDate);
       eventArray.sort(compareByDate).forEach(event => {
-        console.log("Event startDate: " + event.startDate);
-        console.log("Event publishDate: " + event.publishDate);
+        // console.log("Event startDate: " + event.startDate);
+        // console.log("Event publishDate: " + event.publishDate);
         generateLowResImage(event);
 
         const publishEvent = event.publishDate == undefined || event.publishDate <= todayDate ? true : false;
@@ -71,6 +74,19 @@ const getEvents = async (req, res, next) => {
             }else{
               pastEvents.push(event);
             }
+        }else if (event.unpublished && event.name === "[LIVE STREAM ONLY]: NOT FOR PUBLISHING") {
+          // If description = OFF, it means we don't want to show the Live Stream panel on website
+          if (event.description === "OFF") {
+            streamEvent["isEnabled"] = false;
+          } else {
+            console.log("Found LIVE STREAM Enabled");
+            const streamArray = event.description.split("~");
+            streamArray.forEach(data => {
+              const [key, value] = data.split('|');
+              streamEvent[key] = value;
+            })
+            streamEvent["isEnabled"] = true;
+          }
         }else{
             console.log(`Event: ${event.name} NOT PUBLISHED. Publish date in future or event marked as Unpublished!`);
         }
@@ -104,11 +120,11 @@ const getEvents = async (req, res, next) => {
 
       console.log("Future events:");
       console.log(futureEvents);
-      console.log("Past events:");
-      console.log(pastEvents);
+    //   console.log("Past events:");
+    //   console.log(pastEvents);
 
       console.log("DB not enabled. Returning events from file system");
-      res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday });
+      res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday, streamEvent });
     });
 };
 
