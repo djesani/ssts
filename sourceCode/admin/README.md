@@ -1,20 +1,39 @@
-ng g m shared/user-profile --route=profile --module app.module
-ng g s shared/user-profile/user-profile
+app
+-- core
+-- layout
+-- public
+-- secure
+- app-routing.module.ts
+- app.component.ts
+- app.component.html
+- app.module.ts
 
-ng g c shared/not-found --module app.module
+core
+-- guard
+-- interceptor
+-- models
+core.module.ts
 
-ng g m shared/dashboard --route=dashboard --module app.module
-ng g c shared/dashboard/dashboard-main
-ng g c shared/dashboard/dashboard-nav-side
-ng g c shared/dashboard/dashboard-nav-top
+layout
+-- header
+-- layout-public
+-- layout-secure
+-- page-loader
+-- sidebar
 
-ng g m events      --route=events         --module app.module
-ng g c events/events-list
-ng g c events/events-detail
-ng g c events/events-form
+public
+-- login
+-- logout
+-- page404
+public-routing.module.ts
+public.module.ts
 
-----
+secure
+-- admin
+secure-routing.module.ts
+secure.module.ts
 
-ng add @fortawesome/angular-fontawesome
-
----
+shared
+-- directives
+-- fontawesome
+-- services
