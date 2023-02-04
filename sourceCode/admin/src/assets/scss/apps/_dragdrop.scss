@@ -1,0 +1,75 @@
+.board {
+  float: left;
+  position: relative;
+  max-width: 300px;
+  height: auto;
+  margin: 8px;
+  background-color: lightgray;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.drop-card {
+  float: left;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+  cursor: move;
+  cursor: grab;
+  header {
+    float: left;
+    width: 100%;
+    padding: 0.5em;
+    background-color: lightgray;
+    text-transform: uppercase;
+    border-radius: 3px 3px 0 0;
+  }
+}
+.drop-cardtitle {
+  float: left;
+  width: 100%;
+}
+.noselect {
+  user-select: none;
+}
+.gu-mirror {
+  cursor: move;
+  cursor: grabbing;
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 1;
+  transform: rotate(5deg);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.4;
+  filter: alpha(opacity=20);
+}
+#board1 header {
+  background-color: #bc3425;
+  color: white;
+}
+#board2 header {
+  background-color: #92549e;
+  color: white;
+}
+#board3 header {
+  background-color: #00b1cf;
+  color: white;
+}
+.drop-cards .is-moving {
+  background-color: white;
+  color: black;
+}
+.cards {
+  padding: 4px 8px;
+}
