@@ -1,26 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarIconsListComponent } from './calendarIcons-list/calendarIcons-list.component';
-import { CalendarIconsDetailComponent } from './calendarIcons-detail/calendarIcons-detail.component';
 import { CalendarIconsFormComponent } from './calendarIcons-form/calendarIcons-form.component';
 
-import { AuthGuard } from "../shared/auth/auth.guard";
+import { AuthGuard } from '../../core/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: CalendarIconsListComponent,
-    canActivate: [AuthGuard],
-    // data: {
-    //   permissions: {
-    //     only: 'ADMIN',
-    //     redirectTo: 'login'
-    //   }
-    // }
-  },
-  {
-    path: 'details/:id',
-    component: CalendarIconsDetailComponent,
     canActivate: [AuthGuard],
     data: {
       permissions: {

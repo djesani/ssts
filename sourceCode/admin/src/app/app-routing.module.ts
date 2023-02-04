@@ -23,6 +23,18 @@ const routes: Routes = [
     ]
   },
   {
+    path: '',
+    component: LayoutSecureComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: '/calendarIcons', pathMatch: 'full' },
+      {
+        path: 'calendarIcons',
+        loadChildren: () => import('./secure/calendarIcons/calendarIcons.module').then(m => m.CalendarIconsModule)
+      },
+    ]
+  },
+  {
     path: 'public',
     component: LayoutPublicComponent,
     children: [

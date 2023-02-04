@@ -4,19 +4,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
-import { CalendarIconsDetailComponent } from './calendarIcons-detail/calendarIcons-detail.component';
 import { CalendarIconsFormComponent } from './calendarIcons-form/calendarIcons-form.component';
 import { CalendarIconsListComponent } from './calendarIcons-list/calendarIcons-list.component';
 import { CalendarIconsRoutingModule } from './calendarIcons-routing.module';
 import { CalendarIconsSearchPipe } from './calendarIcons.search.pipe';
 import { CalendarIconsService } from './calendarIcons.service';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
-    CalendarIconsDetailComponent,
     CalendarIconsFormComponent,
     CalendarIconsListComponent,
     CalendarIconsSearchPipe,
@@ -28,10 +29,10 @@ import { CalendarIconsService } from './calendarIcons.service';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-   
+    AngularEditorModule,
+    MatTableModule
   ],
   exports: [
-    CalendarIconsDetailComponent,
     CalendarIconsFormComponent,
     CalendarIconsListComponent,
     CalendarIconsSearchPipe,

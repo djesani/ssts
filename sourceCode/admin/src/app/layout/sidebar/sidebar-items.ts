@@ -14,6 +14,19 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: "",
     role: ["Admin"],
     submenu: [],
+  },
+  {
+    path: "/calendarIcons",
+    title: "Calendar Icons",
+    moduleName: "dashboard",
+    iconType: "feather",
+    icon: "image",
+    class: "",
+    groupTitle: false,
+    badge: "",
+    badgeClass: "",
+    role: ["Admin"],
+    submenu: [],
   }
 
 ];
