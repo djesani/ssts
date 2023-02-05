@@ -1,105 +1,75 @@
 const fs = require('fs');
-const path = require('path');
+const formidable = require('formidable');
 const express = require('express');
-const { caliconsFilePath } = require('../../config');
 const router = express.Router();
 
-const externalImagePath = "/images/events/";
-const externalImagePathRegex = "^\/images\/events\/";
+const { calendarIconsFilePath } = require('../../config');
+const { imageRootDir } = require('../../config');
 
-const getDateFromTimestamp = timestamp => {
-    const date = new Date(timestamp);
-    const dateString = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
-    return dateString;
-}
-
-const getTimestampFromDate = (date, isStart) => {
-    const [ day, month, year ] = date.split('/');
-    const dateString = `${year}-${month}-${day}`;
-    const dateTime = isStart ? `${dateString} 00:00:00` : `${dateString} 23:59:00`;
-    const timestamp = new Date(dateTime).getTime();
-    return timestamp;
-}
+const calendarIconsImagePath = `${imageRootDir}/calendaricons`;
 
 router.get('/', function(req, res, next) {
-    const allEvents = [];
+    const allCalendarIcons = [];
 
-    fs.readdir(caliconsFilePath, function(err, files) {
+    fs.readdir(calendarIconsFilePath, function(err, files) {
       console.log(files);
       if(err) console.log(err);
       files.forEach(file => {
-        const eventJson = JSON.parse(fs.readFileSync(`${caliconsFilePath}/${file}`, 'utf8'));
-        eventJson.filename = file;
-        eventJson.startDate = getDateFromTimestamp(eventJson.startDate);
-        eventJson.endDate = getDateFromTimestamp(eventJson.endDate);
-        allEvents.push(eventJson);
+        const calendarIconsJson = JSON.parse(fs.readFileSync(`${calendarIconsFilePath}/${file}`, 'utf8'));
+        calendarIconsJson.filename = file;
+        allCalendarIcons.push(calendarIconsJson);
       });
-      console.log("Got all events:");
-      console.log(allEvents);
-      res.send(allEvents);
+      console.log("Got all calendar icons:");
+      console.log(allCalendarIcons);
+      res.send(allCalendarIcons);
     });
 });
 
 router.post('/', function(req, res, next) {
     const filename = req.body.name.replace(/[^A-Za-z0-9]/g,'');
-    const { startDate: payloadStart, endDate: payloadEnd } = req.body;
-    const startDate = getTimestampFromDate(payloadStart, true);
-    const endDate = getTimestampFromDate(payloadEnd);
 
-    // check image has right filepath
-    if(!req.body.imageurl.match(externalImagePathRegex)){
-        console.log("image missing file path. Adding");
-        req.body.imageurl = externalImagePath + req.body.imageurl;
-    }
-
-    const mergeData = {
-        ...req.body,
-        startDate,
-        endDate
-    };
-
-    fs.writeFile(`${caliconsFilePath}/${filename}`, JSON.stringify(mergeData, null, 2), function (err) {
+    fs.writeFile(`${calendarIconsFilePath}/${filename}`, JSON.stringify(req.body, null, 2), function (err) {
         if (err) throw err;
-        console.log(`Created new event: ${filename}`);
-        res.send("Created a new event with filename: " + filename);
+        console.log(`Created new calendar icon: ${filename}`);
+        res.send("Created a new calendar icon with filename: " + filename);
     });
 });
 
 router.patch('/:filename', function(req, res, next) {
-    const { filename } = req.params;
-    const { startDate: payloadStart, endDate: payloadEnd } = req.body;
+    const { filename } = req.params;;
 
-    const eventJson = JSON.parse(fs.readFileSync(`${caliconsFilePath}/${filename}`, 'utf8'));
-    const startDate = getTimestampFromDate(payloadStart, true);
-    const endDate = getTimestampFromDate(payloadEnd);
+    const calendarIconsJson = JSON.parse(fs.readFileSync(`${calendarIconsFilePath}/${filename}`, 'utf8'));
     const mergeData = { 
-        ...eventJson,
+        ...calendarIconsJson,
         ...req.body,
-        startDate,
-        endDate
     };
 
-    fs.writeFile(`${caliconsFilePath}/${filename}`, JSON.stringify(mergeData, null, 2), function (err) {
+    fs.writeFile(`${calendarIconsFilePath}/${filename}`, JSON.stringify(mergeData, null, 2), function (err) {
         if (err) throw err;
-        console.log(`Replaced event: ${filename}`);
-        res.send("Updated event with filename: " + filename);
+        console.log(`Replaced calendar icon: ${filename}`);
+        res.send("Updated calendar icon with filename: " + filename);
     });
 });
 
-router.delete('/:filename', function(req, res, next) {
-    const { filename } = req.params;
-    const unpublishedData = {
-        unpublished: true,
-        unpublishedDate: new Date().getTime()
-    }
+router.post('/fileupload', function (req, res){
+    let form = new formidable.IncomingForm();
+    form.parse(req);
 
-    const eventJson = JSON.parse(fs.readFileSync(`${caliconsFilePath}/${filename}`, 'utf8'));
-    const mergeData = Object.assign(eventJson, unpublishedData);
+    form.on('fileBegin', function (name, file){
+        file.path = calendarIconsImagePath + "/" + file.name;
+    });
 
-    fs.writeFile(`${caliconsFilePath}/${filename}`, JSON.stringify(mergeData, null, 2), function (err) {
-        if (err) throw err;
-        console.log(`Unpublished event: ${filename}`);
-        res.send("Unpublished an event with filename: " + filename);
+    form.on('file', function (name, file){
+        console.log('Uploaded file: ' + file.name);
+    });
+
+    form.on('error', function (name, file){
+        console.error('Error', err)
+        res.status(500).send('Error uploading file!');
+    });
+
+    form.on('end', function (name, file){
+        res.status(200).send('File uploaded!');
     });
 });
 

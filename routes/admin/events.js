@@ -2,7 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { eventFilePath } = require('../../config');
+const formidable = require('formidable');
 const router = express.Router();
+
+const { imageRootDir } = require('../../config');
+const eventsImagePath = `${imageRootDir}/events`;
 
 const externalImagePath = "/images/events/";
 const externalImagePathRegex = "^\/images\/events\/";
@@ -49,7 +53,7 @@ router.post('/', function(req, res, next) {
     // check image has right filepath
     if(!req.body.imageurl.match(externalImagePathRegex)){
         console.log("image missing file path. Adding");
-        req.body.imageurl = externalImagePath + req.body.imageurl;
+        // req.body.imageurl = externalImagePath + req.body.imageurl;
     }
 
     const mergeData = {
@@ -100,6 +104,28 @@ router.delete('/:filename', function(req, res, next) {
         if (err) throw err;
         console.log(`Unpublished event: ${filename}`);
         res.send("Unpublished an event with filename: " + filename);
+    });
+});
+
+router.post('/fileupload', function (req, res){
+    var form = new formidable.IncomingForm();
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        file.path = eventsImagePath + "/" + file.name;
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded file: ' + file.name);
+    });
+
+    form.on('error', function (name, file){
+        console.error('Error', err)
+        res.status(500).send('Error uploading file!');
+    });
+
+    form.on('end', function (name, file){
+        res.status(200).send('File uploaded!');
     });
 });
 
