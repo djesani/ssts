@@ -49,11 +49,4 @@ router.get('/admin/api-docs', function(req, res, next) {
 });
 
 
-router.get('/admin3/', function(req, res, next) {
-  res.render('admin3', { title: 'index' });
-});
-
-
-
-
 module.exports = router;
