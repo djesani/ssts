@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EventsListComponent } from './events-list/events-list.component';
-import { EventsDetailComponent } from './events-detail/events-detail.component';
 import { EventsFormComponent } from './events-form/events-form.component';
 
 import { AuthGuard } from '../../core/guard/auth.guard';
@@ -10,17 +9,6 @@ const routes: Routes = [
   {
     path: '',
     component: EventsListComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
-  },
-  {
-    path: 'details/:id',
-    component: EventsDetailComponent,
     canActivate: [AuthGuard],
     data: {
       permissions: {

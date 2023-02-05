@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { EventsDetailComponent } from './events-detail/events-detail.component';
 import { EventsFormComponent } from './events-form/events-form.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventsRoutingModule } from './events-routing.module';
@@ -19,7 +18,6 @@ import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
-    EventsDetailComponent,
     EventsFormComponent,
     EventsListComponent,
     EventsSearchPipe,
@@ -35,7 +33,6 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule
   ],
   exports: [
-    EventsDetailComponent,
     EventsFormComponent,
     EventsListComponent,
     EventsSearchPipe,

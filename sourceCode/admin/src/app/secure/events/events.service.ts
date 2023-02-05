@@ -31,5 +31,4 @@ export class EventsService {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
-
 }

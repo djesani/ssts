@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
-const baseUrl = `${environment.CONTEXT_PATH}/events`;
+const baseUrl = `${environment.CONTEXT_PATH}/calendaricons`;
 
 @Injectable()
 export class CalendarIconsService {
@@ -26,10 +26,5 @@ export class CalendarIconsService {
   update(id, data): Observable<any> {
     return this.http.patch(`${baseUrl}/${id}`, data);
   }
-
-  delete(id): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
-  }
-
 
 }

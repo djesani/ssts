@@ -268,7 +268,7 @@ export class EventsFormComponent implements OnInit {
         // uncomment this if you want to auto upload files when added
         const uploadAll: UploadInput = {
           type: 'uploadAll',
-          url: `${environment.CONTEXT_PATH}/fileupload`,
+          url: `${environment.CONTEXT_PATH}/events/fileupload`,
           method: 'POST'
         };
         this.uploadInput.emit(uploadAll);
