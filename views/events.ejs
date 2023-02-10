@@ -28,33 +28,6 @@
     <% include partials/countdown-timer %>
     <% include partials/top-grid %>
 
-    <!-- <% if(streamEvent.isEnabled) { %>
-    <div class="container bg-red">
-        <div class="row">
-            <div class="col-xl12 col-md-12 col-sm-12" style="text-align: center; padding: 20px; color: #e9e9e9;">
-                <%= streamEvent.title %><br>
-                <% if(streamEvent.subtitle) { %><span style="font-size: smaller;"><%= streamEvent.subtitle %></span><% } %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12"><iframe width="100%" height="400" src="<%= streamEvent.live %>" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 d-none d-md-block"><img height="400" src="<%= eventToday.imageurl %>" alt="Itinirery"></div>
-        </div>
-        <div class="row">
-            <div class="col-xl12 col-md-12 col-sm-12" style="text-align: center; padding: 20px; font-size: smaller; color: #e9e9e9;">
-                <% if(streamEvent.day1) { %><a href="<%= streamEvent.day1 %>" target="_blank">Day 1</a><% } %>
-                <% if(streamEvent.day2) { %> | <a href="<%= streamEvent.day2 %>" target="_blank">Day 2</a><% } %>
-                <% if(streamEvent.day3) { %> | <a href="<%= streamEvent.day3 %>" target="_blank">Day 3</a><% } %>
-                <% if(streamEvent.day4) { %> | <a href="<%= streamEvent.day4 %>" target="_blank">Day 4</a><% } %>
-                <% if(streamEvent.day5) { %> | <a href="<%= streamEvent.day5 %>" target="_blank">Day 5</a><% } %>
-                <% if(streamEvent.day6) { %> | <a href="<%= streamEvent.day6 %>" target="_blank">Day 6</a><% } %>
-                <% if(streamEvent.playlist) { %>View playlist <a href="<%= streamEvent.playlist %>" target="_blank">here</a><% } %>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <% } %> -->
-
     <% if(futureEvents.length > 0) { %>
     <div class="container bg-light">
         <div class="row">&nbsp;</div>
