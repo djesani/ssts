@@ -17,7 +17,7 @@
 /*                 [1. Common ]                   			*/
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 /* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 @import "common/_variables";
 @import "common/_mixins";
 @import "common/_customanimate.scss";
@@ -79,7 +79,7 @@
 @import "plugins/_formwizard.scss";
 @import "plugins/_imagegallery.scss";
 @import "plugins/_maps.scss";
-@import "plugins/_tables.scss";
+@import "plugins/_tables.scss";  // error - temp to sort out later 
 
 /*                 [7. UI ]                   */
 @import "ui/_alerts.scss";
