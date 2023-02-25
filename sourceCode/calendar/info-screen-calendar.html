@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+</head>
+
+<body>
+    <h2>The XMLHttpRequest Object</h2>
+    <button type="button" onclick="loadDoc()">Request data</button>
+    <p id="demo"></p>
+    <div id="contain"></div>
+</body>
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://unpkg.com/dayjs@1.11.1/dayjs.min.js"></script>
+<script>
+    /* This solution makes use of "simple access" to google, providing only an API Key.
+     * This way we can only get access to public calendars. To access a private calendar,
+     * we would need to use OAuth 2.0 access.
+     *
+     * "Simple" vs. "Authorized" access: https://developers.google.com/api-client-library/javascript/features/authentication
+     * Examples of "simple" vs OAuth 2.0 access: https://developers.google.com/api-client-library/javascript/samples/samples#authorizing-and-making-authorized-requests
+     *
+     * We will make use of "Option 1: Load the API discovery document, then assemble the request."
+     * as described in https://developers.google.com/api-client-library/javascript/start/start-js
+     */
+
+    const filterString = (string) => {
+        const words = string.split(" ");
+        if (words.includes("Fast", "Ekadashi", "Panchmi", "Jayanti")) {
+            return "https://sydneytemple.org/images/calendar/ekadashi-fast.png";
+        }
+        if (words.includes("Raas")) {
+            return "https://sydneytemple.org/images/events/Raas.png";
+        }
+        if (words.includes("10th")) {
+            return "https://sydneytemple.org/images/events/10thLogo.png";
+        }
+        if (words.includes("Poojan/Ankoot")) {
+            return "https://sydneytemple.org/images/events/CalendarAnkoot.png";
+        }
+
+        if (words.includes("Abhishek")) {
+            return "https://sydneytemple.org/images/events/abhishek.png";
+        }
+
+        if (words.includes("Eclipse")) {
+            return "https://sydneytemple.org/images/events/eclipse.png";
+        }
+
+        if (words.includes("Hanuman")) {
+            return "https://sydneytemple.org/images/events/hanuman-jayanti.png";
+        }
+
+        if (words.includes("Hindola")) {
+            return "https://sydneytemple.org/images/events/hindola.png";
+        }
+
+        if (words.includes("Holika")) {
+            return "https://sydneytemple.org/images/events/holika-dahan.png";
+        }
+
+        if (words.includes("India")) {
+            return "https://sydneytemple.org/images/events/india-independence.png";
+        }
+
+        if (words.includes("Janmashtmi")) {
+            return "https://sydneytemple.org/images/events/janmashtmi.png";
+        }
+
+        if (words.includes("Krushna, Krishna")) {
+            return "https://sydneytemple.org/images/events/krushna-janmashtmi.png";
+        }
+
+        if (words.includes("Laxmi")) {
+            return "https://sydneytemple.org/images/events/laxmi-poojan.png";
+        }
+
+        if (words.includes("Ramnavmi")) {
+            return "https://sydneytemple.org/images/events/ramnavmi.png";
+        }
+
+        https: return "";
+    };
+
+    function printCalendar() {
+        // The "Calendar ID" from your calendar settings page, "Calendar Integration" secion:
+        var calendarId = "sydneytemple13@gmail.com";
+
+        // 1. Create a project using google's wizzard: https://console.developers.google.com/start/api?id=calendar
+        // 2. Create credentials:
+        //    a) Go to https://console.cloud.google.com/apis/credentials
+        //    b) Create Credentials / API key
+        //    c) Since your key will be called from any of your users' browsers, set "Application restrictions" to "None",
+        //       leave "Website restrictions" blank; you may optionally set "API restrictions" to "Google Calendar API"
+
+        // ================================================================
+        // ENTER API KEY BELOW
+        // ================================================================
+        var apiKey = "AIzaSyBKdK0yc1_WfRdKLrtMZ-QASu9C1yl0wGA"; //AIzaSyDAokA9GzBC_hcjQoi0TgidP_oCpcF7TI4
+
+        // You can get a list of time zones from here: http://www.timezoneconverter.com/cgi-bin/zonehelp
+        var userTimeZone = "Australia/Sydney";
+
+        // Initializes the client with the API key and the Translate API.
+        gapi.client
+            .init({
+                apiKey: apiKey,
+                // Discovery docs docs: https://developers.google.com/api-client-library/javascript/features/discovery
+                discoveryDocs: [
+                    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+                ]
+            })
+            .then(function () {
+                // Use Google's "apis-explorer" for research: https://developers.google.com/apis-explorer/#s/calendar/v3/
+                // Events: list API docs: https://developers.google.com/calendar/v3/reference/events/list
+                return gapi.client.calendar.events.list({
+                    calendarId: calendarId,
+                    timeZone: userTimeZone,
+                    singleEvents: true,
+                    timeMin: new Date().toISOString(), //gathers only events not happened yet
+                    maxResults: 20,
+                    orderBy: "startTime"
+                });
+            })
+            .then(
+                function (response) {
+                    if (response.result.items) {
+                        var calendarRows = `<div class="my-slider">`;
+                        response.result.items.forEach(function (entry) {
+                            const eventImage = filterString(entry.summary);
+                            const startDateTime = entry.start.dateTime;
+
+                            console.log("entry", entry);
+
+                            if (startDateTime) {
+                                if (eventImage) {
+                                    calendarRows =
+                                        calendarRows +
+                                        `
+                        <div class="event">
+                          <div class="slide">
+                            <div class="date">
+                              <div class="mmm">
+                              ${dayjs(entry.start.dateTime).format("MMMM")} 
+                              </div>
+                              <div class="dd">
+                              ${dayjs(entry.start.dateTime).format("DD")} 
+                              </div>
+                            </div>
+                            <div class="info">
+                              <div class="info-time">
+                                <div class="day">
+                                  ${dayjs(entry.start.dateTime).format(
+                                            "dddd "
+                                        )} 
+                                  <span class="time">
+                                    ${dayjs(entry.start.dateTime).format(
+                                            "h:mma"
+                                        )} 
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="title">
+                                ${entry.summary}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="image"> 
+                            <img src="${eventImage}">
+                          </div>
+                        </div>
+                    `;
+                                } else {
+                                    calendarRows =
+                                        calendarRows +
+                                        `
+                        <div class="event">
+                          <div class="slide">
+                            <div class="date">
+                              <div class="mmm">
+                                ${dayjs(entry.start.dateTime).format("MMMM")} 
+                              </div>
+                              <div class="dd">
+                              ${dayjs(entry.start.dateTime).format("DD")} 
+                              </div>
+                            </div>
+                            <div class="info">
+                              <div class="info-time">
+                                <div class="day">
+                                  ${dayjs(entry.start.dateTime).format(
+                                            "dddd "
+                                        )} 
+                                  <span class="time">
+                                    ${dayjs(entry.start.dateTime).format(
+                                            "h:mma"
+                                        )} 
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="title">
+                                ${entry.summary}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      `;
+                                }
+                            } else {
+                                if (eventImage) {
+                                    calendarRows =
+                                        calendarRows +
+                                        `
+                      <div class="event">
+                        <div class="slide">
+                          <div class="date">
+                            <div class="mmm">${dayjs(entry.start.date).format(
+                                            "MMMM"
+                                        )} </div>
+                            <div class="dd">${dayjs(entry.start.date).format(
+                                            "DD"
+                                        )} </div>
+                          </div>
+                          <div class="info">
+                            <div class="info-time">
+                              <div class="day">${dayjs(entry.start.date).format(
+                                            "dddd"
+                                        )} </div>
+                            </div>
+                            <div class="title">
+                              ${entry.summary}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="image"> 
+                          <img src="${eventImage}">
+                        </div>
+                      </div>
+                  `;
+                                } else {
+                                    calendarRows =
+                                        calendarRows +
+                                        `
+                      <div class="event">
+                        <div class="slide">
+                          <div class="date">
+                            <div class="mmm">${dayjs(entry.start.date).format(
+                                            "MMMM"
+                                        )} </div>
+                            <div class="dd">${dayjs(entry.start.date).format(
+                                            "DD"
+                                        )} </div>
+                          </div>
+                          <div class="info">
+                            <div class="info-time">
+                              <div class="day">${dayjs(entry.start.date).format(
+                                            "dddd"
+                                        )} </div>
+                            </div>
+                            <div class="title">
+                              ${entry.summary}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                                }
+                            }
+                        });
+                        calendarRows = calendarRows + "</div>";
+                    }
+
+                    var body = document.getElementById("contain");
+                    body.innerHTML = calendarRows;
+
+                    let slider = tns({
+                        container: ".my-slider",
+                        slideBy: 1,
+                        axis: "vertical",
+                        autoplay: false,
+                        controls: false,
+                        nav: false,
+                        touch: false,
+                        autoHeight: false,
+                        gutter: 10,
+                        items: 20,
+                        speed: 400,
+                        autoplayTimeout: 3000
+                    });
+                },
+                function (reason) {
+                    console.log("Error: " + reason.result.error.message);
+                }
+            );
+    }
+
+    // Loads the JavaScript client library and invokes `start` afterwards.
+    // gapi.load("client", printCalendar);
+</script>
+<style>
+    #contain {
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    :root {
+        --boxHeight: 10vh;
+        --backgroundColor: #fffae0;
+        --backgroundColor: #e9f9a194;
+        --fontColor: #555;
+        --dayMonthColor: #888;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: var(--backgroundColor);
+    }
+
+    .slide {
+        display: flex;
+    }
+
+    .event {
+        display: flex;
+        min-height: var(--boxHeight);
+        color: var(--fontColor);
+        align-items: center;
+        flex-wrap: wrap;
+        border-bottom: 10px solid #fff;
+        align-content: stretch;
+        position: relative;
+        padding: 5px 10px;
+    }
+
+    .date {
+        width: var(--boxHeight);
+        min-width: var(--boxHeight);
+        border-right: 1px solid #e9e0b5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dd {
+        font-size: 48px;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+
+    .mmm,
+    .info-time {
+        color: var(--dayMonthColor);
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 0 15px;
+    }
+
+    .info-time {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .day,
+    .mmm {
+        font-size: 24px;
+        text-transform: uppercase;
+    }
+
+    .time {
+        text-transform: lowercase;
+        font-weight: normal;
+        color: var(--fontColor);
+    }
+
+    .day {
+        min-width: 60px;
+    }
+
+    .time {
+        min-width: 200px;
+        font-size: 24px;
+    }
+
+    [data-action="stop"] {
+        display: none;
+    }
+
+    .image {
+        padding-left: 5px;
+    }
+
+    .image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .tns-item {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .event .image img {
+        border-radius: 50%;
+    }
+</style>
+
+<script>
+    let a;
+    function loadDoc() {
+        fetch('calendar-icons.json')
+            .then((response) => response.json())
+            .then((data) => {
+                a = data;
+                console.log('a', a)
+            })
+    }
+    loadDoc();
+</script>
+
+</html>
