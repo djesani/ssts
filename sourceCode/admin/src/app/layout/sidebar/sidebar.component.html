@@ -1,0 +1,66 @@
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar" (mouseenter)="mouseHover($event)" (mouseleave)="mouseOut($event)">
+
+  <div class="brand">
+    <div class="logo">
+      <img src="assets/brand/materialize-logo.png" alt="logo">
+    </div>
+    <div class="name">
+      ADMIN
+    </div>
+    <label class="switch">
+      <input type="checkbox" class="sideMenuStatus" [(ngModel)]="sideMenuShow" (change)="toggleSidebar()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <!-- Menu -->
+  <div class="nav">
+    <ul class="list-"
+      [ngStyle]="{'position' : 'relative', 'max-height' : listMaxHeight+'px', 'max-width' : listMaxWidth+'px'}">
+      <!-- Top Most level menu -->
+      <li [class.active]="level1Menu === sidebarItem.moduleName && sidebarItem.submenu.length != 0"
+        *ngFor="let sidebarItem of sidebarItems" [routerLinkActive]="sidebarItem.submenu.length != 0 ? '' : 'active'">
+        <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title }}</div>
+        <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
+          [ngClass]="[sidebarItem.class]" (click)="callLevel1Toggle($event, sidebarItem.moduleName)" class="nav-link">
+          <i-feather [name]="sidebarItem.icon" class="sidebarIcon"></i-feather>
+          <span class="hide-menu">{{sidebarItem.title }}
+          </span>
+          <span *ngIf="sidebarItem.badge != '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
+        </a>
+        <!-- First level menu -->
+        <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
+          <li [ngClass]="level2Menu === sidebarSubItem.moduleName? 'activeSub':''"
+            *ngFor="let sidebarSubItem of sidebarItem.submenu"
+            [routerLinkActive]="sidebarSubItem.submenu.length > 0 ? '' : 'active'">
+            <a [routerLink]="sidebarSubItem.submenu.length > 0 ? null : [sidebarSubItem.path]"
+              (click)="callLevel2Toggle($event,sidebarSubItem.moduleName)" [ngClass]="[sidebarSubItem.class]">
+              {{sidebarSubItem.title }}
+            </a>
+            <!-- Second level menu -->
+            <ul class="ml-menu-2" *ngIf="sidebarSubItem.submenu.length > 0">
+              <li *ngFor="let sidebarSubsubItem of sidebarSubItem.submenu"
+                [ngClass]="level3Menu === sidebarSubsubItem.moduleName? 'activeSubSub':''"
+                [routerLinkActive]="sidebarSubsubItem.submenu.length > 0 ? '' : 'active'">
+                <a [routerLink]="sidebarSubsubItem.submenu.length > 0 ? null : [sidebarSubsubItem.path]"
+                  (click)="callLevel3Toggle($event,sidebarSubsubItem.moduleName)" [ngClass]="[sidebarSubsubItem.class]">
+                  {{sidebarSubsubItem.title }}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="" (click)="logout()" class="nav-link">
+          <i-feather name="log-out" class="sidebarIcon"></i-feather>
+          <span class="hide-menu">Logout
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- #Menu -->
+</aside>
+<!-- #END# Left Sidebar -->

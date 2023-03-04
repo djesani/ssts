@@ -10,6 +10,7 @@ const prodConfig = {
     },
     mediaRootDir: '../public_html/media-content',
     eventFilePath: '/home/sstsahos/ssts-events',
+    calendarIconsFilePath: '/home/sstsahos/ssts-calendaricons',
     imageRootDir: `${publicRoot}/images`,
     imageBasePath: 'http://www.sydneytemple.org'
     // imageBasePath: 'https://storage.googleapis.com/cloudiq-aviary-dev-cdn/test-site'
@@ -24,6 +25,7 @@ const devConfig = {
     },
     mediaRootDir: 'public/media',
     eventFilePath: 'public/events',
+    calendarIconsFilePath: 'public/calendaricons',
     imageRootDir: 'public/images',
     imageBasePath: ''
 };

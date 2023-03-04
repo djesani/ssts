@@ -1,0 +1,142 @@
+<div id="main-content2">
+    <div class="calendarIcons" *ngIf="calendarIcons">
+        <div class="header-nav">
+            <header id="header-nav">
+                <div class="row add-wrapper">
+                    <div class="col-sm-1 btn-add-container">
+                        <button class="btn btn-primary btn-add" routerLink="add">Add</button>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="header-search-wrapper">
+                            <input class="header-search-input" [(ngModel)]="query" placeholder="search . . .">
+                            <fa-icon [icon]="['fas', 'search']"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="calendarIcons-list">
+            <div class="row row-calendarIcon-header">
+                <div class="col-3">
+                    Keyword
+                </div>
+                <div class="col-3">
+                    Icon
+                </div>
+
+                <div class="col-3">
+                    Published
+                </div>
+
+                <div class="col-3">
+
+                </div>
+            </div>
+            <div *ngFor="let calendarIcon of calendarIcons | search:'name,description,startDate':query"
+                class="row row-calendarIcon">
+                <div class="col-3">
+                    <div class="calendarIcon-name">{{calendarIcon.name}}</div>
+                </div>
+                <div class="col-3">
+                    <img src="{{LOCAL_PATH}}{{calendarIcon.imageurl}}" class="thumb">
+                </div>
+                <div class="col-3 read-only published-status">
+                    <span class="published" *ngIf="!calendarIcon.unpublished">
+                        <fa-icon [icon]="['fas', 'check-circle']"></fa-icon>
+                    </span>
+                    <span class="unpublished" *ngIf="calendarIcon.unpublished">
+                        <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
+                    </span>
+                </div>
+                <div class="col-3 actions">
+                    <button class="btn btn-primary" routerLink="edit/{{calendarIcon.filename}}">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    table {
+        width: 100%;
+    }
+
+    .mat-table {
+        background: transparent;
+    }
+
+    .mat-header-row {
+        border-bottom: 2px solid #690f79;
+        padding: 10px 0;
+        color: var(--bs-secondary);
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+        font-size: 16px;
+        color: #5b1e67;
+        padding: 0 10px;
+    }
+
+    .mat-header-cell {
+        font-size: 18px;
+    }
+
+    .calendarIcons-list {
+        padding: 80px 0px 0;
+        margin: 0 20px;
+    }
+
+    td.mat-cell:first-of-type,
+    td.mat-footer-cell:first-of-type {
+        padding-left: 0px;
+    }
+
+    .row.row-calendarIcon-header {
+        border-bottom: 2px solid #690f79;
+        padding: 10px 0;
+        color: var(--bs-secondary);
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .published-status {
+        text-align: left;
+    }
+
+    .row-calendarIcon {
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .row-calendarIcon:hover {
+        background-color: #690f791d;
+    }
+
+    button {
+        color: white;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .calendarIcons-list {
+        padding: 80px 10px 0;
+        margin: 0 20px;
+    }
+
+    .row.row-calendarIcon-header {
+        border-bottom: 2px solid #690f79;
+        padding: 10px 0;
+        color: var(--bs-secondary);
+    }
+
+    .row-calendarIcon {
+        align-items: center;
+    }
+</style>

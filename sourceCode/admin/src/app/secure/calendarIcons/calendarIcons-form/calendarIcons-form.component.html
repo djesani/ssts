@@ -1,0 +1,147 @@
+<div id="main-content2">
+    <div class="card calendarIcon" *ngIf="calendarIcon">
+        <h5 class="card-header">
+            <span *ngIf="isEdit">Edit </span>
+            <span *ngIf="!isEdit">Add </span>
+            <span class="name">Calendar Icon</span>
+        </h5>
+        <div class="card-body">
+
+            <form [formGroup]="calendarIconForm" (ngSubmit)="calendarIconFormSubmit()" ScrollToInvalidControl>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="form-control-group">
+                                <label>Keyword</label>
+                                <input type="text" class="form-control" formControlName="name" />
+                                <div class="invalid-feedback">Keyword is required</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-control-group">
+                                    <label>Published</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input custom-control-input unpublished"
+                                            formControlName="unpublished" id="unpublished" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="form-control-group image-url-fcg">
+                                <label>Image URL</label>
+                                <div class="input-group file-upload">
+                                    <div class="input-group-prepend">
+                                        <img src="{{LOCAL_PATH}}{{calendarIcon.imageurl}}" class="thumb">
+                                    </div>
+                                    <label class="upload-button">
+                                        <input type="file" class="form-control file" ngFileSelect
+                                            formControlName="imageName" (uploadOutput)="onUploadOutput($event)"
+                                            [uploadInput]="uploadInput" />
+                                        <div class="invalid-feedback">Image URL is required</div>
+                                    </label>
+                                </div>
+                                <div class="invalid-feedback">Image URL is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-default" (click)="cancelCalendarIcon()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card.calendarIcon {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .card.calendarIcon .btn {
+        display: inline-block;
+    }
+
+    .card.calendarIcon .card-header {
+        color: #fff;
+        padding: 15px !important;
+    }
+
+    .card.calendarIcon .card-body {
+        padding-top: 80px !important;
+        width: 100%;
+        background: #5305660d;
+    }
+
+    .row-calendarIcon {
+        border-bottom: 1px solid #9227a624;
+        padding: 5px 0;
+        padding: 5px 0;
+    }
+
+    .row-calendarIcon:hover {
+        background-color: #8f24a91a;
+    }
+
+    .row-calendarIcon-header {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .card.calendarIcon .card-header {
+        padding: 0;
+        margin: 0;
+        background: linear-gradient(45deg, #8e24aa, #ff6e40);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        align-self: stretch;
+        align-items: center;
+        height: 64px;
+        box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+        box-shadow: 0 5px 5px 5px #0000002e;
+        transition-duration: .2s;
+        transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+        transition-property: max-height, box-shadow;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+        border-radius: 0;
+    }
+
+
+    .calendarIcons .btn-primary,
+    .card.calendarIcon .btn-primary{
+        background: linear-gradient(45deg, #fe8a10, #feaf1f);
+        border: 1px solid #fe8a10 !important;
+        box-shadow: 0px 0px 3px 0 rgb(255 110 64 / 50%);
+        color: #fff !important;
+        transition: none;
+    }
+
+    .calendarIcons .btn:hover,
+    .card.calendarIcon .btn:hover {
+        background: linear-gradient(0deg, #fe8a10, #feaf1f);
+        color: #fff;
+    }
+
+    .calendarIcons .btn {
+        min-width: 100px;
+    }
+</style>
