@@ -8,7 +8,7 @@
 
 <body>
     <h2>The XMLHttpRequest Object</h2>
-    <button type="button" onclick="loadDoc()">Request data</button>
+    <button type="button" onclick="run()">Request data</button>
     <p id="demo"></p>
     <div id="contain"></div>
 </body>
@@ -27,7 +27,7 @@
      * as described in https://developers.google.com/api-client-library/javascript/start/start-js
      */
 
-    const filterString = (string) => {
+    const getImageUrl1 = (string) => {
         const words = string.split(" ");
         if (words.includes("Fast", "Ekadashi", "Panchmi", "Jayanti")) {
             return "https://sydneytemple.org/images/calendar/ekadashi-fast.png";
@@ -130,7 +130,7 @@
                     if (response.result.items) {
                         var calendarRows = `<div class="my-slider">`;
                         response.result.items.forEach(function (entry) {
-                            const eventImage = filterString(entry.summary);
+                            const eventImage = getImageUrl(entry.summary);
                             const startDateTime = entry.start.dateTime;
 
                             console.log("entry", entry);
@@ -297,7 +297,7 @@
     }
 
     // Loads the JavaScript client library and invokes `start` afterwards.
-    // gapi.load("client", printCalendar);
+    gapi.load("client", printCalendar);
 </script>
 <style>
     #contain {
@@ -418,16 +418,53 @@
 </style>
 
 <script>
-    let a;
-    function loadDoc() {
+    let iconsData;
+    let eventsData;
+
+    async function getIconsData() {
         fetch('calendar-icons.json')
             .then((response) => response.json())
             .then((data) => {
-                a = data;
-                console.log('a', a)
+                iconsData = data.filter(el => el.unpublished === false);
             })
     }
-    loadDoc();
+
+    async function getEventsData() {
+        fetch('calendar-events.json')
+            .then((response) => response.json())
+            .then((data) => {
+                eventsData = data;
+            })
+    }
+
+    async function getImageUrl(string) {
+        path = "https://sydneytemple.org";
+        var stringWordsList = string.split(" ");
+        iconsData.forEach(function (arrayItem) {
+            if (stringWordsList.includes(arrayItem.name)) {
+                // event.abc = path + arrayItem.imageurl;
+                return arrayItem.imageurl;
+            }
+        });
+        // console.log('eventsDatalinked ', eventsData);
+    }
+
+
+    function run() {
+        getIconsData();
+        getEventsData();
+
+        setTimeout(() => {
+            console.log('iconsData', iconsData);
+            console.log('eventsData', eventsData);
+
+            // getImageUrl();
+
+        }, "1000");
+
+    }
+
+    run();
 </script>
 
 </html>
