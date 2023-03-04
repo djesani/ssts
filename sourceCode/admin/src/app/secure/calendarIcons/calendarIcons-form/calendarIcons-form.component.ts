@@ -165,7 +165,7 @@ export class CalendarIconsFormComponent implements OnInit {
         // uncomment this if you want to auto upload files when added
         const uploadAll: UploadInput = {
           type: 'uploadAll',
-          url: `${environment.CONTEXT_PATH}/fileupload/calendaricons`,
+          url: `${environment.CONTEXT_PATH}/fileupload`,
           method: 'POST'
         };
         this.uploadInput.emit(uploadAll);
@@ -194,7 +194,7 @@ export class CalendarIconsFormComponent implements OnInit {
         this.dragOver = false;
         break;
       case 'done':
-        this.calendarIcon.imageurl = '/images/calendaricons/' + output.file.name;
+        this.calendarIcon.imageurl = '/images/events/' + output.file.name;
         break;
     }
   }
