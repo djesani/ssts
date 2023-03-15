@@ -1,19 +1,19 @@
 [{
-        "imageurl": "/images/calendaricons/ekadashi-fast.png",
-        "name": "test1",
-        "unpublished": true,
-        "filename": "test1"
-    },
-    {
-        "imageurl": "/images/calendaricons/ekadashi-fast.png",
-        "name": "test2",
-        "unpublished": true,
-        "filename": "test2"
-    },
-    {
-        "imageurl": "/images/calendaricons/ekadashi-fast.png",
-        "name": "test3",
-        "unpublished": true,
-        "filename": "test3"
-    }
+    "imageurl": "/images/calendaricons/ekadashi-fast.png",
+    "name": "Fast",
+    "unpublished": false,
+    "filename": "test1"
+},
+{
+    "imageurl": "/images/calendaricons/Raas.png",
+    "name": "Raas",
+    "unpublished": false,
+    "filename": "test2"
+},
+{
+    "imageurl": "/images/events/holika-dahan.png",
+    "name": "Holika",
+    "unpublished": false,
+    "filename": "test3"
+}
 ]

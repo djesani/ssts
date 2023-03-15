@@ -8,7 +8,7 @@
 
 <body>
     <h2>The XMLHttpRequest Object</h2>
-    <button type="button" onclick="loadDoc()">Request data</button>
+    <button type="button" onclick="run()">Request data</button>
     <p id="demo"></p>
     <div id="contain"></div>
 </body>
@@ -27,7 +27,7 @@
      * as described in https://developers.google.com/api-client-library/javascript/start/start-js
      */
 
-    const filterString = (string) => {
+    const getImageUrl1 = (string) => {
         const words = string.split(" ");
         if (words.includes("Fast", "Ekadashi", "Panchmi", "Jayanti")) {
             return "https://sydneytemple.org/images/calendar/ekadashi-fast.png";
@@ -130,7 +130,7 @@
                     if (response.result.items) {
                         var calendarRows = `<div class="my-slider">`;
                         response.result.items.forEach(function (entry) {
-                            const eventImage = filterString(entry.summary);
+                            const eventImage = getImageUrl2(entry.summary);
                             const startDateTime = entry.start.dateTime;
 
                             console.log("entry", entry);
@@ -418,16 +418,79 @@
 </style>
 
 <script>
-    let a;
-    function loadDoc() {
+    let iconsData;
+    let eventsData;
+
+    async function getIconsData() {
         fetch('calendar-icons.json')
             .then((response) => response.json())
             .then((data) => {
-                a = data;
-                console.log('a', a)
+                iconsData = data.filter(el => el.unpublished === false);
             })
     }
-    loadDoc();
+
+    async function getEventsData() {
+        fetch('calendar-events.json')
+            .then((response) => response.json())
+            .then((data) => {
+                eventsData = data;
+            })
+    }
+
+    function getImageUrl(s) {
+        // path = "https://sydneytemple.org";
+        var stringWordsList = s.split(" ");
+        var test = ""
+        // console.log('iconsData ===', iconsData)
+        // console.log('stringWordsList', stringWordsList)
+        iconsData.forEach(function (arrayItem) {
+
+            // console.log('iconsData', iconsData)
+
+            //  console.log('arrayItem', arrayItem.name)
+            if (stringWordsList.includes(arrayItem.name)) {
+                // arrayItem.abc =  arrayItem.imageurl;
+                // console.log('matched', arrayItem.name,  arrayItem.imageurl)
+                // return arrayItem.imageurl;
+                test = arrayItem.imageurl;
+            }
+            
+        });
+
+        return   test;
+    }
+
+
+    function run() {
+        getIconsData();
+        getEventsData();
+
+        setTimeout(() => {
+            
+            // console.log('iconsData', iconsData);
+            // console.log('eventsData', eventsData);
+
+            eventsData.forEach(function (event) {
+                // console.log('event', event)
+                // console.log('event.summary', event.summary)
+
+                event.url = getImageUrl(event.summary);
+
+                console.log('getImageUrl(event.summary)', getImageUrl(event.summary))
+
+                // event.xzc = "aaaa";
+
+                console.log(event)
+            })
+
+            // console.log('iconsData', iconsData);
+            // console.log('eventsData', eventsData);
+
+        }, "1000");
+
+    }
+
+    run();
 </script>
 
 </html>
