@@ -78,6 +78,11 @@ div.top-grid {
     cursor: default;
 }
 
+span.am-pm {
+    display: inline !important;
+    font-size: 10px;
+}
+
 div.other-pages {
     padding-right: 15px;
     padding-top: 15px;
