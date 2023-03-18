@@ -297,7 +297,7 @@ export class EventsFormComponent implements OnInit {
         this.dragOver = false;
         break;
       case 'done':
-        this.event.imageurl = 'images/events/' + output.file.name;
+        this.event.imageurl = '/images/events/' + output.file.name;
         break;
     }
   }

@@ -47,10 +47,10 @@ router.post('/', function(req, res, next) {
     const endDate = getTimestampFromDate(payloadEnd);
 
     // check image has right filepath
-    // if(!req.body.imageurl.match(externalImagePathRegex)){
-    //     console.log("image missing file path. Adding");
-    //     req.body.imageurl = externalImagePath + req.body.imageurl;
-    // }
+    if(!req.body.imageurl.match(externalImagePathRegex)){
+        console.log("image missing file path. Adding");
+        req.body.imageurl = externalImagePath + req.body.imageurl;
+    }
 
     const mergeData = {
         ...req.body,
