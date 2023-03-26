@@ -130,7 +130,7 @@
                     if (response.result.items) {
                         var calendarRows = `<div class="my-slider">`;
                         response.result.items.forEach(function (entry) {
-                            const eventImage = getImageUrl(entry.summary);
+                            const eventImage = getImageUrl2(entry.summary);
                             const startDateTime = entry.start.dateTime;
 
                             console.log("entry", entry);
@@ -297,7 +297,7 @@
     }
 
     // Loads the JavaScript client library and invokes `start` afterwards.
-    gapi.load("client", printCalendar);
+    // gapi.load("client", printCalendar);
 </script>
 <style>
     #contain {
@@ -437,16 +437,27 @@
             })
     }
 
-    async function getImageUrl(string) {
-        path = "https://sydneytemple.org";
-        var stringWordsList = string.split(" ");
+    function getImageUrl(s) {
+        // path = "https://sydneytemple.org";
+        var stringWordsList = s.split(" ");
+        var test = ""
+        // console.log('iconsData ===', iconsData)
+        // console.log('stringWordsList', stringWordsList)
         iconsData.forEach(function (arrayItem) {
+
+            // console.log('iconsData', iconsData)
+
+            //  console.log('arrayItem', arrayItem.name)
             if (stringWordsList.includes(arrayItem.name)) {
-                // event.abc = path + arrayItem.imageurl;
-                return arrayItem.imageurl;
+                // arrayItem.abc =  arrayItem.imageurl;
+                // console.log('matched', arrayItem.name,  arrayItem.imageurl)
+                // return arrayItem.imageurl;
+                test = arrayItem.imageurl;
             }
+            
         });
-        // console.log('eventsDatalinked ', eventsData);
+
+        return   test;
     }
 
 
@@ -455,10 +466,25 @@
         getEventsData();
 
         setTimeout(() => {
-            console.log('iconsData', iconsData);
-            console.log('eventsData', eventsData);
+            
+            // console.log('iconsData', iconsData);
+            // console.log('eventsData', eventsData);
 
-            // getImageUrl();
+            eventsData.forEach(function (event) {
+                // console.log('event', event)
+                // console.log('event.summary', event.summary)
+
+                event.url = getImageUrl(event.summary);
+
+                console.log('getImageUrl(event.summary)', getImageUrl(event.summary))
+
+                // event.xzc = "aaaa";
+
+                console.log(event)
+            })
+
+            // console.log('iconsData', iconsData);
+            // console.log('eventsData', eventsData);
 
         }, "1000");
 
