@@ -121,6 +121,11 @@ img.card-img-top {
   border-bottom: 1px solid #665b9575;
 }
 
+.wrapper-daily-darshan {
+  position: relative;
+  overflow: hidden;
+}
+
 .wrapper:after {
   content: '';
   display: block;
