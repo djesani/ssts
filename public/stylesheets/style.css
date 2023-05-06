@@ -86,7 +86,7 @@ body {
 div.top-grid {
     border: 5px solid #b1afaf !important;
     padding-top: 10px;
-    border-radius: 8%;
+    border-radius: 30px;
     text-align: center;
     height: 100%;
     cursor: default;
