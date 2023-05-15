@@ -142,7 +142,7 @@ img.card-img-top {
   transform: translateX(-50%);
 }
 
-.wrapper-daily-darshan img {
+.wrapper-daily-darshan .dd-img {
   width: auto;
   height: 326px;
   max-width: none;
