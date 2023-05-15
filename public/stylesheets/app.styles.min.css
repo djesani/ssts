@@ -141,3 +141,12 @@ img.card-img-top {
   top: 0;
   transform: translateX(-50%);
 }
+
+.wrapper-daily-darshan img {
+  width: auto;
+  height: 326px;
+  max-width: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
