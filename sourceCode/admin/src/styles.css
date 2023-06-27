@@ -981,3 +981,7 @@ ngb-datepicker.dropdown-menu {
 .thumb {
     width: 100px;
 }
+
+.form-control.description {
+    padding: 1px;
+}

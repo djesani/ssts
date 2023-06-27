@@ -12,7 +12,7 @@ import { EventsRoutingModule } from './events-routing.module';
 import { EventsSearchPipe } from './events.search.pipe';
 import { EventsService } from './events.service';
 
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { MatTableModule } from '@angular/material/table';
 
@@ -29,7 +29,7 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    AngularEditorModule,
+    CKEditorModule,
     MatTableModule
   ],
   exports: [

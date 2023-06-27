@@ -18,10 +18,8 @@
                         </div>
                         <div class="form-control-group">
                             <label>Description</label>
-
-                            <angular-editor class="form-control description" formControlName="description"
-                                [config]="editorConfig"></angular-editor>
-
+                            <ckeditor class="form-control description" [config]="cKEditorConfig" [editor]="Editor" formControlName="description">
+                            </ckeditor>
                             <div class="invalid-feedback">Description is required</div>
                         </div>
                     </div>
@@ -53,7 +51,8 @@
                                         <div class="form-check">
                                             <input type="checkbox"
                                                 class="form-check-input custom-control-input changeEndDate"
-                                                id="changeEndDate" [checked]="changeEndDate" (change)=onChangeEndDate($event)/>
+                                                id="changeEndDate" [checked]="changeEndDate"
+                                                (change)=onChangeEndDate($event) />
                                         </div>
                                         <input type="text" class="form-control" formControlName="endDate" ngbDatepicker
                                             #endDateDatepicker="ngbDatepicker" (click)="endDateDatepicker.toggle()"
