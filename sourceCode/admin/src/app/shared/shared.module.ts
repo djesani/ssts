@@ -12,7 +12,7 @@ import { CustomAdapter, CustomDateParserFormatter } from './services/ng-date-pic
 import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 import { FaModule} from './fontawesome/fa.module';
-import { NgxUploaderModule } from 'ngx-uploader';
+// import { NgxUploaderModule } from 'ngx-uploader';
 
 import { ScrollToInvalidControlDirective } from './directives/scroll-to-invalid-control.directive';
 
@@ -28,7 +28,7 @@ const sharedModules = [
   NgxSpinnerModule,
   HttpClientModule,
   NgbDatepickerModule,
-  NgxUploaderModule,
+  // NgxUploaderModule,
   FaModule,
 ];
 
