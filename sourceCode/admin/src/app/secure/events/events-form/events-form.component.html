@@ -66,6 +66,14 @@
                         <div class="row">
                             <div class="form-control-group image-url-fcg">
                                 <label>Image URL</label>
+                                <input type="text" formControlName="imageName" class="invisible">
+                                <application-attachments [attachmentConfig]="attachmentConfigHydraulicLetter"
+                                    (attachmentsFormData)="onAttachmentsHydraulicLetterChanged($event)"
+                                    [attachmentsRequiredShow]="hydraulicLetterAttachmentsRequiredShow"
+                                    [existingData]="documentAttachmentsExisting.hydraulicLetter" [ngClass]="{
+                                        'has-error':  hydraulicLetterAttachmentsRequiredShow
+                                    }">
+                                </application-attachments>
                                 <div class="input-group file-upload">
                                     <div class="input-group-prepend">
                                         <img src="{{LOCAL_PATH}}{{event.imageurl}}" class="thumb">

@@ -5,12 +5,14 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../shared/shared.module';
+import { ModulesModule } from '../../shared/modules/modules.module';
 
 import { EventsFormComponent } from './events-form/events-form.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { EventsSearchPipe } from './events.search.pipe';
 import { EventsService } from './events.service';
+import { AttachmentsService } from '../../shared/modules/application-attachments/attachments.service';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -30,7 +32,8 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     SharedModule,
     CKEditorModule,
-    MatTableModule
+    MatTableModule,
+    ModulesModule
   ],
   exports: [
     EventsFormComponent,
@@ -38,6 +41,6 @@ import { MatTableModule } from '@angular/material/table';
     EventsSearchPipe,
   ],
 
-  providers: [EventsService],
+  providers: [EventsService, AttachmentsService],
 })
 export class EventsModule { }
