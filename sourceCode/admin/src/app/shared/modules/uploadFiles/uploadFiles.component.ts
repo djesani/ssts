@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UploadFilesService } from './uploadFiles.service';
 
+import { Observable, of, throwError } from "rxjs";
+import { catchError } from 'rxjs/operators';
+
 @Component({
   selector: 'app-uploadFiles',
   templateUrl: './uploadFiles.component.html'
@@ -19,45 +22,7 @@ export class UploadFilesComponent implements OnInit {
   formClass: string;
   formPreFilled = false;
 
-  @Input() uploadFilesRequiredShow: boolean;
-  @Input() uploadFileConfig: any;
-  @Input() existingData: any;
-  @Output() uploadFilesFormData = new EventEmitter();
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private uploadFilesService: UploadFilesService,
-  ) { }
-
-  ngOnInit() {
-    this.uploadFilesForm = this.formBuilder.group({
-      uploadFile: [null, Validators.required]
-    });
-    this.formClass = this.uploadFileConfig.uploadFileType.replace(/ /g, "-").toLowerCase();
-    this.uploadFileConfigSetDefault();
-    this.formPreFill();
-  }
-
-  ngOnChanges() {
-    this.formPreFill();
-  }
-
   uploadFileConfigSetDefault() {
-    if (this.uploadFileConfig.applicationId == undefined || this.uploadFileConfig.applicationId == "") {
-      this.uploadFileConfig.applicationId = "1";
-    }
-    if (this.uploadFileConfig.uploadFileType == undefined || this.uploadFileConfig.uploadFileType == "") {
-      this.uploadFileConfig.uploadFileType = "UploadFile type";
-    }
-    if (this.uploadFileConfig.labelPrimaryCounter == undefined || this.uploadFileConfig.labelPrimaryCounter == "") {
-      this.uploadFileConfig.labelPrimaryCounter = "1.";
-    }
-    if (this.uploadFileConfig.labelPrimary == undefined || this.uploadFileConfig.labelPrimary == "") {
-      this.uploadFileConfig.labelPrimary = "UploadFile upload";
-    }
-    if (this.uploadFileConfig.labelSecondary == undefined || this.uploadFileConfig.labelSecondary == "") {
-      this.uploadFileConfig.labelSecondary = "Each attached file must be less than 10MB in size";
-    }
     if (this.uploadFileConfig.fileTypeAcceptError == undefined || this.uploadFileConfig.fileTypeAcceptError == "") {
       this.uploadFileConfig.fileTypeAcceptError = "We couldn't upload this file as this file format is not allowed";
     }
@@ -108,6 +73,29 @@ export class UploadFilesComponent implements OnInit {
     }
   }
 
+  @Input() uploadFilesRequiredShow: boolean;
+  @Input() uploadFileConfig: any;
+  @Input() existingData: any;
+  @Output() uploadFilesFormData = new EventEmitter();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private uploadFilesService: UploadFilesService,
+  ) { }
+
+  ngOnInit() {
+    this.uploadFilesForm = this.formBuilder.group({
+      uploadFile: [null, Validators.required]
+    });
+    this.formClass = this.uploadFileConfig.uploadFileType.replace(/ /g, "-").toLowerCase();
+    this.uploadFileConfigSetDefault();
+    this.formPreFill();
+  }
+
+  ngOnChanges() {
+    this.formPreFill();
+  }
+
   uploadFilesFunction(fileEvent: any) {
 
     const fileList: FileList = fileEvent.target.files;
@@ -150,7 +138,6 @@ export class UploadFilesComponent implements OnInit {
       }
 
       this.uploadFile.fileName = file.name;
-      this.uploadFile.uploadFileType = this.uploadFileConfig.uploadFileType;
 
       if (
         this.uploadFile.fileNoContentError ||
@@ -172,45 +159,89 @@ export class UploadFilesComponent implements OnInit {
         }
 
         let formData: any = new FormData();
-        formData.append("documentType", this.uploadFileConfig.uploadFileType);
-        formData.append('applicationId', this.uploadFileConfig.applicationId);
+        formData.append("documentType", "abc");
+        formData.append('applicationId', "def");
         formData.append("uploadFile", file);
+
         this.uploadFile.uploading = true;
 
-        this.uploadFilesService.postUploadFile(formData).subscribe((data: any[]) => {
-          let response: any = data;
-          if (response.message == "success") {
-            let document = response.document;
-            document.metadata = JSON.parse(document.metadata);
-            this.uploadFiles.find(function (element) {
-              if (element.uploading == true && element.fileName == document.metadata.documentName) {
-                element.swimReference = response.document.swimReference;
-                element.id = response.document.id;
-                element.uploading = false;
-                element.removing = false;
-                element.uploadStatus = "success";
-                element.metadata = document.metadata;
-              }
-            });
-          }
-          this.uploadFilesFormDataEmit();
-          this.uploadFilesUploadedCount = this.uploadFilesUploaded.length;
-        });
+      //  .subscribe({
+      //     next: data => {
+      //         // this.postId = data.id;
+      //         console.log('data', data)
+      //     },
+      //     error: error => {
+      //         // this.errorMessage = error.message;
+      //         console.error('There was an error!', error);
+      //     }
+      // })
+  // }
+
+        this.uploadFilesService.postUploadFile(formData)
+
+        // .subscribe({
+        //     next: data => {
+        //         // this.postId = data.id;
+        //         console.log('data', data)
+        //     },
+        //     error: error => {
+
+        //       console.log('error', error)
+        //         // this.errorMessage = error.message;
+        //         console.error('There was an error!', error);
+        //     }
+        // })
+
+      //   .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      //     // this.errorMessage = error.message;
+      //     console.error('There was an error!', error);
+
+      //     // after handling the error, return a new observable 
+      //     // that doesn't emit any values and completes
+      //     return of();
+      // }))
+      .subscribe(data => {
+          // this.postId = data.id;
+          console.log('data', data)
+      });
+
+        // .subscribe((data) => {
+        //   console.log('data', data)
+        //   // let response: any = data;
+        //   // console.log('response', response)
+        //   // if (response == "File uploaded!") {
+        //   //   let document = response.document;
+        //   //   document.metadata = JSON.parse(document.metadata);
+        //   //   this.uploadFiles.find(function (element) {
+        //   //     if (element.uploading == true && element.fileName == document.metadata.documentName) {
+        //   //       element.id = response.document.id;
+        //   //       element.uploading = false;
+        //   //       element.removing = false;
+        //   //       element.uploadStatus = "success";
+        //   //       element.metadata = document.metadata;
+        //   //     }
+        //   //   });
+        //   // }
+        //   this.uploadFilesFormDataEmit();
+        //   this.uploadFilesUploadedCount = this.uploadFilesUploaded.length;
+        // });
         this.uploadFiles.push(this.uploadFile);
-        this.uploadFilesForm.reset();
+
+        // console.log("this.uploadFiles", this.uploadFiles)
+        // this.uploadFilesForm.reset();
       }
     });
 
   }
 
   removeUploadFile(uploadFile: any) {
-    let objIndex = this.uploadFiles.findIndex((obj => obj.swimReference == uploadFile.swimReference));
+    let objIndex = this.uploadFiles.findIndex((obj => obj.id == uploadFile.id));
     this.uploadFiles[objIndex].removing = true;
 
     this.uploadFilesService.deleteUploadFile(uploadFile).subscribe((data: any[]) => {
       let response: any = data;
       if (response) {
-        this.uploadFiles = this.uploadFiles.filter(({ swimReference }) => !uploadFile.swimReference.includes(swimReference));
+        this.uploadFiles = this.uploadFiles.filter(({ id }) => !uploadFile.id.includes(id));
         this.uploadFilesFormDataEmit();
         this.uploadFilesUploadedCount = this.uploadFilesUploaded.length;
         this.filesMaxUploadAllowedError = false;

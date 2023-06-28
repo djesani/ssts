@@ -13,6 +13,8 @@ export class UploadFilesService {
   constructor(private httpClient: HttpClient) {}
 
   public postUploadFile(uploadFile) {
+    console.log("postUploadFile", uploadFile )
+    console.log("baseUrl", baseUrl )
     return this.httpClient.post(baseUrl, uploadFile);
   }
 

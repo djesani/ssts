@@ -27,6 +27,8 @@ export class EventsFormComponent implements OnInit {
   minEndDate: NgbDateStruct;
   maxEndDate: NgbDateStruct;
 
+  uploadFilesExisting : [];
+
   formData: FormData;
 
   eventForm: FormGroup;
@@ -79,7 +81,7 @@ export class EventsFormComponent implements OnInit {
     this.buildForm();
     this.setAddEditValidators();
 
-    this.loadData();
+    this.formPreFill();
 
     this.minStartDate = {
       year: now.getFullYear(),
@@ -126,13 +128,10 @@ export class EventsFormComponent implements OnInit {
 
   @ViewChild("name", { static: false }) inputEl: ElementRef;
 
-  loadData() {
+  formPreFill() {
     this.eventsService.getAll().subscribe((data: any[]) => {
       this.events = data;
-
-      // console.log('this.events', this.events)
       if (this.isEdit) {
-        console.log("this.events", this.events);
         this.event = this.events.find((event) => event.filename == this.getId);
         this.setData();
       } else {
@@ -147,10 +146,10 @@ export class EventsFormComponent implements OnInit {
       description: ["", Validators.required],
       startDate: [null, Validators.required],
       endDate: [null],
-      imageName: [null],
-      imageurl: [null],
       unpublished: [true],
       filename: [null],
+      imageurl: [null],
+      imageName: [null],
     });
   }
 
@@ -208,9 +207,9 @@ export class EventsFormComponent implements OnInit {
     this.eventForm.get("description").setValue(this.event.description);
     this.eventForm.get("startDate").setValue(this.event.startDate);
     this.eventForm.get("endDate").setValue(this.event.endDate);
-    this.eventForm.get("imageurl").setValue(this.event.imageurl);
     this.eventForm.get("unpublished").setValue(!this.event.unpublished); // inverse
     this.eventForm.get("filename").setValue(this.event.filename);
+    this.eventForm.get("imageurl").setValue(this.event.imageurl);
     this.eventForm.get("imageName").setValue("");
 
     if (this.event.startDate !== this.event.endDate) {
@@ -225,9 +224,9 @@ export class EventsFormComponent implements OnInit {
     this.event.description = this.eventForm.get("description").value;
     this.event.startDate = this.eventForm.get("startDate").value;
     this.event.endDate = this.eventForm.get("endDate").value;
-    // this.event.imageurl = this.eventForm.get('imageurl').value; // do not get this as it has been changed
     this.event.unpublished = !this.eventForm.get("unpublished").value; // inverse
     this.event.filename = this.eventForm.get("filename").value;
+    // this.event.imageurl = this.eventForm.get('imageurl').value; // do not get this as it has been changed
   }
 
   saveEvent() {

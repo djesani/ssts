@@ -56,13 +56,13 @@ export class CalendarIconsFormComponent implements OnInit {
     this.buildForm();
     this.setAddEditValidators();
 
-    this.loadData();
+    this.formPreFill();
   }
 
   @ViewChild('name', { static: false }) inputEl: ElementRef;
 
 
-  loadData() {
+  formPreFill() {
     this.calendarIconsService.getAll().subscribe((data: any[]) => {
       this.calendarIcons = data;
 

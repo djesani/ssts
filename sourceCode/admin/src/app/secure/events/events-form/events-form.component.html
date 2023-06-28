@@ -68,8 +68,27 @@
                                 <label>Image URL</label>
                                 <input type="text" formControlName="imageName" class="invisible">
                                 <app-uploadFiles [uploadFileConfig]="uploadFileConfigEvent"
-                                    [uploadFilesRequiredShow]="true">
+                                    [uploadFilesRequiredShow]="true" [existingData]="uploadFilesExisting" [ngClass]="{
+                                        'has-error':  true
+                                    }">
                                 </app-uploadFiles>
+
+                                <div>fileName:: {{event.fileName}}</div>
+
+                                <div>imageName:: {{event.imageName}}</div>
+
+                                <div>imageurl:: {{event.imageurl}}</div>
+
+                                
+
+                                <!-- <application-attachments [attachmentConfig]="attachmentConfigHydraulicLetter"
+                                    (attachmentsFormData)="onAttachmentsHydraulicLetterChanged($event)"
+                                    [attachmentsRequiredShow]="hydraulicLetterAttachmentsRequiredShow"
+                                    [existingData]="documentAttachmentsExisting.hydraulicLetter" [ngClass]="{
+                                        'has-error':  hydraulicLetterAttachmentsRequiredShow
+                                    }">
+                                </application-attachments> -->
+
                                 <div class="input-group file-upload">
                                     <div class="input-group-prepend">
                                         <img src="{{LOCAL_PATH}}{{event.imageurl}}" class="thumb">
