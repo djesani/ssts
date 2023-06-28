@@ -12,8 +12,6 @@ import { CalendarIconsRoutingModule } from './calendarIcons-routing.module';
 import { CalendarIconsSearchPipe } from './calendarIcons.search.pipe';
 import { CalendarIconsService } from './calendarIcons.service';
 
-import { AngularEditorModule } from '@kolkov/angular-editor';
-
 import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
@@ -29,7 +27,6 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    AngularEditorModule,
     MatTableModule
   ],
   exports: [

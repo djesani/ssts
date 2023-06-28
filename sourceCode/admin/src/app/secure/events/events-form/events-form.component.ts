@@ -1,12 +1,10 @@
 import { Component, OnInit, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { EventsService } from '../events.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-
-// import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 import { environment } from '../../../../environments/environment';
 
@@ -31,72 +29,26 @@ export class EventsFormComponent implements OnInit {
   maxEndDate: NgbDateStruct;
 
   formData: FormData;
-  // options: UploaderOptions;
-  // files: UploadFile[];
-  // uploadInput: EventEmitter<UploadInput>;
-  humanizeBytes: Function;
-  dragOver: boolean;
 
   eventForm: FormGroup;
   changeEndDate = false;
 
   LOCAL_PATH = environment.LOCAL_PATH;
 
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    customClasses: [],
-    uploadWithCredentials: false,
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      [
-        'undo',
-        'redo',
-        'subscript',
-        'superscript',
-        'indent',
-        'outdent',
-        'customClasses',
-        'unlink',
-        'insertImage',
-        'insertVideo',
-        'insertHorizontalRule',
-        'toggleEditorMode'
-      ]
+  public Editor = ClassicEditor;
+
+  public cKEditorConfig = {
+    toolbar: [ 'heading', '|',
+      'fontfamily','fontsize',
+      'alignment',
+      'fontColor','fontBackgroundColor', '|',
+      'bold', 'italic','|',
+      'link','|',
+      'outdent','indent','|',
+      'bulletedList','numberedList','|',
+      'undo','redo'
     ]
-  };
-
-  // 'bold',
-  // 'italic',
-  // 'underline',
-  // 'strikeThrough',
-  // 'justifyLeft',
-  // 'justifyCenter',
-  // 'justifyRight',
-  // 'justifyFull',
-  // 'heading',
-  // 'fontName',
-  // 'fontSize',
-  // 'textColor',
-  // 'backgroundColor',
-  // 'insertUnorderedList',
-  // 'insertOrderedList',
-  // 'link',
-  // 'removeFormat',
-
+  }
 
   constructor(
     private router: Router,
@@ -107,11 +59,6 @@ export class EventsFormComponent implements OnInit {
     this.getId = this.activatedRoute.snapshot.paramMap.get('id');
     this.urlSegments = this.activatedRoute.snapshot.url;
     this.hasEdit();
-
-    // this.options = { concurrency: 1, maxUploads: 3, maxFileSize: 1000000 };
-    // this.files = []; // local uploading files array
-    // this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
-    // this.humanizeBytes = humanizeBytes;
   }
 
   ngOnInit(): void {
@@ -130,7 +77,6 @@ export class EventsFormComponent implements OnInit {
   }
 
   @ViewChild('name', { static: false }) inputEl: ElementRef;
-
 
   loadData() {
     this.eventsService.getAll().subscribe((data: any[]) => {
