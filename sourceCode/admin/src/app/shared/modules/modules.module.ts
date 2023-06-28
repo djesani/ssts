@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
-import { ApplicationAttachmentsComponent } from "./application-attachments/application-attachments.component";
+import { UploadFilesComponent } from "./uploadFiles/uploadFiles.component";
 import { SharedModule } from "../shared.module";
 
 @NgModule({
   declarations: [
-    ApplicationAttachmentsComponent,
+    UploadFilesComponent,
   ],
   imports: [SharedModule],
   exports: [
-    ApplicationAttachmentsComponent,
+    UploadFilesComponent,
   ],
 })
 export class ModulesModule {}

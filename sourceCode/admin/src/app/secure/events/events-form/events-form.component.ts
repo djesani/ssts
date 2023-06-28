@@ -16,17 +16,6 @@ const now = new Date();
   styles: [],
 })
 export class EventsFormComponent implements OnInit {
-  applicationDocuments = [];
-  hydraulicLetterAttachmentsRequiredShow = false;
-  documentAttachments = {
-    hydraulicLetter: []
-  };
-  documentAttachmentsExisting = {
-    hydraulicLetter: []
-  };
-  attachmentConfigHydraulicLetter: any;
-  attachmentsHydraulicLetterChanged = [];
-
   events: any;
   event: any;
   getId: any;
@@ -73,13 +62,15 @@ export class EventsFormComponent implements OnInit {
     ],
   };
 
+  uploadFileConfigEvent: any;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private eventsService: EventsService,
+    private eventsService: EventsService
   ) {
-    this.getId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getId = this.activatedRoute.snapshot.paramMap.get("id");
     this.urlSegments = this.activatedRoute.snapshot.url;
     this.hasEdit();
   }
@@ -112,14 +103,10 @@ export class EventsFormComponent implements OnInit {
       day: now.getDate() + 1,
     };
 
-    this.attachmentConfigHydraulicLetter = {
-      attachmentType: "Hydraulic letter",
-      labelPrimaryCounter: "1.",
-      labelPrimary: "Letter from hydraulic",
-      labelSecondary: "Specify the requirements.",
-      fileTypeAccept: ".pdf, .jpg, .jpeg, .png",
+    this.uploadFileConfigEvent = {
+      fileTypeAccept: ".jpg, .jpeg, .png",
       fileTypeAcceptError: "File format not accepted",
-      attachmentsRequiredError: "At least one letter req",
+      uploadFilesRequiredError: "At least one file required",
       filesMaxUploadAllowedError: "5 files only",
       labelFileUpload: "Attach file/s",
       labelRemoveIconClass: "fa-trash",
@@ -130,8 +117,8 @@ export class EventsFormComponent implements OnInit {
       // filesMaxUploadAllowed: 5,
       // fileMaxSize: 10485760, // 10MB in bytes,
       // fileMinSize: 1024, // bytes
-      // attachmentAddError: "Error in adding attachment",
-      // attachmentRemoveError: "Error in removing attachment",
+      // uploadFileAddError: "Error in adding uploadFile",
+      // uploadFileRemoveError: "Error in removing uploadFile",
       // labelFileUploadIconClass: "fa-plus",
       // labelRemove: "Remove",
     };
@@ -276,19 +263,5 @@ export class EventsFormComponent implements OnInit {
 
   cancelEvent() {
     this.router.navigate(["events"]);
-  }
-
-  onAttachmentsHydraulicLetterChanged(value) {
-    this.attachmentsHydraulicLetterChanged = value;
-    this.documentAttachments.hydraulicLetter =
-      this.attachmentsHydraulicLetterChanged;
-    this.eventForm
-      .get("imageurl")
-      .setValue(this.documentAttachments.hydraulicLetter);
-    this.isAttachmentsRequired();
-  }
-
-  isAttachmentsRequired() {
-    return true;
   }
 }

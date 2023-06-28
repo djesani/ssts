@@ -12,7 +12,7 @@ import { EventsListComponent } from './events-list/events-list.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { EventsSearchPipe } from './events.search.pipe';
 import { EventsService } from './events.service';
-import { AttachmentsService } from '../../shared/modules/application-attachments/attachments.service';
+import { UploadFilesService } from '../../shared/modules/uploadFiles/uploadFiles.service';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -41,6 +41,6 @@ import { MatTableModule } from '@angular/material/table';
     EventsSearchPipe,
   ],
 
-  providers: [EventsService, AttachmentsService],
+  providers: [EventsService, UploadFilesService],
 })
 export class EventsModule { }
