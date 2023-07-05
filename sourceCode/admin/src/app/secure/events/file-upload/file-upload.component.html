@@ -1,13 +1,8 @@
-<div class="row" [ngClass]="{
-  'files-selected-no':  !selectedFiles, 
-  'files-selected':     selectedFiles
-}">
+<div class="row">
   <div class="col-4">
     <img [src]="preview" class="preview- thumb" *ngIf="selectedFiles" />
     <img [src]="existingFileUrl" class="thumb" *ngIf="!selectedFiles" />
   </div>
-
-  <!-- <div>existingFileUrl::{{existingFileUrl}}</div> -->
   <div class="col-8">
     <div class="row">
       <div class="col-12">
@@ -15,17 +10,11 @@
           <input type="file" accept="image/*" (change)="selectFile($event)" class="form-control file" />
         </label>
       </div>
-      <div class="col-4">
-        <button class="btn btn-default btn-sm float-right" [disabled]="!selectedFiles" (click)="upload()">
+      <!-- <div class="col-4">
+        <button type="button" class="btn btn-default btn-sm float-right" [disabled]="!selectedFiles" (click)="upload()">
           Upload
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
-
-<style>
-  .preview {
-    max-width: 200px;
-  }
-</style>

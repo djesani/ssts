@@ -173,10 +173,7 @@ h5 {
     padding: 10px;
     border-radius: 5px;
     min-height: 130px;
-    display: flex;
-    align-items: center;
-    align-content: space-evenly;
-    flex-direction: row;
+    display: block;
 }
 
 .input-group.file-upload .thumb {
@@ -198,6 +195,20 @@ h5 {
     padding: 2px 8px;
     width: 60% !important;
     margin-right: 15px;
+}
+
+.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload {
+    border: 2px solid #ff6e40 !important;
+    margin-bottom: 0;
+}
+
+.form-control-group.image-url-fcg .upload-button {
+    display: block;
+}
+
+.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.invalid-feedback {
+    display: block;
+    opacity: 1;
 }
 
 .form-control.file {
@@ -948,11 +959,11 @@ ngb-datepicker.dropdown-menu {
 }
 
 .angular-editor-textarea {
-   font-size: 16px;
+    font-size: 16px;
 }
 
 .form-check .form-check-input {
-    opacity: 1 !important; 
+    opacity: 1 !important;
     position: unset !important;
     pointer-events: unset !important;
 }
@@ -983,13 +994,4 @@ ngb-datepicker.dropdown-menu {
 
 .form-control.description {
     padding: 1px;
-}
-
-.files-selected-no .col-4 {
-    display: none;
-}
-
-.files-selected-no .col-8 {
-    width: 100%;
-    padding-left: 20px;
 }

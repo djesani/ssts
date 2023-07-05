@@ -67,16 +67,13 @@
                         <div class="row">
                             <div class="form-control-group image-url-fcg">
                                 <label>Image URL</label>
-                                <!-- <input type="text" formControlName="imageName" class="invisible"> -->
+                                <input type="file" class="form-control" formControlName="imageName" style="display:none" />
                                 <div class="input-group file-upload">
-                                    <div class="input-group-prepend">
-                                        <img src="{{LOCAL_PATH}}{{event.imageurl}}" class="thumb">
-                                    </div>
                                     <label class="upload-button">
-                                        <app-file-upload formControlName="imageName"
+                                        <app-file-upload 
                                             [existingFileUrl]="existingFileUrl">
                                         </app-file-upload>
-                                        <div class="invalid-feedback">Image URL is required</div>
+                                        <!-- <div class="invalid-feedback">Image URL is required</div> -->
                                     </label>
                                 </div>
                                 <div class="invalid-feedback">Image URL is required</div>
