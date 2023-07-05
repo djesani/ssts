@@ -2,14 +2,14 @@
     [ngClass]="{
         'uploadFilesRequiredShow':  uploadFilesRequiredShow
     }">
-    <div class="form-group">
+    <div class="form-group input-group file-upload">
         <div class="row fileupload-buttonbar">
             <div class="col-sm-12 col-md-4 button-column">
                 <span class="btn btn-secondary btn-block fileinput-button">
                     <i class="fa {{uploadFileConfig.labelFileUploadIconClass}}"></i>
                     {{uploadFileConfig.labelFileUpload}}
                     <input type="file" formControlName="uploadFile" (change)="uploadFilesFunction($event)"
-                        (click)="removeFailed()" accept="{{uploadFileConfig.fileTypeAccept}}"
+                         accept="{{uploadFileConfig.fileTypeAccept}}"
                         [multiple]="uploadFileConfig.fileUploadMultiple">
                 </span>
             </div>
@@ -32,7 +32,7 @@
 
                     </div>
                     <div class="col-sm-8">
-                        <div class="remove-uploadFile" (click)="removeUploadFile(uploadFile)" *ngIf="
+                        <div class="remove-uploadFile"  *ngIf="
                                 !uploadFile.removing            &&
                                 !uploadFile.uploading           &&
                                 !uploadFile.fileNoContentError  &&

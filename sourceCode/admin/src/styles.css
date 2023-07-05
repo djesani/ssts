@@ -180,11 +180,11 @@ h5 {
 }
 
 .input-group.file-upload .thumb {
-    width: 90%;
+    width: 100%;
 }
 
 .input-group.file-upload .input-group-prepend {
-    width: 40%
+    width: 20%
 }
 
 .input-group.file-upload .input-group-append {
@@ -295,7 +295,6 @@ label {
 }
 
 .upload-button {
-    width: 60%;
     align-self: flex-start;
 }
 
@@ -984,4 +983,13 @@ ngb-datepicker.dropdown-menu {
 
 .form-control.description {
     padding: 1px;
+}
+
+.files-selected-no .col-4 {
+    display: none;
+}
+
+.files-selected-no .col-8 {
+    width: 100%;
+    padding-left: 20px;
 }

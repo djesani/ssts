@@ -1,28 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from "@angular/forms";
 
-import { SharedModule } from '../../shared/shared.module';
-import { ModulesModule } from '../../shared/modules/modules.module';
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { MatTableModule } from "@angular/material/table";
 
-import { EventsFormComponent } from './events-form/events-form.component';
-import { EventsListComponent } from './events-list/events-list.component';
-import { EventsRoutingModule } from './events-routing.module';
-import { EventsSearchPipe } from './events.search.pipe';
-import { EventsService } from './events.service';
-import { UploadFilesService } from '../../shared/modules/uploadFiles/uploadFiles.service';
+import { SharedModule } from "../../shared/shared.module";
+import { ModulesModule } from "../../shared/modules/modules.module";
 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EventsFormComponent } from "./events-form/events-form.component";
+import { EventsListComponent } from "./events-list/events-list.component";
+import { EventsRoutingModule } from "./events-routing.module";
+import { EventsSearchPipe } from "./events.search.pipe";
+import { EventsService } from "./events.service";
 
-import { MatTableModule } from '@angular/material/table';
+import { FileUploadComponent } from "./file-upload/file-upload.component";
+// import {FileUploadService } from "./file-upload/file-upload.service";
+
+import { UploadFilesComponent } from "./uploadFiles/uploadFiles.component";
+import { UploadFilesService } from "./uploadFiles/uploadFiles.service";
 
 @NgModule({
   declarations: [
     EventsFormComponent,
     EventsListComponent,
     EventsSearchPipe,
+    UploadFilesComponent,
+    FileUploadComponent
   ],
   imports: [
     CommonModule,
@@ -33,14 +39,10 @@ import { MatTableModule } from '@angular/material/table';
     SharedModule,
     CKEditorModule,
     MatTableModule,
-    ModulesModule
+    ModulesModule,
   ],
-  exports: [
-    EventsFormComponent,
-    EventsListComponent,
-    EventsSearchPipe,
-  ],
+  exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 
   providers: [EventsService, UploadFilesService],
 })
-export class EventsModule { }
+export class EventsModule {}

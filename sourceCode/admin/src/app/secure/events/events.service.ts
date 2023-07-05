@@ -23,7 +23,7 @@ export class EventsService {
     return this.http.post(baseUrl, data);
   }
 
-  update(id, data): Observable<any> {
+  update(id: any, data: any): Observable<any> {
     return this.http.patch(`${baseUrl}/${id}`, data);
   }
 

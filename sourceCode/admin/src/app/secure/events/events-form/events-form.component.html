@@ -18,7 +18,8 @@
                         </div>
                         <div class="form-control-group">
                             <label>Description</label>
-                            <ckeditor class="form-control description" [config]="cKEditorConfig" [editor]="Editor" formControlName="description">
+                            <ckeditor class="form-control description" [config]="cKEditorConfig" [editor]="Editor"
+                                formControlName="description">
                             </ckeditor>
                             <div class="invalid-feedback">Description is required</div>
                         </div>
@@ -66,36 +67,15 @@
                         <div class="row">
                             <div class="form-control-group image-url-fcg">
                                 <label>Image URL</label>
-                                <input type="text" formControlName="imageName" class="invisible">
-                                <app-uploadFiles [uploadFileConfig]="uploadFileConfigEvent"
-                                    [uploadFilesRequiredShow]="true" [existingData]="uploadFilesExisting" [ngClass]="{
-                                        'has-error':  true
-                                    }">
-                                </app-uploadFiles>
-
-                                <div>fileName:: {{event.fileName}}</div>
-
-                                <div>imageName:: {{event.imageName}}</div>
-
-                                <div>imageurl:: {{event.imageurl}}</div>
-
-                                
-
-                                <!-- <application-attachments [attachmentConfig]="attachmentConfigHydraulicLetter"
-                                    (attachmentsFormData)="onAttachmentsHydraulicLetterChanged($event)"
-                                    [attachmentsRequiredShow]="hydraulicLetterAttachmentsRequiredShow"
-                                    [existingData]="documentAttachmentsExisting.hydraulicLetter" [ngClass]="{
-                                        'has-error':  hydraulicLetterAttachmentsRequiredShow
-                                    }">
-                                </application-attachments> -->
-
+                                <!-- <input type="text" formControlName="imageName" class="invisible"> -->
                                 <div class="input-group file-upload">
                                     <div class="input-group-prepend">
                                         <img src="{{LOCAL_PATH}}{{event.imageurl}}" class="thumb">
                                     </div>
                                     <label class="upload-button">
-                                        <input type="file" class="form-control file" ngFileSelect
-                                            formControlName="imageName" />
+                                        <app-file-upload formControlName="imageName"
+                                            [existingFileUrl]="existingFileUrl">
+                                        </app-file-upload>
                                         <div class="invalid-feedback">Image URL is required</div>
                                     </label>
                                 </div>

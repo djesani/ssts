@@ -31,6 +31,8 @@ export class EventsFormComponent implements OnInit {
 
   formData: FormData;
 
+  existingFileUrl: any;
+
   eventForm: FormGroup;
   changeEndDate = false;
 
@@ -217,6 +219,9 @@ export class EventsFormComponent implements OnInit {
     } else {
       this.changeEndDate = false;
     }
+
+    this.existingFileUrl =  this.LOCAL_PATH + this.event.imageurl;
+
   }
 
   getData() {
