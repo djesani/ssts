@@ -159,8 +159,9 @@ h5 {
 }
 
 .action-buttons {
-    padding: 15px 0;
+    padding: 15px;
     clear: both;
+    margin: 0px -15px -13px;
 }
 
 .row {
