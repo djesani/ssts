@@ -27,7 +27,7 @@ export class EventsFormComponent implements OnInit {
   minEndDate: NgbDateStruct;
   maxEndDate: NgbDateStruct;
 
-  uploadFilesExisting : [];
+  uploadFilesExisting: [];
 
   formData: FormData;
 

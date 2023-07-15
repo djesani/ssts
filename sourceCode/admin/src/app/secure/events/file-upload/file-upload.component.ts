@@ -30,19 +30,29 @@ export class FileUploadComponent implements OnInit {
           this.preview = e.target.result;
         };
         reader.readAsDataURL(this.currentFile);
-        this.upload();
+        // this.upload();
       }
     }
   }
 
   upload(): void {
+
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
-        this.uploadService.upload(this.currentFile);
+        this.uploadService.upload(this.currentFile).subscribe(
+          (data) => {
+            console.log(" this.uploadService.upload add-data", data);
+          },
+          (error) => {
+            console.log(" this.uploadService.upload error");
+          },
+          () => {
+            console.log(" this.uploadService.upload success");
+          }
+        )
       }
-      // this.selectedFiles = undefined;
     }
   }
   

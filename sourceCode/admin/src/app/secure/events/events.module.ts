@@ -17,18 +17,18 @@ import { EventsSearchPipe } from "./events.search.pipe";
 import { EventsService } from "./events.service";
 
 import { FileUploadComponent } from "./file-upload/file-upload.component";
-// import {FileUploadService } from "./file-upload/file-upload.service";
+import {FileUploadService } from "./file-upload/file-upload.service";
 
-import { UploadFilesComponent } from "./uploadFiles/uploadFiles.component";
-import { UploadFilesService } from "./uploadFiles/uploadFiles.service";
+// import { UploadFilesComponent } from "./uploadFiles/uploadFiles.component";
+// import { UploadFilesService } from "./uploadFiles/uploadFiles.service";
 
 @NgModule({
   declarations: [
     EventsFormComponent,
     EventsListComponent,
     EventsSearchPipe,
-    UploadFilesComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    // UploadFilesComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +43,6 @@ import { UploadFilesService } from "./uploadFiles/uploadFiles.service";
   ],
   exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 
-  providers: [EventsService, UploadFilesService],
+  providers: [EventsService, FileUploadService],
 })
 export class EventsModule {}
