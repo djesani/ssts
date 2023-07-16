@@ -148,6 +148,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
+  touchstart() {
+    const body = this.document.body;
+    if (body.classList.contains("sidemenu-collapsed.sidemenu-collapsed-hover")) {
+      this.renderer.addClass(this.document.body, "sidemenu-collapsed-hover");
+    }
+  }
+
   isSideMenuExpanded() {
     if (localStorage.getItem("sidemenu-expanded") == 'true') {
       this.sideMenuExpanded = true;
