@@ -1,5 +1,5 @@
 <!-- Left Sidebar -->
-<aside id="leftsidebar" class="sidebar" (mouseenter)="mouseHover($event)" (mouseleave)="mouseOut($event)">
+<aside id="leftsidebar" class="sidebar" (mouseenter)="mouseHover($event)" (mouseleave)="mouseOut($event)" (touch)="logTouch(i)">
 
   <div class="brand">
     <div class="logo">
@@ -9,7 +9,7 @@
       ADMIN
     </div>
     <label class="switch">
-      <input type="checkbox" class="sideMenuStatus" [(ngModel)]="sideMenuKeepExpanded" (change)="toggleSidebar()">
+      <input type="checkbox" class="sideMenuStatus" [(ngModel)]="sideMenuExpanded" (change)="toggleSidebar()">
       <span class="slider round"></span>
     </label>
   </div>

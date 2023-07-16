@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   headerHeight = 60;
   currentRoute: string;
   routerObj = null;
-  sideMenuKeepExpanded = true;
+  sideMenuExpanded = true;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -122,22 +122,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   initLeftSidebar() {
     const _this = this;
-    this.isSideMenuKeepExpanded();
+    this.isSideMenuExpanded();
   }
   mouseHover(e) {
     const body = this.document.body;
-    if (body.classList.contains("sidemenu-expanded") && !this.sideMenuKeepExpanded) {
-      this.renderer.addClass(this.document.body, "sidemenu-expanded-hover");
+    if (body.classList.contains("sidemenu-collapsed") && !this.sideMenuExpanded) {
+      this.renderer.addClass(this.document.body, "sidemenu-collapsed-hover");
     }
   }
   mouseOut(e) {
     const body = this.document.body;
-    if (body.classList.contains("sidemenu-expanded")) {
-      this.renderer.removeClass(this.document.body, "sidemenu-expanded-hover");
+    if (body.classList.contains("sidemenu-collapsed")) {
+      this.renderer.removeClass(this.document.body, "sidemenu-collapsed-hover");
     }
-    if (body.classList.contains("sidemenu-expanded-hover") && this.sideMenuKeepExpanded) {
-      this.renderer.removeClass(this.document.body, "sidemenu-expanded-hover");
-      this.renderer.addClass(this.document.body, "sidemenu-keep-expanded");
+    if (body.classList.contains("sidemenu-collapsed-hover") && this.sideMenuExpanded) {
+      this.renderer.removeClass(this.document.body, "sidemenu-collapsed-hover");
+      this.renderer.addClass(this.document.body, "sidemenu-expanded");
     }
   }
   logout() {
@@ -148,23 +148,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  isSideMenuKeepExpanded() {
-    if (localStorage.getItem("sidemenu-keep-expanded") == 'true') {
-      this.sideMenuKeepExpanded = true;
-      this.renderer.removeClass(this.document.body, "sidemenu-expanded");
+  isSideMenuExpanded() {
+    if (localStorage.getItem("sidemenu-expanded") == 'true') {
+      this.sideMenuExpanded = true;
+      this.renderer.removeClass(this.document.body, "sidemenu-collapsed");
     } else {
-      this.sideMenuKeepExpanded = false;
-      this.renderer.addClass(this.document.body, "sidemenu-expanded");
+      this.sideMenuExpanded = false;
+      this.renderer.addClass(this.document.body, "sidemenu-collapsed");
     }
-    if (this.sideMenuKeepExpanded) {
-      this.renderer.addClass(this.document.body, "sidemenu-keep-expanded");
+    if (this.sideMenuExpanded) {
+      this.renderer.addClass(this.document.body, "sidemenu-expanded");
     } else {
-      this.renderer.removeClass(this.document.body, "sidemenu-keep-expanded");
+      this.renderer.removeClass(this.document.body, "sidemenu-expanded");
     }
   }
 
   toggleSidebar() {
-    localStorage.setItem('sidemenu-keep-expanded', this.sideMenuKeepExpanded.toString());
-    this.isSideMenuKeepExpanded();
+    localStorage.setItem('sidemenu-expanded', this.sideMenuExpanded.toString());
+    this.isSideMenuExpanded();
   }
 }

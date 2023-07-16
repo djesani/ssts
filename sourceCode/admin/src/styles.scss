@@ -128,7 +128,7 @@ body {
         background-color: #efebef;
     }
 
-    &.sidemenu-expanded {
+    &.sidemenu-collapsed {
         .sidebar {
             width: 50px;
 
@@ -146,8 +146,8 @@ body {
         }
     }
 
-    &.sidemenu-expanded-hover,
-    &.sidemenu-keep-expanded {
+    &.sidemenu-collapsed-hover,
+    &.sidemenu-expanded {
         #main-content {
             margin-left: 200px;
         }
@@ -173,8 +173,8 @@ body {
             a {
                 font-size: 16px !important;
                 color: #a8550f !important;
-                border: 1px solid fe8a10;
                 padding: 15px 12px !important;
+                border: 1px solid #fff;
             }
 
             .sidebarIcon {
