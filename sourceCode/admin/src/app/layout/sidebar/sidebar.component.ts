@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   headerHeight = 60;
   currentRoute: string;
   routerObj = null;
-  sideMenuShow = true;
+  sideMenuKeepExpanded = true;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -62,10 +62,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
   @HostListener("window:resize", ["$event"])
-  // windowResizecall(event) {
-  //   this.setMenuHeight();
-  //   this.checkStatuForResize(false);
-  // }
   @HostListener("document:mousedown", ["$event"])
   onGlobalClick(event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
@@ -118,7 +114,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     }
 
-    // this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
   }
@@ -127,31 +122,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   initLeftSidebar() {
     const _this = this;
-    // Set menu height
-    // _this.setMenuHeight();
-    // _this.checkStatuForResize(true);
-
-    this.isSideMenuShow();
+    this.isSideMenuKeepExpanded();
   }
-  // setMenuHeight() {
-  //   this.innerHeight = window.innerHeight;
-  //   const height = this.innerHeight - this.headerHeight;
-  //   this.listMaxHeight = height + "";
-  //   this.listMaxWidth = "500px";
-  // }
-  // isOpen() {
-  //   return this.bodyTag.classList.contains("overlay-open");
-  // }
-  // checkStatuForResize(firstTime) {
-  //   if (window.innerWidth < 1170) {
-  //     this.renderer.addClass(this.document.body, "ls-closed");
-  //   } else {
-  //     this.renderer.removeClass(this.document.body, "ls-closed");
-  //   }
-  // }
   mouseHover(e) {
     const body = this.document.body;
-    if (body.classList.contains("sidemenu-expanded") && !this.sideMenuShow) {
+    if (body.classList.contains("sidemenu-expanded") && !this.sideMenuKeepExpanded) {
       this.renderer.addClass(this.document.body, "sidemenu-expanded-hover");
     }
   }
@@ -160,7 +135,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (body.classList.contains("sidemenu-expanded")) {
       this.renderer.removeClass(this.document.body, "sidemenu-expanded-hover");
     }
-    if (body.classList.contains("sidemenu-expanded-hover") && this.sideMenuShow) {
+    if (body.classList.contains("sidemenu-expanded-hover") && this.sideMenuKeepExpanded) {
       this.renderer.removeClass(this.document.body, "sidemenu-expanded-hover");
       this.renderer.addClass(this.document.body, "sidemenu-keep-expanded");
     }
@@ -173,15 +148,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  isSideMenuShow() {
+  isSideMenuKeepExpanded() {
     if (localStorage.getItem("sidemenu-keep-expanded") == 'true') {
-      this.sideMenuShow = true;
+      this.sideMenuKeepExpanded = true;
       this.renderer.removeClass(this.document.body, "sidemenu-expanded");
     } else {
-      this.sideMenuShow = false;
+      this.sideMenuKeepExpanded = false;
       this.renderer.addClass(this.document.body, "sidemenu-expanded");
     }
-    if (this.sideMenuShow) {
+    if (this.sideMenuKeepExpanded) {
       this.renderer.addClass(this.document.body, "sidemenu-keep-expanded");
     } else {
       this.renderer.removeClass(this.document.body, "sidemenu-keep-expanded");
@@ -189,7 +164,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   toggleSidebar() {
-    localStorage.setItem('sidemenu-keep-expanded', this.sideMenuShow.toString());
-    this.isSideMenuShow();
+    localStorage.setItem('sidemenu-keep-expanded', this.sideMenuKeepExpanded.toString());
+    this.isSideMenuKeepExpanded();
   }
 }
