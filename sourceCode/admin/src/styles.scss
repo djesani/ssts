@@ -128,7 +128,7 @@ body {
         background-color: #efebef;
     }
 
-    &.side-closed {
+    &.sidemenu-expanded {
         .sidebar {
             width: 50px;
 
@@ -146,7 +146,7 @@ body {
         }
     }
 
-    &.side-closed-hover,
+    &.sidemenu-expanded-hover,
     &.sideMenuShow {
         #main-content {
             margin-left: 200px;
