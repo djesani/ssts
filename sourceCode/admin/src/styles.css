@@ -996,3 +996,7 @@ ngb-datepicker.dropdown-menu {
 .form-control.description {
     padding: 1px;
 }
+
+.hidden {
+    display: none !important;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -106,7 +106,6 @@ export class EventsFormComponent implements OnInit {
       month: now.getMonth() + 1,
       day: now.getDate() + 1,
     };
-
   }
 
   formPreFill() {
@@ -128,7 +127,7 @@ export class EventsFormComponent implements OnInit {
       startDate: [null, Validators.required],
       endDate: [null],
       unpublished: [true],
-      imageurl: [null]
+      imageurl: [null],
     });
   }
 
@@ -195,8 +194,7 @@ export class EventsFormComponent implements OnInit {
       this.changeEndDate = false;
     }
 
-    this.existingFileUrl =  this.LOCAL_PATH + this.event.imageurl;
-
+    this.existingFileUrl = this.LOCAL_PATH + this.event.imageurl;
   }
 
   getData() {
@@ -244,7 +242,7 @@ export class EventsFormComponent implements OnInit {
   }
 
   uploadedFilename(filename: any) {
-    this.event.imageurl = '/images/events/' + filename;
+    this.event.imageurl = "/images/events/" + filename;
     this.eventForm.get("imageurl").setValue(this.event.imageurl);
   }
 }

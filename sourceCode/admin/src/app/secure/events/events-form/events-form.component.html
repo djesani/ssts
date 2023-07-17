@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="form-control-group image-url-fcg">
                                 <label>Image URL</label>
-                                <input type="text" class="form-control" formControlName="imageurl" />
+                                <input type="text" class="form-control hidden" formControlName="imageurl" />
                                 <div class="input-group file-upload">
                                     <label class="upload-button">
                                         <app-file-upload 
@@ -80,9 +80,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div>{{event | json}}</div> -->
-                <div>imageurl: {{event.imageurl }}</div>
 
                 <div class="action-buttons">
                     <button class="btn btn-default" (click)="cancelEvent()">Cancel</button>

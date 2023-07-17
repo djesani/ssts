@@ -30,7 +30,7 @@ export class FileUploadComponent implements OnInit {
           this.preview = e.target.result;
         };
         reader.readAsDataURL(this.currentFile);
-        // this.upload();
+        this.upload();
       }
     }
   }
@@ -41,10 +41,14 @@ export class FileUploadComponent implements OnInit {
       if (file) {
         this.currentFile = file;
         this.uploadService.upload(this.currentFile).subscribe(
-          () => {},
+          (data) => {},
           (msg) => {
             this.uploadedFilename.emit(this.currentFile.name);
-            console.log(" this.uploadService.upload", msg);
+            console.log("upload", msg);
+          },
+          () => {
+            this.uploadedFilename.emit(this.currentFile.name);
+            console.log("success");
           }
         )
       }
