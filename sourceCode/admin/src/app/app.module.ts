@@ -24,7 +24,7 @@ import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-
+    
     PageLoaderComponent,
     LayoutPublicComponent,
     LayoutSecureComponent,

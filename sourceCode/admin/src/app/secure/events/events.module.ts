@@ -16,8 +16,8 @@ import { EventsRoutingModule } from "./events-routing.module";
 import { EventsSearchPipe } from "./events.search.pipe";
 import { EventsService } from "./events.service";
 
-import { FileUploadComponent } from "./file-upload/file-upload.component";
-import {FileUploadService } from "./file-upload/file-upload.service";
+// import { FileUploadComponent } from "../../shared/components/file-upload/file-upload.component";
+// import { FileUploadService } from "../../shared/components/file-upload/file-upload.service";
 
 // import { UploadFilesComponent } from "./uploadFiles/uploadFiles.component";
 // import { UploadFilesService } from "./uploadFiles/uploadFiles.service";
@@ -27,7 +27,7 @@ import {FileUploadService } from "./file-upload/file-upload.service";
     EventsFormComponent,
     EventsListComponent,
     EventsSearchPipe,
-    FileUploadComponent,
+    // FileUploadComponent,
     // UploadFilesComponent,
   ],
   imports: [
@@ -43,6 +43,9 @@ import {FileUploadService } from "./file-upload/file-upload.service";
   ],
   exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 
-  providers: [EventsService, FileUploadService],
+  providers: [
+    EventsService, 
+    // FileUploadService
+  ],
 })
 export class EventsModule {}

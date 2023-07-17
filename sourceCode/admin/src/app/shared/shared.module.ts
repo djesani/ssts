@@ -17,7 +17,9 @@ import { ScrollToInvalidControlDirective } from './directives/scroll-to-invalid-
 import { MaterialModule } from "./material.module";
 import { FeatherIconsModule } from "./modules/feather-icons/feather-icons.module";
 
-const sharedModules = [
+import { FileUploadComponent } from "./components/file-upload/file-upload.component";
+
+const sharedModulesArray = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
@@ -32,13 +34,15 @@ const sharedModules = [
 @NgModule({
   declarations: [
     ScrollToInvalidControlDirective,
+    FileUploadComponent
   ],
-  imports: [sharedModules],
+  imports: [sharedModulesArray],
   exports: [
-    sharedModules, 
+    sharedModulesArray, 
     ScrollToInvalidControlDirective,
     MaterialModule,
     FeatherIconsModule,
+    FileUploadComponent
   ],
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },
