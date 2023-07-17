@@ -1001,3 +1001,8 @@ ngb-datepicker.dropdown-menu {
 .hidden {
     display: none !important;
 }
+
+body ngb-datepicker .ngb-dp-today .btn-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
