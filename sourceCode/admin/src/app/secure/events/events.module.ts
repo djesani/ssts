@@ -16,19 +16,11 @@ import { EventsRoutingModule } from "./events-routing.module";
 import { EventsSearchPipe } from "./events.search.pipe";
 import { EventsService } from "./events.service";
 
-// import { FileUploadComponent } from "../../shared/components/file-upload/file-upload.component";
-// import { FileUploadService } from "../../shared/components/file-upload/file-upload.service";
-
-// import { UploadFilesComponent } from "./uploadFiles/uploadFiles.component";
-// import { UploadFilesService } from "./uploadFiles/uploadFiles.service";
-
 @NgModule({
   declarations: [
     EventsFormComponent,
     EventsListComponent,
     EventsSearchPipe,
-    // FileUploadComponent,
-    // UploadFilesComponent,
   ],
   imports: [
     CommonModule,
@@ -43,9 +35,6 @@ import { EventsService } from "./events.service";
   ],
   exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 
-  providers: [
-    EventsService, 
-    // FileUploadService
-  ],
+  providers: [EventsService],
 })
 export class EventsModule {}
