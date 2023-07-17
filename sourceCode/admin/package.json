@@ -7,7 +7,8 @@
     "build": "ng build -c production --base-href=/admin/ --output-path=../../admin",
     "watch": "ng build -c production --base-href=/admin/ --output-path=../../admin --watch",
     "server:mock": "npx json-server --watch ./server/database.json",
-    "update": "npx npm-check-updates -u -x typescript,bootstrap,rxjs"
+    "update": "npx npm-check-updates -u -x typescript,bootstrap,rxjs",
+    "purge" : "ng purge"
   },
   "private": true,
   "dependencies": {
@@ -40,10 +41,14 @@
     "zone.js": "~0.13.1"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^16.0.0",
     "@angular-devkit/build-angular": "~16.1.4",
     "@angular/cli": "~16.1.4",
     "@angular/compiler-cli": "~16.1.5",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
     "@types/node": "^20.4.2",
+    "postcss-scss": "^4.0.6",
+    "purgecss-webpack-plugin": "4.1.3",
     "typescript": "~5.1.6"
   }
 }
