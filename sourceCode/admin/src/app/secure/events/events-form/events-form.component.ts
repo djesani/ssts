@@ -109,8 +109,6 @@ export class EventsFormComponent implements OnInit {
 
   }
 
-  // @ViewChild("name", { static: false }) inputEl: ElementRef;
-
   formPreFill() {
     this.eventsService.getAll().subscribe((data: any[]) => {
       this.events = data;
@@ -130,20 +128,18 @@ export class EventsFormComponent implements OnInit {
       startDate: [null, Validators.required],
       endDate: [null],
       unpublished: [true],
-      filename: [null],
-      imageurl: [null],
-      imageName: [null],
+      imageurl: [null]
     });
   }
 
   setAddEditValidators() {
-    const imageName = this.eventForm.get("imageName");
+    const imageurl = this.eventForm.get("imageurl");
     if (this.isEdit) {
-      imageName.setValidators(null);
+      imageurl.setValidators(null);
     } else {
-      imageName.setValidators([Validators.required]);
+      imageurl.setValidators([Validators.required]);
     }
-    imageName.updateValueAndValidity();
+    imageurl.updateValueAndValidity();
   }
 
   eventFormSubmit() {
@@ -191,9 +187,7 @@ export class EventsFormComponent implements OnInit {
     this.eventForm.get("startDate").setValue(this.event.startDate);
     this.eventForm.get("endDate").setValue(this.event.endDate);
     this.eventForm.get("unpublished").setValue(!this.event.unpublished); // inverse
-    this.eventForm.get("filename").setValue(this.event.filename);
     this.eventForm.get("imageurl").setValue(this.event.imageurl);
-    this.eventForm.get("imageName").setValue("");
 
     if (this.event.startDate !== this.event.endDate) {
       this.changeEndDate = true;
@@ -211,8 +205,7 @@ export class EventsFormComponent implements OnInit {
     this.event.startDate = this.eventForm.get("startDate").value;
     this.event.endDate = this.eventForm.get("endDate").value;
     this.event.unpublished = !this.eventForm.get("unpublished").value; // inverse
-    this.event.filename = this.eventForm.get("filename").value;
-    // this.event.imageurl = this.eventForm.get('imageurl').value; // do not get this as it has been changed
+    // this.event.imageurl = !this.eventForm.get("imageurl").value;
   }
 
   saveEvent() {
@@ -251,12 +244,7 @@ export class EventsFormComponent implements OnInit {
   }
 
   uploadedFilename(filename: any) {
-    console.log("uploadedFilename", filename)
-    // this.event.filename = filename;
-    this.event.imageurl = filename;
-
     this.event.imageurl = '/images/events/' + filename;
-
-    // this.eventForm.get("imageName").setValue(filename);
+    this.eventForm.get("imageurl").setValue(this.event.imageurl);
   }
 }
