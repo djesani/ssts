@@ -107,28 +107,9 @@ export class EventsFormComponent implements OnInit {
       day: now.getDate() + 1,
     };
 
-    this.uploadFileConfigEvent = {
-      fileTypeAccept: ".jpg, .jpeg, .png",
-      fileTypeAcceptError: "File format not accepted",
-      uploadFilesRequiredError: "At least one file required",
-      filesMaxUploadAllowedError: "5 files only",
-      labelFileUpload: "Attach file/s",
-      labelRemoveIconClass: "fa-trash",
-      // fileMaxSizeError: "We couldn't upload this file as it's more than 10MB",
-      // fileMinSizeError: "We couldn't upload this file as it's less than 1KB",
-      // fileNoContentError: "We couldn't upload this file as it's 0 bytes",
-      // fileUploadMultiple: true,
-      // filesMaxUploadAllowed: 5,
-      // fileMaxSize: 10485760, // 10MB in bytes,
-      // fileMinSize: 1024, // bytes
-      // uploadFileAddError: "Error in adding uploadFile",
-      // uploadFileRemoveError: "Error in removing uploadFile",
-      // labelFileUploadIconClass: "fa-plus",
-      // labelRemove: "Remove",
-    };
   }
 
-  @ViewChild("name", { static: false }) inputEl: ElementRef;
+  // @ViewChild("name", { static: false }) inputEl: ElementRef;
 
   formPreFill() {
     this.eventsService.getAll().subscribe((data: any[]) => {
@@ -267,5 +248,15 @@ export class EventsFormComponent implements OnInit {
 
   cancelEvent() {
     this.router.navigate(["events"]);
+  }
+
+  uploadedFilename(filename: any) {
+    console.log("uploadedFilename", filename)
+    // this.event.filename = filename;
+    this.event.imageurl = filename;
+
+    this.event.imageurl = '/images/events/' + filename;
+
+    // this.eventForm.get("imageName").setValue(filename);
   }
 }

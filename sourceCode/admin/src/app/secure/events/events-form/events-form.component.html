@@ -71,9 +71,8 @@
                                 <div class="input-group file-upload">
                                     <label class="upload-button">
                                         <app-file-upload 
-                                            [existingFileUrl]="existingFileUrl">
+                                            [existingFileUrl]="existingFileUrl" (uploadedFilename)="uploadedFilename($event)">
                                         </app-file-upload>
-                                        <!-- <div class="invalid-feedback">Image URL is required</div> -->
                                     </label>
                                 </div>
                                 <div class="invalid-feedback">Image URL is required</div>
@@ -81,6 +80,10 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- <div>{{event | json}}</div> -->
+                <div>imageurl: {{event.imageurl }}</div>
+                <div>filename: {{event.filename }}</div>
 
                 <div class="action-buttons">
                     <button class="btn btn-default" (click)="cancelEvent()">Cancel</button>

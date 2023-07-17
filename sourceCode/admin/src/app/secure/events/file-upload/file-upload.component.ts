@@ -11,7 +11,7 @@ export class FileUploadComponent implements OnInit {
   preview = '';
 
   @Input() existingFileUrl: string;
-  @Output() uploadFilesFormData = new EventEmitter();
+  @Output() uploadedFilename = new EventEmitter();
 
   constructor(private uploadService: FileUploadService) {}
 
@@ -36,20 +36,15 @@ export class FileUploadComponent implements OnInit {
   }
 
   upload(): void {
-
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
         this.uploadService.upload(this.currentFile).subscribe(
-          (data) => {
-            console.log(" this.uploadService.upload add-data", data);
-          },
-          (error) => {
-            console.log(" this.uploadService.upload error");
-          },
-          () => {
-            console.log(" this.uploadService.upload success");
+          () => {},
+          (msg) => {
+            this.uploadedFilename.emit(this.currentFile.name);
+            console.log(" this.uploadService.upload", msg);
           }
         )
       }

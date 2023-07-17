@@ -13,10 +13,7 @@ export class FileUploadService {
   constructor(private http: HttpClient) {}
 
   upload(file: File): Observable<any> {
-    // console.log("FileUploadService - file", file)
     const formData: FormData = new FormData();
-    // formData.append("documentType", "abc");
-    // formData.append("applicationId", "def");
     formData.append("file", file);
     return this.http.post(`${this.baseUrl}/fileupload`, formData);
   }
