@@ -370,12 +370,13 @@ nav ul li {
     background-color: #fff !important;
 }
 
-.form-control[readonly] {
+.form-control.enabled {
     background-color: #fff !important;
 }
 
-.form-control[disabled] {
+.form-control.disabled {
     background-color: #f7694733 !important;
+    pointer-events: none;
 }
 
 .add-wrapper .btn,

@@ -32,7 +32,7 @@
                                     <label>Start date</label>
                                     <input type="text" class="form-control" formControlName="startDate" ngbDatepicker
                                         #startDateDatepicker="ngbDatepicker" (click)="startDateDatepicker.toggle()"
-                                        [readonly]="true" (ngModelChange)="setEndDate()" />
+                                        (ngModelChange)="setEndDate()" />
                                     <div class="invalid-feedback">Start date is required</div>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                         </div>
                                         <input type="text" class="form-control" formControlName="endDate" ngbDatepicker
                                             #endDateDatepicker="ngbDatepicker" (click)="endDateDatepicker.toggle()"
-                                            [readonly]="true" [disabled]="!changeEndDate" />
+                                            [ngClass]="{ disabled: !changeEndDate, enabled: changeEndDate }"/>
                                         <div class="invalid-feedback">End date is required</div>
                                     </div>
                                 </div>
@@ -85,7 +85,6 @@
                     <button class="btn btn-default" (click)="cancelEvent()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-
             </form>
         </div>
     </div>
