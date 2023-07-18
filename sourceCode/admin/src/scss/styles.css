@@ -369,7 +369,7 @@ label {
 
 .nav ul {
     margin: 0;
-    padding: 10px 0px 10px 0px;
+    padding: 6px 0px 10px 0px;
     list-style-type: none;
 }
 
@@ -834,12 +834,12 @@ input:checked+.slider:before {
 }
 
 .published-status .unpublished {
-    margin-left: 20px;
+    margin-left: -20px;
     color: var(--bs-primary);
 }
 
 .published-status .published {
-    margin-left: 20px;
+    margin-left: -20px;
     color: var(--bs-secondary);
 }
 

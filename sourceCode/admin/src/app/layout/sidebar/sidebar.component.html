@@ -24,7 +24,7 @@
         <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title }}</div>
         <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
           [ngClass]="[sidebarItem.class]" (click)="callLevel1Toggle($event, sidebarItem.moduleName)" class="nav-link">
-          <!-- <i-feather [name]="sidebarItem.icon" class="sidebarIcon"></i-feather> -->
+          <fa-icon [icon]="['fas', sidebarItem.icon]"></fa-icon>
           <span class="hide-menu">{{sidebarItem.title }}
           </span>
           <span *ngIf="sidebarItem.badge != '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
@@ -54,7 +54,7 @@
       </li>
       <li>
         <a class="" (click)="logout()" class="nav-link">
-          <!-- <i-feather name="log-out" class="sidebarIcon"></i-feather> -->
+          <fa-icon [icon]="['fas', 'sign-out']"></fa-icon>
           <span class="hide-menu">Logout
           </span>
         </a>
