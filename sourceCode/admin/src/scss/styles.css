@@ -259,7 +259,7 @@ h5 {
 
 .row-event-header {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .card-header .name {
@@ -330,7 +330,7 @@ label {
 .file-upload.is-invalid,
 .form-control.ng-invalid.ng-touched,
 .form-control.ng-invalid.ng-touched:focus,
-.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload  {
+.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload {
     border: 2px solid #690f7978 !important;
 }
 
@@ -692,7 +692,7 @@ header {
 }
 
 .events .btn {
-    min-width: 100px;
+    min-width: 90px;
 }
 
 .nav-link .ng-fa-icon {
@@ -794,7 +794,17 @@ input:checked+.slider:before {
 }
 
 #main-content .btn-add-container {
-    padding-right: 5px;
+    padding: 0 1px 0 5px;
+    margin-top: -1px;
+}
+
+#main-content .search-container {
+    padding: 0 0px 0 10px;
+}
+
+.sidemenu-collapsed-hover #main-content .search-container,
+.sidemenu-expanded #main-content .search-container {
+    padding: 0 4px 0 12px;
 }
 
 #main-content .header-nav {
@@ -1025,4 +1035,4 @@ body ngb-datepicker .ngb-dp-today .btn-light {
         margin-left: 0px;
         margin-bottom: 20px;
     }
-  }
+}
