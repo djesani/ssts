@@ -25,16 +25,16 @@ body {
 
     .form-control.description {
         padding: 0;
-        // min-height: 130px;
         .ck-toolbar {
             background-color: #f7694733 !important;
             border: 0;
             border-bottom: 1px solid #fe911380 !important;
+
             .ck-toolbar__separator {
                 background: #fe911380;
             }
         }
-    
+
         .ck-content {
             border: 0;
         }
@@ -52,20 +52,28 @@ body {
             color: #a8550f;
         }
 
-        .ck.ck-button:not(.ck-disabled):hover, a.ck.ck-button:not(.ck-disabled):hover,
-        .ck.ck-button.ck-on:not(.ck-disabled):active, a.ck.ck-button.ck-on:not(.ck-disabled):active  {
+        .ck.ck-button:not(.ck-disabled):hover,
+        a.ck.ck-button:not(.ck-disabled):hover,
+        .ck.ck-button.ck-on:not(.ck-disabled):active,
+        a.ck.ck-button.ck-on:not(.ck-disabled):active {
             background: #ffc10745;
         }
 
-        .ck.ck-button:active, .ck.ck-button:focus, a.ck.ck-button:active, a.ck.ck-button:focus {
+        .ck.ck-button:active,
+        .ck.ck-button:focus,
+        a.ck.ck-button:active,
+        a.ck.ck-button:focus {
             border: #a8550f;
         }
-        .ck.ck-button.ck-on, 
+
+        .ck.ck-button.ck-on,
         a.ck.ck-button.ck-on {
             background: #713605;
+
             .ck-icon {
                 color: #fff;
             }
+
             &:hover {
                 background: #4d2301;
             }
@@ -84,6 +92,11 @@ body {
 
     .action-buttons {
         background-color: #efebef;
+        border-top: 1px solid #cccccc24;
+
+        .btn {
+            margin-bottom: 0;
+        }
     }
 
     &.sidemenu-collapsed {

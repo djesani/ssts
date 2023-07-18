@@ -242,7 +242,7 @@ h5 {
 }
 
 .card.event .card-body {
-    padding: 80px 15px !important;
+    padding: 80px 15px 12px !important;
     width: 100%;
     background: #5305660d;
 }
@@ -266,12 +266,13 @@ h5 {
     padding-left: 5px;
 }
 
+body app-layout-public .login .form-control,
 .header-search-input,
 .form-check .form-check-input,
 .input-group.file-upload,
 .form-control {
     border: 1px solid #690f7947 !important;
-    border-radius: 0;
+    border-radius: 0 !important;
 }
 
 .input-group.file-upload .btn {
@@ -281,6 +282,10 @@ h5 {
 
 .input-group.file-upload .col-4 {
     padding-right: 0;
+}
+
+.login .form-group {
+    margin-bottom: 20px;
 }
 
 label {
@@ -859,6 +864,7 @@ input:checked+.slider:before {
 }
 
 .login .card-header {
+    padding: 12px;
     color: #fff;
     background: linear-gradient(45deg, #8e24aa, #ff6e40);
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);

@@ -11,11 +11,8 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomAdapter, CustomDateParserFormatter } from './services/ng-date-picker.service';
 import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
-// import { FaModule} from './fontawesome/fa.module';
+import { FaModule} from './fontawesome/fa.module';
 import { ScrollToInvalidControlDirective } from './directives/scroll-to-invalid-control.directive';
-
-// import { MaterialModule } from "./material.module";
-// import { FeatherIconsModule } from "./modules/feather-icons/feather-icons.module";
 
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 
@@ -28,7 +25,7 @@ const sharedModulesArray = [
   NgxSpinnerModule,
   HttpClientModule,
   NgbDatepickerModule,
-  // FaModule,
+  FaModule,
 ];
 
 @NgModule({
@@ -40,8 +37,6 @@ const sharedModulesArray = [
   exports: [
     sharedModulesArray, 
     ScrollToInvalidControlDirective,
-    // MaterialModule,
-    // FeatherIconsModule,
     FileUploadComponent
   ],
   providers: [
