@@ -9,7 +9,7 @@
                     <div class="col-sm-11">
                         <div class="header-search-wrapper">
                             <input class="header-search-input" [(ngModel)]="query" placeholder="search . . .">
-                            <fa-icon [icon]="['fas', 'search']"></fa-icon>
+                            <!-- <fa-icon [icon]="['fas', 'search']"></fa-icon> -->
                         </div>
                     </div>
                 </div>
@@ -42,10 +42,10 @@
                 </div>
                 <div class="col-3 read-only published-status">
                     <span class="published" *ngIf="!calendarIcon.unpublished">
-                        <fa-icon [icon]="['fas', 'check-circle']"></fa-icon>
+                        <!-- <fa-icon [icon]="['fas', 'check-circle']"></fa-icon> -->
                     </span>
                     <span class="unpublished" *ngIf="calendarIcon.unpublished">
-                        <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
+                        <!-- <fa-icon [icon]="['fas', 'times-circle']"></fa-icon> -->
                     </span>
                 </div>
                 <div class="col-3 actions">

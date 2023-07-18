@@ -8,7 +8,7 @@ import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { MatTableModule } from "@angular/material/table";
 
 import { SharedModule } from "../../shared/shared.module";
-import { ModulesModule } from "../../shared/modules/modules.module";
+// import { ModulesModule } from "../../shared/modules/modules.module";
 
 import { EventsFormComponent } from "./events-form/events-form.component";
 import { EventsListComponent } from "./events-list/events-list.component";
@@ -31,7 +31,7 @@ import { EventsService } from "./events.service";
     SharedModule,
     CKEditorModule,
     MatTableModule,
-    ModulesModule,
+    // ModulesModule,
   ],
   exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 

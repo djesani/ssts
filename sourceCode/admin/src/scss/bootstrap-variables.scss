@@ -1,0 +1,11 @@
+/**
+    To overwrite Bootstrap variables append code (here) before imports.
+*/
+$enable-rounded: true; // disables rounded corners
+$primary: orange; // changes primary color
+$secondary: #690f79; // changes secondary color
+
+:root {
+    --bs-primary: orange !important;
+    --bs-secondary: #690f79 !important;
+}

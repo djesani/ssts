@@ -1,66 +1,44 @@
-// const path = require('path')
-// const glob = require('glob')
-// const PurgeCSSPlugin = require('purgecss-webpack-plugin')
+const path = require("path");
+const glob = require("glob");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 
-// const PATHS = {
-//   src: path.join(__dirname, 'src')
-// }
-
-// module.exports = {
-//   entry: './src/index.html',
-//   output: {
-//     filename: 'bundle.js',
-//     path: path.join(__dirname, 'dist')
-//   },
-//   optimization: {
-//     splitChunks: {
-//       cacheGroups: {
-//         styles: {
-//           name: 'styles',
-//           test: /\.css$/,
-//           chunks: 'all',
-//           enforce: true
-//         }
-//       }
-//     }
-//   },
-//   module: {
-//     rules: [
-//       {
-//         test: /\.css$/,
-//         use: [
-//           "css-loader"
-//         ]
-//       }
-//     ]
-//   },
-//   plugins: [
-//     new PurgeCSSPlugin({
-//       paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
-//     }),
-//   ]
-// }
-
-
-// const glob = require('glob');
-// const Purgecss = require('purgecss-webpack-plugin');
-
-// module.exports = {
-//   plugins: [
-//     new Purgecss({
-//       paths: () =>
-//         glob
-//           .sync('./src/**/*', { nodir: true })
-//     }),
-//   ],
-// };
-
-const purgecss = require('@fullhuman/postcss-purgecss')
+const PATHS = {
+  src: path.join(__dirname, "src"),
+};
 
 module.exports = {
+  // entry: "./src/**/*",
+  // output: {
+  //   filename: "bundle.js",
+  //   path: path.join(__dirname, "dist"),
+  // },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          test: /\.css$/,
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
+  },
   plugins: [
-    purgecss({
-      content: ['./**/*.html']
-    })
-  ]
-}
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+    }),
+  ],
+};
