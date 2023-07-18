@@ -586,8 +586,7 @@ header {
     align-self: stretch;
     align-items: center;
     height: 64px;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
-    box-shadow: 0 5px 5px 5px #0000002e;
+    box-shadow: 5px 5px 5px 5px #0000002e;
     transition-duration: .2s;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-property: max-height, box-shadow;
@@ -607,8 +606,6 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 50%);
-    box-shadow: 6px 0 20px 0 rgb(25 42 70 / 35%);
     box-shadow: 2px 0 10px 0 rgb(25 42 70 / 50%);
     box-sizing: border-box;
     color: #424242;
@@ -699,7 +696,7 @@ header {
 }
 
 .nav-link .ng-fa-icon {
-    padding-right: 18px;
+    padding-right: 20px;
     font-size: 20px;
     color: rgba(0, 0, 0, .54);
 }
