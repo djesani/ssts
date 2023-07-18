@@ -198,11 +198,6 @@ h5 {
     margin-right: 15px;
 }
 
-.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload {
-    border: 2px solid #ff6e40 !important;
-    margin-bottom: 0;
-}
-
 .form-control-group.image-url-fcg .upload-button {
     display: block;
 }
@@ -271,9 +266,21 @@ h5 {
     padding-left: 5px;
 }
 
+.header-search-input,
+.form-check .form-check-input,
 .input-group.file-upload,
 .form-control {
-    border: 1px solid #fe911380 !important;
+    border: 1px solid #690f7947 !important;
+    border-radius: 0;
+}
+
+.input-group.file-upload .btn {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.input-group.file-upload .col-4 {
+    padding-right: 0;
 }
 
 label {
@@ -317,8 +324,9 @@ label {
 
 .file-upload.is-invalid,
 .form-control.ng-invalid.ng-touched,
-.form-control.ng-invalid.ng-touched:focus {
-    border: 2px solid #ff6e40 !important;
+.form-control.ng-invalid.ng-touched:focus,
+.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload  {
+    border: 2px solid #690f7978 !important;
 }
 
 .form-check-input:focus,
@@ -872,6 +880,8 @@ input:checked+.slider:before {
 
 .form-check .form-check-input {
     border: 1px solid #fe911380;
+    border-radius: 0;
+    margin-top: 0;
 }
 
 
@@ -986,16 +996,16 @@ ngb-datepicker.dropdown-menu {
     margin: 0 15px 0 0;
 }
 
+.form-check {
+    padding-left: 0 !important;
+}
+
 .row-calendarIcon {
     margin: 5px 0;
 }
 
 .thumb {
     width: 100px;
-}
-
-.form-control.description {
-    padding: 1px;
 }
 
 .hidden {

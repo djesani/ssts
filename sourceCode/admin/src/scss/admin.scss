@@ -1,177 +1,220 @@
-
 body {
-  font-size: 16px;
-  background-color: #fb6b460a !important;
+    font-size: 16px;
+    background-color: #fb6b460a !important;
 
-  label {
-      font-size: 18px;
-  }
+    label {
+        font-size: 18px;
+    }
 
-  button,
-  input,
-  select,
-  a {
-      font-size: 16px !important;
-  }
+    button,
+    input,
+    select,
+    a {
+        font-size: 16px !important;
+    }
 
-  .angular-editor {
-      button {
-          font-size: 12px !important;
-      }
-  }
+    .angular-editor {
+        button {
+            font-size: 12px !important;
+        }
+    }
 
-  .card-header {
-      font-size: 20px;
-  }
+    .card-header {
+        font-size: 20px;
+    }
 
-  angular-editor {
-      padding: 0 !important;
-      border: 0 !important;
+    .form-control.description {
+        padding: 0;
+        // min-height: 130px;
+        .ck-toolbar {
+            background-color: #f7694733 !important;
+            border: 0;
+            border-bottom: 1px solid #fe911380 !important;
+            .ck-toolbar__separator {
+                background: #fe911380;
+            }
+        }
+    
+        .ck-content {
+            border: 0;
+        }
 
-      .angular-editor-textarea {
-          border: 0 !important;
-      }
-  }
+        .ck.ck-editor__editable {
+            min-height: 80px;
+        }
 
-  .angular-editor-toolbar {
-      background-color: #f7694733 !important;
-      border: 0;
-      border-bottom: 1px solid #fe911380 !important;
-  }
+        .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+            border: 1px solid #fe911380 !important;
+        }
 
-  .action-buttons {
-      background-color: #efebef;
-  }
 
-  &.sidemenu-collapsed {
-      .sidebar {
-          width: 50px;
+        .ck-reset_all :not(.ck-reset_all-excluded *) {
+            color: #a8550f;
+        }
 
-          li.active,
-          li {
-              padding: 0;
-              color: orange;
-              text-decoration: none;
-              transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
-          }
-      }
+        .ck.ck-button:not(.ck-disabled):hover, a.ck.ck-button:not(.ck-disabled):hover,
+        .ck.ck-button.ck-on:not(.ck-disabled):active, a.ck.ck-button.ck-on:not(.ck-disabled):active  {
+            background: #ffc10745;
+        }
 
-      .add-wrapper {
-          width: 98%;
-      }
-  }
+        .ck.ck-button:active, .ck.ck-button:focus, a.ck.ck-button:active, a.ck.ck-button:focus {
+            border: #a8550f;
+        }
+        .ck.ck-button.ck-on, 
+        a.ck.ck-button.ck-on {
+            background: #713605;
+            .ck-icon {
+                color: #fff;
+            }
+            &:hover {
+                background: #4d2301;
+            }
+        }
 
-  &.sidemenu-collapsed-hover,
-  &.sidemenu-expanded {
-      #main-content {
-          margin-left: 200px;
-      }
+    }
 
-      .sidebar {
-          width: 250px !important;
-      }
+    .ck.ck-input {
+        border: 1px solid #fe911380;
+        color: #a8550f;
+    }
 
-      .add-wrapper {
-          width: 84%;
-      }
-  }
+    .ck.ck-input:focus {
+        border: 1px solid #a8550f;
+    }
 
-  .sidebar {
+    .action-buttons {
+        background-color: #efebef;
+    }
 
-      li {
-          padding: 0;
-          color: orange;
-          text-decoration: none;
-          border: 1px solid #fff !important;
-          transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    &.sidemenu-collapsed {
+        .sidebar {
+            width: 50px;
 
-          a {
-              font-size: 16px !important;
-              color: #a8550f !important;
-              padding: 15px 12px !important;
-              border: 1px solid #fff;
-          }
+            li.active,
+            li {
+                padding: 0;
+                color: orange;
+                text-decoration: none;
+                transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+            }
+        }
 
-          .sidebarIcon {
-              stroke-width: 1px;
-              margin-right: 15px;
-              height: 24px !important;
-              width: 24px !important;
-              fill: #ffc10745 !important;
-              color: #feaf1f;
-          }
+        .add-wrapper {
+            width: 98%;
+        }
+    }
 
-          &.active,
-          &:hover {
-              background: linear-gradient(45deg, #fe8a10, #feaf1f);
-              border: 1px solid #fe8a10 !important;
-              box-shadow: 0px 0px 3px 0 rgb(255 110 64 / 50%);
+    &.sidemenu-collapsed-hover,
+    &.sidemenu-expanded {
+        #main-content {
+            margin-left: 200px;
+        }
 
-              a {
-                  color: #fff !important;
-                  border: 1px solid #fe8a10;
+        .sidebar {
+            width: 250px !important;
+        }
 
-                  .sidebarIcon {
-                      fill: #ffc107 !important;
-                      color: #fff;
-                  }
+        .add-wrapper {
+            width: 84%;
+        }
+    }
 
-              }
-          }
-      }
-  }
+    .sidebar {
 
-  #main-content2 {
-      margin-left: 50px;
-      background: #f6edef !important;
-      font-size: 16px;
-  }
+        li {
+            padding: 0;
+            color: orange;
+            text-decoration: none;
+            border: 1px solid #fff !important;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 
-  header {
-      height: 50px;
-      line-height: 50px;
-      padding: 0;
-      margin: 5px 20px !important;
+            a {
+                font-size: 16px !important;
+                color: #a8550f !important;
+                padding: 15px 12px !important;
+                border: 1px solid #fff;
+            }
 
-      .btn-add {
-          min-height: 40px;
-          min-width: 75px !important;
-      }
-  }
+            .sidebarIcon {
+                stroke-width: 1px;
+                margin-right: 15px;
+                height: 24px !important;
+                width: 24px !important;
+                fill: #ffc10745 !important;
+                color: #feaf1f;
+            }
 
-  .header-search-input {
-      height: 42px;
+            &.active,
+            &:hover {
+                background: linear-gradient(45deg, #fe8a10, #feaf1f);
+                border: 1px solid #fe8a10 !important;
+                box-shadow: 0px 0px 3px 0 rgb(255 110 64 / 50%);
 
-      &+.ng-fa-icon {
-          padding: 0px 10px 0px 20px;
-      }
+                a {
+                    color: #fff !important;
+                    border: 1px solid #fe8a10;
 
-      &::placeholder {
-          font-size: 16px;
-          ;
-      }
-  }
+                    .sidebarIcon {
+                        fill: #ffc107 !important;
+                        color: #fff;
+                    }
 
-  app-layout-public {
-      #main-content {
-          margin-left: 0 !important;
-      }
+                }
+            }
+        }
+    }
 
-      .alert.alert-info {
-          display: none;
-      }
+    #main-content2 {
+        margin-left: 50px;
+        background: #f6edef !important;
+        font-size: 16px;
+    }
 
-      .login {
-          margin: 0 auto !important;
+    header {
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+        margin: 5px 20px !important;
 
-          .card {
-              margin-top: 50px !important;
-          }
+        .btn-add {
+            min-height: 40px;
+            min-width: 75px !important;
+        }
+    }
 
-          .form-control {
-              border-radius: 5px;
-              padding: 8px 15px;
-          }
-      }
-  }
+    .header-search-input {
+        height: 42px;
+
+        &+.ng-fa-icon {
+            padding: 0px 10px 0px 20px;
+        }
+
+        &::placeholder {
+            font-size: 16px;
+            ;
+        }
+    }
+
+    app-layout-public {
+        #main-content {
+            margin-left: 0 !important;
+        }
+
+        .alert.alert-info {
+            display: none;
+        }
+
+        .login {
+            margin: 0 auto !important;
+
+            .card {
+                margin-top: 50px !important;
+            }
+
+            .form-control {
+                border-radius: 5px;
+                padding: 8px 15px;
+            }
+        }
+    }
 }
