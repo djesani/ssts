@@ -696,7 +696,7 @@ header {
 }
 
 .nav-link .ng-fa-icon {
-    padding-right: 20px;
+    padding-right: 15px;
     font-size: 20px;
     color: rgba(0, 0, 0, .54);
 }
@@ -1019,3 +1019,10 @@ body ngb-datepicker .ngb-dp-today .btn-light {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
 }
+
+@media screen and (max-width: 992px) {
+    #unpublished {
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+  }
