@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable } from "@angular/core";
 import {
   HttpRequest,
   HttpResponse,
@@ -6,23 +6,23 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS,
-} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
-import { User } from '../models/user';
-import { Role } from '../models/role';
+} from "@angular/common/http";
+import { Observable, of, throwError } from "rxjs";
+import { mergeMap } from "rxjs/operators";
+import { User } from "../models/user";
+import { Role } from "../models/role";
 
 const users: User[] = [
   {
     id: 1,
-    img: 'assets/images/user/admin.jpg',
-    username: 'admin',
-    password: 'Swaminarayan19',
-    firstName: '',
-    lastName: '',
+    img: "assets/images/user/admin.jpg",
+    username: "admin",
+    password: "Swaminarayan19",
+    firstName: "",
+    lastName: "",
     role: Role.Admin,
-    token: 'admin-token',
-  }
+    token: "admin-token",
+  },
 ];
 
 @Injectable()
@@ -37,7 +37,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function handleRoute() {
       switch (true) {
-        case url.endsWith('/auth/basic') && method === 'POST':
+        case url.endsWith("/auth/basic") && method === "POST":
           return authenticate();
         default:
           // pass through any requests not handled above
@@ -53,7 +53,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         (x) => x.username === username && x.password === password
       );
       if (!user) {
-        return error('Username or password is incorrect');
+        return error("Username or password is incorrect");
       }
       return ok({
         id: user.id,
@@ -77,11 +77,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function unauthorized() {
-      return throwError({ status: 401, error: { message: 'Unauthorised' } });
+      return throwError({ status: 401, error: { message: "Unauthorised" } });
     }
 
     function isLoggedIn() {
-      return headers.get('Authorization') === 'Bearer fake-jwt-token';
+      return headers.get("Authorization") === "Bearer fake-jwt-token";
     }
   }
 }

@@ -45,16 +45,17 @@ export class LoginComponent implements OnInit {
         .login(this.f["username"].value, this.f["password"].value)
         .subscribe({
           next: (res) => {
+            console.log("authService.login.subscribe", res )
             if (res) {
               setTimeout(() => {
                 const role = this.authService.currentUserValue.role;
-                if (role === Role.All || role === Role.Admin) {
+                // if (role === Role.All || role === Role.Admin) {
                   this.returnUrl =
                     this.route.snapshot.queryParams["returnUrl"] || "/";
                   this.router.navigate([this.returnUrl]);
-                } else {
-                  this.router.navigate(["/public/login"]);
-                }
+                // } else {
+                //   this.router.navigate(["/public/login"]);
+                // }
               }, 1000);
             } else {
               this.error = "Invalid Login";
@@ -62,8 +63,26 @@ export class LoginComponent implements OnInit {
           },
           error: (error) => {
             this.error = error;
+            console.log("error", error);
+            console.log("authService.login.subscribe - error ", error )
+            if (error) {
+              setTimeout(() => {
+                // const role = this.authService.currentUserValue.role;
+                // if (role === Role.All || role === Role.Admin) {
+                  this.returnUrl =
+                    this.route.snapshot.queryParams["returnUrl"] || "/";
+                  this.router.navigate([this.returnUrl]);
+                // } else {
+                //   this.router.navigate(["/public/login"]);
+                // }
+              }, 1000);
+            } else {
+              this.error = "Invalid Login";
+            }
           },
-          complete: () => {},
+          complete: () => {
+            console.log("complete");
+          },
         });
     }
   }
