@@ -1030,13 +1030,6 @@ body ngb-datepicker .ngb-dp-today .btn-light {
     background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
 }
 
-@media screen and (max-width: 992px) {
-    #unpublished {
-        margin-left: 0px;
-        margin-bottom: 20px;
-    }
-}
-
 .calendarIcons .published-status .published,
 .calendarIcons .published-status .unpublished {
     margin-left: 20px;
@@ -1046,4 +1039,72 @@ body ngb-datepicker .ngb-dp-today .btn-light {
 .calendarIcons .btn:hover,
 .calendarIcons .btn {
     color: #fff;
+}
+
+@media screen and (max-width: 992px) {
+    #unpublished {
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header-nav {
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+
+    body header#header-nav .btn-add {
+        min-width: 50px !important;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    body header#header-nav {
+        margin: 5px 10px !important;
+    }
+
+    #main-content .search-container {
+        padding: 0 0 0 5px !important;
+    }
+
+    .events-list .description {
+        display: none;
+    }
+
+    .row-event-header {
+        font-size: 14px;
+    }
+
+    .row-event {
+        padding: 2px 0;
+        font-size: 14px;
+    }
+
+    .events-list {
+        padding: 65px 5px 0;
+        margin: 0 15px;
+    }
+
+    .events-list .btn {
+        background: none !important;
+        border: 0 !important;
+        color: darkorange !important;
+        box-shadow: none !important;
+    }
+
+    .events .btn {
+        min-width: 50px;
+        padding: 5px 0;
+    }
+
+    .header-search-input {
+        padding: 8px 10px 8px 35px;
+        width: 90%;
+    }
+
+    body .header-search-input + .ng-fa-icon {
+        padding: 0px 10px 0px 10px !important;
+    }
+
 }

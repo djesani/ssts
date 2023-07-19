@@ -3,10 +3,10 @@
         <div class="header-nav">
             <header id="header-nav">
                 <div class="row add-wrapper">
-                    <div class="col-sm-1 btn-add-container">
+                    <div class="col-2 col-sm-1 btn-add-container">
                         <button class="btn btn-primary btn-add" routerLink="add">Add</button>
                     </div>
-                    <div class="col-sm-11 search-container">
+                    <div class="col-10 col-sm-11 search-container">
                         <div class="header-search-wrapper">
                             <input class="header-search-input" [(ngModel)]="query" placeholder="search . . .">
                             <fa-icon [icon]="['fas', 'search']"></fa-icon>
@@ -17,33 +17,33 @@
         </div>
         <div class="events-list">
             <div class="row row-event-header">
-                <div class="col-2">
+                <div class="col-5 col-sm-2 name">
                     Name
                 </div>
-                <div class="col-7">
+                <div class="col-sm-7 description">
                     Description
                 </div>
-                <div class="col-1">
+                <div class="col-3 col-sm-1 start-date">
                     Start date
                 </div>
-                <div class="col-1">
+                <div class="col-2 col-sm-1 published">
                     Published
                 </div>
-                <div class="col-1">
+                <div class="col-2 col-sm-1 actions">
 
                 </div>
             </div>
             <div *ngFor="let event of events | search:'name,description,startDate':query" class="row row-event">
-                <div class="col-2">
+                <div class="col-5 col-sm-2 name">
                     <div class="event-name">{{event.name}}</div>
                 </div>
-                <div class="col-7">
+                <div class="col-sm-7 description">
                     <div class="event-name" [innerHTML]="event.description"></div>
                 </div>
-                <div class="col-1">
+                <div class="col-3 col-sm-1 start-date">
                     <div class="event-name">{{event.startDate}}</div>
                 </div>
-                <div class="col-1 read-only published-status">
+                <div class="col-2 col-sm-1 read-only published-status">
                     <span class="published" *ngIf="!event.unpublished">
                         <fa-icon [icon]="['fas', 'check-circle']"></fa-icon>
                     </span>
@@ -51,7 +51,7 @@
                         <fa-icon [icon]="['fas', 'times-circle']"></fa-icon>
                     </span>
                 </div>
-                <div class="col-1">
+                <div class="col-2 col-sm-1 actions">
                     <button class="btn btn-primary" routerLink="edit/{{event.filename}}">Edit</button>
                 </div>
             </div>
