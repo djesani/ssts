@@ -1,22 +1,27 @@
-import { Component, OnInit, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+} from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { CalendarIconsService } from '../calendarIcons.service';
+import { CalendarIconsService } from "../calendarIcons.service";
 
 // import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from "../../../../environments/environment";
 
 const now = new Date();
 
 @Component({
-  selector: 'app-calendarIcons-form',
-  templateUrl: './calendarIcons-form.component.html',
-  styles: []
+  selector: "app-calendarIcons-form",
+  templateUrl: "./calendarIcons-form.component.html",
+  styles: [],
 })
 export class CalendarIconsFormComponent implements OnInit {
-
   calendarIcons: any;
   calendarIcon: any;
   getId: any;
@@ -35,15 +40,14 @@ export class CalendarIconsFormComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private calendarIconsService: CalendarIconsService,
+    private calendarIconsService: CalendarIconsService
   ) {
-    this.getId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getId = this.activatedRoute.snapshot.paramMap.get("id");
     this.urlSegments = this.activatedRoute.snapshot.url;
     this.hasEdit();
   }
 
   ngOnInit(): void {
-
     this.buildForm();
     this.setAddEditValidators();
 
@@ -55,7 +59,9 @@ export class CalendarIconsFormComponent implements OnInit {
       this.calendarIcons = data;
 
       if (this.isEdit) {
-        this.calendarIcon = this.calendarIcons.find(calendarIcon => calendarIcon.filename == this.getId);
+        this.calendarIcon = this.calendarIcons.find(
+          (calendarIcon) => calendarIcon.filename == this.getId
+        );
         this.setData();
       } else {
         this.calendarIcon = {};
@@ -94,60 +100,69 @@ export class CalendarIconsFormComponent implements OnInit {
   }
 
   hasEdit() {
-    this.urlSegments.forEach(element => {
-      if (element.path == 'edit') {
-        return this.isEdit = true;
+    this.urlSegments.forEach((element) => {
+      if (element.path == "edit") {
+        return (this.isEdit = true);
       }
     });
   }
 
   setData() {
-    this.calendarIconForm.get('name').setValue(this.calendarIcon.name);
-    this.calendarIconForm.get('imageurl').setValue(this.calendarIcon.imageurl);
-    this.calendarIconForm.get('unpublished').setValue(!this.calendarIcon.unpublished); // inverse
-    this.calendarIconForm.get('filename').setValue(this.calendarIcon.filename);
+    this.calendarIconForm.get("name").setValue(this.calendarIcon.name);
+    this.calendarIconForm.get("imageurl").setValue(this.calendarIcon.imageurl);
+    this.calendarIconForm
+      .get("unpublished")
+      .setValue(!this.calendarIcon.unpublished); // inverse
+    this.calendarIconForm.get("filename").setValue(this.calendarIcon.filename);
 
     this.existingFileUrl = this.LOCAL_PATH + this.calendarIcon.imageurl;
   }
 
   getData() {
-    this.calendarIcon.name = this.calendarIconForm.get('name').value;
+    this.calendarIcon.name = this.calendarIconForm.get("name").value;
     // this.calendarIcon.imageurl = this.calendarIconForm.get('imageurl').value; // do not get this as it has been changed
-    this.calendarIcon.unpublished = !this.calendarIconForm.get('unpublished').value; // inverse
-    this.calendarIcon.filename = this.calendarIconForm.get('filename').value;
+    this.calendarIcon.unpublished =
+      !this.calendarIconForm.get("unpublished").value; // inverse
+    this.calendarIcon.filename = this.calendarIconForm.get("filename").value;
   }
 
   saveCalendarIcon() {
     this.getData();
     if (this.isEdit) {
-      this.calendarIconsService.update(this.calendarIcon.filename, this.calendarIcon)
-        .subscribe(
-          data => { console.log('edit-data', data) },
-          error => { this.router.navigate(['calendarIcons']) },
-          () => {
-            this.router.navigate(['calendarIcons']);
-          }
-        );
+      this.calendarIconsService
+        .update(this.calendarIcon.filename, this.calendarIcon)
+        .subscribe({
+          next: () => {
+            this.router.navigate(["calendarIcons"]);
+          },
+          error: () => {
+            this.router.navigate(["calendarIcons"]);
+          },
+          complete: () => {
+            this.router.navigate(["calendarIcons"]);
+          },
+        });
     } else {
-      this.calendarIconsService.add(this.calendarIcon)
-        .subscribe(
-          data => { console.log('add-data', data) },
-          error => { this.router.navigate(['calendarIcons']) },
-          () => {
-            this.router.navigate(['calendarIcons']);
-          }
-        );
+      this.calendarIconsService.add(this.calendarIcon).subscribe({
+        next: () => {
+          this.router.navigate(["calendarIcons"]);
+        },
+        error: () => {
+          this.router.navigate(["calendarIcons"]);
+        },
+        complete: () => {
+          this.router.navigate(["calendarIcons"]);
+        },
+      });
     }
   }
 
   cancelCalendarIcon() {
-    this.router.navigate(['calendarIcons']);
+    this.router.navigate(["calendarIcons"]);
   }
 
   uploadedFilename(filename: any) {
     this.calendarIcon.imageurl = "/images/events/" + filename;
-    // this.calendarIcon.imageurl = "/images/calendarIcon/" + filename;
     this.calendarIconForm.get("imageurl").setValue(this.calendarIcon.imageurl);
   }
-
 }

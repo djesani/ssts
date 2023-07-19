@@ -205,31 +205,29 @@ export class EventsFormComponent implements OnInit {
   saveEvent() {
     this.getData();
     if (this.isEdit) {
-      this.eventsService.update(this.event.filename, this.event).subscribe(
-        (data) => {
-          console.log("edit-data", data);
-        },
-        (error) => {
+      this.eventsService.update(this.event.filename, this.event).subscribe({
+        next: () => {
           this.router.navigate(["events"]);
         },
-        () => {
-          console.log("success");
+        error: () => {
           this.router.navigate(["events"]);
-        }
-      );
+        },
+        complete: () => {
+          this.router.navigate(["events"]);
+        },
+      });
     } else {
-      this.eventsService.add(this.event).subscribe(
-        (data) => {
-          console.log("add-data", data);
-        },
-        (error) => {
+      this.eventsService.add(this.event).subscribe({
+        next: () => {
           this.router.navigate(["events"]);
         },
-        () => {
-          console.log("success");
+        error: () => {
           this.router.navigate(["events"]);
-        }
-      );
+        },
+        complete: () => {
+          this.router.navigate(["events"]);
+        },
+      });
     }
   }
 

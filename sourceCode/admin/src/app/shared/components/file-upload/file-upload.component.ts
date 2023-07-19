@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FileUploadService } from './file-upload.service';
+import { FileUploadService } from "./file-upload.service";
 
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html'
+  selector: "app-file-upload",
+  templateUrl: "./file-upload.component.html",
 })
 export class FileUploadComponent implements OnInit {
   selectedFiles?: FileList;
   currentFile?: File;
-  preview = '';
+  preview = "";
 
   @Input() existingFileUrl: string;
   @Output() uploadedFilename = new EventEmitter();
@@ -18,12 +18,12 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {}
 
   selectFile(event: any): void {
-    this.preview = '';
+    this.preview = "";
     this.selectedFiles = event.target.files;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
-        this.preview = '';
+        this.preview = "";
         this.currentFile = file;
         const reader = new FileReader();
         reader.onload = (e: any) => {
@@ -40,19 +40,18 @@ export class FileUploadComponent implements OnInit {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
-        this.uploadService.upload(this.currentFile).subscribe(
-          (data) => {},
-          (msg) => {
+        this.uploadService.upload(this.currentFile).subscribe({
+          next: () => {
             this.uploadedFilename.emit(this.currentFile.name);
-            console.log("upload", msg);
           },
-          () => {
+          error: () => {
             this.uploadedFilename.emit(this.currentFile.name);
-            console.log("success");
-          }
-        )
+          },
+          complete: () => {
+            this.uploadedFilename.emit(this.currentFile.name);
+          },
+        });
       }
     }
   }
-  
 }

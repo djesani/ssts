@@ -1,35 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/guard/auth.service';
-import { Role } from 'src/app/core/models/role';
-
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../../core/guard/auth.service";
+import { Role } from "src/app/core/models/role";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html'
+  selector: "app-login",
+  templateUrl: "./login.component.html",
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
-  error = '';
+  error = "";
 
-  hide = true;
-  // userPermissions: any;
-  loading = false;
   returnUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
 
@@ -39,37 +34,37 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.error = '';
+    this.error = "";
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-      this.error = 'Username and Password not valid !';
+      this.error = "Username and Password not valid !";
       return;
     } else {
       this.authService
-        .login(this.f['username'].value, this.f['password'].value)
-        .subscribe(
-          (res) => {
+        .login(this.f["username"].value, this.f["password"].value)
+        .subscribe({
+          next: (res) => {
             if (res) {
               setTimeout(() => {
                 const role = this.authService.currentUserValue.role;
                 if (role === Role.All || role === Role.Admin) {
-                  this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+                  this.returnUrl =
+                    this.route.snapshot.queryParams["returnUrl"] || "/";
                   this.router.navigate([this.returnUrl]);
                 } else {
-                  this.router.navigate(['/public/login']);
+                  this.router.navigate(["/public/login"]);
                 }
               }, 1000);
             } else {
-              this.error = 'Invalid Login';
+              this.error = "Invalid Login";
             }
           },
-          (error) => {
+          error: (error) => {
             this.error = error;
-            this.submitted = false;
-          }
-        );
+          },
+          complete: () => {},
+        });
     }
   }
 }
