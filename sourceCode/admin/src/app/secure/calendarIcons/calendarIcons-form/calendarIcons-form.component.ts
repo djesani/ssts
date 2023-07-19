@@ -24,11 +24,7 @@ export class CalendarIconsFormComponent implements OnInit {
   isEdit: boolean;
 
   formData: FormData;
-  // options: UploaderOptions;
-  // files: UploadFile[];
-  // uploadInput: EventEmitter<UploadInput>;
-  humanizeBytes: Function;
-  dragOver: boolean;
+  existingFileUrl: any;
 
   calendarIconForm: FormGroup;
   changeEndDate = false;
@@ -44,11 +40,6 @@ export class CalendarIconsFormComponent implements OnInit {
     this.getId = this.activatedRoute.snapshot.paramMap.get('id');
     this.urlSegments = this.activatedRoute.snapshot.url;
     this.hasEdit();
-
-    // this.options = { concurrency: 1, maxUploads: 3, maxFileSize: 1000000 };
-    // this.files = []; // local uploading files array
-    // this.uploadInput = new EventEmitter<UploadInput>(); // input calendarIcons, we use this to emit data to ngx-uploader
-    // this.humanizeBytes = humanizeBytes;
   }
 
   ngOnInit(): void {
@@ -58,9 +49,6 @@ export class CalendarIconsFormComponent implements OnInit {
 
     this.formPreFill();
   }
-
-  @ViewChild('name', { static: false }) inputEl: ElementRef;
-
 
   formPreFill() {
     this.calendarIconsService.getAll().subscribe((data: any[]) => {
@@ -78,7 +66,6 @@ export class CalendarIconsFormComponent implements OnInit {
   buildForm() {
     this.calendarIconForm = this.formBuilder.group({
       name: ["", Validators.required],
-      imageName: [null],
       imageurl: [null],
       unpublished: [true],
       filename: [null],
@@ -86,13 +73,13 @@ export class CalendarIconsFormComponent implements OnInit {
   }
 
   setAddEditValidators() {
-    const imageName = this.calendarIconForm.get('imageName');
+    const imageurl = this.calendarIconForm.get("imageurl");
     if (this.isEdit) {
-      imageName.setValidators(null);
+      imageurl.setValidators(null);
     } else {
-      imageName.setValidators([Validators.required]);
+      imageurl.setValidators([Validators.required]);
     }
-    imageName.updateValueAndValidity();
+    imageurl.updateValueAndValidity();
   }
 
   calendarIconFormSubmit() {
@@ -119,7 +106,8 @@ export class CalendarIconsFormComponent implements OnInit {
     this.calendarIconForm.get('imageurl').setValue(this.calendarIcon.imageurl);
     this.calendarIconForm.get('unpublished').setValue(!this.calendarIcon.unpublished); // inverse
     this.calendarIconForm.get('filename').setValue(this.calendarIcon.filename);
-    this.calendarIconForm.get('imageName').setValue('');
+
+    this.existingFileUrl = this.LOCAL_PATH + this.calendarIcon.imageurl;
   }
 
   getData() {
@@ -156,61 +144,10 @@ export class CalendarIconsFormComponent implements OnInit {
     this.router.navigate(['calendarIcons']);
   }
 
-  // ****************************************** upload start
-
-  // onUploadOutput(output: UploadOutput): void {
-
-  //   switch (output.type) {
-  //     case 'allAddedToQueue':
-  //       // uncomment this if you want to auto upload files when added
-  //       const uploadAll: UploadInput = {
-  //         type: 'uploadAll',
-  //         url: `${environment.CONTEXT_PATH}/fileupload`,
-  //         method: 'POST'
-  //       };
-  //       this.uploadInput.emit(uploadAll);
-  //       break;
-  //     case 'addedToQueue':
-  //       if (typeof output.file !== 'undefined') {
-  //         this.files.push(output.file);
-  //       }
-  //       break;
-  //     case 'uploading':
-  //       if (typeof output.file !== 'undefined') {
-  //         // update current data in files array for uploading file
-  //         const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
-  //         this.files[index] = output.file;
-  //       }
-  //       break;
-  //     case 'removed':
-  //       // remove file from array when removed
-  //       this.files = this.files.filter((file: UploadFile) => file !== output.file);
-  //       break;
-  //     case 'dragOver':
-  //       this.dragOver = true;
-  //       break;
-  //     case 'dragOut':
-  //     case 'drop':
-  //       this.dragOver = false;
-  //       break;
-  //     case 'done':
-  //       this.calendarIcon.imageurl = '/images/events/' + output.file.name;
-  //       break;
-  //   }
-  // }
-
-  // cancelUpload(id: string): void {
-  //   this.uploadInput.emit({ type: 'cancel', id: id });
-  // }
-
-  // removeFile(id: string): void {
-  //   this.uploadInput.emit({ type: 'remove', id: id });
-  // }
-
-  // removeAllFiles(): void {
-  //   this.uploadInput.emit({ type: 'removeAll' });
-  // }
-
-  // ****************************************** upload end
+  uploadedFilename(filename: any) {
+    this.calendarIcon.imageurl = "/images/events/" + filename;
+    // this.calendarIcon.imageurl = "/images/calendarIcon/" + filename;
+    this.calendarIconForm.get("imageurl").setValue(this.calendarIcon.imageurl);
+  }
 
 }

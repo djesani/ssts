@@ -35,14 +35,12 @@
                         <div class="row">
                             <div class="form-control-group image-url-fcg">
                                 <label>Image URL</label>
+                                <input type="text" class="form-control hidden" formControlName="imageurl" />
                                 <div class="input-group file-upload">
-                                    <div class="input-group-prepend">
-                                        <img src="{{LOCAL_PATH}}{{calendarIcon.imageurl}}" class="thumb">
-                                    </div>
                                     <label class="upload-button">
-                                        <input type="file" class="form-control file" ngFileSelect
-                                            formControlName="imageName"  />
-                                        <div class="invalid-feedback">Image URL is required</div>
+                                        <app-file-upload [existingFileUrl]="existingFileUrl"
+                                            (uploadedFilename)="uploadedFilename($event)">
+                                        </app-file-upload>
                                     </label>
                                 </div>
                                 <div class="invalid-feedback">Image URL is required</div>
@@ -81,7 +79,7 @@
     }
 
     .card.calendarIcon .card-body {
-        padding-top: 80px !important;
+        padding: 80px 10px 0 15px !important;
         width: 100%;
         background: #5305660d;
     }
@@ -126,7 +124,7 @@
 
 
     .calendarIcons .btn-primary,
-    .card.calendarIcon .btn-primary{
+    .card.calendarIcon .btn-primary {
         background: linear-gradient(45deg, #fe8a10, #feaf1f);
         border: 1px solid #fe8a10 !important;
         box-shadow: 0px 0px 3px 0 rgb(255 110 64 / 50%);

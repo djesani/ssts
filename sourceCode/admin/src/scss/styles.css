@@ -1036,3 +1036,14 @@ body ngb-datepicker .ngb-dp-today .btn-light {
         margin-bottom: 20px;
     }
 }
+
+.calendarIcons .published-status .published,
+.calendarIcons .published-status .unpublished {
+    margin-left: 20px;
+    float: left;
+}
+
+.calendarIcons .btn:hover,
+.calendarIcons .btn {
+    color: #fff;
+}

@@ -12,8 +12,6 @@ import { CalendarIconsRoutingModule } from './calendarIcons-routing.module';
 import { CalendarIconsSearchPipe } from './calendarIcons.search.pipe';
 import { CalendarIconsService } from './calendarIcons.service';
 
-import { MatTableModule } from '@angular/material/table';
-
 @NgModule({
   declarations: [
     CalendarIconsFormComponent,
@@ -27,7 +25,6 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    MatTableModule
   ],
   exports: [
     CalendarIconsFormComponent,

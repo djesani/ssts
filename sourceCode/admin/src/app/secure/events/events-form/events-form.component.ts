@@ -27,8 +27,6 @@ export class EventsFormComponent implements OnInit {
   minEndDate: NgbDateStruct;
   maxEndDate: NgbDateStruct;
 
-  uploadFilesExisting: [];
-
   formData: FormData;
 
   existingFileUrl: any;
@@ -65,8 +63,6 @@ export class EventsFormComponent implements OnInit {
       "redo",
     ],
   };
-
-  uploadFileConfigEvent: any;
 
   constructor(
     private router: Router,
