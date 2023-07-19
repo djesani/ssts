@@ -9,35 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: EventsListComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'add',
     component: EventsFormComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit/:id',
     component: EventsFormComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
+    canActivate: [AuthGuard]
   }
 ];
 

@@ -9,35 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: CalendarIconsListComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'add',
     component: CalendarIconsFormComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit/:id',
     component: CalendarIconsFormComponent,
-    canActivate: [AuthGuard],
-    data: {
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: 'login'
-      }
-    }
+    canActivate: [AuthGuard]
   }
 ];
 
