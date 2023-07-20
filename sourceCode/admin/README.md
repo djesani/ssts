@@ -9,9 +9,7 @@ app
 - app.module.ts
 
 core
--- guard
--- interceptor
--- models
+-- auth
 core.module.ts
 
 layout
