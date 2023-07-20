@@ -14,7 +14,7 @@ export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const isLoggedIn = this.authService.getIsLoggedIn();
+    let isLoggedIn = this.authService.getIsLoggedIn();
 
     if (isLoggedIn) {
       return true;
