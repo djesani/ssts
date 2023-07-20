@@ -44,8 +44,6 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: (n) => {},
           error: (error) => {
-            this.error = error.message;
-
             console.log("login status", error.status);
             if (error.status == 200) {
               this.authService.setIsLoggedIn(true);
@@ -53,12 +51,12 @@ export class LoginComponent implements OnInit {
               const returnUrl =
                 this.route.snapshot.queryParams["returnUrl"] || "/";
               localStorage.setItem("isLoggedIn", "true");
-
-              // console.log("returnUrl", returnUrl);
               this.router.navigate([returnUrl]);
             } else {
+              if (error.status == 401) {
+                this.error = "Username or Password is incorrect.";
+              }
               this.authService.setIsLoggedIn(false);
-              this.router.navigate(["/public/login"]);
             }
           },
         });

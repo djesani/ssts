@@ -908,7 +908,7 @@ input:checked+.slider:before {
 }
 
 .welcome-msg {
-    margin-top: 40px;
+    margin: 20px 0;
 }
 
 app-layout-public #main-content {

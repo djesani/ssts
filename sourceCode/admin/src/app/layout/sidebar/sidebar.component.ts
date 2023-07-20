@@ -7,7 +7,7 @@ import { AuthService } from "src/app/core/auth/auth.service";
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent implements OnInit {
-  sideMenuExpanded = true;
+  sideMenuExpanded = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -65,14 +65,12 @@ export class SidebarComponent implements OnInit {
     if (localStorage.getItem("sidemenu-expanded") == "true") {
       this.sideMenuExpanded = true;
       this.renderer.removeClass(this.document.body, "sidemenu-collapsed");
+      this.renderer.addClass(this.document.body, "sidemenu-expanded");
     } else {
       this.sideMenuExpanded = false;
       this.renderer.addClass(this.document.body, "sidemenu-collapsed");
-    }
-    if (this.sideMenuExpanded) {
-      this.renderer.addClass(this.document.body, "sidemenu-expanded");
-    } else {
       this.renderer.removeClass(this.document.body, "sidemenu-expanded");
+      this.renderer.removeClass(this.document.body, "sidemenu-collapsed-hover");
     }
   }
 
