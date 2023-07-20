@@ -6,7 +6,7 @@ import {
   OnInit,
   Renderer2
 } from "@angular/core";
-import { AuthService } from "src/app/core/guard/auth.service";
+import { AuthService } from "src/app/core/auth/auth.service";
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",

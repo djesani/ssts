@@ -1,18 +1,11 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AuthGuard } from './guard/auth.guard';
-import { AuthService } from './guard/auth.service';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { AuthGuard } from "./auth/auth.guard";
+import { AuthService } from "./auth/auth.service";
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
-  providers: [
-    AuthGuard,
-    AuthService
-  ],
-  exports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
+  providers: [AuthGuard, AuthService],
+  exports: [CommonModule],
 })
 export class CoreModule {}
