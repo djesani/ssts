@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutSecureComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/events', pathMatch: 'full' },
       {

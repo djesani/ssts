@@ -1,11 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { first } from "rxjs/operators";
-
 import { AuthService } from "../../core/guard/auth.service";
-// import { Role } from "src/app/core/models/role";
-
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -45,77 +41,27 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService
         .login(this.f["username"].value, this.f["password"].value)
-        .pipe(first())
         .subscribe({
-          next: (n) => {
-            console.log("next", n)
-            // get return url from route parameters or default to '/'
-            const returnUrl =
-              this.route.snapshot.queryParams["returnUrl"] || "/";
-
-              console.log("returnUrl", returnUrl)
-            this.router.navigate([returnUrl]);
-          },
+          next: (n) => {},
           error: (error) => {
             this.error = error.message;
 
-            console.log("LoginComponent authService.login subscribe error", error)
-            const returnUrl =
-            this.route.snapshot.queryParams["returnUrl"] || "/";
+            console.log("login status", error.status);
+            if (error.status == 200) {
+              this.authService.setIsLoggedIn(true);
+              // get return url from route parameters or default to '/'
+              const returnUrl =
+                this.route.snapshot.queryParams["returnUrl"] || "/";
+                localStorage.setItem("isLoggedIn", "true");
 
-            console.log("returnUrl", returnUrl)
-          this.router.navigate([returnUrl]);
+              // console.log("returnUrl", returnUrl);
+              this.router.navigate([returnUrl]);
+            } else {
+              this.authService.setIsLoggedIn(false);
+              this.router.navigate(["/public/login"]);
+            }
           },
         });
-
-      // this.authService
-      //   .login(this.f["username"].value, this.f["password"].value)
-      //   .subscribe({
-      //     next: (res) => {
-      //       console.log("authService.login.subscribe", res);
-      //       if (res) {
-      //         setTimeout(() => {
-      //           const role = this.authService.currentUserValue.role;
-      //           // if (role === Role.All || role === Role.Admin) {
-      //           this.returnUrl =
-      //             this.route.snapshot.queryParams["returnUrl"] || "/";
-      //           this.router.navigate([this.returnUrl]);
-      //           // } else {
-      //           //   this.router.navigate(["/public/login"]);
-      //           // }
-      //         }, 1000);
-      //       } else {
-      //         this.error = "Invalid Login";
-      //       }
-      //     },
-      //     error: (error) => {
-      //       this.error = error;
-      //       console.log("LoginComponent authService subscribe error", error);
-      //       console.log("authService.login.subscribe - error.error.text", error.error.text);
-      //       if (error) {
-      //         setTimeout(() => {
-      //           // const role = this.authService.currentUserValue.role;
-      //           // if (role === Role.All || role === Role.Admin) {
-      //           this.returnUrl =
-      //             this.route.snapshot.queryParams["returnUrl"] || "/";
-      //           this.router.navigate([this.returnUrl]);
-      //           // } else {
-      //           //   this.router.navigate(["/public/login"]);
-      //           // }
-      //         }, 1000);
-      //       } else {
-      //         this.error = "Invalid Login";
-      //       }
-      //     },
-      //     complete: () => {
-      //       console.log("complete");
-      //       this.returnUrl =
-      //         this.route.snapshot.queryParams["returnUrl"] || "/";
-      //       this.router.navigate([this.returnUrl]);
-
-      //       // this.router.navigate(["/public/login"]);
-      //     },
-      //   });
     }
   }
 }
