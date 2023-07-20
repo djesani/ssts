@@ -26,11 +26,6 @@ public
 public-routing.module.ts
 public.module.ts
 
-secure
--- admin
-secure-routing.module.ts
-secure.module.ts
-
 shared
 -- directives
 -- fontawesome
