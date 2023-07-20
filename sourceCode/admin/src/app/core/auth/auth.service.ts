@@ -7,11 +7,10 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class AuthService {
-
   public isLoggedIn: BehaviorSubject<any>;
 
   constructor(private http: HttpClient) {
-     this.isLoggedIn = new BehaviorSubject(false);
+    this.isLoggedIn = new BehaviorSubject(false);
   }
 
   public setIsLoggedIn(status: boolean) {
@@ -19,14 +18,14 @@ export class AuthService {
   }
 
   public getIsLoggedIn() {
-    return this.isLoggedIn.value
+    return this.isLoggedIn.value;
   }
 
   login(username: string, password: string) {
     return this.http.post<any>(`${environment.CONTEXT_PATH}/auth/basic2`, {
       username,
       password,
-    })
+    });
   }
 
   logout() {

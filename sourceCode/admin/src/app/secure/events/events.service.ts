@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
-import { environment } from '../../../environments/environment';
+import { environment } from "../../../environments/environment";
 
 const baseUrl = `${environment.CONTEXT_PATH}/events`;
 
 @Injectable()
 export class EventsService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
     return this.http.get(baseUrl);
@@ -30,5 +29,4 @@ export class EventsService {
   delete(id): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
-
 }
