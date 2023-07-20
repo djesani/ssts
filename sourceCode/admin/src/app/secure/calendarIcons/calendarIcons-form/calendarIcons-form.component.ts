@@ -74,7 +74,6 @@ export class CalendarIconsFormComponent implements OnInit {
       name: ["", Validators.required],
       imageurl: [null],
       unpublished: [true],
-      filename: [null],
     });
   }
 
@@ -113,7 +112,6 @@ export class CalendarIconsFormComponent implements OnInit {
     this.calendarIconForm
       .get("unpublished")
       .setValue(!this.calendarIcon.unpublished); // inverse
-    this.calendarIconForm.get("filename").setValue(this.calendarIcon.filename);
 
     this.existingFileUrl = this.LOCAL_PATH + this.calendarIcon.imageurl;
   }
@@ -123,7 +121,6 @@ export class CalendarIconsFormComponent implements OnInit {
     // this.calendarIcon.imageurl = this.calendarIconForm.get('imageurl').value; // do not get this as it has been changed
     this.calendarIcon.unpublished =
       !this.calendarIconForm.get("unpublished").value; // inverse
-    this.calendarIcon.filename = this.calendarIconForm.get("filename").value;
   }
 
   saveCalendarIcon() {
