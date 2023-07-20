@@ -18,14 +18,21 @@ export class AuthService {
   }
 
   public getIsLoggedIn() {
+    let isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn == 'true') {
+      this.setIsLoggedIn(true);
+    } else {
+      this.setIsLoggedIn(false);
+    }
     return this.isLoggedIn.value;
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.CONTEXT_PATH}/auth/basic2`, {
-      username,
-      password,
-    });
+    return this.http
+      .post<any>(`${environment.CONTEXT_PATH}/auth/basic2`, {
+        username,
+        password,
+      })
   }
 
   logout() {
