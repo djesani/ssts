@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
+import { CoreModule } from './core/core.module';
 import { PublicModule} from './public/public.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -27,6 +28,9 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+
+    // core, public & shared
+    CoreModule,
     PublicModule,
     SharedModule,
   ],

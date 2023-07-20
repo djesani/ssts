@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarIconsListComponent } from './calendarIcons-list/calendarIcons-list.component';
 import { CalendarIconsFormComponent } from './calendarIcons-form/calendarIcons-form.component';
 
-import { AuthGuard } from '../../shared/services/auth.guard';
+import { AuthGuard } from '../../core/auth/auth.guard';
 
 const routes: Routes = [
   {

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventsFormComponent } from './events-form/events-form.component';
 
-import { AuthGuard } from '../../shared/services/auth.guard';
+import { AuthGuard } from '../../core/auth/auth.guard';
 
 const routes: Routes = [
   {
