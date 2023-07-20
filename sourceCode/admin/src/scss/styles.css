@@ -1103,7 +1103,7 @@ body ngb-datepicker .ngb-dp-today .btn-light {
         width: 90%;
     }
 
-    body .header-search-input + .ng-fa-icon {
+    body .header-search-input+.ng-fa-icon {
         padding: 0px 10px 0px 10px !important;
     }
 

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-layout-secure',
-  templateUrl: './layout-secure.component.html'
+  selector: "app-layout-secure",
+  templateUrl: "./layout-secure.component.html",
 })
 export class LayoutSecureComponent {}

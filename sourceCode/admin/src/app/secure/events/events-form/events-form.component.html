@@ -57,7 +57,7 @@
                                         </div>
                                         <input type="text" class="form-control" formControlName="endDate" ngbDatepicker
                                             #endDateDatepicker="ngbDatepicker" (click)="endDateDatepicker.toggle()"
-                                            [ngClass]="{ disabled: !changeEndDate, enabled: changeEndDate }"/>
+                                            [ngClass]="{ disabled: !changeEndDate, enabled: changeEndDate }" />
                                         <div class="invalid-feedback">End date is required</div>
                                     </div>
                                 </div>
@@ -70,8 +70,8 @@
                                 <input type="text" class="form-control hidden" formControlName="imageurl" />
                                 <div class="input-group file-upload">
                                     <label class="upload-button">
-                                        <app-file-upload 
-                                            [existingFileUrl]="existingFileUrl" (uploadedFilename)="uploadedFilename($event)">
+                                        <app-file-upload [existingFileUrl]="existingFileUrl"
+                                            (uploadedFilename)="uploadedFilename($event)">
                                         </app-file-upload>
                                     </label>
                                 </div>

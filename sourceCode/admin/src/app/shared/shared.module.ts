@@ -1,18 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { HttpClientModule } from "@angular/common/http";
 
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from "ngx-spinner";
 
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomAdapter, CustomDateParserFormatter } from './services/ng-date-picker.service';
-import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  CustomAdapter,
+  CustomDateParserFormatter,
+} from "./services/ng-date-picker.service";
+import {
+  NgbDateAdapter,
+  NgbDateParserFormatter,
+} from "@ng-bootstrap/ng-bootstrap";
 
-import { FaModule} from './fontawesome/fa.module';
-import { ScrollToInvalidControlDirective } from './directives/scroll-to-invalid-control.directive';
+import { FaModule } from "./fontawesome/fa.module";
+import { ScrollToInvalidControlDirective } from "./directives/scroll-to-invalid-control.directive";
 
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 
@@ -29,15 +35,12 @@ const sharedModulesArray = [
 ];
 
 @NgModule({
-  declarations: [
-    ScrollToInvalidControlDirective,
-    FileUploadComponent
-  ],
+  declarations: [ScrollToInvalidControlDirective, FileUploadComponent],
   imports: [sharedModulesArray],
   exports: [
-    sharedModulesArray, 
+    sharedModulesArray,
     ScrollToInvalidControlDirective,
-    FileUploadComponent
+    FileUploadComponent,
   ],
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },

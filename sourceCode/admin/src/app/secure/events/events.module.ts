@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 
 import { SharedModule } from "../../shared/shared.module";
@@ -15,11 +14,7 @@ import { EventsSearchPipe } from "./events.search.pipe";
 import { EventsService } from "./events.service";
 
 @NgModule({
-  declarations: [
-    EventsFormComponent,
-    EventsListComponent,
-    EventsSearchPipe,
-  ],
+  declarations: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
   imports: [
     CommonModule,
     EventsRoutingModule,
