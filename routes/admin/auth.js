@@ -24,7 +24,7 @@ router.post('/basic',
     if( user.username === 'admin' && user.password === 'Swaminarayan19'){
         console.log('Password matched!');
         res.send('OK');
-    }else{
+    } else{
         console.log('User not matched. Returning 401 error!');
         res.status(401).send({status: 'UNAUTHORIZED', message: 'Unauthorized to login. Check credentials are correct.'});
     }
