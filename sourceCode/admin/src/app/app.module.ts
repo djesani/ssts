@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CoreModule } from './core/core.module';
 import { PublicModule} from './public/public.module';
@@ -17,8 +17,8 @@ import { LayoutSecureComponent } from './layout/layout-secure/layout-secure.comp
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 import { fakeBackendProvider } from './core/interceptor/fake-backend';
-import { ErrorInterceptor } from './core/interceptor/error.interceptor';
-import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
+// import { ErrorInterceptor } from './core/interceptor/error.interceptor';
+// import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 
 
 @NgModule({
@@ -42,9 +42,9 @@ import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider,
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // fakeBackendProvider,
   ],
   bootstrap: [AppComponent]
 })
