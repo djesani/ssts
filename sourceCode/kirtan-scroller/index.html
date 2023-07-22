@@ -4,19 +4,83 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Kirtans</title>
 </head>
 
 <body>
-    <h1>Hello, world!</h1>
+    <h1 id="title"></h1>
+    <ul id="list"></ul>
 </body>
 <script>
+    let kirtanJson;
+    let slides;
+    let title;
+    let list = "";
     async function loadData() {
         const response = await fetch("data.json");
-        const data = await response.json();
-        console.log(data);
+        kirtanJson = await response.json();
+        id = getUrlParamsId();
+        kirtan = getKirtanById(id);
+        title = kirtan.title_english;
+        description = kirtan.description_english;
+        slides = description.split("\n");
+        // console.log(kirtan)
+        // console.log("title", title)
+        render();
     }
+
+    function render() {
+        slides.forEach((item) => {
+            list += `<li>${item}</li>`;
+        });
+        listElement = document.getElementById('list');
+        listElement.innerHTML = list;
+        titleElement = document.getElementById('title');
+        titleElement.innerHTML = title;
+    }
+
+    function getKirtanById(id) {
+        kirtan = kirtanJson.data.find(x => x.id == id);
+        if (kirtan) {
+            return kirtan;
+        } else {
+            return kirtanJson.data.find(x => x.id == 1);
+        }
+    }
+
+    function getUrlParamsId() {
+        urlSearch = window.location.search;
+        if (urlSearch) {
+            urlParams = new URLSearchParams(urlSearch);
+            id = urlParams.get('id')
+        } else {
+            id = 1
+        }
+        return id;
+    }
+
     loadData();
 </script>
+
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 5px 0;
+        font-size: 50px;
+    }
+
+    #title,
+    #list {
+        text-align: center;
+    }
+
+    #title {
+        font-size: 60px;
+    }
+</style>
 
 </html>

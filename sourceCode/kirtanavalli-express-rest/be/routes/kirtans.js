@@ -14,7 +14,7 @@ kirtans.get("/search/", async (req, res) => {
   ORDER BY 
     title_english 
   ASC
-  LIMIT 100000
+  LIMIT 100
   `;
   db.query(sql, [], (err, data) => {
     if (err) {
