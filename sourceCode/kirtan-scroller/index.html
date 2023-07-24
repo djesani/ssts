@@ -10,11 +10,11 @@
 <body>
     <h1 id="title"></h1>
     <ul id="list">
-        <li class="list" id="l1">Line 1</li>
-        <li class="list" id="l2">Line 2</li>
-        <li class="list" id="l3">Line 3</li>
-        <li class="list" id="l4">Line 4</li>
-        <li class="list" id="l5">Line 5</li>
+        <li id="l1">Line 1</li>
+        <li id="l2">Line 2</li>
+        <li id="l3">Line 3</li>
+        <li id="l4">Line 4</li>
+        <li id="l5">Line 5</li>
     </ul>
 </body>
 
@@ -24,15 +24,13 @@
         if (event.keyCode == 38) {
             //Up Arrow Pushed
             if (index > 1) {
-                index = index - 1;
                 prev();
             }
             
         } else if (event.keyCode == 40) {
             //Down Arrow Pushed
             console.log("slides.length", slides.length )  
-            if ((index +6) < slides.length ) {
-                index = index + 1;
+            if ((index +5) < slides.length ) {
                 next();
             }
             
@@ -58,16 +56,11 @@
         title = kirtan.title_english;
         description = kirtan.description_english;
         slides = description.split("\n");
-        // console.log("slides", slides);
-        render();
+        renderTitle();
+        renderSlides();
     }
 
-    function render() {
-        slides.forEach((item) => {
-            list += `<li>${item}</li>`;
-        });
-        listElement = document.getElementById('list');
-        // listElement.innerHTML = list;
+    function renderTitle() {
         titleElement = document.getElementById('title');
         titleElement.innerHTML = title;
     }
@@ -98,6 +91,19 @@
 <script>
     index = 1;
     body = document.getElementById('list');
+    l1 = document.getElementById('l1');
+    l2 = document.getElementById('l2');
+    l3 = document.getElementById('l3');
+    l4 = document.getElementById('l4');
+    l5 = document.getElementById('l5');
+
+    function renderSlides() {
+        l1.innerHTML = slides[index + 0];
+        l2.innerHTML = slides[index + 1];
+        l3.innerHTML = slides[index + 2];
+        l4.innerHTML = slides[index + 3];
+        l5.innerHTML = slides[index + 4];
+    }
 
     function prev() {
         body.classList.add("shrink");
@@ -110,22 +116,6 @@
         body.classList.remove("shrink");
         index = index + 1;
         renderSlides();
-    }
-
-</script>
-
-<script>
-    l1 = document.getElementById('l1');
-    l2 = document.getElementById('l2');
-    l3 = document.getElementById('l3');
-    l4 = document.getElementById('l4');
-    l5 = document.getElementById('l5');
-    function renderSlides() {
-        l1.innerHTML = slides[index + 0];
-        l2.innerHTML = slides[index + 1];
-        l3.innerHTML = slides[index + 2];
-        l4.innerHTML = slides[index + 3];
-        l5.innerHTML = slides[index + 4];
     }
 </script>
 
