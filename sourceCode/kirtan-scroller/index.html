@@ -23,13 +23,13 @@
     document.addEventListener('keydown', (event) => {
         if (event.keyCode == 38) {
             //Up Arrow Pushed
-            if (index > 1) {
+            if (index > 3) {
                 prev();
             }
         } else if (event.keyCode == 40) {
             //Down Arrow Pushed
             console.log("slides.length", slides.length)
-            if ((index + 5) < slides.length) {
+            if ((index + 6) < slides.length) {
                 next();
             }
         }
@@ -102,24 +102,28 @@
     }
 
     function prev() {
+        // list.classList.add("animation");
         // list.classList.remove("no-animation");
         list.classList.add("shrink");
-        list.classList.remove("grow");
+        // list.classList.remove("grow");
         setTimeout(() => {
+            // list.classList.remove("animation");
             // list.classList.add("no-animation");
-            list.classList.remove("shrink");
+            // list.classList.remove("shrink");
             index = index - 1;
             renderSlides();
         }, 500)
 
     }
     function next() {
+        list.classList.add("animation");
         // list.classList.remove("no-animation");
         list.classList.add("grow");
-        list.classList.remove("shrink");
+        // list.classList.remove("shrink");
         setTimeout(() => {
+            // list.classList.remove("animation");
             // list.classList.add("no-animation");
-            list.classList.remove("grow");
+            // list.classList.remove("grow");
             index = index + 1;
             renderSlides();
         }, 500)
@@ -127,6 +131,27 @@
 </script>
 
 <style>
+    /* The animation code */
+    /* .object {
+        animation: MoveUpDown 1s linear infinite;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+
+    @keyframes MoveUpDown {
+
+        0%,
+        100% {
+            bottom: 0;
+        }
+
+        50% {
+            bottom: 100px;
+        }
+    } */
+
+
     ul {
         list-style: none;
         padding: 0;
@@ -136,8 +161,15 @@
         padding: 5px 0;
         font-size: 40px;
         width: 100%;
-        transition: all .5s ease-in-out;
+        /* transition: all .5s ease-in-out; */
         text-align: center;
+        /* animation: MoveUpDown 1s linear infinite; */
+        /* animation-name: example;
+        animation-duration: 4s; */
+
+        /* position: absolute;
+        left: 0;
+        bottom: 0; */
     }
 
     #title {
@@ -145,8 +177,12 @@
         text-align: center;
     }
 
-    .no-animation {
-        transition: none;
+    li.no-animation {
+        transition: none !important;
+    }
+
+    li.animation {
+        transition: all .5s ease-in-out;
     }
 </style>
 
@@ -169,11 +205,11 @@
         font-size: 30px;
     }
 
-    #l4 {
+    /* #l4 {
         position: absolute;
         top: 500px;
         font-size: 0px;
-    }
+    } */
 
     .list.grow #l1 {
         top: 100px;
@@ -195,7 +231,7 @@
         font-size: 30px;
     }
 
-    .list.shrink #l1 {
+    /* .list.shrink #l1 {
         top: 200px;
         font-size: 30px;
     }
@@ -213,7 +249,7 @@
     .list.shrink #l4 {
         top: 500px;
         font-size: 0px;
-    }
+    } */
 </style>
 
 </html>
