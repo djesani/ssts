@@ -120,7 +120,7 @@
             list.classList.remove("shrink");
             index = index - 1;
             renderSlides();
-        }, 600)
+        }, 500)
     }
     function next() {
         l0.classList.remove("no-animation");
@@ -141,7 +141,7 @@
             list.classList.remove("grow");
             index = index + 1;
             renderSlides();
-        }, 600)
+        }, 500)
     }
 </script>
 
@@ -163,6 +163,7 @@
     body {
         background-color: #fff2e6;
         color: #990101;
+        overflow: hidden;
     }
 
     :root {
@@ -190,7 +191,7 @@
         color: var(--default-color);
         font-weight: normal;
         transition-property: all;
-        transition-timing-function: ease-in;
+        transition-timing-function: linear;
         transition-duration: var(--transition-duration);
     }
 
@@ -208,23 +209,22 @@
 <style>
     #l0 {
         position: absolute;
-        top: 100px;
+        top: 20vh;
         opacity: 0;
         color: var(--default-color);
     }
 
     #l1 {
         position: absolute;
-        top: 200px;
+        top: 40vh;
         color: var(--default-color);
         opacity: var(--default-opacity);
-
         --highlight-font-weight: bold;
     }
 
     #l2 {
         position: absolute;
-        top: 300px;
+        top: 60vh;
         font-size: var(--highlight-font-size);
         font-weight: var(--highlight-font-weight);
         color: var(--highlight-color);
@@ -232,32 +232,32 @@
 
     #l3 {
         position: absolute;
-        top: 400px;
+        top: 80vh;
         color: var(--default-color);
         opacity: var(--default-opacity);
     }
 
     #l4 {
         position: absolute;
-        top: 500px;
+        top: 100vh;
         opacity: 0;
         color: var(--default-color);
     }
 
     .list.grow #l0 {
-        top: 0px;
+        top: 0vh;
         opacity: 0;
         color: var(--default-color);
     }
 
     .list.grow #l1 {
-        top: 100px;
+        top: 20vh;
         opacity: 0;
         font-weight: var(--default-font-weight);
     }
 
     .list.grow #l2 {
-        top: 200px;
+        top: 40vh;
         font-size: 30px;
         opacity: var(--default-opacity);
         color: var(--default-color);
@@ -265,7 +265,7 @@
     }
 
     .list.grow #l3 {
-        top: 300px;
+        top: 60vh;
         font-size: var(--highlight-font-size);
         font-weight: var(--highlight-font-weight);
         color: var(--highlight-color);
@@ -273,19 +273,19 @@
     }
 
     .list.grow #l4 {
-        top: 400px;
+        top: 80vh;
         opacity: var(--default-opacity);
         color: var(--default-color);
     }
 
     .list.shrink #l0 {
-        top: 200px;
+        top: 40vh;
         opacity: var(--default-opacity);
         color: var(--default-color);
     }
 
     .list.shrink #l1 {
-        top: 300px;
+        top: 60vh;
         font-size: var(--highlight-font-size);
         font-weight: var(--default-font-weight);
         color: var(--highlight-color);
@@ -293,7 +293,7 @@
     }
 
     .list.shrink #l2 {
-        top: 400px;
+        top: 80vh;
         font-size: 30px;
         opacity: var(--default-opacity);
         color: var(--default-color);
@@ -301,13 +301,13 @@
     }
 
     .list.shrink #l3 {
-        top: 500px;
+        top: 100vh;
         opacity: 0;
         color: var(--default-color);
     }
 
     .list.shrink #l4 {
-        top: 600px;
+        top: 100vh;
         opacity: 0;
         color: var(--default-color);
     }
