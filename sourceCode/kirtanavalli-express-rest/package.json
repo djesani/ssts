@@ -7,7 +7,7 @@
     "push": "    npx prisma db push",
     "studio": "  npx prisma studio",
     "generate": "npx prisma generate",
-    "dev": "npx nodemon be/server.js",
+    "be": "npx nodemon be/server.js",
     "fe": " npx ws --spa index.html"
   },
   "dependencies": {
