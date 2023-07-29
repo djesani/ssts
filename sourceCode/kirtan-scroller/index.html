@@ -23,13 +23,13 @@
     document.addEventListener('keydown', (event) => {
         if (event.keyCode == 38) {
             //Up Arrow Pushed
-            if (index > 3) {
+            if (index > 0) {
                 prev();
             }
         } else if (event.keyCode == 40) {
             //Down Arrow Pushed
             console.log("slides.length", slides.length)
-            if ((index + 6) < slides.length) {
+            if ((index + 3) < slides.length) {
                 next();
             }
         }
@@ -160,9 +160,14 @@
         /* --highlight-color: red; */
         --highlight-font-size: 40px;
         --highlight-font-weight: normal;
-        /* --highlight-font-weight: bold; */
+        --highlight-font-weight: bold;
         --transition-duration: 500ms;
         --no-of-lines: 5;
+    }
+
+    #title {
+        font-size: 40px;
+        text-align: center;
     }
 
     ul {
@@ -181,11 +186,6 @@
         transition-timing-function: linear;
         transition-duration: var(--transition-duration);
         position: absolute;
-    }
-
-    #title {
-        font-size: 50px;
-        text-align: center;
     }
 
     li.no-animation {
