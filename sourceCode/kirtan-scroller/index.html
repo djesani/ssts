@@ -10,11 +10,11 @@
 <body>
     <h1 id="title"></h1>
     <ul id="list" class="list">
+        <li id="l0">Line 0</li>
         <li id="l1">Line 1</li>
         <li id="l2">Line 2</li>
         <li id="l3">Line 3</li>
-        <!-- <li id="l4">Line 4</li> -->
-        <!-- <li id="l5">Line 5</li> -->
+        <li id="l4">Line 4</li>
     </ul>
 </body>
 
@@ -87,67 +87,75 @@
 <script>
     index = 0;
     list = document.getElementById('list');
+    l0 = document.getElementById('l0');
     l1 = document.getElementById('l1');
     l2 = document.getElementById('l2');
     l3 = document.getElementById('l3');
-    // l4 = document.getElementById('l4');
-    // l5 = document.getElementById('l5');
+    l4 = document.getElementById('l4');
 
     function renderSlides() {
+        l0.innerHTML = slides[index - 1];
         l1.innerHTML = slides[index + 0];
         l2.innerHTML = slides[index + 1];
         l3.innerHTML = slides[index + 2];
-        // l4.innerHTML = slides[index + 3];
-        // l5.innerHTML = slides[index + 4];
+        l4.innerHTML = slides[index + 3];
     }
 
     function prev() {
-        // list.classList.add("animation");
-        // list.classList.remove("no-animation");
+        l0.classList.remove("no-animation");
+        l1.classList.remove("no-animation");
+        l2.classList.remove("no-animation");
+        l3.classList.remove("no-animation");
+        l4.classList.remove("no-animation");
+
+        list.classList.remove("grow");
         list.classList.add("shrink");
-        // list.classList.remove("grow");
         setTimeout(() => {
-            // list.classList.remove("animation");
-            // list.classList.add("no-animation");
-            // list.classList.remove("shrink");
+            l0.classList.add("no-animation");
+            l1.classList.add("no-animation");
+            l2.classList.add("no-animation");
+            l3.classList.add("no-animation");
+            l4.classList.add("no-animation");
+
+            list.classList.remove("shrink");
             index = index - 1;
             renderSlides();
-        }, 500)
-
+        }, 600)
     }
     function next() {
-        list.classList.add("animation");
-        // list.classList.remove("no-animation");
+        l0.classList.remove("no-animation");
+        l1.classList.remove("no-animation");
+        l2.classList.remove("no-animation");
+        l3.classList.remove("no-animation");
+        l4.classList.remove("no-animation");
+
         list.classList.add("grow");
-        // list.classList.remove("shrink");
+        list.classList.remove("shrink");
         setTimeout(() => {
-            // list.classList.remove("animation");
-            // list.classList.add("no-animation");
-            // list.classList.remove("grow");
+            l0.classList.add("no-animation");
+            l1.classList.add("no-animation");
+            l2.classList.add("no-animation");
+            l3.classList.add("no-animation");
+            l4.classList.add("no-animation");
+
+            list.classList.remove("grow");
             index = index + 1;
             renderSlides();
-        }, 500)
+        }, 600)
     }
 </script>
 
 <style>
     /* The animation code */
-    /* .object {
-        animation: MoveUpDown 1s linear infinite;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-    }
-
-    @keyframes MoveUpDown {
+    /* @keyframes MoveUpDown {
 
         0%,
         100% {
-            bottom: 0;
+            transform: translateY(0);
         }
 
         50% {
-            bottom: 100px;
+            transform: translateY(-100px);
         }
     } */
 
@@ -161,32 +169,29 @@
         padding: 5px 0;
         font-size: 40px;
         width: 100%;
-        /* transition: all .5s ease-in-out; */
+        transition: all .5s ease-in-out;
         text-align: center;
-        /* animation: MoveUpDown 1s linear infinite; */
-        /* animation-name: example;
-        animation-duration: 4s; */
-
-        /* position: absolute;
-        left: 0;
-        bottom: 0; */
     }
 
     #title {
-        font-size: 60px;
+        font-size: 50px;
         text-align: center;
     }
 
     li.no-animation {
         transition: none !important;
-    }
-
-    li.animation {
-        transition: all .5s ease-in-out;
+        /* animation: MoveUpDown 1s ease-in-out infinite ; */
     }
 </style>
 
 <style>
+    #l0 {
+        position: absolute;
+        top: 100px;
+        font-size:20px;
+        opacity: 0;
+    }
+
     #l1 {
         position: absolute;
         top: 200px;
@@ -205,51 +210,72 @@
         font-size: 30px;
     }
 
-    /* #l4 {
+    #l4 {
         position: absolute;
         top: 500px;
-        font-size: 0px;
-    } */
+        font-size: 20px;
+        opacity: 0;
+    }
+
+    .list.grow #l0 {
+        top: 0px;
+        font-size: 10px;
+        opacity: 0;
+    }
 
     .list.grow #l1 {
         top: 100px;
-        font-size: 0px;
+        font-size: 20px;
+        opacity: 0;
     }
 
     .list.grow #l2 {
         top: 200px;
         font-size: 30px;
+        opacity: 1;
     }
 
     .list.grow #l3 {
         top: 300px;
         font-size: 40px;
+        opacity: 1;
     }
 
     .list.grow #l4 {
         top: 400px;
         font-size: 30px;
+        opacity: 1;
     }
 
-    /* .list.shrink #l1 {
+    .list.shrink #l0 {
         top: 200px;
         font-size: 30px;
+        opacity: 1;
+    }
+
+    .list.shrink #l1 {
+        top: 300px;
+        font-size: 40px;
+        opacity: 1;
     }
 
     .list.shrink #l2 {
-        top: 300px;
-        font-size: 40px;
+        top: 400px;
+        font-size: 30px;
+        opacity: 1;
     }
 
     .list.shrink #l3 {
-        top: 400px;
-        font-size: 30px;
+        top: 500px;
+        font-size: 20px;
+        opacity: 0;
     }
 
     .list.shrink #l4 {
-        top: 500px;
-        font-size: 0px;
-    } */
+        top: 600px;
+        font-size: 10px;
+        opacity: 0;
+    }
 </style>
 
 </html>
