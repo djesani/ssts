@@ -1,27 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from "@angular/forms";
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from "../../shared/shared.module";
 
-import { EventsFormComponent } from './events-form/events-form.component';
-import { EventsListComponent } from './events-list/events-list.component';
-import { EventsRoutingModule } from './events-routing.module';
-import { EventsSearchPipe } from './events.search.pipe';
-import { EventsService } from './events.service';
-
-import { AngularEditorModule } from '@kolkov/angular-editor';
-
-import { MatTableModule } from '@angular/material/table';
+import { EventsFormComponent } from "./events-form/events-form.component";
+import { EventsListComponent } from "./events-list/events-list.component";
+import { EventsRoutingModule } from "./events-routing.module";
+import { EventsSearchPipe } from "./events.search.pipe";
+import { EventsService } from "./events.service";
 
 @NgModule({
-  declarations: [
-    EventsFormComponent,
-    EventsListComponent,
-    EventsSearchPipe,
-  ],
+  declarations: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
   imports: [
     CommonModule,
     EventsRoutingModule,
@@ -29,15 +22,10 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    AngularEditorModule,
-    MatTableModule
+    CKEditorModule,
   ],
-  exports: [
-    EventsFormComponent,
-    EventsListComponent,
-    EventsSearchPipe,
-  ],
+  exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 
   providers: [EventsService],
 })
-export class EventsModule { }
+export class EventsModule {}

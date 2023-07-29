@@ -1,5 +1,11 @@
-<div class="file-drop-area">
-  <button mat-raised-button color="primary">Choose file</button>
-  <span>{{file ? file.name : ' or drag and drop file here' }}</span>
-  <input class="file-input" type="file">
+<div class="row">
+  <div class="col-6 col-sm-4">
+    <img [src]="preview" class="thumb" *ngIf="selectedFiles" />
+    <img [src]="existingFileUrl" class="thumb" *ngIf="!selectedFiles" />
+  </div>
+  <div class="col-6 col-sm-8">
+    <label class="btn btn-default p-0">
+      <input type="file" accept="image/*" (change)="selectFile($event)" class="form-control file" />
+    </label>
+  </div>
 </div>

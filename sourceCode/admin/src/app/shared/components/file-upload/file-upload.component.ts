@@ -1,39 +1,57 @@
-import { Component, ElementRef, HostListener, Input } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { FileUploadService } from "./file-upload.service";
+
 @Component({
   selector: "app-file-upload",
   templateUrl: "./file-upload.component.html",
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: FileUploadComponent,
-      multi: true,
-    },
-  ],
-  styleUrls: ["./file-upload.component.scss"],
 })
-export class FileUploadComponent implements ControlValueAccessor {
-  @Input() progress;
-  onChange: Function;
-  public file: File | null = null;
+export class FileUploadComponent implements OnInit {
+  selectedFiles?: FileList;
+  currentFile?: File;
+  preview = "";
 
-  @HostListener("change", ["$event.target.files"]) emitFiles(event: FileList) {
-    const file = event && event.item(0);
-    this.onChange(file);
-    this.file = file;
+  @Input() existingFileUrl: string;
+  @Output() uploadedFilename = new EventEmitter();
+
+  constructor(private uploadService: FileUploadService) {}
+
+  ngOnInit(): void {}
+
+  selectFile(event: any): void {
+    this.preview = "";
+    this.selectedFiles = event.target.files;
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.preview = "";
+        this.currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.preview = e.target.result;
+        };
+        reader.readAsDataURL(this.currentFile);
+        this.upload();
+      }
+    }
   }
 
-  constructor(private host: ElementRef<HTMLInputElement>) {}
-
-  writeValue(value: null) {
-    // clear file input
-    this.host.nativeElement.value = "";
-    this.file = null;
+  upload(): void {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        this.uploadService.upload(this.currentFile).subscribe({
+          next: () => {
+            this.uploadedFilename.emit(this.currentFile.name);
+          },
+          error: () => {
+            this.uploadedFilename.emit(this.currentFile.name);
+          },
+          complete: () => {
+            this.uploadedFilename.emit(this.currentFile.name);
+          },
+        });
+      }
+    }
   }
-
-  registerOnChange(fn: Function) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: Function) {}
 }
