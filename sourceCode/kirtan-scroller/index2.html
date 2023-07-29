@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kirtans</title>
+</head>
+
+<body>
+    <h1 id="title" class="title">A tan rang patang sarikho, jata var na lageji;</h1>
+    <ul id="list" class="list">
+        <li id="l1">ā tana raṅga pataṅga sarīkhō, jātāṁ vāra na lāgējī; </li>
+        <li id="l2">asaṅkhya gayā dhana sampatti mēlī, tārī najaruṁ āgējī. 1</li>
+        <li id="l3">aṅgē tēla phūlēla lagāvē, māthē chōgāṁ ghālējī; </li>
+        <li id="l4">jōbana dhananuṁ jōra jaṇāvē, chāti kāḍhī cālējī. 2</li>
+    </ul>
+</body>
+
+<script>
+    list = document.getElementById('list');
+    function prev() {
+        list.classList.add("shrink");
+        list.classList.remove("grow");
+    }
+    function next() {
+        list.classList.add("grow");
+        list.classList.remove("shrink");
+    }
+</script>
+
+<script>
+    // Add event listener on keydown
+    document.addEventListener('keydown', (event) => {
+        if (event.keyCode == 38) {
+            //Up Arrow Pushed
+            prev();
+        } else if (event.keyCode == 40) {
+            //Down Arrow Pushed
+            next();
+        }
+    }, false);
+</script>
+
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 5px 0;
+        font-size: 40px;
+        width: 100%;
+        transition: all .5s ease-in-out;
+        text-align: center;
+    }
+
+    #title {
+        font-size: 60px;
+        text-align: center;
+    }
+</style>
+
+<style>
+    #l1 {
+        position: absolute;
+        top: 200px;
+        font-size: 30px;
+    }
+
+    #l2 {
+        position: absolute;
+        top: 300px;
+        font-size: 40px;
+    }
+
+    #l3 {
+        position: absolute;
+        top: 400px;
+        font-size: 30px;
+    }
+
+    #l4 {
+        position: absolute;
+        top: 500px;
+        font-size: 0px;
+    }
+
+    .list.grow #l1 {
+        top: 100px;
+        font-size: 0px;
+    }
+
+    .list.grow #l2 {
+        top: 200px;
+        font-size: 30px;
+    }
+
+    .list.grow #l3 {
+        top: 300px;
+        font-size: 40px;
+    }
+
+    .list.grow #l4 {
+        top: 400px;
+        font-size: 30px;
+    }
+
+    .list.shrink #l1 {
+        top: 200px;
+        font-size: 30px;
+    }
+
+    .list.shrink #l2 {
+        top: 300px;
+        font-size: 40px;
+    }
+
+    .list.shrink #l3 {
+        top: 400px;
+        font-size: 30px;
+    }
+
+    .list.shrink #l4 {
+        top: 500px;
+        font-size: 0px;
+    }
+</style>
+
+</html>
