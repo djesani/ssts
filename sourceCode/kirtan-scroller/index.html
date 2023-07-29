@@ -146,20 +146,6 @@
 </script>
 
 <style>
-    /* The animation code */
-    /* @keyframes MoveUpDown {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-100px);
-        }
-    } */
-
-
     body {
         background-color: #fff2e6;
         color: #990101;
@@ -172,10 +158,11 @@
         --default-font-weight: normal;
         --highlight-color: #ff6a00;
         /* --highlight-color: red; */
-        --highlight-font-size: 38px;
+        --highlight-font-size: 40px;
         --highlight-font-weight: normal;
         /* --highlight-font-weight: bold; */
         --transition-duration: 500ms;
+        --no-of-lines: 5;
     }
 
     ul {
@@ -193,6 +180,7 @@
         transition-property: all;
         transition-timing-function: linear;
         transition-duration: var(--transition-duration);
+        position: absolute;
     }
 
     #title {
@@ -202,44 +190,39 @@
 
     li.no-animation {
         transition: none;
-        /* animation: MoveUpDown 1s ease-in-out infinite ; */
     }
 </style>
 
 <style>
     #l0 {
-        position: absolute;
-        top: 20vh;
+        top: 10vh;
         opacity: 0;
         color: var(--default-color);
     }
 
     #l1 {
-        position: absolute;
-        top: 40vh;
+        top: 30vh;
+        top: calc(calc ((100vh / 5) + 10));
         color: var(--default-color);
         opacity: var(--default-opacity);
         --highlight-font-weight: bold;
     }
 
     #l2 {
-        position: absolute;
-        top: 60vh;
+        top: 50vh;
         font-size: var(--highlight-font-size);
         font-weight: var(--highlight-font-weight);
         color: var(--highlight-color);
     }
 
     #l3 {
-        position: absolute;
-        top: 80vh;
+        top: 70vh;
         color: var(--default-color);
         opacity: var(--default-opacity);
     }
 
     #l4 {
-        position: absolute;
-        top: 100vh;
+        top: 90vh;
         opacity: 0;
         color: var(--default-color);
     }
@@ -251,13 +234,13 @@
     }
 
     .list.grow #l1 {
-        top: 20vh;
+        top: 10vh;
         opacity: 0;
         font-weight: var(--default-font-weight);
     }
 
     .list.grow #l2 {
-        top: 40vh;
+        top: 30vh;
         font-size: 30px;
         opacity: var(--default-opacity);
         color: var(--default-color);
@@ -265,7 +248,7 @@
     }
 
     .list.grow #l3 {
-        top: 60vh;
+        top: 50vh;
         font-size: var(--highlight-font-size);
         font-weight: var(--highlight-font-weight);
         color: var(--highlight-color);
@@ -273,19 +256,19 @@
     }
 
     .list.grow #l4 {
-        top: 80vh;
+        top: 70vh;
         opacity: var(--default-opacity);
         color: var(--default-color);
     }
 
     .list.shrink #l0 {
-        top: 40vh;
+        top: 30vh;
         opacity: var(--default-opacity);
         color: var(--default-color);
     }
 
     .list.shrink #l1 {
-        top: 60vh;
+        top: 50vh;
         font-size: var(--highlight-font-size);
         font-weight: var(--default-font-weight);
         color: var(--highlight-color);
@@ -293,7 +276,7 @@
     }
 
     .list.shrink #l2 {
-        top: 80vh;
+        top: 70vh;
         font-size: 30px;
         opacity: var(--default-opacity);
         color: var(--default-color);
@@ -301,7 +284,7 @@
     }
 
     .list.shrink #l3 {
-        top: 100vh;
+        top: 90vh;
         opacity: 0;
         color: var(--default-color);
     }
