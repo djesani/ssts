@@ -1107,4 +1107,12 @@ body ngb-datepicker .ngb-dp-today .btn-light {
         padding: 0px 10px 0px 10px !important;
     }
 
+    app-file-upload>.row {
+        flex-direction: column-reverse;
+    }
+
+    .form-control.file {
+        margin-bottom: 10px !important;
+    }
+
 }

@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-6 col-sm-4">
+  <div class="col-12 col-sm-4">
     <img [src]="preview" class="thumb" *ngIf="selectedFiles" />
     <img [src]="existingFileUrl" class="thumb" *ngIf="!selectedFiles" />
   </div>
-  <div class="col-6 col-sm-8">
+  <div class="col-12 col-sm-8">
     <label class="btn btn-default p-0">
       <input type="file" accept="image/*" (change)="selectFile($event)" class="form-control file" />
     </label>
