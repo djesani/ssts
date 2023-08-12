@@ -1,16 +1,8 @@
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  ElementRef,
-  ViewChild,
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { CalendarIconsService } from "../calendarIcons.service";
-
-// import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 
 import { environment } from "../../../../environments/environment";
 
@@ -119,8 +111,9 @@ export class CalendarIconsFormComponent implements OnInit {
   getData() {
     this.calendarIcon.name = this.calendarIconForm.get("name").value;
     // this.calendarIcon.imageurl = this.calendarIconForm.get('imageurl').value; // do not get this as it has been changed
-    this.calendarIcon.unpublished =
-      !this.calendarIconForm.get("unpublished").value; // inverse
+    this.calendarIcon.startDate = "1/1/1970";
+    this.calendarIcon.endDate = "1/1/1970";
+    this.calendarIcon.unpublished = !this.calendarIconForm.get("unpublished").value; // inverse
   }
 
   saveCalendarIcon() {
