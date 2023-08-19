@@ -7,10 +7,7 @@
 </head>
 
 <body>
-    <!-- <h2>The XMLHttpRequest Object</h2>
-    <button type="button" onclick="run()">Request data</button>
-    <p id="demo"></p> -->
-    <div id="contain">Contain</div>
+    <div id="contain"></div>
 </body>
 
 <script src="https://apis.google.com/js/api.js"></script>
@@ -72,12 +69,8 @@
                     if (response.result.items) {
                         var calendarRows = `<div class="my-slider">`;
                         response.result.items.forEach(function (entry) {
-                            // const eventImage = getImageUrl1(entry.summary);
                             const eventImage = getImageUrl(entry.summary);
-                            //  const eventImage = "";
                             const startDateTime = entry.start.dateTime;
-
-                            console.log("entry", entry);
 
                             if (startDateTime) {
                                 if (eventImage) {
@@ -351,7 +344,6 @@
 
 <script>
     let iconsData;
-    let eventsData;
 
     async function getIconsData() {
         fetch('calendar-icons.json')
