@@ -154,7 +154,7 @@ export class CalendarIconsFormComponent implements OnInit {
   }
 
   uploadedFilename(filename: any) {
-    this.calendarIcon.imageurl = "/images/events/" + filename;
+    this.calendarIcon.imageurl = "/images/calendaricons/" + filename;
     this.calendarIconForm.get("imageurl").setValue(this.calendarIcon.imageurl);
   }
 }
