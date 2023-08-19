@@ -23,7 +23,7 @@ body {
 
 .tile-border-radius {
     border-radius: 0 0 25px 25px;
-} 
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -48,7 +48,7 @@ body {
 .main-header {
     padding: 0px 10px;
     color: #585858;
-    font: 100 14px/150% "Source Sans Pro", sans-serif;
+    font: 400 14px/150% sans-serif;
 }
 
 .today-header {
@@ -157,7 +157,8 @@ figure.photo {
 }
 
 /* Nav bar & footer styles */
-nav.bg-dark, div.bg-dark {
+nav.bg-dark,
+div.bg-dark {
     background-color: #b73106 !important;
 }
 
@@ -284,7 +285,7 @@ nav.bg-dark, div.bg-dark {
 
 /* Countdown timer styles */
 
-#clockdiv{
+#clockdiv {
     font-family: sans-serif;
     color: #ee9967;
     justify-content: space-between;
@@ -295,13 +296,13 @@ nav.bg-dark, div.bg-dark {
     margin-right: 0px !important;
 }
 
-#clockdiv > div{
+#clockdiv>div {
     padding: 10px;
     border-radius: 3px;
     display: inline-block;
 }
 
-#clockdiv div > span{
+#clockdiv div>span {
     padding: 15px 25px 15px 25px;
     border-radius: 10px;
     background: #fff;
@@ -315,6 +316,7 @@ nav.bg-dark, div.bg-dark {
     color: #ee9967;
     text-align: center;
 }
+
 .countdown-footer {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -328,19 +330,21 @@ nav.bg-dark, div.bg-dark {
     width: 150px;
 }
 
-.smalltext{
+.smalltext {
     padding-top: 5px;
     font-size: 16px;
 }
 
 @media (max-width: 995px) {
 
-    #clockdiv{
+    #clockdiv {
         font-size: 3em;
     }
+
     .countdown-img {
         width: 115px;
     }
+
     .countdown-header {
         font-size: 1em;
     }
@@ -348,46 +352,55 @@ nav.bg-dark, div.bg-dark {
 
 @media (max-width: 768px) {
 
-    #clockdiv{
+    #clockdiv {
         font-size: 2em;
         /* flex-wrap: nowrap; */
     }
+
     .countdown-img {
         width: 88px;
     }
-    #clockdiv > div{
+
+    #clockdiv>div {
         padding: 5px;
         border-radius: 3px;
     }
-    #clockdiv div > span{
+
+    #clockdiv div>span {
         padding: 16px 20px 15px 20px;
     }
 }
 
 @media (max-width: 520px) {
 
-    #clockdiv{
+    #clockdiv {
         font-size: 2em;
         flex-wrap: nowrap;
         justify-content: space-evenly;
         margin-left: -5px;
     }
+
     .countdown-img {
         width: 65px;
     }
-    #clockdiv > div{
+
+    #clockdiv>div {
         padding: 3px;
         border-radius: 3px;
     }
-    #clockdiv div > span{
+
+    #clockdiv div>span {
         padding: 5px 10px 5px 10px;
     }
-    .smalltext{
+
+    .smalltext {
         font-size: 12px;
     }
+
     .countdown-header {
         font-size: 0.8em;
     }
+
     .countdown-footer {
         font-size: 12px;
     }
