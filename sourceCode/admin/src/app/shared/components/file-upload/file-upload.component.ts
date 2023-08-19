@@ -11,6 +11,7 @@ export class FileUploadComponent implements OnInit {
   preview = "";
 
   @Input() existingFileUrl: string;
+  @Input() filesource: string;
   @Output() uploadedFilename = new EventEmitter();
 
   constructor(private uploadService: FileUploadService) {}
@@ -40,7 +41,7 @@ export class FileUploadComponent implements OnInit {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
-        this.uploadService.upload(this.currentFile).subscribe({
+        this.uploadService.upload(this.currentFile, this.filesource).subscribe({
           next: () => {
             this.uploadedFilename.emit(this.currentFile.name);
           },

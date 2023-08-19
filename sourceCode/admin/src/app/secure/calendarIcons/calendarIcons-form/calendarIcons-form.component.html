@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control hidden" formControlName="imageurl" />
                                 <div class="input-group file-upload">
                                     <label class="upload-button">
-                                        <app-file-upload [existingFileUrl]="existingFileUrl"
+                                        <app-file-upload [existingFileUrl]="existingFileUrl" [filesource]="filesource"
                                             (uploadedFilename)="uploadedFilename($event)">
                                         </app-file-upload>
                                     </label>

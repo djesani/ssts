@@ -30,6 +30,7 @@ export class EventsFormComponent implements OnInit {
   formData: FormData;
 
   existingFileUrl: any;
+  filesource : string;
 
   eventForm: FormGroup;
   changeEndDate = false;
@@ -80,6 +81,7 @@ export class EventsFormComponent implements OnInit {
     this.setAddEditValidators();
 
     this.formPreFill();
+    this.filesource = "events";
 
     this.minStartDate = {
       year: now.getFullYear(),

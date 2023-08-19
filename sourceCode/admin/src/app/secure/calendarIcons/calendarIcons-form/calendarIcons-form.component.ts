@@ -22,6 +22,7 @@ export class CalendarIconsFormComponent implements OnInit {
 
   formData: FormData;
   existingFileUrl: any;
+  filesource : string;
 
   calendarIconForm: FormGroup;
   changeEndDate = false;
@@ -44,6 +45,7 @@ export class CalendarIconsFormComponent implements OnInit {
     this.setAddEditValidators();
 
     this.formPreFill();
+    this.filesource = "calendarIcons";
   }
 
   formPreFill() {
