@@ -1,0 +1,12 @@
+{
+  "name": "supabase-realtime",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.33.1"
+  }
+}
