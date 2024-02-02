@@ -24,6 +24,10 @@ router.get('/history', function(req, res, next) {
   res.render('history', { title: 'History' });
 });
 
+router.get('/our-activities/gujarati-classes', function(req, res, next) {
+  res.render('gujarati-classes', { title: 'Gujarati Classes' });
+});
+
 router.get('/donations', function(req, res, next) {
   res.render('donations', { title: 'Donations' });
 });
