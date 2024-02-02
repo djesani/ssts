@@ -1,0 +1,12 @@
+<div ng-controller="kirtansCtrl">
+  <div class="value title">{{data.title_english}}</div>
+  <div class="value title">{{data.title_gujarati}}</div>
+  <div>
+    <ul>
+      <li class="line" ng-repeat="line in data.description track by $index">
+        <span class="english">{{line.english}}</span>
+        <span class="gujarati">{{line.gujarati}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,25 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { HttpClientModule } from "@angular/common/http";
 
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from "ngx-spinner";
 
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomAdapter, CustomDateParserFormatter } from './services/ng-date-picker.service';
-import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  CustomAdapter,
+  CustomDateParserFormatter,
+} from "./services/ng-date-picker.service";
+import {
+  NgbDateAdapter,
+  NgbDateParserFormatter,
+} from "@ng-bootstrap/ng-bootstrap";
 
-import { FaModule} from './fontawesome/fa.module';
-import { NgxUploaderModule } from 'ngx-uploader';
+import { FaModule } from "./fontawesome/fa.module";
+import { ScrollToInvalidControlDirective } from "./directives/scroll-to-invalid-control.directive";
 
-import { ScrollToInvalidControlDirective } from './directives/scroll-to-invalid-control.directive';
+import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 
-import { MaterialModule } from "./material.module";
-import { FeatherIconsModule } from "./components/feather-icons/feather-icons.module";
-
-const sharedModules = [
+const sharedModulesArray = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
@@ -28,20 +31,16 @@ const sharedModules = [
   NgxSpinnerModule,
   HttpClientModule,
   NgbDatepickerModule,
-  NgxUploaderModule,
   FaModule,
 ];
 
 @NgModule({
-  declarations: [
-    ScrollToInvalidControlDirective,
-  ],
-  imports: [sharedModules],
+  declarations: [ScrollToInvalidControlDirective, FileUploadComponent],
+  imports: [sharedModulesArray],
   exports: [
-    sharedModules, 
+    sharedModulesArray,
     ScrollToInvalidControlDirective,
-    MaterialModule,
-    FeatherIconsModule,
+    FileUploadComponent,
   ],
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },
