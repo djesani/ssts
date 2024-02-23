@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <h1>Hello, world!</h1>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+
+    <!-- <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script> -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+
+    <!-- use script module by specifying type="module" -->
+    <script type="module" defer>
+        const firebaseConfig = {
+            apiKey: 'AIzaSyCCNCFjCCNlEhTmMjvokNanoh12pN7OwTU',
+            authDomain: 'popkorn-18f8b.firebaseapp.com',
+            databaseURL: 'https://popkorn-18f8b.firebaseio.com',
+            projectId: 'popkorn-18f8b',
+            storageBucket: 'popkorn-18f8b.appspot.com',
+            messagingSenderId: '762845453825',
+            appId: '1:762845453825:web:691639682a78a29e646a00',
+            measurementId: 'G-LFHQG844KS'
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        console.log('db', db)
+
+        // Get a list of cities from your database
+        async function getCities(db) {
+            const citiesCol = collection(db, 'users');
+            const citySnapshot = await getDocs(citiesCol);
+            const cityList = citySnapshot.docs.map(doc => doc.data());
+            return cityList;
+        }
+        getCities();
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 const { Pool, Client } = require('pg')
-const connectionString = "postgresql://postgres:UK0oIrfNf3axF5Cb@db.ogzgvpqnjbjzxjsvscjh.supabase.co:5432/postgres"
+const connectionString = "postgres://postgres.ogzgvpqnjbjzxjsvscjh:UK0oIrfNf3axF5Cb@aws-0-ap-southeast-2.pooler.supabase.com:5432/postgres";
 
 const db = new Client({
   connectionString,

@@ -10,8 +10,8 @@ server.get("/", (req, res) => {
 });
 
 server.use("/kirtans", require("./routes/kirtans"));
-server.use("/categories", require("./routes/categories"));
-server.use("/sub-categories", require("./routes/sub-categories"));
+// server.use("/categories", require("./routes/categories"));
+// server.use("/sub-categories", require("./routes/sub-categories"));
 
 const root = express();
 const contextPath = "/api";
