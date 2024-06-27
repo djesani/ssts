@@ -67,7 +67,7 @@
 
         let kirtanJson, slides, title, index = 0;
         const list = document.getElementById('list');
-        const numLines = 5;
+        const numLines = 7;
 
         async function loadData() {
             const response = await fetch("data.json");
@@ -138,13 +138,13 @@
 
             for (let i = 1; i <= numLines; i++) {
                 const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = (i === 1 || i === numLines + 1) ? 0 : "var(--default-opacity)";
+                const opacity = (i === 1 || i === numLines) ? 0 : "var(--default-opacity)";
                 styles += `.list .list-item:nth-child(${i}) { top: ${step * i}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
-            for (let i = 2; i <= numLines; i++) {
+            for (let i = 2; i <= numLines + 1; i++) {
                 const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = i === 2 ? 0 : 'var(--default-opacity)';
+                const opacity = i === 2 || i == numLines + 1 ? 0 : 'var(--default-opacity)';
                 styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
