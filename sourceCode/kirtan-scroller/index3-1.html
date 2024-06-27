@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kirtans</title>
+    <style>
+        body {
+            background-color: #fff2e6;
+            color: #990101;
+            overflow: hidden;
+        }
+
+        :root {
+            --default-color: #990101;
+            --default-opacity: 1;
+            --highlight-color: #ff6a00;
+            --transition-duration: 500ms;
+        }
+
+        #title {
+            font-size: 40px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-item {
+            padding: 5px 0;
+            font-size: 30px;
+            width: 100%;
+            text-align: center;
+            color: var(--default-color);
+            font-weight: normal;
+            transition: all linear var(--transition-duration);
+            position: absolute;
+        }
+
+        .list-item.no-animation {
+            transition: none;
+        }
+    </style>
+
+    <style id="dynamic-styles"></style>
+
+    <style>
+        .list2 .list-item:nth-child(1) {
+            top: 10vh;
+            opacity: 0;
+        }
+
+        .list2 .list-item:nth-child(2) {
+            top: 30vh;
+            opacity: var(--default-opacity);
+        }
+
+        .list2 .list-item:nth-child(3) {
+            top: 50vh;
+            color: var(--highlight-color);
+        }
+
+        .list2 .list-item:nth-child(4) {
+            top: 70vh;
+            opacity: var(--default-opacity);
+        }
+
+        .list2 .list-item:nth-child(5) {
+            top: 90vh;
+            opacity: 0;
+        }
+
+        .list2.up .list-item:nth-child(1) {
+            top: 0vh;
+            opacity: 0;
+        }
+
+        .list2.up .list-item:nth-child(2) {
+            top: 10vh;
+            opacity: 0;
+        }
+
+        .list2.up .list-item:nth-child(3) {
+            top: 30vh;
+            opacity: var(--default-opacity);
+        }
+
+        .list2.up .list-item:nth-child(4) {
+            top: 50vh;
+            opacity: 1;
+        }
+
+        .list2.up .list-item:nth-child(5) {
+            top: 70vh;
+            opacity: var(--default-opacity);
+        }
+
+        .list2.down .list-item:nth-child(1) {
+            top: 30vh;
+            opacity: var(--default-opacity);
+        }
+
+        .list2.down .list-item:nth-child(2) {
+            top: 50vh;
+            opacity: 1;
+        }
+
+        .list2.down .list-item:nth-child(3) {
+            top: 70vh;
+            opacity: var(--default-opacity);
+        }
+
+        .list2.down .list-item:nth-child(4) {
+            top: 90vh;
+            opacity: 0;
+        }
+
+        .list2.down .list-item:nth-child(5) {
+            top: 100vh;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title"></h1>
+    <ul id="list" class="list"></ul>
+
+    <script>
+        document.addEventListener('keydown', event => {
+            if (event.keyCode === 38) {
+                if (index > 0) {
+                    prev();
+                }
+            } else if (event.keyCode === 40) {
+                if ((index + 3) < slides.length) {
+                    next();
+                }
+            }
+        });
+
+        let kirtanJson, slides, title, index = 0;
+        const list = document.getElementById('list');
+        const numLines = 5;
+        const lineHeightVh = 100 / numLines;
+
+        async function loadData() {
+            const response = await fetch("data.json");
+            kirtanJson = await response.json();
+            const id = getUrlParamsId();
+            const kirtan = getKirtanById(id);
+            title = kirtan.title_english;
+            slides = kirtan.description_english.split("\n");
+            const dynamicStyles = generateDynamicStyles(numLines);
+            injectStyles(dynamicStyles);
+            renderTitle();
+            renderSlides();
+        }
+
+        function renderTitle() {
+            document.getElementById('title').innerText = title;
+        }
+
+        function getKirtanById(id) {
+            return kirtanJson.data.find(x => x.id == id) || kirtanJson.data[0];
+        }
+
+        function getUrlParamsId() {
+            const urlSearch = new URLSearchParams(window.location.search);
+            return urlSearch.get('id') || 1;
+        }
+
+        function renderSlides() {
+            list.innerHTML = '';
+            for (let i = 0; i < numLines; i++) {
+                const li = document.createElement('li');
+                li.className = 'list-item';
+                li.innerText = slides[index + i - 1] || "";
+                list.appendChild(li);
+            }
+        }
+
+        function prev() {
+            transitionSlides('down', -1);
+        }
+
+        function next() {
+            transitionSlides('up', 1);
+        }
+
+        function transitionSlides(animationClass, step) {
+            toggleAnimationClasses(false);
+            list.classList.add(animationClass);
+            setTimeout(() => {
+                toggleAnimationClasses(true);
+                list.classList.remove(animationClass);
+                index += step;
+                renderSlides();
+            }, 500);
+        }
+
+        function toggleAnimationClasses(remove) {
+            const method = remove ? 'add' : 'remove';
+            document.querySelectorAll('.list-item').forEach(item => {
+                item.classList[method]("no-animation");
+            });
+        }
+
+        function generateDynamicStyles(numLines) {
+            let styles = "";
+            const step = 100 / numLines;
+            for (let i = 1; i <= numLines; i++) {
+                const top = step * (i - 1);
+                const opacity = (i === 1 || i === numLines) ? 0 : "var(--default-opacity)";
+                styles += `.list .list-item:nth-child(${i}) { top: ${top}vh; opacity: ${opacity}; }\n`;
+            }
+
+            styles += `.list.up .list-item:nth-child(1) { top: 0vh; opacity: 0; }\n`;
+            for (let i = 2; i <= numLines; i++) {
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 2)}vh; opacity: ${i === 2 ? 0 : 'var(--default-opacity)'}; }\n`;
+            }
+
+            styles += `.list.down .list-item:nth-child(1) { top: ${step * 2}vh; opacity: var(--default-opacity); }\n`;
+            for (let i = 2; i <= numLines; i++) {
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${i === numLines ? 0 : 'var(--default-opacity)'}; }\n`;
+            }
+
+            return styles;
+        }
+
+        function injectStyles(styles) {
+            const styleSheet = document.getElementById("dynamic-styles");
+            styleSheet.textContent = styles;
+        }
+
+        loadData();
+    </script>
+</body>
+
+</html>
