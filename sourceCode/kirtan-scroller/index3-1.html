@@ -212,20 +212,25 @@
         function generateDynamicStyles(numLines) {
             let styles = "";
             const step = 100 / numLines;
+            const highlightIndex = Math.floor(numLines / 2) + 1;
+
             for (let i = 1; i <= numLines; i++) {
                 const top = step * (i - 1);
                 const opacity = (i === 1 || i === numLines) ? 0 : "var(--default-opacity)";
-                styles += `.list .list-item:nth-child(${i}) { top: ${top}vh; opacity: ${opacity}; }\n`;
+                const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
+                styles += `.list .list-item:nth-child(${i}) { top: ${top}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
             styles += `.list.up .list-item:nth-child(1) { top: 0vh; opacity: 0; }\n`;
             for (let i = 2; i <= numLines; i++) {
-                styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 2)}vh; opacity: ${i === 2 ? 0 : 'var(--default-opacity)'}; }\n`;
+                const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 2)}vh; opacity: ${i === 2 ? 0 : 'var(--default-opacity)'}; color: ${color}; }\n`;
             }
 
-            styles += `.list.down .list-item:nth-child(1) { top: ${step * 2}vh; opacity: var(--default-opacity); }\n`;
+            styles += `.list.down .list-item:nth-child(1) { top: ${step * 1}vh; opacity: var(--default-opacity); }\n`;
             for (let i = 2; i <= numLines; i++) {
-                styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${i === numLines ? 0 : 'var(--default-opacity)'}; }\n`;
+                const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i )}vh; opacity: ${i === numLines ? 0 : 'var(--default-opacity)'}; color: ${color}; }\n`;
             }
 
             return styles;
