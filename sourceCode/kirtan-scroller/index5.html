@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Eye Effect on Lyrics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            gap: 10px;
+        }
+        .item {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        .item:hover {
+            transform: scale(2);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">Lyric 1</div>
+        <div class="item">Lyric 2</div>
+        <div class="item">Lyric 3</div>
+        <div class="item">Lyric 4</div>
+        <div class="item">Lyric 5</div>
+        <div class="item">Lyric 6</div>
+        <div class="item">Lyric 7</div>
+        <div class="item">Lyric 8</div>
+        <div class="item">Lyric 9</div>
+        <div class="item">Lyric 10</div>
+    </div>
+    <script>
+        document.querySelectorAll('.item').forEach(item => {
+            item.addEventListener('mouseover', () => {
+                item.style.transform = 'scale(2)';
+                item.style.zIndex = '10';
+            });
+            item.addEventListener('mouseout', () => {
+                item.style.transform = 'scale(1)';
+                item.style.zIndex = '1';
+            });
+        });
+    </script>
+</body>
+</html>

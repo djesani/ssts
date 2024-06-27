@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fisheye List</title>
+		<style>
+			.fisheye-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+			}
+
+			.fisheye-list {
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+				height: 440px; /* Adjust height as needed (100px per item + 10px margin * 4) */
+				width: 200px; /* Adjust width as needed */
+				position: relative;
+			}
+
+			.fisheye-list.transitioning.next .fisheye-item {
+				animation: scrollUp 0.3s ease-in-out;
+			}
+
+			.fisheye-list.transitioning.prev .fisheye-item {
+				animation: scrollDown 0.3s ease-in-out;
+			}
+
+			@keyframes scrollUp {
+				0% {
+					transform: translateY(0);
+					opacity: 1;
+				}
+				50% {
+					opacity: 0;
+				}
+				100% {
+					transform: translateY(
+						-110px
+					); /* Adjust translateY value based on item height and margin */
+					opacity: 1;
+				}
+			}
+
+			@keyframes scrollDown {
+				0% {
+					transform: translateY(0);
+					opacity: 1;
+				}
+				50% {
+					opacity: 0;
+				}
+				100% {
+					transform: translateY(
+						110px
+					); /* Adjust translateY value based on item height and margin */
+					opacity: 1;
+				}
+			}
+
+			.fisheye-item {
+				flex: 0 0 100px; /* Adjust height as needed */
+				margin: 5px 0; /* Adjust margin as needed */
+				opacity: 1;
+				transition: opacity 0.3s ease, transform 0.3s ease;
+			}
+
+			.fisheye-item:nth-child(1) {
+				opacity: 1;
+			}
+
+			.fisheye-item:nth-child(2) {
+				opacity: 1;
+			}
+
+			.fisheye-item:nth-child(3) {
+				opacity: 1;
+			}
+
+			.fisheye-item:nth-child(4) {
+				opacity: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="fisheye-container">
+			<button id="previousButton">Previous</button>
+			<div class="fisheye-list" id="fisheyeList">
+				<!-- Items will be dynamically added here -->
+			</div>
+			<button id="nextButton">Next</button>
+		</div>
+
+		<script>
+			const items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"];
+			let currentIndex = 0;
+			let isTransitioning = false;
+			let direction = "";
+
+			const fisheyeList = document.getElementById("fisheyeList");
+			const previousButton = document.getElementById("previousButton");
+			const nextButton = document.getElementById("nextButton");
+
+			const renderItems = () => {
+				fisheyeList.innerHTML = "";
+				const visibleItems = getVisibleItems();
+				visibleItems.forEach((item, index) => {
+					const div = document.createElement("div");
+					div.className = "fisheye-item";
+					div.textContent = item;
+					fisheyeList.appendChild(div);
+				});
+			};
+
+			const getVisibleItems = () => {
+				const visibleItems = [];
+				for (let i = 0; i < 5; i++) {
+					visibleItems.push(items[(currentIndex + i) % items.length]);
+				}
+				return visibleItems;
+			};
+
+			const handleNextClick = () => {
+				if (!isTransitioning) {
+					direction = "next";
+					fisheyeList.classList.add("transitioning", direction);
+					isTransitioning = true;
+					setTimeout(() => {
+						currentIndex = (currentIndex + 1) % items.length;
+						fisheyeList.classList.remove("transitioning", direction);
+						isTransitioning = false;
+						renderItems();
+					}, 300); // Duration of the transition
+				}
+			};
+
+			const handlePreviousClick = () => {
+				if (!isTransitioning) {
+					direction = "prev";
+					fisheyeList.classList.add("transitioning", direction);
+					isTransitioning = true;
+					setTimeout(() => {
+						currentIndex = (currentIndex - 1 + items.length) % items.length;
+						fisheyeList.classList.remove("transitioning", direction);
+						isTransitioning = false;
+						renderItems();
+					}, 300); // Duration of the transition
+				}
+			};
+
+			previousButton.addEventListener("click", handlePreviousClick);
+			nextButton.addEventListener("click", handleNextClick);
+
+			renderItems();
+		</script>
+	</body>
+</html>
