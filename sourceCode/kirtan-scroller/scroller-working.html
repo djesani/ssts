@@ -65,13 +65,13 @@
         const list = document.getElementById("list");
         const numLines = 7;
         const highlightIndex = Math.floor(numLines / 2) + 1;
-        const stepsFromHilglight = highlightIndex - 1;
+        const stepsFromHighlight = highlightIndex - 1;
 
         document.addEventListener("keydown", (event) => {
             if (event.key === "ArrowUp") {
-                if (index + stepsFromHilglight > 0) prev();
+                if (index + stepsFromHighlight > 0) prev();
             } else if (event.key === "ArrowDown") {
-                if (index - stepsFromHilglight < slides.length - numLines) next();
+                if (index - stepsFromHighlight < slides.length - numLines) next();
             }
         });
 
@@ -187,7 +187,7 @@
         }
 
         function adjustToHighlightFirst() {
-            for (let i = 0; i < stepsFromHilglight; i++) {
+            for (let i = 0; i < stepsFromHighlight; i++) {
                 prev();
             }
         }
