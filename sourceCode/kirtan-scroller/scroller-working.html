@@ -62,8 +62,8 @@
             slidesGujarati,
             title,
             index = 0;
+        const numLines = 5;
         const list = document.getElementById("list");
-        const numLines = 7;
         const highlightIndex = Math.floor(numLines / 2) + 1;
         const stepsFromHighlight = highlightIndex - 1;
 
@@ -160,13 +160,13 @@
 
             for (let i = 2; i <= numLines + 1; i++) {
                 const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = i === 2 || i == numLines + 1 ? 0 : "var(--default-opacity)";
+                const opacity = i === 2 || i == numLines + 1 ? 0 : "1";
                 styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
             for (let i = 1; i <= numLines - 1; i++) {
                 const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = i === numLines - 1 ? 0 : "var(--default-opacity)";
+                const opacity = i === numLines - 1 ? 0 : "1";
                 styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i + 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
@@ -177,8 +177,7 @@
             if (index === 1 || index === numLines) return 0;
             const distanceFromCenter = Math.abs(highlightIndex - index);
             const maxDistance = Math.floor(numLines / 2);
-            // return 1 - distanceFromCenter / maxDistance;
-            return 1;
+            return 1 - distanceFromCenter / maxDistance;
         }
 
         function injectStyles(styles) {
