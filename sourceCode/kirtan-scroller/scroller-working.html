@@ -135,10 +135,11 @@
             let styles = "";
             const step = 100 / numLines;
             const highlightIndex = Math.floor(numLines / 2) + 1;
+            let opacity = 1;
 
             for (let i = 1; i <= numLines; i++) {
                 const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = (i === 1 || i === numLines) ? 0 : "var(--default-opacity)";
+                opacity = (i === 1 || i === numLines) ? 0 : "var(--default-opacity)";
                 styles += `.list .list-item:nth-child(${i}) { top: ${step * i}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
