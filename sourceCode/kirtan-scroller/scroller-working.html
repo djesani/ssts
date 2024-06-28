@@ -149,24 +149,29 @@
 
         function generateDynamicStyles(numLines) {
             let styles = "";
-            const step = 100 / numLines;
+            const viewportHeight = window.innerHeight;
+            const itemHeight = viewportHeight / numLines;
+            const middlePosition = viewportHeight / 2 - itemHeight / 2;
 
             for (let i = 1; i <= numLines; i++) {
+                const topPosition = middlePosition + (i - highlightIndex) * itemHeight;
                 const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i, highlightIndex, numLines);
-                styles += `.list .list-item:nth-child(${i}) { top: ${step * i}vh; opacity: ${opacity}; color: ${color}; }\n`;
+                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
             for (let i = 2; i <= numLines + 1; i++) {
+                const topPosition = middlePosition + (i - 1 - highlightIndex) * itemHeight;
                 const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
-                styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
             for (let i = 1; i <= numLines - 1; i++) {
+                const topPosition = middlePosition + (i + 1 - highlightIndex) * itemHeight;
                 const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
-                styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i + 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
             return styles;
