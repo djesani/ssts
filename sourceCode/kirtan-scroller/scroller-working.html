@@ -14,7 +14,6 @@
 
         :root {
             --default-color: #990101;
-            --default-opacity: 1;
             --highlight-color: #ff6a00;
             --transition-duration: 500ms;
         }
@@ -62,7 +61,7 @@
             slidesGujarati,
             title,
             index = 0;
-        const numLines = 5;
+        const numLines = 7;
         const list = document.getElementById("list");
         const highlightIndex = Math.floor(numLines / 2) + 1;
         const stepsFromHighlight = highlightIndex - 1;
@@ -160,13 +159,13 @@
 
             for (let i = 2; i <= numLines + 1; i++) {
                 const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = i === 2 || i == numLines + 1 ? 0 : "1";
+                const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
                 styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
             for (let i = 1; i <= numLines - 1; i++) {
                 const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
-                const opacity = i === numLines - 1 ? 0 : "1";
+                const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
                 styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i + 1)}vh; opacity: ${opacity}; color: ${color}; }\n`;
             }
 
