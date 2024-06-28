@@ -67,10 +67,12 @@
 
         let kirtanJson,
             slides,
+            slidesGujarati,
             title,
             index = 0;
         const list = document.getElementById("list");
         const numLines = 7;
+        const highlightIndex = Math.floor(numLines / 2) + 1;
 
         async function loadData() {
             const response = await fetch("data.json");
@@ -83,6 +85,7 @@
             injectStyles(generateDynamicStyles(numLines));
             renderTitle();
             renderSlides();
+            adjustToHighlightFirst();
         }
 
         function renderTitle() {
@@ -147,7 +150,6 @@
         function generateDynamicStyles(numLines) {
             let styles = "";
             const step = 100 / numLines;
-            const highlightIndex = Math.floor(numLines / 2) + 1;
 
             for (let i = 1; i <= numLines; i++) {
                 const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
@@ -174,13 +176,20 @@
             if (index === 1 || index === numLines) return 0;
             const distanceFromCenter = Math.abs(highlightIndex - index);
             const maxDistance = Math.floor(numLines / 2);
-            //   return 1 - distanceFromCenter / maxDistance;
+            // return 1 - distanceFromCenter / maxDistance;
             return 1;
         }
 
         function injectStyles(styles) {
             const styleSheet = document.getElementById("dynamic-styles");
             styleSheet.textContent = styles;
+        }
+
+        function adjustToHighlightFirst() {
+            const stepsToFirst = highlightIndex - 1;
+            for (let i = 0; i < stepsToFirst; i++) {
+                prev();
+            }
         }
 
         loadData();
