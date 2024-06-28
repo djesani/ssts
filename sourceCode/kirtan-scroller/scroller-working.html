@@ -57,14 +57,6 @@
     <ul id="list" class="list"></ul>
 
     <script>
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowUp") {
-                if (index > 0) prev();
-            } else if (event.key === "ArrowDown") {
-                if (index + numLines - 1 < slides.length) next();
-            }
-        });
-
         let kirtanJson,
             slides,
             slidesGujarati,
@@ -73,6 +65,15 @@
         const list = document.getElementById("list");
         const numLines = 7;
         const highlightIndex = Math.floor(numLines / 2) + 1;
+        const stepsFromHilglight = highlightIndex - 1;
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                if (index + stepsFromHilglight > 0) prev();
+            } else if (event.key === "ArrowDown") {
+                if (index - stepsFromHilglight < slides.length - numLines) next();
+            }
+        });
 
         async function loadData() {
             const response = await fetch("data.json");
@@ -186,7 +187,7 @@
         }
 
         function adjustToHighlightFirst() {
-            const stepsToFirst = highlightIndex - 1;
+           
             for (let i = 0; i < stepsToFirst; i++) {
                 prev();
             }
