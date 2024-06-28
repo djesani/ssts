@@ -43,6 +43,10 @@
         .list-item.no-animation {
             transition: none;
         }
+
+        .english {
+            font-weight: bold;
+        }
     </style>
 
     <style id="dynamic-styles"></style>
@@ -75,7 +79,9 @@
             const kirtan = getKirtanById(id);
             title = kirtan.title_english;
             slides = kirtan.description_english.split("\n");
-            slidesGujarati = kirtan.description_english.split("\n");
+            slidesGujarati = kirtan.description_gujarati.split("\n");
+
+            console.log('slidesGujarati', slidesGujarati)
             injectStyles(generateDynamicStyles(numLines));
             renderTitle();
             renderSlides();
@@ -99,7 +105,17 @@
             for (let i = 0; i < numLines; i++) {
                 const li = document.createElement("li");
                 li.className = "list-item";
-                li.innerText = slides[index + i] || "";
+
+                const eng = document.createElement("div");
+                eng.innerText = slides[index + i] || "";
+                eng.className = "english";
+
+                const guj = document.createElement("div");
+                guj.innerText = slidesGujarati[index + i] || "";
+                guj.className = "gujarati";
+
+                li.appendChild(eng);
+                li.appendChild(guj);
                 list.appendChild(li);
             }
         }
