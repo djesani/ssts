@@ -34,14 +34,14 @@
             padding: 5px 0;
             font-size: var(--fontSize)px;
             color: var(--defaultColor);
-            transition: all linear var(--transition-duration);
+            transition: all linear var(--transitionDuration);
             width: 100%;
             text-align: center;
             font-weight: normal;
             position: absolute;
         }
 
-        .list-item.no-animation {
+        .list-item.noAnimation {
             transition: none;
         }
 
@@ -127,36 +127,44 @@
         <input type="color" id="highlightColor" value="#ff6a00">
 
         <label class="checkbox">
-            <input type="checkbox" id="enableFontResizing" onchange="toggleEnableFontResizing()"> Enable font resizing
+            <input type="checkbox" id="enableFontResizing" onchange="toggleEnableFontResizing()">
+            Enable font resizing
         </label>
         <label class="checkbox">
-            <input type="checkbox" id="enableOpacity" onchange="toggleEnableOpacity()"> Enable opacity
+            <input type="checkbox" id="enableOpacity" onchange="toggleEnableOpacity()">
+            Enable opacity
         </label>
         <label class="checkbox">
-            <input type="checkbox" id="showEnglish" onchange="toggleEnglish()"> Show English
+            <input type="checkbox" id="showEnglish" onchange="toggleEnglish()">
+            Show English
         </label>
         <label class="checkbox">
-            <input type="checkbox" id="showGujarati" onchange="toggleGujarati()"> Show Gujarati
+            <input type="checkbox" id="showGujarati" onchange="toggleGujarati()">
+            Show Gujarati
         </label>
 
         <label for="transitionDuration">Transition duration (ms)</label>
         <select id="transitionDuration" onchange="updateTransitionDuration()">
-            <option value="200">200</option>
-            <option value="400">400</option>
-            <option selected value="600">600</option>
-            <option value="800">800</option>
+            <option value="250">250</option>
+            <option selected value="500">500</option>
+            <option  value="750">750</option>
             <option value="1000">1000</option>
+            <option value="1250">1250</option>
+            <option value="1500">1500</option>
         </select>
 
         <label for="fontSize">Font size (px)</label>
         <select id="fontSize" onchange="updateFontSize()">
             <option value="16">16</option>
+            <option value="20">20</option>
             <option value="24">24</option>
+            <option value="28">28</option>
             <option selected value="32">32</option>
+            <option value="36">36</option>
             <option value="40">40</option>
+            <option value="44">44</option>
             <option value="48">48</option>
         </select>
-
 
     </div>
 
@@ -171,7 +179,7 @@
         let enableOpacity = JSON.parse(localStorage.getItem('enableOpacity')) ?? true;
         let showEnglish = JSON.parse(localStorage.getItem('showEnglish')) ?? true;
         let showGujarati = JSON.parse(localStorage.getItem('showGujarati')) ?? true;
-        let transitionDuration = localStorage.getItem('transitionDuration') || 600;
+        let transitionDuration = localStorage.getItem('transitionDuration') || 500;
         let fontSize = localStorage.getItem('fontSize') || 32;
         const list = document.getElementById("list");
         const highlightIndex = Math.floor(numLines / 2) + 1;
@@ -250,14 +258,35 @@
                 list.classList.remove(animationClass);
                 index += step;
                 renderSlides();
-            }, parseInt(getComputedStyle(document.documentElement).getPropertyValue("--transition-duration")));
+            }, parseInt(getComputedStyle(document.documentElement).getPropertyValue("--transitionDuration")));
         }
 
         function toggleAnimationClasses(remove) {
             const method = remove ? "add" : "remove";
             document.querySelectorAll(".list-item").forEach((item) => {
-                item.classList[method]("no-animation");
+                item.classList[method]("noAnimation");
             });
+        }
+
+        function generateDynamicStyles1(numLines) {
+            let styles = "";
+            const viewportHeight = window.innerHeight;
+            const itemHeight = viewportHeight / numLines;
+            const middlePosition = viewportHeight / 2 - itemHeight / 2;
+            for (let i = 0; i < numLines; i++) {
+                const top = i * itemHeight;
+                styles += `.list-item:nth-child(${i + 1}) { top: ${top}px; }\n`;
+                const distanceFromMiddle = Math.abs(top - middlePosition);
+                if (enableFontResizing) {
+                    const scaleFactor = Math.max(1 - distanceFromMiddle / viewportHeight, 0.5);
+                    styles += `.list-item:nth-child(${i + 1}) .english, .list-item:nth-child(${i + 1}) .gujarati { font-size: calc(var(--fontSize) * ${scaleFactor}); }\n`;
+                }
+                if (enableOpacity) {
+                    const opacity = Math.max(1 - distanceFromMiddle / viewportHeight, 0.3);
+                    styles += `.list-item:nth-child(${i + 1}) { opacity: ${opacity}; }\n`;
+                }
+            }
+            return styles;
         }
 
         function generateDynamicStyles(numLines) {
@@ -271,7 +300,7 @@
                 const color = i === highlightIndex ? "var(--highlightColor)" : "";
                 const opacity = calculateOpacity(i, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i, highlightIndex, numLines);
-                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; fontSize: ${fontSize}px; }\n`;
+                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
             }
 
             for (let i = 2; i <= numLines + 1; i++) {
@@ -279,7 +308,7 @@
                 const color = i - 1 === highlightIndex ? "var(--highlightColor)" : "";
                 const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i - 1, highlightIndex, numLines);
-                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; fontSize: ${fontSize}px; }\n`;
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
             }
 
             for (let i = 1; i <= numLines - 1; i++) {
@@ -287,14 +316,13 @@
                 const color = i + 1 === highlightIndex ? "var(--highlightColor)" : "";
                 const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i + 1, highlightIndex, numLines);
-                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; fontSize: ${fontSize}px; }\n`;
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
             }
 
             return styles;
         }
 
         function calculateOpacity(index, highlightIndex, numLines) {
-            if (!enableOpacity) return 1;
             if (index === 1 || index === numLines) return 0;
             const distanceFromCenter = Math.abs(highlightIndex - index);
             const maxDistance = Math.floor(numLines / 2);
@@ -307,179 +335,105 @@
             return index === highlightIndex ? baseFontSize : baseFontSize * 0.8;
         }
 
-        function injectStyles(styles) {
+        function injectStyles(css) {
             const styleSheet = document.getElementById("dynamic-styles");
-            styleSheet.textContent = styles;
+            styleSheet.innerHTML = css;
         }
 
         function adjustToHighlightFirst() {
-            for (let i = 0; i < stepsFromHighlight; i++) {
-                prev();
-            }
-        }
-
-        function toggleConfigPanel() {
-            const panel = document.getElementById("config-panel");
-            panel.classList.toggle("open");
-        }
-
-        function toggleEnableFontResizing() {
-            enableFontResizing = !enableFontResizing;
-            localStorage.setItem('enableFontResizing', enableFontResizing);
-            injectStyles(generateDynamicStyles(numLines));
-        }
-
-        function toggleEnableOpacity() {
-            enableOpacity = !enableOpacity;
-            localStorage.setItem('enableOpacity', enableOpacity);
-            injectStyles(generateDynamicStyles(numLines));
-        }
-
-        function toggleEnglish() {
-            showEnglish = !showEnglish;
-            localStorage.setItem('showEnglish', showEnglish);
+            while (index < stepsFromHighlight) index++;
             renderSlides();
         }
 
-        function toggleGujarati() {
-            showGujarati = !showGujarati;
+        function saveConfig() {
+            localStorage.setItem('numLines', numLines);
+            localStorage.setItem('backgroundColor', document.getElementById('backgroundColor').value);
+            localStorage.setItem('defaultColor', document.getElementById('defaultColor').value);
+            localStorage.setItem('highlightColor', document.getElementById('highlightColor').value);
+            localStorage.setItem('enableFontResizing', enableFontResizing);
+            localStorage.setItem('enableOpacity', enableOpacity);
+            localStorage.setItem('showEnglish', showEnglish);
             localStorage.setItem('showGujarati', showGujarati);
+            localStorage.setItem('transitionDuration', transitionDuration);
+            localStorage.setItem('fontSize', fontSize);
+        }
+
+        function resetConfig() {
+            localStorage.clear();
+            location.reload();
+        }
+
+        function updateNumLines() {
+            numLines = parseInt(document.getElementById('numLines').value);
+            injectStyles(generateDynamicStyles(numLines));
             renderSlides();
         }
 
         function updateTransitionDuration() {
-            const duration = document.getElementById('transitionDuration').value;
-            document.documentElement.style.setProperty('--transition-duration', `${duration}ms`);
-            localStorage.setItem('transitionDuration', duration);
+            transitionDuration = document.getElementById('transitionDuration').value;
+            document.documentElement.style.setProperty('--transitionDuration', `${transitionDuration}ms`);
         }
 
         function updateFontSize() {
-            injectStyles(generateDynamicStyles(numLines));
-            localStorage.setItem('fontSize', document.getElementById('fontSize').value);
-        }
-
-        function saveConfig() {
-            const numLinesInput = document.getElementById("numLines");
-            const backgroundColorInput = document.getElementById("backgroundColor");
-            const defaultColorInput = document.getElementById("defaultColor");
-            const highlightColorInput = document.getElementById("highlightColor");
-
-            numLines = parseInt(numLinesInput.value);
-            const backgroundColor = backgroundColorInput.value;
-            const defaultColor = defaultColorInput.value;
-            const highlightColor = highlightColorInput.value;
-
-            document.documentElement.style.setProperty('--defaultColor', defaultColor);
-            document.documentElement.style.setProperty('--highlightColor', highlightColor);
-            document.documentElement.style.setProperty('--backgroundColor', backgroundColor);
-
-            localStorage.setItem('numLines', numLines);
-            localStorage.setItem('backgroundColor', backgroundColor);
-            localStorage.setItem('defaultColor', defaultColor);
-            localStorage.setItem('highlightColor', highlightColor);
-
+            fontSize = document.getElementById('fontSize').value;
+            document.documentElement.style.setProperty('--fontSize', fontSize);
             injectStyles(generateDynamicStyles(numLines));
             renderSlides();
+        }
+
+        function toggleConfigPanel() {
+            document.getElementById('config-panel').classList.toggle('open');
+        }
+
+        function toggleEnableFontResizing() {
+            enableFontResizing = !enableFontResizing;
+            injectStyles(generateDynamicStyles(numLines));
+            renderSlides();
+        }
+
+        function toggleEnableOpacity() {
+            enableOpacity = !enableOpacity;
+            injectStyles(generateDynamicStyles(numLines));
+            renderSlides();
+        }
+
+        function toggleEnglish() {
+            showEnglish = !showEnglish;
+            document.querySelectorAll('.english').forEach((el) => {
+                el.style.display = showEnglish ? 'block' : 'none';
+            });
+        }
+
+        function toggleGujarati() {
+            showGujarati = !showGujarati;
+            document.querySelectorAll('.gujarati').forEach((el) => {
+                el.style.display = showGujarati ? 'block' : 'none';
+            });
         }
 
         function loadConfig() {
-            const numLinesValue = localStorage.getItem('numLines');
-            const backgroundColorValue = localStorage.getItem('backgroundColor');
-            const defaultColorValue = localStorage.getItem('defaultColor');
-            const highlightColorValue = localStorage.getItem('highlightColor');
-            const enableFontResizingValue = localStorage.getItem('enableFontResizing') === 'true'; // Parse as boolean
-            const enableOpacityValue = localStorage.getItem('enableOpacity') === 'true'; // Parse as boolean
-            const showEnglishValue = localStorage.getItem('showEnglish') === 'true'; // Parse as boolean
-            const showGujaratiValue = localStorage.getItem('showGujarati') === 'true'; // Parse as boolean
-            const transitionDurationValue = localStorage.getItem('transitionDuration');
-            const fontSizeValue = localStorage.getItem('fontSize');
+            document.getElementById('numLines').value = localStorage.getItem('numLines') || 7;
+            document.getElementById('backgroundColor').value = localStorage.getItem('backgroundColor') || '#fff2e6';
+            document.getElementById('defaultColor').value = localStorage.getItem('defaultColor') || '#990101';
+            document.getElementById('highlightColor').value = localStorage.getItem('highlightColor') || '#ff6a00';
+            document.getElementById('enableFontResizing').checked = JSON.parse(localStorage.getItem('enableFontResizing')) ?? true;
+            document.getElementById('enableOpacity').checked = JSON.parse(localStorage.getItem('enableOpacity')) ?? true;
+            document.getElementById('showEnglish').checked = JSON.parse(localStorage.getItem('showEnglish')) ?? true;
+            document.getElementById('showGujarati').checked = JSON.parse(localStorage.getItem('showGujarati')) ?? true;
+            document.getElementById('transitionDuration').value = localStorage.getItem('transitionDuration') || 500;
+            document.getElementById('fontSize').value = localStorage.getItem('fontSize') || 32;
 
-            // Set values if they exist in localStorage
-            if (numLinesValue) {
-                document.getElementById('numLines').value = numLinesValue;
-                numLines = parseInt(numLinesValue);
-            }
-            if (backgroundColorValue) {
-                document.getElementById('backgroundColor').value = backgroundColorValue;
-                document.documentElement.style.setProperty('--backgroundColor', backgroundColorValue);
-            }
-            if (defaultColorValue) {
-                document.getElementById('defaultColor').value = defaultColorValue;
-                document.documentElement.style.setProperty('--defaultColor', defaultColorValue);
-            }
-            if (highlightColorValue) {
-                document.getElementById('highlightColor').value = highlightColorValue;
-                document.documentElement.style.setProperty('--highlightColor', highlightColorValue);
-            }
-            if (enableFontResizingValue !== null) {
-                enableFontResizing = enableFontResizingValue;
-                document.getElementById('enableFontResizing').checked = enableFontResizing;
-            }
-            if (enableOpacityValue !== null) {
-                enableOpacity = enableOpacityValue;
-                document.getElementById('enableOpacity').checked = enableOpacity;
-            }
-            if (showEnglishValue !== null) {
-                showEnglish = showEnglishValue;
-                document.getElementById('showEnglish').checked = showEnglish;
-            }
-            if (showGujaratiValue !== null) {
-                showGujarati = showGujaratiValue;
-                document.getElementById('showGujarati').checked = showGujarati;
-            }
-            if (transitionDurationValue) {
-                document.getElementById('transitionDuration').value = transitionDurationValue;
-                document.documentElement.style.setProperty('--transition-duration', `${transitionDurationValue}ms`);
-            }
-            if (fontSizeValue) {
-                document.getElementById('fontSize').value = fontSizeValue;
-            }
+            document.documentElement.style.setProperty('--backgroundColor', localStorage.getItem('backgroundColor') || '#fff2e6');
+            document.documentElement.style.setProperty('--defaultColor', localStorage.getItem('defaultColor') || '#990101');
+            document.documentElement.style.setProperty('--highlightColor', localStorage.getItem('highlightColor') || '#ff6a00');
+            document.documentElement.style.setProperty('--transitionDuration', `${localStorage.getItem('transitionDuration') || 500}ms`);
+            document.documentElement.style.setProperty('--fontSize', `${localStorage.getItem('fontSize') || 32}px`);
         }
 
-        function resetConfig() {
-            localStorage.removeItem('numLines');
-            localStorage.removeItem('defaultColor');
-            localStorage.removeItem('backgroundColor');
-            localStorage.removeItem('highlightColor');
-            localStorage.removeItem('transitionDuration');
-            localStorage.removeItem('fontSize');
-            localStorage.removeItem('enableFontResizing');
-            localStorage.removeItem('enableOpacity');
-            localStorage.removeItem('showEnglish');
-            localStorage.removeItem('showGujarati');
-
-            numLines = 7; // Default number of lines
-            const defaultColor = '#990101'; // Default default color
-            const highlightColor = '#ff6a00'; // Default highlight color
-            const backgroundColor = '#fff2e6'; // Default background color
-            const transitionDuration = 600; // Default transition duration in ms
-            const fontSize = 32; // Default font size in px
-            const enableFontResizing = true; // Default show font size toggle
-            const enableOpacity = true; // Default show opacity toggle
-            const showEnglish = true; // Default show English toggle
-            const showGujarati = true; // Default show Gujarati toggle
-
-            document.getElementById('numLines').value = numLines;
-            document.getElementById('defaultColor').value = defaultColor
-            document.getElementById('backgroundColor').value = backgroundColor;
-            document.getElementById('highlightColor').value = highlightColor;
-            document.getElementById('transitionDuration').value = transitionDuration;
-            document.getElementById('fontSize').value = fontSize;
-            document.getElementById('enableFontResizing').checked = enableFontResizing;
-            document.getElementById('enableOpacity').checked = enableOpacity;
-            document.getElementById('showEnglish').checked = showEnglish;
-            document.getElementById('showGujarati').checked = showGujarati;
-
-            document.documentElement.style.setProperty('--default-color', defaultColor);
-            document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--highlightc-olor', highlightColor);
-            document.documentElement.style.setProperty('--transition-duration', `${transitionDuration}ms`);
-            injectStyles(generateDynamicStyles(numLines));
-            renderSlides();
+        window.onload = () => {
+            loadData();
+            loadConfig();
         }
-
-        loadConfig();
-        loadData();
     </script>
 </body>
 
