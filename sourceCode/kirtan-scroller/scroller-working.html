@@ -46,6 +46,33 @@
         .english {
             font-weight: bold;
         }
+
+        #config-panel {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+            transition: right 0.3s;
+            padding: 20px;
+        }
+
+        #config-panel.open {
+            right: 0;
+        }
+
+        #config-panel label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        #config-panel input[type="color"] {
+            width: 100%;
+            height: 30px;
+            border: none;
+        }
     </style>
 
     <style id="dynamic-styles"></style>
@@ -56,6 +83,20 @@
     <ul id="list" class="list"></ul>
     <button onclick="toggleFontSize()">Toggle Font Size</button>
     <button onclick="toggleOpacity()">Toggle Opacity</button>
+    <button onclick="toggleConfigPanel()">Toggle Config Panel</button>
+
+    <div id="config-panel">
+        <label for="num-lines">Number of Lines:</label>
+        <input type="number" id="num-lines" min="1" value="6">
+        
+        <label for="default-color">Default Color:</label>
+        <input type="color" id="default-color" value="#990101">
+        
+        <label for="highlight-color">Highlight Color:</label>
+        <input type="color" id="highlight-color" value="#ff6a00">
+        
+        <button onclick="saveConfig()">Save Config</button>
+    </div>
 
     <script>
         let kirtanJson,
@@ -63,7 +104,7 @@
             slidesGujarati,
             title,
             index = 0;
-        const numLines = 7;
+        let numLines = parseInt(localStorage.getItem('numLines')) || 7;
         const list = document.getElementById("list");
         const highlightIndex = Math.floor(numLines / 2) + 1;
         const stepsFromHighlight = highlightIndex - 1;
@@ -221,6 +262,51 @@
             injectStyles(generateDynamicStyles(numLines));
         }
 
+        function toggleConfigPanel() {
+            const panel = document.getElementById("config-panel");
+            panel.classList.toggle("open");
+        }
+
+        function saveConfig() {
+            const numLinesInput = document.getElementById("num-lines");
+            const defaultColorInput = document.getElementById("default-color");
+            const highlightColorInput = document.getElementById("highlight-color");
+
+            numLines = parseInt(numLinesInput.value);
+            const defaultColor = defaultColorInput.value;
+            const highlightColor = highlightColorInput.value;
+
+            document.documentElement.style.setProperty('--default-color', defaultColor);
+            document.documentElement.style.setProperty('--highlight-color', highlightColor);
+
+            localStorage.setItem('numLines', numLines);
+            localStorage.setItem('defaultColor', defaultColor);
+            localStorage.setItem('highlightColor', highlightColor);
+
+            injectStyles(generateDynamicStyles(numLines));
+            renderSlides();
+        }
+
+        function loadConfig() {
+            const numLinesValue = localStorage.getItem('numLines');
+            const defaultColorValue = localStorage.getItem('defaultColor');
+            const highlightColorValue = localStorage.getItem('highlightColor');
+
+            if (numLinesValue) {
+                document.getElementById('num-lines').value = numLinesValue;
+                numLines = parseInt(numLinesValue);
+            }
+            if (defaultColorValue) {
+                document.getElementById('default-color').value = defaultColorValue;
+                document.documentElement.style.setProperty('--default-color', defaultColorValue);
+            }
+            if (highlightColorValue) {
+                document.getElementById('highlight-color').value = highlightColorValue;
+                document.documentElement.style.setProperty('--highlight-color', highlightColorValue);
+            }
+        }
+
+        loadConfig();
         loadData();
     </script>
 </body>
