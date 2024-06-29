@@ -53,10 +53,11 @@
             right: -300px;
             width: 300px;
             height: 100%;
-            background-color: #fff;
+            background-color: #fff2e6;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s;
             padding: 20px;
+            overflow-y: auto;
         }
 
         #config-panel.open {
@@ -69,10 +70,24 @@
         }
 
         #config-panel input[type="color"],
-        #config-panel input[type="number"],
+        #config-panel select,
         #config-panel input[type="checkbox"] {
             width: 100%;
-            /* height: 30px; */
+        }
+
+        #config-panel input[type="checkbox"] {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        #config-panel label.checkbox {
+            display: flex;
+        }
+
+        #config-panel input[type="checkbox"] {
+            margin: 2px 9px 0 0;
+            width: 16px;
+            height: 16px;
         }
     </style>
 
@@ -86,7 +101,15 @@
     <div id="config-panel">
         <button onclick="toggleConfigPanel()">Close Config Panel</button>
         <label for="num-lines">Number of Lines:</label>
-        <input type="number" id="num-lines" min="1" value="11">
+        <select id="num-lines">
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="9">9</option>
+            <option value="11">11</option>
+        </select>
+
+        <label for="highlight-color">Background Color:</label>
+        <input type="color" id="background-color" value="##fff2e6">
 
         <label for="default-color">Default Color:</label>
         <input type="color" id="default-color" value="#990101">
@@ -94,23 +117,36 @@
         <label for="highlight-color">Highlight Color:</label>
         <input type="color" id="highlight-color" value="#ff6a00">
 
-        <button onclick="toggleConfigPanel()">Toggle Config Panel</button>
-        <label>
+        <label class="checkbox">
             <input type="checkbox" id="toggle-font-size" onchange="toggleFontSize()"> Toggle Font Size
         </label>
-        <label>
+        <label class="checkbox">
             <input type="checkbox" id="toggle-opacity" onchange="toggleOpacity()"> Toggle Opacity
         </label>
-        <label>
+        <label class="checkbox">
             <input type="checkbox" id="toggle-english" onchange="toggleEnglish()"> Show English
         </label>
-        <label>
+        <label class="checkbox">
             <input type="checkbox" id="toggle-gujarati" onchange="toggleGujarati()"> Show Gujarati
         </label>
+
         <label for="transition-duration">Transition Duration (ms):</label>
-        <input type="number" id="transition-duration" value="500" onchange="updateTransitionDuration()">
+        <select id="transition-duration">
+            <option value="200">200</option>
+            <option value="400">400</option>
+            <option value="600">600</option>
+            <option value="800">800</option>
+            <option value="1000">1000</option>
+        </select>
+
         <label for="font-size">Font Size (px):</label>
-        <input type="number" id="font-size" value="30" onchange="updateFontSize()">
+        <select id="font-size">
+            <option value="16">16</option>
+            <option value="24">24</option>
+            <option value="32">32</option>
+            <option value="40">40</option>
+            <option value="48">48</option>
+        </select>
 
         <button onclick="saveConfig()">Save Config</button>
     </div>
@@ -121,14 +157,14 @@
             slidesGujarati,
             title,
             index = 0;
-        let numLines = parseInt(localStorage.getItem('numLines')) || 6;
+        let numLines = parseInt(localStorage.getItem('numLines')) || 7;
+        let enableFontSize = JSON.parse(localStorage.getItem('enableFontSize')) || true;
+        let enableOpacity = JSON.parse(localStorage.getItem('enableOpacity')) || true;
+        let showEnglish = JSON.parse(localStorage.getItem('showEnglish')) || true;
+        let showGujarati = JSON.parse(localStorage.getItem('showGujarati')) || true;
         const list = document.getElementById("list");
         const highlightIndex = Math.floor(numLines / 2) + 1;
         const stepsFromHighlight = highlightIndex - 1;
-        let enableFontSize = true;
-        let enableOpacity = true;
-        let showEnglish = true;
-        let showGujarati = true;
 
         document.addEventListener("keydown", (event) => {
             if (event.key === "ArrowUp") {
@@ -278,39 +314,47 @@
 
         function toggleFontSize() {
             enableFontSize = !enableFontSize;
+            localStorage.setItem('enableFontSize', enableFontSize);
             injectStyles(generateDynamicStyles(numLines));
         }
 
         function toggleOpacity() {
             enableOpacity = !enableOpacity;
+            localStorage.setItem('enableOpacity', enableOpacity);
             injectStyles(generateDynamicStyles(numLines));
         }
 
         function toggleEnglish() {
             showEnglish = !showEnglish;
+            localStorage.setItem('showEnglish', showEnglish);
             renderSlides();
         }
 
         function toggleGujarati() {
             showGujarati = !showGujarati;
+            localStorage.setItem('showGujarati', showGujarati);
             renderSlides();
         }
 
         function updateTransitionDuration() {
             const duration = document.getElementById('transition-duration').value;
             document.documentElement.style.setProperty('--transition-duration', `${duration}ms`);
+            localStorage.setItem('transitionDuration', duration);
         }
 
         function updateFontSize() {
             injectStyles(generateDynamicStyles(numLines));
+            localStorage.setItem('fontSize', document.getElementById('font-size').value);
         }
 
         function saveConfig() {
             const numLinesInput = document.getElementById("num-lines");
+            const defaultBackroundColorInput = document.getElementById("background-color");
             const defaultColorInput = document.getElementById("default-color");
             const highlightColorInput = document.getElementById("highlight-color");
 
             numLines = parseInt(numLinesInput.value);
+            const defaultBackroundColor = defaultBackroundColorInput.value;
             const defaultColor = defaultColorInput.value;
             const highlightColor = highlightColorInput.value;
 
@@ -318,6 +362,7 @@
             document.documentElement.style.setProperty('--highlight-color', highlightColor);
 
             localStorage.setItem('numLines', numLines);
+            localStorage.setItem('defaultBackroundColorInput', defaultBackroundColorInput);
             localStorage.setItem('defaultColor', defaultColor);
             localStorage.setItem('highlightColor', highlightColor);
 
@@ -327,12 +372,23 @@
 
         function loadConfig() {
             const numLinesValue = localStorage.getItem('numLines');
+            const defaultBackgroundColorValue = localStorage.getItem('defaultBackgroundColor');
             const defaultColorValue = localStorage.getItem('defaultColor');
             const highlightColorValue = localStorage.getItem('highlightColor');
+            const enableFontSizeValue = JSON.parse(localStorage.getItem('enableFontSize'));
+            const enableOpacityValue = JSON.parse(localStorage.getItem('enableOpacity'));
+            const showEnglishValue = JSON.parse(localStorage.getItem('showEnglish'));
+            const showGujaratiValue = JSON.parse(localStorage.getItem('showGujarati'));
+            const transitionDurationValue = localStorage.getItem('transitionDuration');
+            const fontSizeValue = localStorage.getItem('fontSize');
 
             if (numLinesValue) {
                 document.getElementById('num-lines').value = numLinesValue;
                 numLines = parseInt(numLinesValue);
+            }
+            if (defaultBackgroundColorValue) {
+                document.getElementById('default-background-color').value = defaultBackgroundColorValue;
+                document.documentElement.style.setProperty('--default-background-color', defaultBackgroundColorValue);
             }
             if (defaultColorValue) {
                 document.getElementById('default-color').value = defaultColorValue;
@@ -341,6 +397,29 @@
             if (highlightColorValue) {
                 document.getElementById('highlight-color').value = highlightColorValue;
                 document.documentElement.style.setProperty('--highlight-color', highlightColorValue);
+            }
+            if (enableFontSizeValue !== null) {
+                enableFontSize = enableFontSizeValue;
+                document.getElementById('toggle-font-size').checked = enableFontSize;
+            }
+            if (enableOpacityValue !== null) {
+                enableOpacity = enableOpacityValue;
+                document.getElementById('toggle-opacity').checked = enableOpacity;
+            }
+            if (showEnglishValue !== null) {
+                showEnglish = showEnglishValue;
+                document.getElementById('toggle-english').checked = showEnglish;
+            }
+            if (showGujaratiValue !== null) {
+                showGujarati = showGujaratiValue;
+                document.getElementById('toggle-gujarati').checked = showGujarati;
+            }
+            if (transitionDurationValue) {
+                document.getElementById('transition-duration').value = transitionDurationValue;
+                document.documentElement.style.setProperty('--transition-duration', `${transitionDurationValue}ms`);
+            }
+            if (fontSizeValue) {
+                document.getElementById('font-size').value = fontSizeValue;
             }
         }
 
