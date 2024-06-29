@@ -54,7 +54,7 @@
             width: 300px;
             height: 100%;
             background-color: #fff;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s;
             padding: 20px;
         }
@@ -68,10 +68,11 @@
             margin: 15px 0 5px;
         }
 
-        #config-panel input[type="color"] {
+        #config-panel input[type="color"],
+        #config-panel input[type="number"],
+        #config-panel input[type="checkbox"] {
             width: 100%;
-            height: 30px;
-            border: none;
+            /* height: 30px; */
         }
     </style>
 
@@ -81,20 +82,36 @@
 <body>
     <h1 id="title"></h1>
     <ul id="list" class="list"></ul>
-    <button onclick="toggleFontSize()">Toggle Font Size</button>
-    <button onclick="toggleOpacity()">Toggle Opacity</button>
-    <button onclick="toggleConfigPanel()">Toggle Config Panel</button>
 
     <div id="config-panel">
+        <button onclick="toggleConfigPanel()">Close Config Panel</button>
         <label for="num-lines">Number of Lines:</label>
-        <input type="number" id="num-lines" min="1" value="6">
-        
+        <input type="number" id="num-lines" min="1" value="11">
+
         <label for="default-color">Default Color:</label>
         <input type="color" id="default-color" value="#990101">
-        
+
         <label for="highlight-color">Highlight Color:</label>
         <input type="color" id="highlight-color" value="#ff6a00">
-        
+
+        <button onclick="toggleConfigPanel()">Toggle Config Panel</button>
+        <label>
+            <input type="checkbox" id="toggle-font-size" onchange="toggleFontSize()"> Toggle Font Size
+        </label>
+        <label>
+            <input type="checkbox" id="toggle-opacity" onchange="toggleOpacity()"> Toggle Opacity
+        </label>
+        <label>
+            <input type="checkbox" id="toggle-english" onchange="toggleEnglish()"> Show English
+        </label>
+        <label>
+            <input type="checkbox" id="toggle-gujarati" onchange="toggleGujarati()"> Show Gujarati
+        </label>
+        <label for="transition-duration">Transition Duration (ms):</label>
+        <input type="number" id="transition-duration" value="500" onchange="updateTransitionDuration()">
+        <label for="font-size">Font Size (px):</label>
+        <input type="number" id="font-size" value="30" onchange="updateFontSize()">
+
         <button onclick="saveConfig()">Save Config</button>
     </div>
 
@@ -104,12 +121,14 @@
             slidesGujarati,
             title,
             index = 0;
-        let numLines = parseInt(localStorage.getItem('numLines')) || 7;
+        let numLines = parseInt(localStorage.getItem('numLines')) || 6;
         const list = document.getElementById("list");
         const highlightIndex = Math.floor(numLines / 2) + 1;
         const stepsFromHighlight = highlightIndex - 1;
         let enableFontSize = true;
         let enableOpacity = true;
+        let showEnglish = true;
+        let showGujarati = true;
 
         document.addEventListener("keydown", (event) => {
             if (event.key === "ArrowUp") {
@@ -155,10 +174,12 @@
                 const eng = document.createElement("div");
                 eng.innerText = slides[index + i] || "";
                 eng.className = "english";
+                eng.style.display = showEnglish ? "block" : "none";
 
                 const guj = document.createElement("div");
                 guj.innerText = slidesGujarati[index + i] || "";
                 guj.className = "gujarati";
+                guj.style.display = showGujarati ? "block" : "none";
 
                 li.appendChild(eng);
                 li.appendChild(guj);
@@ -203,7 +224,7 @@
                 const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i, highlightIndex, numLines);
-                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}; }\n`;
+                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
             }
 
             for (let i = 2; i <= numLines + 1; i++) {
@@ -211,7 +232,7 @@
                 const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i - 1, highlightIndex, numLines);
-                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}; }\n`;
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
             }
 
             for (let i = 1; i <= numLines - 1; i++) {
@@ -219,7 +240,7 @@
                 const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i + 1, highlightIndex, numLines);
-                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}; }\n`;
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
             }
 
             return styles;
@@ -234,11 +255,9 @@
         }
 
         function calculateFontSize(index, highlightIndex, numLines) {
-            if (!enableFontSize) return "100%";
-            if (index === highlightIndex) return "100%";
-            const distanceFromCenter = Math.abs(highlightIndex - index);
-            const maxDistance = Math.floor(numLines / 2);
-            return `${100 - distanceFromCenter * (100 / maxDistance)}%`;
+            if (!enableFontSize) return parseInt(document.getElementById('font-size').value) || 30;
+            const baseFontSize = parseInt(document.getElementById('font-size').value) || 30;
+            return index === highlightIndex ? baseFontSize : baseFontSize * 0.8;
         }
 
         function injectStyles(styles) {
@@ -252,6 +271,11 @@
             }
         }
 
+        function toggleConfigPanel() {
+            const panel = document.getElementById("config-panel");
+            panel.classList.toggle("open");
+        }
+
         function toggleFontSize() {
             enableFontSize = !enableFontSize;
             injectStyles(generateDynamicStyles(numLines));
@@ -262,9 +286,23 @@
             injectStyles(generateDynamicStyles(numLines));
         }
 
-        function toggleConfigPanel() {
-            const panel = document.getElementById("config-panel");
-            panel.classList.toggle("open");
+        function toggleEnglish() {
+            showEnglish = !showEnglish;
+            renderSlides();
+        }
+
+        function toggleGujarati() {
+            showGujarati = !showGujarati;
+            renderSlides();
+        }
+
+        function updateTransitionDuration() {
+            const duration = document.getElementById('transition-duration').value;
+            document.documentElement.style.setProperty('--transition-duration', `${duration}ms`);
+        }
+
+        function updateFontSize() {
+            injectStyles(generateDynamicStyles(numLines));
         }
 
         function saveConfig() {
