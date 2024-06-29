@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kirtans</title>
     <style>
-        body {
-            background-color: #fff2e6;
-            color: #990101;
-            overflow: hidden;
-        }
-
         :root {
+            --background-color: #fff2e6;
             --default-color: #990101;
             --highlight-color: #ff6a00;
             --transition-duration: 500ms;
+            --font-size: 32;
+        }
+
+        body {
+            background-color: var(--background-color);
+            overflow: hidden;
         }
 
         #title {
             font-size: 40px;
             text-align: center;
+            color: var(--default-color);
         }
 
         ul {
@@ -30,12 +32,12 @@
 
         .list-item {
             padding: 5px 0;
-            font-size: 30px;
+            font-size: var(--font-size)px;
+            color: var(--default-color);
+            transition: all linear var(--transition-duration);
             width: 100%;
             text-align: center;
-            color: var(--default-color);
             font-weight: normal;
-            transition: all linear var(--transition-duration);
             position: absolute;
         }
 
@@ -100,16 +102,18 @@
 
     <div id="config-panel">
         <button onclick="toggleConfigPanel()">Close Config Panel</button>
+        <button onclick="saveConfig()">Save Config</button>
+        <button onclick="resetConfig()">Reset Config</button>
         <label for="num-lines">Number of Lines:</label>
         <select id="num-lines">
             <option value="5">5</option>
-            <option value="7">7</option>
+            <option selected value="7">7</option>
             <option value="9">9</option>
             <option value="11">11</option>
         </select>
 
-        <label for="highlight-color">Background Color:</label>
-        <input type="color" id="background-color" value="##fff2e6">
+        <label for="background-color">Background Color:</label>
+        <input type="color" id="background-color" value="#fff2e6">
 
         <label for="default-color">Default Color:</label>
         <input type="color" id="default-color" value="#990101">
@@ -134,7 +138,7 @@
         <select id="transition-duration">
             <option value="200">200</option>
             <option value="400">400</option>
-            <option value="600">600</option>
+            <option selected-x value="600">600</option>
             <option value="800">800</option>
             <option value="1000">1000</option>
         </select>
@@ -143,12 +147,12 @@
         <select id="font-size">
             <option value="16">16</option>
             <option value="24">24</option>
-            <option value="32">32</option>
+            <option selected-x value="32">32</option>
             <option value="40">40</option>
             <option value="48">48</option>
         </select>
 
-        <button onclick="saveConfig()">Save Config</button>
+
     </div>
 
     <script>
@@ -257,7 +261,7 @@
 
             for (let i = 1; i <= numLines; i++) {
                 const topPosition = middlePosition + (i - highlightIndex) * itemHeight;
-                const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
+                const color = i === highlightIndex ? "var(--highlight-color)" : "";
                 const opacity = calculateOpacity(i, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i, highlightIndex, numLines);
                 styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
@@ -265,7 +269,7 @@
 
             for (let i = 2; i <= numLines + 1; i++) {
                 const topPosition = middlePosition + (i - 1 - highlightIndex) * itemHeight;
-                const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
+                const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "";
                 const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i - 1, highlightIndex, numLines);
                 styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
@@ -273,7 +277,7 @@
 
             for (let i = 1; i <= numLines - 1; i++) {
                 const topPosition = middlePosition + (i + 1 - highlightIndex) * itemHeight;
-                const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
+                const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "";
                 const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
                 const fontSize = calculateFontSize(i + 1, highlightIndex, numLines);
                 styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
@@ -349,20 +353,21 @@
 
         function saveConfig() {
             const numLinesInput = document.getElementById("num-lines");
-            const defaultBackroundColorInput = document.getElementById("background-color");
+            const backgroundColorInput = document.getElementById("background-color");
             const defaultColorInput = document.getElementById("default-color");
             const highlightColorInput = document.getElementById("highlight-color");
 
             numLines = parseInt(numLinesInput.value);
-            const defaultBackroundColor = defaultBackroundColorInput.value;
+            const backgroundColor = backgroundColorInput.value;
             const defaultColor = defaultColorInput.value;
             const highlightColor = highlightColorInput.value;
 
             document.documentElement.style.setProperty('--default-color', defaultColor);
             document.documentElement.style.setProperty('--highlight-color', highlightColor);
+            document.documentElement.style.setProperty('--background-color', backgroundColor);
 
             localStorage.setItem('numLines', numLines);
-            localStorage.setItem('defaultBackroundColorInput', defaultBackroundColorInput);
+            localStorage.setItem('backgroundColor', backgroundColor);
             localStorage.setItem('defaultColor', defaultColor);
             localStorage.setItem('highlightColor', highlightColor);
 
@@ -372,7 +377,7 @@
 
         function loadConfig() {
             const numLinesValue = localStorage.getItem('numLines');
-            const defaultBackgroundColorValue = localStorage.getItem('defaultBackgroundColor');
+            const backgroundColorValue = localStorage.getItem('backgroundColor');
             const defaultColorValue = localStorage.getItem('defaultColor');
             const highlightColorValue = localStorage.getItem('highlightColor');
             const enableFontSizeValue = JSON.parse(localStorage.getItem('enableFontSize'));
@@ -386,9 +391,9 @@
                 document.getElementById('num-lines').value = numLinesValue;
                 numLines = parseInt(numLinesValue);
             }
-            if (defaultBackgroundColorValue) {
-                document.getElementById('default-background-color').value = defaultBackgroundColorValue;
-                document.documentElement.style.setProperty('--default-background-color', defaultBackgroundColorValue);
+            if (backgroundColorValue) {
+                document.getElementById('background-color').value = backgroundColorValue;
+                document.documentElement.style.setProperty('--background-color', backgroundColorValue);
             }
             if (defaultColorValue) {
                 document.getElementById('default-color').value = defaultColorValue;
@@ -421,6 +426,48 @@
             if (fontSizeValue) {
                 document.getElementById('font-size').value = fontSizeValue;
             }
+        }
+
+        function resetConfig() {
+            localStorage.removeItem('numLines');
+            localStorage.removeItem('defaultColor');
+            localStorage.removeItem('backgroundColor');
+            localStorage.removeItem('highlightColor');
+            localStorage.removeItem('transitionDuration');
+            localStorage.removeItem('fontSize');
+            localStorage.removeItem('showFontSize');
+            localStorage.removeItem('showOpacity');
+            localStorage.removeItem('showEnglish');
+            localStorage.removeItem('showGujarati');
+
+            numLines = 7; // Default number of lines
+            const defaultColor = '#990101'; // Default default color
+            const highlightColor = '#ff6a00'; // Default highlight color
+            const backgroundColor = '#fff2e6'; // Default background color
+            const transitionDuration = 600; // Default transition duration in ms
+            const fontSize = 32; // Default font size in px
+            const showFontSize = true; // Default show font size toggle
+            const showOpacity = true; // Default show opacity toggle
+            const showEnglish = true; // Default show English toggle
+            const showGujarati = true; // Default show Gujarati toggle
+
+            document.getElementById('num-lines').value = numLines;
+            document.getElementById('default-color').value = defaultColor
+            document.getElementById('background-color').value = backgroundColor;
+            document.getElementById('highlight-color').value = highlightColor;
+            document.getElementById('transition-duration').value = transitionDuration;
+            document.getElementById('font-size').value = fontSize;
+            document.getElementById('toggle-font-size').checked = showFontSize;
+            document.getElementById('toggle-opacity').checked = showOpacity;
+            document.getElementById('toggle-english').checked = showEnglish;
+            document.getElementById('toggle-gujarati').checked = showGujarati;
+
+            document.documentElement.style.setProperty('--default-color', defaultColor);
+            document.documentElement.style.setProperty('--background-color', backgroundColor);
+            document.documentElement.style.setProperty('--highlight-color', highlightColor);
+            document.documentElement.style.setProperty('--transition-duration', `${transitionDuration}ms`);
+            injectStyles(generateDynamicStyles(numLines));
+            renderSlides();
         }
 
         loadConfig();
