@@ -52,7 +52,7 @@
         #config-panel {
             position: fixed;
             top: 0;
-            right: -320px;
+            right: -350px;
             width: 300px;
             height: 100%;
             background-color: #fff2e6;
@@ -93,8 +93,10 @@
             height: 16px;
         }
 
-        #config-panel #panel-close {
-            margin: 0 0 0 -20px;
+        #panel-open {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     </style>
 
@@ -104,13 +106,14 @@
 <body>
     <h1 id="title"></h1>
     <ul id="list" class="list"></ul>
+    <button onclick="openConfigPanel()" id="panel-open">i</button>
 
     <div id="config-panel">
-        <button onclick="toggleConfigPanel()" id="panel-close">Close</button>
+        <button onclick="closeConfigPanel()" id="panel-close">Close</button>
         <button onclick="saveConfig()">Save Config</button>
         <button onclick="resetConfig()">Reset Config</button>
         <label for="numLines">Lines</label>
-        <select id="numLines">
+        <select id="numLines" onchange="updateNumLines()">
             <option value="5">5</option>
             <option selected value="7">7</option>
             <option value="9">9</option>
@@ -118,28 +121,28 @@
         </select>
 
         <label for="backgroundColor">Background color</label>
-        <input type="color" id="backgroundColor" value="#fff2e6">
+        <input type="color" id="backgroundColor" value="#fff2e6" onchange="updateBackgroundColor()">
 
         <label for="defaultColor">Default color</label>
-        <input type="color" id="defaultColor" value="#990101">
+        <input type="color" id="defaultColor" value="#990101" onchange="updateDefaultColor()">
 
         <label for="highlightColor">Highlight color</label>
-        <input type="color" id="highlightColor" value="#ff6a00">
+        <input type="color" id="highlightColor" value="#ff6a00" onchange="updateHighlightColor()">
 
         <label class="checkbox">
-            <input type="checkbox" id="enableFontResizing" onchange="toggleEnableFontResizing()">
+            <input type="checkbox" id="enableFontResizing" onchange="updateEnableFontResizing()">
             Enable font resizing
         </label>
         <label class="checkbox">
-            <input type="checkbox" id="enableOpacity" onchange="toggleEnableOpacity()">
+            <input type="checkbox" id="enableOpacity" onchange="updateEnableOpacity()">
             Enable opacity
         </label>
         <label class="checkbox">
-            <input type="checkbox" id="showEnglish" onchange="toggleEnglish()">
+            <input type="checkbox" id="showEnglish" onchange="updateEnglish()">
             Show English
         </label>
         <label class="checkbox">
-            <input type="checkbox" id="showGujarati" onchange="toggleGujarati()">
+            <input type="checkbox" id="showGujarati" onchange="updateGujarati()">
             Show Gujarati
         </label>
 
@@ -147,7 +150,7 @@
         <select id="transitionDuration" onchange="updateTransitionDuration()">
             <option value="250">250</option>
             <option selected value="500">500</option>
-            <option  value="750">750</option>
+            <option value="750">750</option>
             <option value="1000">1000</option>
             <option value="1250">1250</option>
             <option value="1500">1500</option>
@@ -251,17 +254,17 @@
         }
 
         function transitionSlides(animationClass, step) {
-            toggleAnimationClasses(false);
+            updateAnimationClasses(false);
             list.classList.add(animationClass);
             setTimeout(() => {
-                toggleAnimationClasses(true);
+                updateAnimationClasses(true);
                 list.classList.remove(animationClass);
                 index += step;
                 renderSlides();
             }, parseInt(getComputedStyle(document.documentElement).getPropertyValue("--transitionDuration")));
         }
 
-        function toggleAnimationClasses(remove) {
+        function updateAnimationClasses(remove) {
             const method = remove ? "add" : "remove";
             document.querySelectorAll(".list-item").forEach((item) => {
                 item.classList[method]("noAnimation");
@@ -314,9 +317,8 @@
             return index === highlightIndex ? baseFontSize : baseFontSize * 0.8;
         }
 
-        function injectStyles(css) {
-            const styleSheet = document.getElementById("dynamic-styles");
-            styleSheet.innerHTML = css;
+        function injectStyles(styles) {
+            document.getElementById("dynamic-styles").textContent = styles;
         }
 
         function adjustToHighlightFirst() {
@@ -325,16 +327,43 @@
         }
 
         function saveConfig() {
-            localStorage.setItem('numLines', numLines);
-            localStorage.setItem('backgroundColor', document.getElementById('backgroundColor').value);
-            localStorage.setItem('defaultColor', document.getElementById('defaultColor').value);
-            localStorage.setItem('highlightColor', document.getElementById('highlightColor').value);
-            localStorage.setItem('enableFontResizing', enableFontResizing);
-            localStorage.setItem('enableOpacity', enableOpacity);
-            localStorage.setItem('showEnglish', showEnglish);
-            localStorage.setItem('showGujarati', showGujarati);
-            localStorage.setItem('transitionDuration', transitionDuration);
-            localStorage.setItem('fontSize', fontSize);
+            const config = {
+                numLines,
+                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--backgroundColor').trim(),
+                defaultColor: getComputedStyle(document.documentElement).getPropertyValue('--defaultColor').trim(),
+                highlightColor: getComputedStyle(document.documentElement).getPropertyValue('--highlightColor').trim(),
+                enableFontResizing,
+                enableOpacity,
+                showEnglish,
+                showGujarati,
+                transitionDuration,
+                fontSize
+            };
+            localStorage.setItem('config', JSON.stringify(config));
+        }
+
+        function resetConfig() {
+            const defaultConfig = {
+                numLines: 7,
+                backgroundColor: '#fff2e6',
+                defaultColor: '#990101',
+                highlightColor: '#ff6a00',
+                enableFontResizing: true,
+                enableOpacity: true,
+                showEnglish: true,
+                showGujarati: true,
+                transitionDuration: 500,
+                fontSize: 32
+            };
+            localStorage.setItem('config', JSON.stringify(defaultConfig));
+            applyConfig(defaultConfig);
+        }
+
+        function loadConfig() {
+            const config = JSON.parse(localStorage.getItem('config'));
+            if (config) {
+                applyConfig(config);
+            }
         }
 
         function resetConfig() {
@@ -342,52 +371,73 @@
             location.reload();
         }
 
+        function openConfigPanel() {
+            document.getElementById("config-panel").classList.add("open");
+        }
+
+        function closeConfigPanel() {
+            document.getElementById("config-panel").classList.remove("open");
+        }
+
         function updateNumLines() {
-            numLines = parseInt(document.getElementById('numLines').value);
-            injectStyles(generateDynamicStyles(numLines));
+            const numLinesControl = document.getElementById("numLines");
+            numLines = parseInt(numLinesControl.value);
+            localStorage.setItem("numLines", numLines);
             renderSlides();
+            injectStyles(generateDynamicStyles(numLines));
+        }
+
+        function updateBackgroundColor() {
+            const backgroundColorControl = document.getElementById("backgroundColor");
+            document.documentElement.style.setProperty('--backgroundColor', backgroundColorControl.value);
+        }
+
+        function updateDefaultColor() {
+            const defaultColorControl = document.getElementById("defaultColor");
+            document.documentElement.style.setProperty('--defaultColor', defaultColorControl.value);
+        }
+
+        function updateHighlightColor() {
+            const highlightColorControl = document.getElementById("highlightColor");
+            document.documentElement.style.setProperty('--highlightColor', highlightColorControl.value);
         }
 
         function updateTransitionDuration() {
-            transitionDuration = document.getElementById('transitionDuration').value;
-            document.documentElement.style.setProperty('--transitionDuration', `${transitionDuration}ms`);
+            const transitionDurationControl = document.getElementById("transitionDuration");
+            transitionDuration = transitionDurationControl.value;
+            document.documentElement.style.setProperty('--transitionDuration', transitionDuration + "ms");
+            localStorage.setItem("transitionDuration", transitionDuration);
         }
 
         function updateFontSize() {
-            fontSize = document.getElementById('fontSize').value;
+            const fontSizeControl = document.getElementById("fontSize");
+            fontSize = fontSizeControl.value;
             document.documentElement.style.setProperty('--fontSize', fontSize);
-            injectStyles(generateDynamicStyles(numLines));
-            renderSlides();
+            localStorage.setItem("fontSize", fontSize);
         }
 
-        function toggleConfigPanel() {
-            document.getElementById('config-panel').classList.toggle('open');
-        }
-
-        function toggleEnableFontResizing() {
+        function updateEnableFontResizing() {
             enableFontResizing = !enableFontResizing;
+            localStorage.setItem("enableFontResizing", enableFontResizing);
             injectStyles(generateDynamicStyles(numLines));
-            renderSlides();
         }
 
-        function toggleEnableOpacity() {
+        function updateEnableOpacity() {
             enableOpacity = !enableOpacity;
+            localStorage.setItem("enableOpacity", enableOpacity);
             injectStyles(generateDynamicStyles(numLines));
+        }
+
+        function updateEnglish() {
+            showEnglish = !showEnglish;
+            localStorage.setItem("showEnglish", showEnglish);
             renderSlides();
         }
 
-        function toggleEnglish() {
-            showEnglish = !showEnglish;
-            document.querySelectorAll('.english').forEach((el) => {
-                el.style.display = showEnglish ? 'block' : 'none';
-            });
-        }
-
-        function toggleGujarati() {
+        function updateGujarati() {
             showGujarati = !showGujarati;
-            document.querySelectorAll('.gujarati').forEach((el) => {
-                el.style.display = showGujarati ? 'block' : 'none';
-            });
+            localStorage.setItem("showGujarati", showGujarati);
+            renderSlides();
         }
 
         function loadConfig() {
