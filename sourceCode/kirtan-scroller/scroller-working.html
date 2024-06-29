@@ -185,7 +185,8 @@
         }
 
         function calculateOpacity(index, highlightIndex, numLines) {
-            if (!enableOpacity || index === 1 || index === numLines) return 0;
+            if (!enableOpacity) return 1;
+            if (index === 1 || index === numLines) return 0;
             const distanceFromCenter = Math.abs(highlightIndex - index);
             const maxDistance = Math.floor(numLines / 2);
             return 1 - distanceFromCenter / maxDistance;
