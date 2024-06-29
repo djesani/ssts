@@ -268,27 +268,6 @@
             });
         }
 
-        function generateDynamicStyles1(numLines) {
-            let styles = "";
-            const viewportHeight = window.innerHeight;
-            const itemHeight = viewportHeight / numLines;
-            const middlePosition = viewportHeight / 2 - itemHeight / 2;
-            for (let i = 0; i < numLines; i++) {
-                const top = i * itemHeight;
-                styles += `.list-item:nth-child(${i + 1}) { top: ${top}px; }\n`;
-                const distanceFromMiddle = Math.abs(top - middlePosition);
-                if (enableFontResizing) {
-                    const scaleFactor = Math.max(1 - distanceFromMiddle / viewportHeight, 0.5);
-                    styles += `.list-item:nth-child(${i + 1}) .english, .list-item:nth-child(${i + 1}) .gujarati { font-size: calc(var(--fontSize) * ${scaleFactor}); }\n`;
-                }
-                if (enableOpacity) {
-                    const opacity = Math.max(1 - distanceFromMiddle / viewportHeight, 0.3);
-                    styles += `.list-item:nth-child(${i + 1}) { opacity: ${opacity}; }\n`;
-                }
-            }
-            return styles;
-        }
-
         function generateDynamicStyles(numLines) {
             let styles = "";
             const viewportHeight = window.innerHeight;
