@@ -52,7 +52,7 @@
         #config-panel {
             position: fixed;
             top: 0;
-            right: -300px;
+            right: -320px;
             width: 300px;
             height: 100%;
             background-color: #fff2e6;
@@ -75,6 +75,7 @@
         #config-panel select,
         #config-panel input[type="checkbox"] {
             width: 100%;
+            min-height: 30px;
         }
 
         #config-panel input[type="checkbox"] {
@@ -87,9 +88,13 @@
         }
 
         #config-panel input[type="checkbox"] {
-            margin: 2px 9px 0 0;
+            margin: -4px 15px 0 0;
             width: 16px;
             height: 16px;
+        }
+
+        #config-panel #panel-close {
+            margin: 0 0 0 -20px;
         }
     </style>
 
@@ -101,7 +106,7 @@
     <ul id="list" class="list"></ul>
 
     <div id="config-panel">
-        <button onclick="toggleConfigPanel()">Close Config Panel</button>
+        <button onclick="toggleConfigPanel()" id="panel-close">Close</button>
         <button onclick="saveConfig()">Save Config</button>
         <button onclick="resetConfig()">Reset Config</button>
         <label for="num-lines">Number of Lines:</label>
@@ -380,13 +385,14 @@
             const backgroundColorValue = localStorage.getItem('backgroundColor');
             const defaultColorValue = localStorage.getItem('defaultColor');
             const highlightColorValue = localStorage.getItem('highlightColor');
-            const enableFontSizeValue = JSON.parse(localStorage.getItem('enableFontSize'));
-            const enableOpacityValue = JSON.parse(localStorage.getItem('enableOpacity'));
-            const showEnglishValue = JSON.parse(localStorage.getItem('showEnglish'));
-            const showGujaratiValue = JSON.parse(localStorage.getItem('showGujarati'));
+            const enableFontSizeValue = localStorage.getItem('enableFontSize') === 'true'; // Parse as boolean
+            const enableOpacityValue = localStorage.getItem('enableOpacity') === 'true'; // Parse as boolean
+            const showEnglishValue = localStorage.getItem('showEnglish') === 'true'; // Parse as boolean
+            const showGujaratiValue = localStorage.getItem('showGujarati') === 'true'; // Parse as boolean
             const transitionDurationValue = localStorage.getItem('transitionDuration');
             const fontSizeValue = localStorage.getItem('fontSize');
 
+            // Set values if they exist in localStorage
             if (numLinesValue) {
                 document.getElementById('num-lines').value = numLinesValue;
                 numLines = parseInt(numLinesValue);
