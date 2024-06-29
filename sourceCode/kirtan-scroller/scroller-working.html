@@ -10,6 +10,7 @@
             background-color: #fff2e6;
             color: #990101;
             overflow: hidden;
+            font-size: 30px;
         }
 
         :root {
@@ -30,7 +31,6 @@
 
         .list-item {
             padding: 5px 0;
-            font-size: 30px;
             width: 100%;
             text-align: center;
             color: var(--default-color);
@@ -157,21 +157,24 @@
                 const topPosition = middlePosition + (i - highlightIndex) * itemHeight;
                 const color = i === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i, highlightIndex, numLines);
-                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; }\n`;
+                const fontSize = calculateFontSize(i, highlightIndex, numLines);
+                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}; }\n`;
             }
 
             for (let i = 2; i <= numLines + 1; i++) {
                 const topPosition = middlePosition + (i - 1 - highlightIndex) * itemHeight;
                 const color = i - 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
-                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; }\n`;
+                const fontSize = calculateFontSize(i - 1, highlightIndex, numLines);
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}; }\n`;
             }
 
             for (let i = 1; i <= numLines - 1; i++) {
                 const topPosition = middlePosition + (i + 1 - highlightIndex) * itemHeight;
                 const color = i + 1 === highlightIndex ? "var(--highlight-color)" : "inherit";
                 const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
-                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; }\n`;
+                const fontSize = calculateFontSize(i + 1, highlightIndex, numLines);
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}; }\n`;
             }
 
             return styles;
@@ -182,6 +185,13 @@
             const distanceFromCenter = Math.abs(highlightIndex - index);
             const maxDistance = Math.floor(numLines / 2);
             return 1 - distanceFromCenter / maxDistance;
+        }
+
+        function calculateFontSize(index, highlightIndex, numLines) {
+            if (index === highlightIndex) return "100%";
+            const distanceFromCenter = Math.abs(highlightIndex - index);
+            const maxDistance = Math.floor(numLines / 2);
+            return `${100 - distanceFromCenter * (100 / maxDistance)}%`;
         }
 
         function injectStyles(styles) {
