@@ -259,50 +259,116 @@
             setTimeout(() => {
                 updateAnimationClasses(true);
                 list.classList.remove(animationClass);
-                updateIndex(step);
+                index += step;
                 renderSlides();
-                adjustToHighlightFirst();
-            }, transitionDuration);
+            }, parseInt(getComputedStyle(document.documentElement).getPropertyValue("--transitionDuration")));
         }
 
-        function updateAnimationClasses(add) {
-            document.querySelectorAll('.list-item').forEach(item => {
-                if (add) {
-                    item.classList.remove('noAnimation');
-                } else {
-                    item.classList.add('noAnimation');
-                }
+        function updateAnimationClasses(action) {
+            const method = action ? "add" : "remove";
+            document.querySelectorAll(".list-item").forEach((item) => {
+                item.classList[method]("noAnimation");
             });
         }
 
-        function updateIndex(step) {
-            index = (index + step + slides.length) % slides.length;
+        function generateDynamicStyles(numLines) {
+            let styles = "";
+            const viewportHeight = window.innerHeight;
+            const itemHeight = viewportHeight / numLines;
+            const middlePosition = viewportHeight / 2 - itemHeight / 2;
+
+            for (let i = 1; i <= numLines; i++) {
+                const topPosition = middlePosition + (i - highlightIndex) * itemHeight;
+                const color = i === highlightIndex ? "var(--highlightColor)" : "";
+                const opacity = calculateOpacity(i, highlightIndex, numLines);
+                const fontSize = calculateFontSize(i, highlightIndex, numLines);
+                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
+            }
+
+            for (let i = 2; i <= numLines + 1; i++) {
+                const topPosition = middlePosition + (i - 1 - highlightIndex) * itemHeight;
+                const color = i - 1 === highlightIndex ? "var(--highlightColor)" : "";
+                const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
+                const fontSize = calculateFontSize(i - 1, highlightIndex, numLines);
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
+            }
+
+            for (let i = 1; i <= numLines - 1; i++) {
+                const topPosition = middlePosition + (i + 1 - highlightIndex) * itemHeight;
+                const color = i + 1 === highlightIndex ? "var(--highlightColor)" : "";
+                const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
+                const fontSize = calculateFontSize(i + 1, highlightIndex, numLines);
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
+            }
+
+            return styles;
         }
 
-        function adjustToHighlightFirst() {
-            for (let i = 0; i < stepsFromHighlight; i++) {
-                prev();
-            }
+        function calculateOpacity(index, highlightIndex, numLines) {
+            if (index === 1 || index === numLines) return 0;
+            const distanceFromCenter = Math.abs(highlightIndex - index);
+            const maxDistance = Math.floor(numLines / 2);
+            return 1 - distanceFromCenter / maxDistance;
+        }
+
+        function calculateFontSize(index, highlightIndex, numLines) {
+            if (!enableFontResizing) return parseInt(document.getElementById('fontSize').value) || 30;
+            const baseFontSize = parseInt(document.getElementById('fontSize').value) || 30;
+            return index === highlightIndex ? baseFontSize : baseFontSize * 0.8;
         }
 
         function injectStyles(styles) {
-            document.getElementById("dynamic-styles").innerHTML = styles;
+            document.getElementById("dynamic-styles").textContent = styles;
         }
 
-        function generateDynamicStyles(numLines) {
-            let styles = '';
-            for (let i = 0; i < numLines; i++) {
-                const distance = Math.abs(i - highlightIndex + 1);
-                const fontSizeRatio = enableFontResizing ? (1 - distance / (numLines - 1)) : 1;
-                const opacity = enableOpacity ? (1 - distance / (numLines - 1)) : 1;
-                styles += `
-                    .list-item:nth-child(${i + 1}) {
-                        font-size: calc(var(--fontSize) * ${fontSizeRatio}px);
-                        opacity: ${opacity};
-                    }
-                `;
+        function adjustToHighlightFirst() {
+            while (index < stepsFromHighlight) index++;
+            renderSlides();
+        }
+
+        function saveConfig() {
+            const config = {
+                numLines,
+                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--backgroundColor').trim(),
+                defaultColor: getComputedStyle(document.documentElement).getPropertyValue('--defaultColor').trim(),
+                highlightColor: getComputedStyle(document.documentElement).getPropertyValue('--highlightColor').trim(),
+                enableFontResizing,
+                enableOpacity,
+                showEnglish,
+                showGujarati,
+                transitionDuration,
+                fontSize
+            };
+            localStorage.setItem('config', JSON.stringify(config));
+        }
+
+        function resetConfig() {
+            const defaultConfig = {
+                numLines: 7,
+                backgroundColor: '#fff2e6',
+                defaultColor: '#990101',
+                highlightColor: '#ff6a00',
+                enableFontResizing: true,
+                enableOpacity: true,
+                showEnglish: true,
+                showGujarati: true,
+                transitionDuration: 500,
+                fontSize: 32
+            };
+            localStorage.setItem('config', JSON.stringify(defaultConfig));
+            applyConfig(defaultConfig);
+        }
+
+        function loadConfig() {
+            const config = JSON.parse(localStorage.getItem('config'));
+            if (config) {
+                applyConfig(config);
             }
-            return styles;
+        }
+
+        function resetConfig() {
+            localStorage.clear();
+            location.reload();
         }
 
         function openConfigPanel() {
@@ -313,146 +379,89 @@
             document.getElementById("config-panel").classList.remove("open");
         }
 
-        function saveConfig() {
-            const config = {
-                numLines: document.getElementById("numLines").value,
-                backgroundColor: document.getElementById("backgroundColor").value,
-                defaultColor: document.getElementById("defaultColor").value,
-                highlightColor: document.getElementById("highlightColor").value,
-                enableFontResizing: document.getElementById("enableFontResizing").checked,
-                enableOpacity: document.getElementById("enableOpacity").checked,
-                showEnglish: document.getElementById("showEnglish").checked,
-                showGujarati: document.getElementById("showGujarati").checked,
-                transitionDuration: document.getElementById("transitionDuration").value,
-                fontSize: document.getElementById("fontSize").value,
-            };
-
-            localStorage.setItem('numLines', config.numLines);
-            localStorage.setItem('backgroundColor', config.backgroundColor);
-            localStorage.setItem('defaultColor', config.defaultColor);
-            localStorage.setItem('highlightColor', config.highlightColor);
-            localStorage.setItem('enableFontResizing', config.enableFontResizing);
-            localStorage.setItem('enableOpacity', config.enableOpacity);
-            localStorage.setItem('showEnglish', config.showEnglish);
-            localStorage.setItem('showGujarati', config.showGujarati);
-            localStorage.setItem('transitionDuration', config.transitionDuration);
-            localStorage.setItem('fontSize', config.fontSize);
-
-            applyConfig(config);
+        function updateNumLines() {
+            const numLinesControl = document.getElementById("numLines");
+            numLines = parseInt(numLinesControl.value);
+            localStorage.setItem("numLines", numLines);
+            renderSlides();
+            injectStyles(generateDynamicStyles(numLines));
         }
 
-        function resetConfig() {
-            localStorage.removeItem('numLines');
-            localStorage.removeItem('backgroundColor');
-            localStorage.removeItem('defaultColor');
-            localStorage.removeItem('highlightColor');
-            localStorage.removeItem('enableFontResizing');
-            localStorage.removeItem('enableOpacity');
-            localStorage.removeItem('showEnglish');
-            localStorage.removeItem('showGujarati');
-            localStorage.removeItem('transitionDuration');
-            localStorage.removeItem('fontSize');
-            loadConfig();
+        function updateBackgroundColor() {
+            const backgroundColorControl = document.getElementById("backgroundColor");
+            document.documentElement.style.setProperty('--backgroundColor', backgroundColorControl.value);
+        }
+
+        function updateDefaultColor() {
+            const defaultColorControl = document.getElementById("defaultColor");
+            document.documentElement.style.setProperty('--defaultColor', defaultColorControl.value);
+        }
+
+        function updateHighlightColor() {
+            const highlightColorControl = document.getElementById("highlightColor");
+            document.documentElement.style.setProperty('--highlightColor', highlightColorControl.value);
+        }
+
+        function updateTransitionDuration() {
+            const transitionDurationControl = document.getElementById("transitionDuration");
+            transitionDuration = transitionDurationControl.value;
+            document.documentElement.style.setProperty('--transitionDuration', transitionDuration + "ms");
+            localStorage.setItem("transitionDuration", transitionDuration);
+        }
+
+        function updateFontSize() {
+            const fontSizeControl = document.getElementById("fontSize");
+            fontSize = fontSizeControl.value;
+            document.documentElement.style.setProperty('--fontSize', fontSize);
+            localStorage.setItem("fontSize", fontSize);
+        }
+
+        function updateEnableFontResizing() {
+            enableFontResizing = !enableFontResizing;
+            localStorage.setItem("enableFontResizing", enableFontResizing);
+            injectStyles(generateDynamicStyles(numLines));
+        }
+
+        function updateEnableOpacity() {
+            enableOpacity = !enableOpacity;
+            localStorage.setItem("enableOpacity", enableOpacity);
+            injectStyles(generateDynamicStyles(numLines));
+        }
+
+        function updateEnglish() {
+            showEnglish = !showEnglish;
+            localStorage.setItem("showEnglish", showEnglish);
+            renderSlides();
+        }
+
+        function updateGujarati() {
+            showGujarati = !showGujarati;
+            localStorage.setItem("showGujarati", showGujarati);
+            renderSlides();
         }
 
         function loadConfig() {
-            document.getElementById("numLines").value = numLines = parseInt(localStorage.getItem('numLines')) || 7;
-            document.getElementById("backgroundColor").value = localStorage.getItem('backgroundColor') || "#fff2e6";
-            document.getElementById("defaultColor").value = localStorage.getItem('defaultColor') || "#990101";
-            document.getElementById("highlightColor").value = localStorage.getItem('highlightColor') || "#ff6a00";
-            document.getElementById("enableFontResizing").checked = enableFontResizing = JSON.parse(localStorage.getItem('enableFontResizing')) ?? true;
-            document.getElementById("enableOpacity").checked = enableOpacity = JSON.parse(localStorage.getItem('enableOpacity')) ?? true;
-            document.getElementById("showEnglish").checked = showEnglish = JSON.parse(localStorage.getItem('showEnglish')) ?? true;
-            document.getElementById("showGujarati").checked = showGujarati = JSON.parse(localStorage.getItem('showGujarati')) ?? true;
-            document.getElementById("transitionDuration").value = transitionDuration = localStorage.getItem('transitionDuration') || 500;
-            document.getElementById("fontSize").value = fontSize = localStorage.getItem('fontSize') || 32;
+            document.getElementById('numLines').value = localStorage.getItem('numLines') || 7;
+            document.getElementById('backgroundColor').value = localStorage.getItem('backgroundColor') || '#fff2e6';
+            document.getElementById('defaultColor').value = localStorage.getItem('defaultColor') || '#990101';
+            document.getElementById('highlightColor').value = localStorage.getItem('highlightColor') || '#ff6a00';
+            document.getElementById('enableFontResizing').checked = JSON.parse(localStorage.getItem('enableFontResizing')) ?? true;
+            document.getElementById('enableOpacity').checked = JSON.parse(localStorage.getItem('enableOpacity')) ?? true;
+            document.getElementById('showEnglish').checked = JSON.parse(localStorage.getItem('showEnglish')) ?? true;
+            document.getElementById('showGujarati').checked = JSON.parse(localStorage.getItem('showGujarati')) ?? true;
+            document.getElementById('transitionDuration').value = localStorage.getItem('transitionDuration') || 500;
+            document.getElementById('fontSize').value = localStorage.getItem('fontSize') || 32;
 
-            applyConfig({
-                numLines,
-                backgroundColor: document.getElementById("backgroundColor").value,
-                defaultColor: document.getElementById("defaultColor").value,
-                highlightColor: document.getElementById("highlightColor").value,
-                enableFontResizing,
-                enableOpacity,
-                showEnglish,
-                showGujarati,
-                transitionDuration,
-                fontSize
-            });
-        }
-
-        function applyConfig(config) {
-            document.documentElement.style.setProperty('--backgroundColor', config.backgroundColor);
-            document.documentElement.style.setProperty('--defaultColor', config.defaultColor);
-            document.documentElement.style.setProperty('--highlightColor', config.highlightColor);
-            document.documentElement.style.setProperty('--transitionDuration', `${config.transitionDuration}ms`);
-            document.documentElement.style.setProperty('--fontSize', config.fontSize);
-            numLines = config.numLines;
-            enableFontResizing = config.enableFontResizing;
-            enableOpacity = config.enableOpacity;
-            showEnglish = config.showEnglish;
-            showGujarati = config.showGujarati;
-            transitionDuration = config.transitionDuration;
-            fontSize = config.fontSize;
-
-            injectStyles(generateDynamicStyles(numLines));
-            renderSlides();
-            adjustToHighlightFirst();
+            document.documentElement.style.setProperty('--backgroundColor', localStorage.getItem('backgroundColor') || '#fff2e6');
+            document.documentElement.style.setProperty('--defaultColor', localStorage.getItem('defaultColor') || '#990101');
+            document.documentElement.style.setProperty('--highlightColor', localStorage.getItem('highlightColor') || '#ff6a00');
+            document.documentElement.style.setProperty('--transitionDuration', `${localStorage.getItem('transitionDuration') || 500}ms`);
+            document.documentElement.style.setProperty('--fontSize', `${localStorage.getItem('fontSize') || 32}px`);
         }
 
         window.onload = () => {
             loadData();
             loadConfig();
-        };
-
-        function updateNumLines() {
-            numLines = parseInt(document.getElementById("numLines").value);
-            injectStyles(generateDynamicStyles(numLines));
-            renderSlides();
-            adjustToHighlightFirst();
-        }
-
-        function updateBackgroundColor() {
-            document.documentElement.style.setProperty('--backgroundColor', document.getElementById("backgroundColor").value);
-        }
-
-        function updateDefaultColor() {
-            document.documentElement.style.setProperty('--defaultColor', document.getElementById("defaultColor").value);
-        }
-
-        function updateHighlightColor() {
-            document.documentElement.style.setProperty('--highlightColor', document.getElementById("highlightColor").value);
-        }
-
-        function updateEnableFontResizing() {
-            enableFontResizing = document.getElementById("enableFontResizing").checked;
-            injectStyles(generateDynamicStyles(numLines));
-        }
-
-        function updateEnableOpacity() {
-            enableOpacity = document.getElementById("enableOpacity").checked;
-            injectStyles(generateDynamicStyles(numLines));
-        }
-
-        function updateEnglish() {
-            showEnglish = document.getElementById("showEnglish").checked;
-            renderSlides();
-        }
-
-        function updateGujarati() {
-            showGujarati = document.getElementById("showGujarati").checked;
-            renderSlides();
-        }
-
-        function updateTransitionDuration() {
-            transitionDuration = document.getElementById("transitionDuration").value;
-            document.documentElement.style.setProperty('--transitionDuration', `${transitionDuration}ms`);
-        }
-
-        function updateFontSize() {
-            fontSize = document.getElementById("fontSize").value;
-            document.documentElement.style.setProperty('--fontSize', fontSize);
-            injectStyles(generateDynamicStyles(numLines));
         }
     </script>
 </body>
