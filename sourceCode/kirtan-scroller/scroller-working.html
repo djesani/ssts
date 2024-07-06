@@ -54,12 +54,13 @@
             top: 0;
             right: -350px;
             width: 300px;
-            height: 100%;
+            height: 90%;
             background-color: #e4ddd7;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s;
             padding: 20px;
             overflow-y: auto;
+            margin-bottom: 50px;
         }
 
         #config-panel.open {
@@ -113,7 +114,7 @@
         <button onclick="saveConfig()">Save Config</button>
         <button onclick="resetConfig()">Reset Config</button>
         <label for="numLines">Lines</label>
-        <select id="numLines" onchange="updateNumLines()">
+        <select id="numLines" onkeyup="updateNumLines()">
             <option value="5">5</option>
             <option selected value="7">7</option>
             <option value="9">9</option>
@@ -121,16 +122,16 @@
         </select>
 
         <label for="backgroundColor">Background color</label>
-        <input type="color" id="backgroundColor" value="#fff2e6" onchange="updateBackgroundColor()">
+        <input type="color" id="backgroundColor" value="#fff2e6" oninput="updateBackgroundColor()">
 
         <label for="defaultColor">Default color</label>
-        <input type="color" id="defaultColor" value="#990101" onchange="updateDefaultColor()">
+        <input type="color" id="defaultColor" value="#990101" oninput="updateDefaultColor()">
 
         <label for="highlightColor">Highlight color</label>
-        <input type="color" id="highlightColor" value="#ff6a00" onchange="updateHighlightColor()">
+        <input type="color" id="highlightColor" value="#ff6a00" oninput="updateHighlightColor()">
 
         <label class="checkbox">
-            <input type="checkbox" id="enableFontResizing" onchange="updateEnableFontResizing()">
+            <input type="checkbox" id="enableFontResizing" onkeyup="updateEnableFontResizing()">
             Enable font resizing
         </label>
         <label class="checkbox">
@@ -339,35 +340,27 @@
                 transitionDuration,
                 fontSize
             };
-            localStorage.setItem('config', JSON.stringify(config));
+
+            Object.entries(config).forEach(([key, value]) => {
+                localStorage.setItem(key, value);
+            });
         }
 
         function resetConfig() {
-            const defaultConfig = {
-                numLines: 7,
-                backgroundColor: '#fff2e6',
-                defaultColor: '#990101',
-                highlightColor: '#ff6a00',
-                enableFontResizing: true,
-                enableOpacity: true,
-                showEnglish: true,
-                showGujarati: true,
-                transitionDuration: 500,
-                fontSize: 32
-            };
-            localStorage.setItem('config', JSON.stringify(defaultConfig));
-            applyConfig(defaultConfig);
-        }
+            const keys = [
+                "numLines",
+                "backgroundColor",
+                "defaultColor",
+                "highlightColor",
+                "enableFontResizing",
+                "enableOpacity",
+                "showEnglish",
+                "showGujarati",
+                "transitionDuration",
+                "fontSize"
+            ];
 
-        function loadConfig() {
-            const config = JSON.parse(localStorage.getItem('config'));
-            if (config) {
-                applyConfig(config);
-            }
-        }
-
-        function resetConfig() {
-            localStorage.clear();
+            keys.forEach((key) => localStorage.removeItem(key));
             location.reload();
         }
 
@@ -380,64 +373,55 @@
         }
 
         function updateNumLines() {
-            const numLinesControl = document.getElementById("numLines");
-            numLines = parseInt(numLinesControl.value);
-            localStorage.setItem("numLines", numLines);
-            renderSlides();
+            numLines = parseInt(document.getElementById("numLines").value);
+            renderSlides();            
             injectStyles(generateDynamicStyles(numLines));
+            adjustToHighlightFirst();
         }
 
         function updateBackgroundColor() {
-            const backgroundColorControl = document.getElementById("backgroundColor");
-            document.documentElement.style.setProperty('--backgroundColor', backgroundColorControl.value);
+            document.documentElement.style.setProperty('--backgroundColor', document.getElementById("backgroundColor").value);
         }
 
         function updateDefaultColor() {
-            const defaultColorControl = document.getElementById("defaultColor");
-            document.documentElement.style.setProperty('--defaultColor', defaultColorControl.value);
+            document.documentElement.style.setProperty('--defaultColor', document.getElementById("defaultColor").value);
         }
 
         function updateHighlightColor() {
-            const highlightColorControl = document.getElementById("highlightColor");
-            document.documentElement.style.setProperty('--highlightColor', highlightColorControl.value);
-        }
-
-        function updateTransitionDuration() {
-            const transitionDurationControl = document.getElementById("transitionDuration");
-            transitionDuration = transitionDurationControl.value;
-            document.documentElement.style.setProperty('--transitionDuration', transitionDuration + "ms");
-            localStorage.setItem("transitionDuration", transitionDuration);
-        }
-
-        function updateFontSize() {
-            const fontSizeControl = document.getElementById("fontSize");
-            fontSize = fontSizeControl.value;
-            document.documentElement.style.setProperty('--fontSize', fontSize);
-            localStorage.setItem("fontSize", fontSize);
+            document.documentElement.style.setProperty('--highlightColor', document.getElementById("highlightColor").value);
         }
 
         function updateEnableFontResizing() {
-            enableFontResizing = !enableFontResizing;
-            localStorage.setItem("enableFontResizing", enableFontResizing);
+            enableFontResizing = document.getElementById("enableFontResizing").checked;
             injectStyles(generateDynamicStyles(numLines));
+            renderSlides();
         }
 
         function updateEnableOpacity() {
-            enableOpacity = !enableOpacity;
-            localStorage.setItem("enableOpacity", enableOpacity);
-            injectStyles(generateDynamicStyles(numLines));
-        }
+            enableOpacity = document.getElementById("enableOpacity").checked;
+            injectStyles(generateDynamicStyles(numLines));   
+            renderSlides();  
+           }
 
         function updateEnglish() {
-            showEnglish = !showEnglish;
-            localStorage.setItem("showEnglish", showEnglish);
+            showEnglish = document.getElementById("showEnglish").checked;
             renderSlides();
         }
 
         function updateGujarati() {
-            showGujarati = !showGujarati;
-            localStorage.setItem("showGujarati", showGujarati);
+            showGujarati = document.getElementById("showGujarati").checked;
             renderSlides();
+        }
+
+        function updateTransitionDuration() {
+            transitionDuration = document.getElementById("transitionDuration").value;
+            document.documentElement.style.setProperty('--transitionDuration', `${transitionDuration}ms`);
+        }
+
+        function updateFontSize() {
+            fontSize = document.getElementById("fontSize").value;
+            document.documentElement.style.setProperty('--fontSize', fontSize);
+            injectStyles(generateDynamicStyles(numLines)); 
         }
 
         function loadConfig() {
