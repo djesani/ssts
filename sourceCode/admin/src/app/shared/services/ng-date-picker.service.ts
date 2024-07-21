@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
-import { NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Injectable } from "@angular/core";
+import {
+  NgbDateAdapter,
+  NgbDateParserFormatter,
+  NgbDateStruct,
+} from "@ng-bootstrap/ng-bootstrap";
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
  */
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
-
-  readonly DELIMITER = '/';
+  readonly DELIMITER = "/";
   paddedDay: string;
   paddedMonth: string;
 
@@ -17,29 +20,34 @@ export class CustomAdapter extends NgbDateAdapter<string> {
       return {
         day: parseInt(date[0], 10),
         month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
+        year: parseInt(date[2], 10),
       };
     }
     return null;
   }
 
   toModel(date: NgbDateStruct | null): string | null {
-
     if (date) {
       if (date.day < 10) {
-        this.paddedDay = '0' + date.day;
+        this.paddedDay = "0" + date.day;
       } else {
-        this.paddedDay = '' + date.day;
+        this.paddedDay = "" + date.day;
       }
 
       if (date.month < 10) {
-        this.paddedMonth = '0' + date.month;
+        this.paddedMonth = "0" + date.month;
       } else {
-        this.paddedMonth = '' + date.month;
+        this.paddedMonth = "" + date.month;
       }
     }
 
-    return date ? this.paddedDay + this.DELIMITER + this.paddedMonth + this.DELIMITER + date.year : null;
+    return date
+      ? this.paddedDay +
+          this.DELIMITER +
+          this.paddedMonth +
+          this.DELIMITER +
+          date.year
+      : null;
   }
 }
 
@@ -48,8 +56,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
  */
 @Injectable()
 export class CustomDateParserFormatter extends NgbDateParserFormatter {
-
-  readonly DELIMITER = '/';
+  readonly DELIMITER = "/";
   paddedDay: string;
   paddedMonth: string;
 
@@ -59,28 +66,33 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
       return {
         day: parseInt(date[0], 10),
         month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
+        year: parseInt(date[2], 10),
       };
     }
     return null;
   }
 
   format(date: NgbDateStruct | null): string {
-
     if (date) {
       if (date.day < 10) {
-        this.paddedDay = '0' + date.day;
+        this.paddedDay = "0" + date.day;
       } else {
-        this.paddedDay = '' + date.day;
+        this.paddedDay = "" + date.day;
       }
 
       if (date.month < 10) {
-        this.paddedMonth = '0' + date.month;
+        this.paddedMonth = "0" + date.month;
       } else {
-        this.paddedMonth = '' + date.month;
+        this.paddedMonth = "" + date.month;
       }
     }
 
-    return date ? this.paddedDay + this.DELIMITER + this.paddedMonth + this.DELIMITER + date.year : '';
+    return date
+      ? this.paddedDay +
+          this.DELIMITER +
+          this.paddedMonth +
+          this.DELIMITER +
+          date.year
+      : "";
   }
 }

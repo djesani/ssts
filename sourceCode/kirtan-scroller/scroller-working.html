@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kirtans</title>
+    <style>
+        :root {
+            --backgroundColor: #fff2e6;
+            --defaultColor: #990101;
+            --highlightColor: #ff6a00;
+            --transitionDuration: 500ms;
+            --fontSize: 32;
+        }
+
+        body {
+            background-color: var(--backgroundColor);
+            overflow: hidden;
+        }
+
+        #title {
+            font-size: 40px;
+            text-align: center;
+            color: var(--defaultColor);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-item {
+            padding: 5px 0;
+            font-size: var(--fontSize)px;
+            color: var(--defaultColor);
+            transition: all linear var(--transitionDuration);
+            width: 100%;
+            text-align: center;
+            font-weight: normal;
+            position: absolute;
+        }
+
+        .list-item.noAnimation {
+            transition: none;
+        }
+
+        .english {
+            font-weight: bold;
+        }
+
+        #config-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 300px;
+            height: 90%;
+            background-color: #e4ddd7;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+            margin-bottom: 50px;
+        }
+
+        #config-panel.open {
+            right: 0;
+        }
+
+        #config-panel label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        #config-panel input[type="color"],
+        #config-panel select,
+        #config-panel input[type="checkbox"] {
+            width: 100%;
+            min-height: 30px;
+        }
+
+        #config-panel input[type="checkbox"] {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        #config-panel label.checkbox {
+            display: flex;
+        }
+
+        #config-panel input[type="checkbox"] {
+            margin: -4px 15px 0 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        #panel-open {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    </style>
+
+    <style id="dynamic-styles"></style>
+</head>
+
+<body>
+    <h1 id="title"></h1>
+    <ul id="list" class="list"></ul>
+    <button onclick="openConfigPanel()" id="panel-open">i</button>
+
+    <div id="config-panel">
+        <button onclick="closeConfigPanel()" id="panel-close">Close</button>
+        <button onclick="saveConfig()">Save Config</button>
+        <button onclick="resetConfig()">Reset Config</button>
+        <label for="numLines">Lines</label>
+        <select id="numLines" onkeyup="updateNumLines()">
+            <option value="5">5</option>
+            <option selected value="7">7</option>
+            <option value="9">9</option>
+            <option value="11">11</option>
+        </select>
+
+        <label for="backgroundColor">Background color</label>
+        <input type="color" id="backgroundColor" value="#fff2e6" oninput="updateBackgroundColor()">
+
+        <label for="defaultColor">Default color</label>
+        <input type="color" id="defaultColor" value="#990101" oninput="updateDefaultColor()">
+
+        <label for="highlightColor">Highlight color</label>
+        <input type="color" id="highlightColor" value="#ff6a00" oninput="updateHighlightColor()">
+
+        <label class="checkbox">
+            <input type="checkbox" id="enableFontResizing" onkeyup="updateEnableFontResizing()">
+            Enable font resizing
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" id="enableOpacity" onchange="updateEnableOpacity()">
+            Enable opacity
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" id="showEnglish" onchange="updateEnglish()">
+            Show English
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" id="showGujarati" onchange="updateGujarati()">
+            Show Gujarati
+        </label>
+
+        <label for="transitionDuration">Transition duration (ms)</label>
+        <select id="transitionDuration" onchange="updateTransitionDuration()">
+            <option value="250">250</option>
+            <option selected value="500">500</option>
+            <option value="750">750</option>
+            <option value="1000">1000</option>
+            <option value="1250">1250</option>
+            <option value="1500">1500</option>
+        </select>
+
+        <label for="fontSize">Font size (px)</label>
+        <select id="fontSize" onchange="updateFontSize()">
+            <option value="16">16</option>
+            <option value="20">20</option>
+            <option value="24">24</option>
+            <option value="28">28</option>
+            <option selected value="32">32</option>
+            <option value="36">36</option>
+            <option value="40">40</option>
+            <option value="44">44</option>
+            <option value="48">48</option>
+        </select>
+
+    </div>
+
+    <script>
+        let kirtanJson,
+            slides,
+            slidesGujarati,
+            title,
+            index = 0;
+        let numLines = parseInt(localStorage.getItem('numLines')) || 7;
+        let enableFontResizing = JSON.parse(localStorage.getItem('enableFontResizing')) ?? true;
+        let enableOpacity = JSON.parse(localStorage.getItem('enableOpacity')) ?? true;
+        let showEnglish = JSON.parse(localStorage.getItem('showEnglish')) ?? true;
+        let showGujarati = JSON.parse(localStorage.getItem('showGujarati')) ?? true;
+        let transitionDuration = localStorage.getItem('transitionDuration') || 500;
+        let fontSize = localStorage.getItem('fontSize') || 32;
+        const list = document.getElementById("list");
+        const highlightIndex = Math.floor(numLines / 2) + 1;
+        const stepsFromHighlight = highlightIndex - 1;
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                if (index + stepsFromHighlight > 0) prev();
+            } else if (event.key === "ArrowDown") {
+                if (index - stepsFromHighlight < slides.length - numLines) next();
+            }
+        });
+
+        async function loadData() {
+            const response = await fetch("data.json");
+            kirtanJson = await response.json();
+            const id = getUrlParamsId();
+            const kirtan = getKirtanById(id);
+            title = kirtan.title_english;
+            slides = kirtan.description_english.split("\n");
+            slidesGujarati = kirtan.description_gujarati.split("\n");
+            injectStyles(generateDynamicStyles(numLines));
+            renderTitle();
+            renderSlides();
+            adjustToHighlightFirst();
+        }
+
+        function renderTitle() {
+            document.getElementById("title").innerText = title;
+        }
+
+        function getKirtanById(id) {
+            return kirtanJson.data.find((x) => x.id == id) || kirtanJson.data[0];
+        }
+
+        function getUrlParamsId() {
+            const urlSearch = new URLSearchParams(window.location.search);
+            return urlSearch.get("id") || 1;
+        }
+
+        function renderSlides() {
+            list.innerHTML = "";
+            for (let i = 0; i < numLines; i++) {
+                const li = document.createElement("li");
+                li.className = "list-item";
+
+                const eng = document.createElement("div");
+                eng.innerText = slides[index + i] || "";
+                eng.className = "english";
+                eng.style.display = showEnglish ? "block" : "none";
+
+                const guj = document.createElement("div");
+                guj.innerText = slidesGujarati[index + i] || "";
+                guj.className = "gujarati";
+                guj.style.display = showGujarati ? "block" : "none";
+
+                li.appendChild(eng);
+                li.appendChild(guj);
+                list.appendChild(li);
+            }
+        }
+
+        function prev() {
+            transitionSlides("down", -1);
+        }
+
+        function next() {
+            transitionSlides("up", 1);
+        }
+
+        function transitionSlides(animationClass, step) {
+            updateAnimationClasses(false);
+            list.classList.add(animationClass);
+            setTimeout(() => {
+                updateAnimationClasses(true);
+                list.classList.remove(animationClass);
+                index += step;
+                renderSlides();
+            }, parseInt(getComputedStyle(document.documentElement).getPropertyValue("--transitionDuration")));
+        }
+
+        function updateAnimationClasses(action) {
+            const method = action ? "add" : "remove";
+            document.querySelectorAll(".list-item").forEach((item) => {
+                item.classList[method]("noAnimation");
+            });
+        }
+
+        function generateDynamicStyles(numLines) {
+            let styles = "";
+            const viewportHeight = window.innerHeight;
+            const itemHeight = viewportHeight / numLines;
+            const middlePosition = viewportHeight / 2 - itemHeight / 2;
+
+            for (let i = 1; i <= numLines; i++) {
+                const topPosition = middlePosition + (i - highlightIndex) * itemHeight;
+                const color = i === highlightIndex ? "var(--highlightColor)" : "";
+                const opacity = calculateOpacity(i, highlightIndex, numLines);
+                const fontSize = calculateFontSize(i, highlightIndex, numLines);
+                styles += `.list .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
+            }
+
+            for (let i = 2; i <= numLines + 1; i++) {
+                const topPosition = middlePosition + (i - 1 - highlightIndex) * itemHeight;
+                const color = i - 1 === highlightIndex ? "var(--highlightColor)" : "";
+                const opacity = calculateOpacity(i - 1, highlightIndex, numLines);
+                const fontSize = calculateFontSize(i - 1, highlightIndex, numLines);
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
+            }
+
+            for (let i = 1; i <= numLines - 1; i++) {
+                const topPosition = middlePosition + (i + 1 - highlightIndex) * itemHeight;
+                const color = i + 1 === highlightIndex ? "var(--highlightColor)" : "";
+                const opacity = calculateOpacity(i + 1, highlightIndex, numLines);
+                const fontSize = calculateFontSize(i + 1, highlightIndex, numLines);
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${topPosition}px; opacity: ${opacity}; color: ${color}; font-size: ${fontSize}px; }\n`;
+            }
+
+            return styles;
+        }
+
+        function calculateOpacity(index, highlightIndex, numLines) {
+            if (index === 1 || index === numLines) return 0;
+            const distanceFromCenter = Math.abs(highlightIndex - index);
+            const maxDistance = Math.floor(numLines / 2);
+            return 1 - distanceFromCenter / maxDistance;
+        }
+
+        function calculateFontSize(index, highlightIndex, numLines) {
+            if (!enableFontResizing) return parseInt(document.getElementById('fontSize').value) || 30;
+            const baseFontSize = parseInt(document.getElementById('fontSize').value) || 30;
+            return index === highlightIndex ? baseFontSize : baseFontSize * 0.8;
+        }
+
+        function injectStyles(styles) {
+            document.getElementById("dynamic-styles").textContent = styles;
+        }
+
+        function adjustToHighlightFirst() {
+            while (index < stepsFromHighlight) index++;
+            renderSlides();
+        }
+
+        function saveConfig() {
+            const config = {
+                numLines,
+                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--backgroundColor').trim(),
+                defaultColor: getComputedStyle(document.documentElement).getPropertyValue('--defaultColor').trim(),
+                highlightColor: getComputedStyle(document.documentElement).getPropertyValue('--highlightColor').trim(),
+                enableFontResizing,
+                enableOpacity,
+                showEnglish,
+                showGujarati,
+                transitionDuration,
+                fontSize
+            };
+
+            Object.entries(config).forEach(([key, value]) => {
+                localStorage.setItem(key, value);
+            });
+        }
+
+        function resetConfig() {
+            const keys = [
+                "numLines",
+                "backgroundColor",
+                "defaultColor",
+                "highlightColor",
+                "enableFontResizing",
+                "enableOpacity",
+                "showEnglish",
+                "showGujarati",
+                "transitionDuration",
+                "fontSize"
+            ];
+
+            keys.forEach((key) => localStorage.removeItem(key));
+            location.reload();
+        }
+
+        function openConfigPanel() {
+            document.getElementById("config-panel").classList.add("open");
+        }
+
+        function closeConfigPanel() {
+            document.getElementById("config-panel").classList.remove("open");
+        }
+
+        function updateNumLines() {
+            numLines = parseInt(document.getElementById("numLines").value);
+            renderSlides();            
+            injectStyles(generateDynamicStyles(numLines));
+            adjustToHighlightFirst();
+        }
+
+        function updateBackgroundColor() {
+            document.documentElement.style.setProperty('--backgroundColor', document.getElementById("backgroundColor").value);
+        }
+
+        function updateDefaultColor() {
+            document.documentElement.style.setProperty('--defaultColor', document.getElementById("defaultColor").value);
+        }
+
+        function updateHighlightColor() {
+            document.documentElement.style.setProperty('--highlightColor', document.getElementById("highlightColor").value);
+        }
+
+        function updateEnableFontResizing() {
+            enableFontResizing = document.getElementById("enableFontResizing").checked;
+            injectStyles(generateDynamicStyles(numLines));
+            renderSlides();
+        }
+
+        function updateEnableOpacity() {
+            enableOpacity = document.getElementById("enableOpacity").checked;
+            injectStyles(generateDynamicStyles(numLines));   
+            renderSlides();  
+           }
+
+        function updateEnglish() {
+            showEnglish = document.getElementById("showEnglish").checked;
+            renderSlides();
+        }
+
+        function updateGujarati() {
+            showGujarati = document.getElementById("showGujarati").checked;
+            renderSlides();
+        }
+
+        function updateTransitionDuration() {
+            transitionDuration = document.getElementById("transitionDuration").value;
+            document.documentElement.style.setProperty('--transitionDuration', `${transitionDuration}ms`);
+        }
+
+        function updateFontSize() {
+            fontSize = document.getElementById("fontSize").value;
+            document.documentElement.style.setProperty('--fontSize', fontSize);
+            injectStyles(generateDynamicStyles(numLines)); 
+        }
+
+        function loadConfig() {
+            document.getElementById('numLines').value = localStorage.getItem('numLines') || 7;
+            document.getElementById('backgroundColor').value = localStorage.getItem('backgroundColor') || '#fff2e6';
+            document.getElementById('defaultColor').value = localStorage.getItem('defaultColor') || '#990101';
+            document.getElementById('highlightColor').value = localStorage.getItem('highlightColor') || '#ff6a00';
+            document.getElementById('enableFontResizing').checked = JSON.parse(localStorage.getItem('enableFontResizing')) ?? true;
+            document.getElementById('enableOpacity').checked = JSON.parse(localStorage.getItem('enableOpacity')) ?? true;
+            document.getElementById('showEnglish').checked = JSON.parse(localStorage.getItem('showEnglish')) ?? true;
+            document.getElementById('showGujarati').checked = JSON.parse(localStorage.getItem('showGujarati')) ?? true;
+            document.getElementById('transitionDuration').value = localStorage.getItem('transitionDuration') || 500;
+            document.getElementById('fontSize').value = localStorage.getItem('fontSize') || 32;
+
+            document.documentElement.style.setProperty('--backgroundColor', localStorage.getItem('backgroundColor') || '#fff2e6');
+            document.documentElement.style.setProperty('--defaultColor', localStorage.getItem('defaultColor') || '#990101');
+            document.documentElement.style.setProperty('--highlightColor', localStorage.getItem('highlightColor') || '#ff6a00');
+            document.documentElement.style.setProperty('--transitionDuration', `${localStorage.getItem('transitionDuration') || 500}ms`);
+            document.documentElement.style.setProperty('--fontSize', `${localStorage.getItem('fontSize') || 32}px`);
+        }
+
+        window.onload = () => {
+            loadData();
+            loadConfig();
+        }
+    </script>
+</body>
+
+</html>
