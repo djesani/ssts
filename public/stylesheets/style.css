@@ -48,7 +48,7 @@ body {
 .main-header {
     padding: 0px 10px;
     color: #585858;
-    font: 400 14px/150% sans-serif;
+    font: 14px/150% "Source Sans Pro", sans-serif;
 }
 
 .today-header {
@@ -333,6 +333,43 @@ div.bg-dark {
 .smalltext {
     padding-top: 5px;
     font-size: 16px;
+}
+
+.other-pages.gujarati {
+    line-height: 1.4;
+}
+
+.other-pages.gujarati p {
+    font-size: 20px;
+}
+
+.other-pages.gujarati h1 {
+    margin: 30px 0;
+    font-size: 48px;
+}
+
+.other-pages.gujarati h2 {
+    margin: 30px 0 0;
+}
+
+.other-pages.gujarati h3 {
+    margin: 50px 0;
+}
+
+.other-pages.gujarati ul {
+    font-size: 20px;
+}
+
+.other-pages.gujarati ul li {
+    padding: 5px 0;
+}
+
+.other-pages.gujarati .bold {
+    font-weight: bold;
+}
+
+.other-pages.gujarati .italics {
+    font-style: italic;
 }
 
 @media (max-width: 995px) {
