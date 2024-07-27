@@ -124,7 +124,7 @@ const getEvents = async (req, res, next) => {
     //   console.log(pastEvents);
 
       console.log("DB not enabled. Returning events from file system");
-      res.render('events', { title: 'SSTS', futureEvents, pastEvents, eventToday, streamEvent });
+      res.render('events', { title: 'SSMB', futureEvents, pastEvents, eventToday, streamEvent });
     });
 };
 

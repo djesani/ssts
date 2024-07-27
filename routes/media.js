@@ -45,7 +45,7 @@ router.use('/', galleryMiddleware, function(req, res, next) {
     }else{
         console.log("No photo or album found");
     }
-    res.render(`${viewsPath}/gallery2`, { title: 'SSTS', galleryRoot: '/media', galleryOutput, renderType });
+    res.render(`${viewsPath}/gallery2`, { title: 'SSMB', galleryRoot: '/media', galleryOutput, renderType });
 });
 
 module.exports = router;
