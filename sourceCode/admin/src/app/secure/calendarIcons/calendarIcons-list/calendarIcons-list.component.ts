@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-calendarIcons-list',
+  standalone: false,
   templateUrl: './calendarIcons-list.component.html'
 })
 export class CalendarIconsListComponent implements OnInit {

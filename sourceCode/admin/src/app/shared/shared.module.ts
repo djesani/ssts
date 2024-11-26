@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient } from "@angular/common/http";
 
 import { NgxSpinnerModule } from "ngx-spinner";
 
@@ -29,7 +29,6 @@ const sharedModulesArray = [
   RouterModule,
   NgbModule,
   NgxSpinnerModule,
-  HttpClientModule,
   NgbDatepickerModule,
   FaModule,
 ];
@@ -45,6 +44,7 @@ const sharedModulesArray = [
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+    provideHttpClient()
   ],
 })
 export class SharedModule {}

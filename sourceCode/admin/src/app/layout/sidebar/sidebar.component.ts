@@ -4,6 +4,7 @@ import { Component, Inject, OnInit, Renderer2 } from "@angular/core";
 import { AuthService } from "src/app/core/auth/auth.service";
 @Component({
   selector: "app-sidebar",
+  standalone: false,
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent implements OnInit {

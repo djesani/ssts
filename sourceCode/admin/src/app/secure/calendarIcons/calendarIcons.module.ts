@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 
@@ -21,7 +20,6 @@ import { CalendarIconsService } from "./calendarIcons.service";
   imports: [
     CommonModule,
     CalendarIconsRoutingModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

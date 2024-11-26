@@ -4,6 +4,7 @@ import { EventsService } from "../events.service";
 
 @Component({
   selector: "app-events-list",
+  standalone: false,
   templateUrl: "./events-list.component.html",
 })
 export class EventsListComponent implements OnInit {

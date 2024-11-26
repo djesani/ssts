@@ -10,6 +10,7 @@ const now = new Date();
 
 @Component({
   selector: "app-calendarIcons-form",
+  standalone: false,
   templateUrl: "./calendarIcons-form.component.html",
   styles: [],
 })

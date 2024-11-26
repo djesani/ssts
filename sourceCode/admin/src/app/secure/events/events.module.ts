@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
@@ -18,7 +17,6 @@ import { EventsService } from "./events.service";
   imports: [
     CommonModule,
     EventsRoutingModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

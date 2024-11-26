@@ -10,7 +10,7 @@ import { LogoutComponent } from "./logout/logout.component";
 import { Page404Component } from "./page404/page404.component";
 
 @NgModule({
-  declarations: [LogoutComponent, Page404Component, LoginComponent],
+  declarations: [LoginComponent, LogoutComponent, Page404Component],
   imports: [
     CommonModule,
     FormsModule,

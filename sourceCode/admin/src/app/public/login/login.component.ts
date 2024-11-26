@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../core/auth/auth.service";
 @Component({
   selector: "app-login",
+  standalone: false,
   templateUrl: "./login.component.html",
 })
 export class LoginComponent implements OnInit {

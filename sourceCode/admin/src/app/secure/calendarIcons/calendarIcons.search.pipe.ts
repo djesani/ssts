@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
   name: "search",
+  standalone: false,
 })
 export class CalendarIconsSearchPipe implements PipeTransform {
   public transform(value, keys: string, term: string) {

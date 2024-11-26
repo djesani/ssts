@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../core/auth/auth.service";
 import { Router } from "@angular/router";
 
-@Component({ template: "" })
+@Component({ template: "", standalone: false })
 export class LogoutComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 

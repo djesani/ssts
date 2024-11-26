@@ -12,6 +12,7 @@ const now = new Date();
 
 @Component({
   selector: "app-events-form",
+  standalone: false,
   templateUrl: "./events-form.component.html",
   styles: [],
 })
