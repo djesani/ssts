@@ -52,5 +52,8 @@ router.get('/admin/api-docs', function(req, res, next) {
   res.render('admin/api-docs', { title: 'api-docs' });
 });
 
+router.get('/trivia', function(req, res, next) {
+  res.render('trivia', { title: 'Trivia' });
+});
 
 module.exports = router;
