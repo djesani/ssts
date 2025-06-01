@@ -6,21 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mandir Trivia - KBC Style</title>
   <style>
-    .progress-container {
-      width: 100%;
-      height: 30px;
-      background-color: #eee;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 50px auto;
-      max-width: 500px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background-color: green;
-      transition: width 0.1s linear;
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -29,70 +16,63 @@
       background-image: url('https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Background-scaled.webp');
       background-repeat: no-repeat;
       background-size: cover;
+      background-position: center;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       align-items: flex-start;
     }
 
-    #title {
-      font-size: 60px;
-    }
-
     .container {
+      width: 100%;
       max-width: 600px;
-      text-align: center;
-      box-shadow: 0 0 0px gold;
+      padding: 20px;
     }
 
     .trivia {
-      margin-top: 70px;
-      padding-top: 10px;
-      border-radius: 130px;
+      margin-top: 50px;
+      padding: 20px;
+      border-radius: 80px;
       background: #eff4f4;
-      width: 90%;
-      padding-left: 60px;
-      padding-right: 60px;
-      padding-bottom: 5px;
-
-    }
-
-    .question {
-      font-size: 30px;
-      font-weight: bold;
-      margin: 20px 0 50px;
-      color: #000000;
-    }
-
-    #trivia-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
 
     .trivia-title {
-      position: relative;
-      top: -50px;
-      width: 500px;
-      z-index: 10;
+      width: 100%;
+      max-width: 500px;
+      margin: -50px auto 10px;
+      display: block;
+    }
+
+    #trivia-image {
+      width: 100%;
+      height: auto;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 20px 0 30px;
+      color: #000000;
     }
 
     .answers {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
     }
 
     .answer-option {
       background: linear-gradient(90deg, #EE4F91, #ffea51);
       color: #000000;
-      font-size: 30px;
-      padding: 20px;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgb(133 102 94);
-      text-transform: titlecase;
+      font-size: 18px;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(133, 102, 94, 0.4);
       font-weight: bold;
       transition: transform 0.3s ease;
       pointer-events: none;
@@ -100,6 +80,23 @@
 
     .answer-option:hover {
       transform: scale(1.05);
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 20px;
+      background-color: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: green;
+      transition: width 0.1s linear;
     }
 
     @keyframes flash {
@@ -119,7 +116,27 @@
       color: rgb(0, 0, 0);
       animation: flash 0.5s ease-in-out 3;
     }
+
+    @media screen and (max-width: 480px) {
+      .question {
+        font-size: 20px;
+      }
+
+      .answer-option {
+        font-size: 16px;
+        padding: 12px;
+      }
+
+      .trivia-title {
+        max-width: 90%;
+      }
+
+      .trivia {
+        border-radius: 20px;
+      }
+    }
   </style>
+
 </head>
 
 <body>
