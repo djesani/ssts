@@ -12,7 +12,6 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      text-align: center;
       background-image: url('https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Background-scaled.webp');
       background-repeat: no-repeat;
       background-size: cover;
@@ -21,57 +20,60 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
       align-items: flex-start;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      text-align: center;
     }
 
     .container {
-      width: 100%;
-      max-width: 600px;
-      padding: 20px;
+      width: 90vw;
+      max-width: 800px;
+      padding: 2vh 4vw;
     }
 
     .trivia {
-      margin-top: 50px;
-      padding: 20px;
-      border-radius: 80px;
       background: #eff4f4;
+      border-radius: 2vw;
+      padding: 3vh 4vw;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      margin-top: 5vh;
     }
 
     .trivia-title {
-      width: 100%;
+      width: 80%;
       max-width: 500px;
-      margin: -50px auto 10px;
+      margin: 0 auto 2vh;
       display: block;
     }
 
     #trivia-image {
       width: 100%;
       height: auto;
-      border-radius: 50px;
-      margin-bottom: 10px;
+      border-radius: 1.5vw;
+      margin-bottom: 2vh;
     }
 
     .question {
-      font-size: 24px;
+      font-size: clamp(18px, 3vw, 32px);
       font-weight: bold;
-      margin: 20px 0 30px;
-      color: #000000;
+      margin: 2vh 0 4vh;
+      color: #000;
     }
 
     .answers {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 2vh;
     }
 
     .answer-option {
       background: linear-gradient(90deg, #EE4F91, #ffea51);
-      color: #000000;
-      font-size: 18px;
-      padding: 15px;
-      border-radius: 20px;
+      color: #000;
+      font-size: clamp(16px, 2.5vw, 28px);
+      padding: 1.5em;
+      border-radius: 2vw;
       box-shadow: 0 4px 10px rgba(133, 102, 94, 0.4);
       font-weight: bold;
       transition: transform 0.3s ease;
@@ -84,12 +86,11 @@
 
     .progress-container {
       width: 100%;
-      height: 20px;
+      height: 2vh;
       background-color: #eee;
-      border-radius: 5px;
+      border-radius: 1vh;
       overflow: hidden;
-      margin-top: 30px;
-      margin-bottom: 30px;
+      margin-top: 4vh;
     }
 
     .progress-bar {
@@ -113,29 +114,38 @@
 
     .highlight-correct {
       background: linear-gradient(90deg, #1ee664, #04BFDE);
-      color: rgb(0, 0, 0);
+      color: #000;
       animation: flash 0.5s ease-in-out 3;
     }
 
-    @media screen and (max-width: 480px) {
-      .question {
-        font-size: 20px;
-      }
-
-      .answer-option {
-        font-size: 16px;
-        padding: 12px;
+    /* Portrait TV / Large Viewports */
+    @media screen and (orientation: portrait) and (min-height: 1000px) and (min-width: 600px) {
+      .container {
+        max-width: 90vw;
       }
 
       .trivia-title {
-        max-width: 90%;
+        max-width: 70vw;
+        margin-bottom: 4vh;
       }
 
-      .trivia {
-        border-radius: 20px;
+      .question {
+        font-size: clamp(28px, 3.5vh, 48px);
+      }
+
+      .answer-option {
+        font-size: clamp(24px, 3vh, 40px);
+        padding: 2.5vh;
+      }
+
+      .progress-container {
+        height: 3vh;
+        margin-top: 5vh;
       }
     }
   </style>
+
+
 
 </head>
 
