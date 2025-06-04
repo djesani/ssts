@@ -6,93 +6,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mandir Trivia - KBC Style</title>
   <style>
-    .progress-container {
-      width: 100%;
-      height: 30px;
-      background-color: #eee;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 50px auto;
-      max-width: 500px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background-color: green;
-      transition: width 0.1s linear;
+    * {
+      box-sizing: border-box;
     }
 
     body {
       font-family: 'Poppins', sans-serif;
-      text-align: center;
       background-image: url('https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Background-scaled.webp');
       background-repeat: no-repeat;
       background-size: cover;
+      background-position: center;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
-      height: 100vh;
       align-items: flex-start;
-    }
-
-    #title {
-      font-size: 60px;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      text-align: center;
     }
 
     .container {
-      max-width: 600px;
-      text-align: center;
-      box-shadow: 0 0 0px gold;
+      width: 90vw;
+      max-width: 800px;
+      padding: 2vh 4vw;
     }
 
     .trivia {
-      margin-top: 70px;
-      padding-top: 10px;
-      border-radius: 130px;
       background: #eff4f4;
-      width: 90%;
-      padding-left: 60px;
-      padding-right: 60px;
-      padding-bottom: 5px;
-
-    }
-
-    .question {
-      font-size: 30px;
-      font-weight: bold;
-      margin: 20px 0 50px;
-      color: #000000;
-    }
-
-    #trivia-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
+      border-radius: 2vw;
+      padding: 3vh 4vw;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      margin-top: 5vh;
     }
 
     .trivia-title {
-      position: relative;
-      top: -50px;
-      width: 500px;
-      z-index: 10;
+      width: 80%;
+      max-width: 500px;
+      margin: 0 auto 2vh;
+      display: block;
+    }
+
+    #trivia-image {
+      width: 100%;
+      height: auto;
+      border-radius: 1.5vw;
+      margin-bottom: 2vh;
+    }
+
+    .question {
+      font-size: clamp(18px, 3vw, 32px);
+      font-weight: bold;
+      margin: 2vh 0 4vh;
+      color: #000;
     }
 
     .answers {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 2vh;
     }
 
     .answer-option {
       background: linear-gradient(90deg, #EE4F91, #ffea51);
-      color: #000000;
-      font-size: 30px;
-      padding: 20px;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgb(133 102 94);
-      text-transform: titlecase;
+      color: #000;
+      font-size: clamp(16px, 2.5vw, 28px);
+      padding: 1.5em;
+      border-radius: 2vw;
+      box-shadow: 0 4px 10px rgba(133, 102, 94, 0.4);
       font-weight: bold;
       transition: transform 0.3s ease;
       pointer-events: none;
@@ -100,6 +82,22 @@
 
     .answer-option:hover {
       transform: scale(1.05);
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 2vh;
+      background-color: #eee;
+      border-radius: 1vh;
+      overflow: hidden;
+      margin-top: 4vh;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: green;
+      transition: width 0.1s linear;
     }
 
     @keyframes flash {
@@ -116,10 +114,39 @@
 
     .highlight-correct {
       background: linear-gradient(90deg, #1ee664, #04BFDE);
-      color: rgb(0, 0, 0);
+      color: #000;
       animation: flash 0.5s ease-in-out 3;
     }
+
+    /* Portrait TV / Large Viewports */
+    @media screen and (orientation: portrait) and (min-height: 1000px) and (min-width: 600px) {
+      .container {
+        max-width: 90vw;
+      }
+
+      .trivia-title {
+        max-width: 70vw;
+        margin-bottom: 4vh;
+      }
+
+      .question {
+        font-size: clamp(28px, 3.5vh, 48px);
+      }
+
+      .answer-option {
+        font-size: clamp(24px, 3vh, 40px);
+        padding: 2.5vh;
+      }
+
+      .progress-container {
+        height: 3vh;
+        margin-top: 5vh;
+      }
+    }
   </style>
+
+
+
 </head>
 
 <body>
@@ -136,18 +163,30 @@
     </div>
     <script>
       const progressBar = document.getElementById('progressBar');
-      const duration = 10000;
+      const duration = 25000;
       const interval = 100;
 
       const questions = [
         {
-          question: "How many mandirs did Maharaj build?",
+          question: "What was the childhood name of Swaminarayan Bhagwan?",
+          options: ["Nilkanth Varni Maharaj", "Ghanshyam Maharaj", "Krishna Bhagwan"],
+          answer: "Ghanshyam Maharaj",
+          image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+        },
+        {
+          question: "How many Ekadashis are in a year?",
+          options: ["24", "26", "28"],
+          answer: "24",
+          image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+        },
+        {
+          question: "How many mandirs did Swaminarayan Bhagwan build?",
           options: ["6", "8", "10"],
           answer: "6",
           image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
         },
         {
-          question: "Which mandir was not built by Maharaj?",
+          question: "Which mandir was not built by Swaminarayan Bhagwan?",
           options: ["Bhuj", "Gadhada", "Loya"],
           answer: "Loya",
           image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
