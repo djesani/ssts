@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mandir Trivia - KBC Style</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Background-scaled.webp');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* .container {
+      width: 90vw;
+      max-width: 800px;
+      padding: 2vh 4vw;
+    } */
+
+
+        .container {
+            width: 90vw;
+            max-width: 800px;
+            padding: 2vh 4vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+        }
+
+        .trivia {
+            background: #eff4f4;
+            border-radius: 2vw;
+            padding: 3vh 4vw;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 5vh;
+        }
+
+        .trivia-title {
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto 2vh;
+            display: block;
+        }
+
+        #trivia-image {
+            width: 100%;
+            height: auto;
+            border-radius: 1.5vw;
+            margin-bottom: 2vh;
+        }
+
+        .question {
+            font-size: clamp(18px, 3vw, 32px);
+            font-weight: bold;
+            margin: 2vh 0 4vh;
+            color: #000;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+        }
+
+        .answer-option {
+            background: linear-gradient(90deg, #EE4F91, #ffea51);
+            color: #000;
+            font-size: clamp(16px, 2.5vw, 28px);
+            padding: 1.5em;
+            border-radius: 2vw;
+            box-shadow: 0 4px 10px rgba(133, 102, 94, 0.4);
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .answer-option:hover {
+            transform: scale(1.05);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 2vh;
+            background-color: #eee;
+            border-radius: 1vh;
+            overflow: hidden;
+            margin-top: 4vh;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: green;
+            transition: width 0.1s linear;
+        }
+
+        @keyframes flash {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .highlight-correct {
+            background: linear-gradient(90deg, #1ee664, #04BFDE);
+            color: #000;
+            animation: flash 0.5s ease-in-out 3;
+        }
+
+        /* Portrait TV / Large Viewports */
+        @media screen and (orientation: portrait) and (min-height: 1000px) and (min-width: 600px) {
+            .container {
+                max-width: 90vw;
+            }
+
+            .trivia-title {
+                max-width: 70vw;
+                margin-bottom: 4vh;
+            }
+
+            .question {
+                font-size: clamp(28px, 3.5vh, 48px);
+            }
+
+            .answer-option {
+                font-size: clamp(24px, 3vh, 40px);
+                padding: 2.5vh;
+            }
+
+            .progress-container {
+                height: 3vh;
+                margin-top: 5vh;
+            }
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="trivia">
+            <img class="trivia-title" src="https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Title.webp"
+                alt="Trivia Title">
+            <img id="trivia-image" src="" alt="Trivia Image">
+            <div id="question" class="question"></div>
+            <div id="answers" class="answers"></div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <script>
+            const progressBar = document.getElementById('progressBar');
+            const duration = 25000;
+            const interval = 100;
+
+            const questions = [
+                {
+                    question: "What was the childhood name of Swaminarayan Bhagwan?",
+                    options: ["Nilkanth Varni Maharaj", "Ghanshyam Maharaj", "Krishna Bhagwan"],
+                    answer: "Ghanshyam Maharaj",
+                    image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+                },
+                {
+                    question: "How many Ekadashis are in a year?",
+                    options: ["24", "26", "28"],
+                    answer: "24",
+                    image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+                },
+                {
+                    question: "How many mandirs did Swaminarayan Bhagwan build?",
+                    options: ["6", "8", "10"],
+                    answer: "6",
+                    image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+                },
+                {
+                    question: "Which mandir was not built by Swaminarayan Bhagwan?",
+                    options: ["Bhuj", "Gadhada", "Loya"],
+                    answer: "Loya",
+                    image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+                }
+            ];
+
+            function getStoredQuestion() {
+                const now = new Date();
+                const weekNumber = Math.floor(now / (1000 * 60 * 60 * 24 * 7));
+                return questions[weekNumber % questions.length];
+            }
+
+            function displayQuestion(questionObj) {
+                document.getElementById('question').innerText = questionObj.question;
+                document.getElementById('trivia-image').src = questionObj.image;
+                const answersDiv = document.getElementById('answers');
+                answersDiv.innerHTML = '';
+
+                questionObj.options.forEach(option => {
+                    const answerDiv = document.createElement('div');
+                    answerDiv.classList.add('answer-option');
+                    answerDiv.innerText = option;
+                    answerDiv.setAttribute('data-answer', option);
+                    answersDiv.appendChild(answerDiv);
+                });
+
+                startProgressBar(questionObj);
+            }
+
+            function startProgressBar(question) {
+                let progress = 0;
+                progressBar.style.width = '0%';
+                progressBar.style.backgroundColor = '#68BD46';
+
+                const progressInterval = setInterval(() => {
+                    progress += interval;
+                    const percentage = (progress / duration) * 100;
+                    progressBar.style.width = `${percentage}%`;
+
+                    if (percentage >= 66) {
+                        progressBar.style.backgroundColor = '#EF3A5D';
+                    } else if (percentage >= 33) {
+                        progressBar.style.backgroundColor = '#F68827';
+                    }
+
+                    if (progress >= duration) {
+                        clearInterval(progressInterval);
+                        revealAnswer(question.answer);
+                    }
+                }, interval);
+            }
+
+            function revealAnswer(correctAnswer) {
+                const allAnswers = document.querySelectorAll('.answer-option');
+                allAnswers.forEach(answer => {
+                    if (answer.getAttribute('data-answer') === correctAnswer) {
+                        answer.classList.add('highlight-correct');
+                    }
+                });
+
+                setTimeout(() => displayQuestion(getStoredQuestion()), 3000);
+            }
+
+            displayQuestion(getStoredQuestion());
+        </script>
+</body>
+
+</html>
