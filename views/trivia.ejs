@@ -203,8 +203,6 @@
         answerDiv.setAttribute('data-answer', option);
         answersDiv.appendChild(answerDiv);
       });
-
-      startProgressBar(questionObj);
     }
 
     function startProgressBar(question) {
@@ -230,6 +228,12 @@
       }, interval);
     }
 
+    function startTrivia() {
+      const currentQuestion = getStoredQuestion();
+      displayQuestion(currentQuestion);
+      startProgressBar(currentQuestion)
+    }
+
     function revealAnswer(correctAnswer) {
       const allAnswers = document.querySelectorAll('.answer-option');
       allAnswers.forEach(answer => {
@@ -238,10 +242,12 @@
         }
       });
 
-      setTimeout(() => displayQuestion(getStoredQuestion()), 6000);
+      setTimeout(() => startTrivia(), 6000);
     }
 
-    displayQuestion(getStoredQuestion());
+    window.onload = () => {
+        setTimeout(() => startTrivia(), 1000);
+    }
   </script>
 </body>
 
