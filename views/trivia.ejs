@@ -267,8 +267,7 @@
     }
 
 
-    startTrivia = async () => {
-      if (typeof blockUntilStart === 'function') await blockUntilStart();
+    startTrivia = () => {
       const currentQuestion = getStoredQuestion();
       displayQuestion(currentQuestion);
       startProgressBar(currentQuestion)
@@ -286,7 +285,7 @@
     }
 
     window.onload = () => {
-      setTimeout(() => startTrivia(), 1000);
+      setTimeout(() => startTrivia(), 11000);
     }
   </script>
 </body>
