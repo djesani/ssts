@@ -147,9 +147,15 @@
     <img id="trivia-image" src="" alt="Trivia Image">
     <div id="question" class="question"></div>
     <div id="answers" class="answers"></div>
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-wrapper"
+      style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 1vh;">
+      <div class="progress-container" style="flex-grow: 1; margin-right: 1vw;">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div id="countdown" style="font-size: 1.2em; font-weight: bold; color: #333;">25s</div>
     </div>
+
+
   </div>
 
   <script>
@@ -205,15 +211,46 @@
       });
     }
 
+    // function startProgressBar(question) {
+    //   let progress = 0;
+    //   progressBar.style.width = '0%';
+    //   progressBar.style.backgroundColor = '#68BD46';
+
+    //   const progressInterval = setInterval(() => {
+    //     progress += interval;
+    //     const percentage = (progress / duration) * 100;
+    //     progressBar.style.width = `${percentage}%`;
+
+    //     if (percentage >= 66) {
+    //       progressBar.style.backgroundColor = '#EF3A5D';
+    //     } else if (percentage >= 33) {
+    //       progressBar.style.backgroundColor = '#F68827';
+    //     }
+
+    //     if (progress >= duration) {
+    //       clearInterval(progressInterval);
+    //       revealAnswer(question.answer);
+    //     }
+    //   }, interval);
+    // }
+
     function startProgressBar(question) {
       let progress = 0;
+      let secondsLeft = duration / 1000;
       progressBar.style.width = '0%';
       progressBar.style.backgroundColor = '#68BD46';
+      document.getElementById('countdown').innerText = `${secondsLeft}s`;
 
       const progressInterval = setInterval(() => {
         progress += interval;
         const percentage = (progress / duration) * 100;
         progressBar.style.width = `${percentage}%`;
+
+        const newSecondsLeft = Math.ceil((duration - progress) / 1000);
+        if (newSecondsLeft !== secondsLeft) {
+          secondsLeft = newSecondsLeft;
+          document.getElementById('countdown').innerText = `${secondsLeft}s`;
+        }
 
         if (percentage >= 66) {
           progressBar.style.backgroundColor = '#EF3A5D';
@@ -223,12 +260,15 @@
 
         if (progress >= duration) {
           clearInterval(progressInterval);
+          document.getElementById('countdown').innerText = `0s`;
           revealAnswer(question.answer);
         }
       }, interval);
     }
 
-    function startTrivia() {
+
+    startTrivia = async () => {
+      if (typeof blockUntilStart === 'function') await blockUntilStart();
       const currentQuestion = getStoredQuestion();
       displayQuestion(currentQuestion);
       startProgressBar(currentQuestion)
@@ -246,7 +286,7 @@
     }
 
     window.onload = () => {
-        setTimeout(() => startTrivia(), 1000);
+      setTimeout(() => startTrivia(), 1000);
     }
   </script>
 </body>
