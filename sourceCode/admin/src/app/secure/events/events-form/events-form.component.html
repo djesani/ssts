@@ -18,9 +18,7 @@
                         </div>
                         <div class="form-control-group">
                             <label>Description</label>
-                            <ckeditor class="form-control description" [config]="cKEditorConfig" [editor]="Editor"
-                                formControlName="description">
-                            </ckeditor>
+                            <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
                             <div class="invalid-feedback">Description is required</div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { SharedModule } from "../../shared/shared.module";
 
@@ -20,7 +20,7 @@ import { EventsService } from "./events.service";
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    CKEditorModule,
+    AngularEditorModule,
   ],
   exports: [EventsFormComponent, EventsListComponent, EventsSearchPipe],
 

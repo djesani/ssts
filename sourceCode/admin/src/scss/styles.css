@@ -330,7 +330,8 @@ label {
 .file-upload.is-invalid,
 .form-control.ng-invalid.ng-touched,
 .form-control.ng-invalid.ng-touched:focus,
-.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload {
+.form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload,
+angular-editor.ng-invalid.ng-touched .angular-editor {
     border: 2px solid #690f7978 !important;
 }
 
@@ -349,6 +350,10 @@ label {
 
 .file.form-control.ng-invalid.ng-touched+.invalid-feedback {
     font-size: 16px !important;
+}
+
+ {
+    
 }
 
 .invalid-feedback {
@@ -799,12 +804,12 @@ input:checked+.slider:before {
 }
 
 #main-content .search-container {
-    padding: 0 0px 0 10px;
+    padding: 0 10px 0 5px;
 }
 
 .sidemenu-collapsed-hover #main-content .search-container,
 .sidemenu-expanded #main-content .search-container {
-    padding: 0 4px 0 12px;
+    padding: 0 10px 0 3px;
 }
 
 #main-content .header-nav {
@@ -820,6 +825,11 @@ input:checked+.slider:before {
     border-bottom: 2px solid #690f79;
     padding: 10px 0;
     color: var(--bs-secondary);
+}
+
+.row.row-event .actions {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .row-event {
@@ -1039,6 +1049,12 @@ body ngb-datepicker .ngb-dp-today .btn-light {
 .calendarIcons .btn:hover,
 .calendarIcons .btn {
     color: #fff;
+}
+
+.row-event-header {
+    position: sticky;
+    top: 64px;
+    background: #f6edef;
 }
 
 @media screen and (max-width: 992px) {
