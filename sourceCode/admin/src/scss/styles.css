@@ -76,7 +76,7 @@ textarea,
 input {
     font-size: 18px;
     /* width: 80%; */
-    border: 2px solid darksalmon;
+    border: 1px solid darksalmon;
     padding: 10px 15px;
     border-radius: 5px;
 }
@@ -173,7 +173,7 @@ h5 {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
-    min-height: 130px;
+    min-height: 308px;
     display: block;
 }
 
@@ -332,14 +332,21 @@ label {
 .form-control.ng-invalid.ng-touched:focus,
 .form-control-group.image-url-fcg .form-control.ng-invalid.ng-touched~.input-group.file-upload,
 angular-editor.ng-invalid.ng-touched .angular-editor {
-    border: 2px solid #690f7978 !important;
+    border: 1px solid #690f7978 !important;
 }
 
+.angular-editor:focus,
+.angular-editor:focus angular-editor-toolbar:focus,
 .form-check-input:focus,
 .form-control:focus {
     outline: none;
     box-shadow: 0 0 0 4px #fea50054 !important;
 }
+
+.angular-editor:focus {
+    border-top: 0;
+}
+
 
 .form-control.ng-invalid.ng-touched+.invalid-feedback {
     display: block;
@@ -1034,6 +1041,7 @@ ngb-datepicker.dropdown-menu {
 body ngb-datepicker .ngb-dp-today .btn-light {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+    color:#fff;
 }
 
 .calendarIcons .published-status .published,
@@ -1082,7 +1090,7 @@ body ngb-datepicker .ngb-dp-today .btn-light {
 }
 
 .angular-editor-textarea {
-    min-height: 218px !important;
+    min-height: 265px !important;
 }
 
 @media screen and (max-width: 992px) {
