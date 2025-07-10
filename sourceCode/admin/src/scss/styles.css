@@ -352,9 +352,7 @@ angular-editor.ng-invalid.ng-touched .angular-editor {
     font-size: 16px !important;
 }
 
- {
-    
-}
+    {}
 
 .invalid-feedback {
     color: #ff6e40 !important;
@@ -1080,10 +1078,13 @@ body ngb-datepicker .ngb-dp-today .btn-light {
     background-color: #fff;
 }
 
-.angular-editor-textarea:focus{
+.angular-editor-textarea:focus {
     outline: none !important;
     box-shadow: 0 0 0 0.2rem rgba(254, 145, 19, .25) !important;
-    min-height: 300px !important;
+}
+
+.angular-editor-textarea {
+    min-height: 218px !important;
 }
 
 @media screen and (max-width: 992px) {
