@@ -352,8 +352,6 @@ angular-editor.ng-invalid.ng-touched .angular-editor {
     font-size: 16px !important;
 }
 
-    {}
-
 .invalid-feedback {
     color: #ff6e40 !important;
     opacity: 0;
