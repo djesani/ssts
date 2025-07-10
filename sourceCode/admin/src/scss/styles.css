@@ -1057,6 +1057,35 @@ body ngb-datepicker .ngb-dp-today .btn-light {
     background: #f6edef;
 }
 
+.angular-editor-toolbar {
+    padding: 4px !important;
+    background-color: #f7694733 !important;
+    border: 1px solid rgba(254, 145, 19, .5019607843) !important;
+}
+
+.angular-editor-wrapper {
+    border: 0 !important;
+    background-color: #fff;
+}
+
+.angular-editor-wrapper {
+    border: 1px solid rgba(254, 145, 19, .5) !important;
+    background-color: #fff;
+    margin-top: -5px;
+    border-top: 0 !important;
+}
+
+.angular-editor-wrapper .angular-editor-textarea {
+    border: 0 !important;
+    background-color: #fff;
+}
+
+.angular-editor-textarea:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 0.2rem rgba(254, 145, 19, .25) !important;
+    min-height: 300px !important;
+}
+
 @media screen and (max-width: 992px) {
     #unpublished {
         margin-left: 0px;
