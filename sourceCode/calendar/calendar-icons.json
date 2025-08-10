@@ -1,20 +1,109 @@
 [{
-
-        "imageurl": "/images/calendaricons/ekadashi-fast.png",
         "name": "Fast",
+        "imageurl": "/images/events/ekadashi-fast.png",
         "unpublished": false,
-        "filename": "test1"
+        "filename": ""
     },
     {
-        "imageurl": "/images/calendaricons/Raas.png",
+        "name": "Ekadashi",
+        "imageurl": "/images/events/ekadashi-fast.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Panchmi",
+        "imageurl": "/images/events/ekadashi-fast.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Jayanti",
+        "imageurl": "/images/events/ekadashi-fast.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
         "name": "Raas",
+        "imageurl": "/images/events/Raas.png",
         "unpublished": false,
-        "filename": "test2"
+        "filename": ""
     },
     {
-        "imageurl": "/images/events/holika-dahan.png",
-        "name": "Holika",
+        "name": "10th",
+        "imageurl": "/images/events/10thLogo.png",
         "unpublished": false,
-        "filename": "test3"
+        "filename": ""
+    },
+    {
+        "name": "Poojan/Ankoot",
+        "imageurl": "/images/events/CalendarAnkoot.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Abhishek",
+        "imageurl": "/images/events/abhishek.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Eclipse",
+        "imageurl": "/images/events/eclipse.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Hanuman",
+        "imageurl": "/images/events/hanuman-jayanti.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Hindola",
+        "imageurl": "/images/events/hindola.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Holika",
+        "imageurl": "/images/events/holika-dahan.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "India",
+        "imageurl": "/images/events/india-independence.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Janmashtmi",
+        "imageurl": "/images/events/janmashtmi.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Krushna",
+        "imageurl": "/images/events/krushna-janmashtmi.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Krishna",
+        "imageurl": "/images/events/krushna-janmashtmi.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Laxmi",
+        "imageurl": "/images/events/laxmi-poojan.png",
+        "unpublished": false,
+        "filename": ""
+    },
+    {
+        "name": "Ramnavmi",
+        "imageurl": "/images/events/ramnavmi.png",
+        "unpublished": false,
+        "filename": ""
     }
 ]

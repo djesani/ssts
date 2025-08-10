@@ -1,35 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/guard/auth.service';
-import { Role } from 'src/app/core/models/role';
-
-
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../../core/auth/auth.service";
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html'
+  selector: "app-login",
+  standalone: false,
+  templateUrl: "./login.component.html",
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
-  error = '';
+  error = "";
 
-  hide = true;
-  // userPermissions: any;
-  loading = false;
   returnUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
 
@@ -39,37 +33,34 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.error = '';
+    this.error = "";
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-      this.error = 'Username and Password not valid !';
+      this.error = "Username and Password not valid !";
       return;
     } else {
       this.authService
-        .login(this.f['username'].value, this.f['password'].value)
-        .subscribe(
-          (res) => {
-            if (res) {
-              setTimeout(() => {
-                const role = this.authService.currentUserValue.role;
-                if (role === Role.All || role === Role.Admin) {
-                  this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
-                  this.router.navigate([this.returnUrl]);
-                } else {
-                  this.router.navigate(['/public/login']);
-                }
-              }, 1000);
+        .login(this.f["username"].value, this.f["password"].value)
+        .subscribe({
+          next: (n) => {},
+          error: (error) => {
+            console.log("login status", error.status);
+            if (error.status == 200) {
+              this.authService.setIsLoggedIn(true);
+              // get return url from route parameters or default to '/'
+              const returnUrl =
+                this.route.snapshot.queryParams["returnUrl"] || "/";
+              localStorage.setItem("isLoggedIn", "true");
+              this.router.navigate([returnUrl]);
             } else {
-              this.error = 'Invalid Login';
+              if (error.status == 401) {
+                this.error = "Username or Password is incorrect.";
+              }
+              this.authService.setIsLoggedIn(false);
             }
           },
-          (error) => {
-            this.error = error;
-            this.submitted = false;
-          }
-        );
+        });
     }
   }
 }

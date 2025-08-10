@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .lyrics-container {
+            text-align: center;
+            overflow: hidden;
+            width: 80%;
+        }
+
+        .lyric {
+            opacity: 0;
+            transform: scale(1.2);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            margin: 20px 0;
+        }
+
+        .lyric.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="lyrics-container">
+        <p class="lyric">This is the first line of the song</p>
+        <p class="lyric">Here's the second line coming in</p>
+        <p class="lyric">And now the third line appears</p>
+        <p class="lyric">Finally, the fourth line is here</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lyrics = document.querySelectorAll('.lyric');
+            let index = 0;
+
+            function showNextLyric() {
+                if (index > 0) {
+                    lyrics[index - 1].classList.remove('active');
+                }
+                if (index < lyrics.length) {
+                    lyrics[index].classList.add('active');
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }
+
+            const interval = setInterval(showNextLyric, 2000);
+        });
+    </script>
+</body>
+</html>
