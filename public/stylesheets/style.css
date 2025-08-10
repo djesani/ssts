@@ -250,6 +250,10 @@ div.bg-dark {
     background-color: #8f2024 !important;
 }
 
+.bg-purple {
+    background-color: #5f2647 !important;
+}
+
 .input-error {
     background-color: #f5a4a4;
 }
@@ -287,7 +291,7 @@ div.bg-dark {
 
 #clockdiv {
     font-family: sans-serif;
-    color: #ee9967;
+    color: #99496e;
     justify-content: space-between;
     font-weight: 100;
     text-align: center;
@@ -305,7 +309,7 @@ div.bg-dark {
 #clockdiv div>span {
     padding: 15px 25px 15px 25px;
     border-radius: 10px;
-    background: #fff;
+    background: #f9eccf;
     display: inline-block;
 }
 
@@ -313,7 +317,7 @@ div.bg-dark {
     padding-top: 5px;
     font-size: 1.5em;
     font-weight: bold;
-    color: #ee9967;
+    color: #f9eccf;
     text-align: center;
 }
 
@@ -322,7 +326,7 @@ div.bg-dark {
     padding-bottom: 5px;
     font-size: 1em;
     font-weight: bold;
-    color: #ee9967;
+    color: #f9eccf;
     text-align: center;
 }
 
