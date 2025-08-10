@@ -393,11 +393,11 @@ div.bg-dark {
 
 .countdown-header {
     padding: 15px 20px;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 700;
     color: #f9eccf;
     text-align: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 2px;
     background: linear-gradient(135deg, rgba(153, 73, 110, 0.8) 0%, rgba(153, 73, 110, 0.6) 100%);
     border-radius: 25px;
