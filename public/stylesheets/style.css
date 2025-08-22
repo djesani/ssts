@@ -250,6 +250,10 @@ div.bg-dark {
     background-color: #8f2024 !important;
 }
 
+.bg-purple {
+    background-color: #5f2647 !important;
+}
+
 .input-error {
     background-color: #f5a4a4;
 }
@@ -284,55 +288,201 @@ div.bg-dark {
 }
 
 /* Countdown timer styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* Add a subtle pulse animation to the countdown numbers */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Add a glow effect for the countdown container */
+.bg-purple {
+    background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #6a1b9a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-purple::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+}
 
 #clockdiv {
-    font-family: sans-serif;
-    color: #ee9967;
-    justify-content: space-between;
-    font-weight: 100;
+    font-family: 'Poppins', sans-serif;
+    color: #99496e;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
     text-align: center;
     font-size: 4.5em;
-    padding-right: 0px !important;
-    margin-right: 0px !important;
+    padding: 5px 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: 1200px;
 }
 
 #clockdiv>div {
+    padding: 8px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Special styling for the logo container */
+#clockdiv>div:first-child {
+    min-width: 200px;
     padding: 10px;
-    border-radius: 3px;
-    display: inline-block;
+    align-self: center;
+}
+
+#clockdiv>div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(249, 236, 207, 0.3);
 }
 
 #clockdiv div>span {
-    padding: 15px 25px 15px 25px;
-    border-radius: 10px;
-    background: #fff;
+    padding: 20px 15px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #faedd3 0%, #f6e8cc 100%);
     display: inline-block;
+    box-shadow: 0 8px 20px rgba(153, 73, 110, 0.15);
+    border: 2px solid rgba(153, 73, 110, 0.1);
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#clockdiv div>span.pulse {
+    animation: pulse 0.6s ease-in-out;
+}
+
+#clockdiv div>span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+#clockdiv div>span:hover::before {
+    left: 100%;
 }
 
 .countdown-header {
-    padding-top: 5px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #ee9967;
+    padding: 15px 20px;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #f9eccf;
     text-align: center;
+    /* text-transform: uppercase; */
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, rgba(153, 73, 110, 0.8) 0%, rgba(153, 73, 110, 0.6) 100%);
+    border-radius: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 .countdown-footer {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    color: #ee9967;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #f9eccf;
     text-align: center;
+    background: rgba(153, 73, 110, 0.3);
+    border-radius: 20px;
+    margin: 15px auto;
+    max-width: 600px;
+    border: 1px solid rgba(249, 236, 207, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 .countdown-img {
-    width: 150px;
+    width: 185px;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(153, 73, 110, 0.1);
+    border-radius: 15%;
+    padding: 8px;
+    background: linear-gradient(135deg, rgba(249, 236, 207, 0.15) 0%, rgba(244, 228, 179, 0.15) 100%);
+    /* border: 0px solid rgba(153, 73, 110, 0.2); */
+}
+
+.countdown-img::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(153, 73, 110, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.countdown-img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+.countdown-img:hover::before {
+    opacity: 1;
 }
 
 .smalltext {
-    padding-top: 5px;
-    font-size: 16px;
+    padding-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f9eccf;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    margin-top: 5px;
 }
 
 .other-pages.gujarati {
@@ -376,14 +526,26 @@ div.bg-dark {
 
     #clockdiv {
         font-size: 3em;
+        gap: 12px;
     }
 
     .countdown-img {
-        width: 115px;
+        width: 145px;
+        border-radius: 15%;
+        padding: 6px;
     }
 
     .countdown-header {
-        font-size: 1em;
+        font-size: 1.1em;
+        letter-spacing: 1px;
+    }
+    
+    #clockdiv>div {
+        min-width: 100px;
+    }
+    
+    #clockdiv>div:first-child {
+        min-width: 160px;
     }
 }
 
@@ -391,54 +553,135 @@ div.bg-dark {
 
     #clockdiv {
         font-size: 2em;
-        /* flex-wrap: nowrap; */
+        gap: 8px;
+        padding: 15px 0;
     }
 
     .countdown-img {
-        width: 88px;
+        width: 115px;
+        border-radius: 15%;
+        padding: 5px;
     }
 
     #clockdiv>div {
         padding: 5px;
-        border-radius: 3px;
+        border-radius: 12px;
+        min-width: 80px;
+    }
+    
+    #clockdiv>div:first-child {
+        min-width: 130px;
     }
 
     #clockdiv div>span {
-        padding: 16px 20px 15px 20px;
+        padding: 15px 12px;
+        border-radius: 12px;
+    }
+    
+    .countdown-header {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+    
+    .countdown-footer {
+        font-size: 0.9em;
+        padding: 10px 15px;
     }
 }
 
 @media (max-width: 520px) {
 
     #clockdiv {
-        font-size: 2em;
-        flex-wrap: nowrap;
-        justify-content: space-evenly;
-        margin-left: -5px;
+        font-size: 1.5em;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        padding: 10px 0;
     }
 
     .countdown-img {
-        width: 65px;
+        width: 90px;
+        border-radius: 15%;
+        padding: 4px;
     }
 
     #clockdiv>div {
         padding: 3px;
-        border-radius: 3px;
+        border-radius: 10px;
+        min-width: 70px;
+    }
+    
+    #clockdiv>div:first-child {
+        min-width: 100px;
     }
 
     #clockdiv div>span {
-        padding: 5px 10px 5px 10px;
+        padding: 10px 8px;
+        border-radius: 10px;
     }
 
     .smalltext {
-        font-size: 12px;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+    }
+
+    .countdown-header {
+        font-size: 0.9em;
+        padding: 10px 12px;
+        letter-spacing: 1px;
+    }
+
+    .countdown-footer {
+        font-size: 11px;
+        padding: 8px 12px;
+    }
+}
+
+/* Specific breakpoint for devices like Samsung Galaxy S20 (360px width) */
+@media (max-width: 400px) {
+
+    #clockdiv {
+        font-size: 1.3em;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 3px;
+        padding: 8px 0;
+    }
+
+    .countdown-img {
+        width: 75px;
+        border-radius: 15%;
+        padding: 3px;
+    }
+
+    #clockdiv>div {
+        padding: 2px;
+        border-radius: 8px;
+        min-width: 60px;
+    }
+    
+    #clockdiv>div:first-child {
+        min-width: 85px;
+    }
+
+    #clockdiv div>span {
+        padding: 8px 6px;
+        border-radius: 8px;
+    }
+
+    .smalltext {
+        font-size: 9px;
+        letter-spacing: 0.3px;
     }
 
     .countdown-header {
         font-size: 0.8em;
+        padding: 8px 10px;
+        letter-spacing: 0.5px;
     }
 
     .countdown-footer {
-        font-size: 12px;
+        font-size: 10px;
+        padding: 6px 10px;
     }
 }
