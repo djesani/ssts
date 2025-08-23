@@ -7,9 +7,6 @@
 </head>
 
 <body>
-    <h2>The XMLHttpRequest Object</h2>
-    <button type="button" onclick="run()">Request data</button>
-    <p id="demo"></p>
     <div id="contain"></div>
 </body>
 
@@ -26,64 +23,6 @@
      * We will make use of "Option 1: Load the API discovery document, then assemble the request."
      * as described in https://developers.google.com/api-client-library/javascript/start/start-js
      */
-
-    const getImageUrl1 = (string) => {
-        const words = string.split(" ");
-        if (words.includes("Fast", "Ekadashi", "Panchmi", "Jayanti")) {
-            return "https://sydneytemple.org/images/calendar/ekadashi-fast.png";
-        }
-        if (words.includes("Raas")) {
-            return "https://sydneytemple.org/images/events/Raas.png";
-        }
-        if (words.includes("10th")) {
-            return "https://sydneytemple.org/images/events/10thLogo.png";
-        }
-        if (words.includes("Poojan/Ankoot")) {
-            return "https://sydneytemple.org/images/events/CalendarAnkoot.png";
-        }
-
-        if (words.includes("Abhishek")) {
-            return "https://sydneytemple.org/images/events/abhishek.png";
-        }
-
-        if (words.includes("Eclipse")) {
-            return "https://sydneytemple.org/images/events/eclipse.png";
-        }
-
-        if (words.includes("Hanuman")) {
-            return "https://sydneytemple.org/images/events/hanuman-jayanti.png";
-        }
-
-        if (words.includes("Hindola")) {
-            return "https://sydneytemple.org/images/events/hindola.png";
-        }
-
-        if (words.includes("Holika")) {
-            return "https://sydneytemple.org/images/events/holika-dahan.png";
-        }
-
-        if (words.includes("India")) {
-            return "https://sydneytemple.org/images/events/india-independence.png";
-        }
-
-        if (words.includes("Janmashtmi")) {
-            return "https://sydneytemple.org/images/events/janmashtmi.png";
-        }
-
-        if (words.includes("Krushna, Krishna")) {
-            return "https://sydneytemple.org/images/events/krushna-janmashtmi.png";
-        }
-
-        if (words.includes("Laxmi")) {
-            return "https://sydneytemple.org/images/events/laxmi-poojan.png";
-        }
-
-        if (words.includes("Ramnavmi")) {
-            return "https://sydneytemple.org/images/events/ramnavmi.png";
-        }
-
-        https: return "";
-    };
 
     function printCalendar() {
         // The "Calendar ID" from your calendar settings page, "Calendar Integration" secion:
@@ -130,142 +69,128 @@
                     if (response.result.items) {
                         var calendarRows = `<div class="my-slider">`;
                         response.result.items.forEach(function (entry) {
-                            const eventImage = getImageUrl2(entry.summary);
+                            const eventImage = getImageUrl(entry.summary);
                             const startDateTime = entry.start.dateTime;
-
-                            console.log("entry", entry);
 
                             if (startDateTime) {
                                 if (eventImage) {
-                                    calendarRows =
-                                        calendarRows +
+                                    calendarRows = calendarRows +
                                         `
-                        <div class="event">
-                          <div class="slide">
-                            <div class="date">
-                              <div class="mmm">
-                              ${dayjs(entry.start.dateTime).format("MMMM")} 
-                              </div>
-                              <div class="dd">
-                              ${dayjs(entry.start.dateTime).format("DD")} 
-                              </div>
-                            </div>
-                            <div class="info">
-                              <div class="info-time">
-                                <div class="day">
-                                  ${dayjs(entry.start.dateTime).format(
-                                            "dddd "
-                                        )} 
-                                  <span class="time">
-                                    ${dayjs(entry.start.dateTime).format(
-                                            "h:mma"
-                                        )} 
-                                  </span>
-                                </div>
-                              </div>
-                              <div class="title">
-                                ${entry.summary}
-                              </div>
-                            </div>
-                          </div>
-                          <div class="image"> 
-                            <img src="${eventImage}">
-                          </div>
-                        </div>
-                    `;
+                                        <div class="event">
+                                            <div class="slide">
+                                                <div class="date">
+                                                <div class="mmm">
+                                                    ${dayjs(entry.start.dateTime).format("MMMM")} 
+                                                </div>
+                                                <div class="dd">
+                                                    ${dayjs(entry.start.dateTime).format("DD")} 
+                                                </div>
+                                                </div>
+                                                <div class="info">
+                                                <div class="info-time">
+                                                    <div class="day">
+                                                        ${dayjs(entry.start.dateTime).format("dddd ")} 
+                                                    <span class="time">
+                                                        ${dayjs(entry.start.dateTime).format("h:mma")} 
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                                <div class="title">
+                                                    ${entry.summary}
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="image"> 
+                                                <img src="${eventImage}">
+                                            </div>
+                                        </div>
+                                        `;
                                 } else {
-                                    calendarRows =
-                                        calendarRows +
+                                    calendarRows = calendarRows +
                                         `
-                        <div class="event">
-                          <div class="slide">
-                            <div class="date">
-                              <div class="mmm">
-                                ${dayjs(entry.start.dateTime).format("MMMM")} 
-                              </div>
-                              <div class="dd">
-                              ${dayjs(entry.start.dateTime).format("DD")} 
-                              </div>
-                            </div>
-                            <div class="info">
-                              <div class="info-time">
-                                <div class="day">
-                                  ${dayjs(entry.start.dateTime).format(
-                                            "dddd "
-                                        )} 
-                                  <span class="time">
-                                    ${dayjs(entry.start.dateTime).format(
-                                            "h:mma"
-                                        )} 
-                                  </span>
-                                </div>
-                              </div>
-                              <div class="title">
-                                ${entry.summary}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      `;
+                                    <div class="event">
+                                        <div class="slide">
+                                            <div class="date">
+                                            <div class="mmm">
+                                                ${dayjs(entry.start.dateTime).format("MMMM")} 
+                                            </div>
+                                            <div class="dd">
+                                                ${dayjs(entry.start.dateTime).format("DD")} 
+                                            </div>
+                                            </div>
+                                            <div class="info">
+                                            <div class="info-time">
+                                                <div class="day">
+                                                ${dayjs(entry.start.dateTime).format("dddd ")} 
+                                                <span class="time">
+                                                    ${dayjs(entry.start.dateTime).format("h:mma")} 
+                                                </span>
+                                                </div>
+                                            </div>
+                                            <div class="title">
+                                                ${entry.summary}
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `;
                                 }
                             } else {
                                 if (eventImage) {
-                                    calendarRows =
-                                        calendarRows +
+                                    calendarRows = calendarRows +
                                         `
-                      <div class="event">
-                        <div class="slide">
-                          <div class="date">
-                            <div class="mmm">${dayjs(entry.start.date).format(
-                                            "MMMM"
-                                        )} </div>
-                            <div class="dd">${dayjs(entry.start.date).format(
-                                            "DD"
-                                        )} </div>
-                          </div>
-                          <div class="info">
-                            <div class="info-time">
-                              <div class="day">${dayjs(entry.start.date).format(
-                                            "dddd"
-                                        )} </div>
-                            </div>
-                            <div class="title">
-                              ${entry.summary}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="image"> 
-                          <img src="${eventImage}">
-                        </div>
-                      </div>
-                  `;
+                                        <div class="event">
+                                            <div class="slide">
+                                            <div class="date">
+                                                <div class="mmm">
+                                                    ${dayjs(entry.start.date).format("MMMM")}
+                                                </div>
+                                                <div class="dd">
+                                                    ${dayjs(entry.start.date).format("DD")}
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                <div class="info-time">
+                                                <div class="day">
+                                                    ${dayjs(entry.start.date).format("dddd")}
+                                                </div>
+                                                </div>
+                                                <div class="title">
+                                                    ${entry.summary}
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="image"> 
+                                                <img src="${eventImage}">
+                                            </div>
+                                        </div>
+                                        `;
                                 } else {
-                                    calendarRows =
-                                        calendarRows +
+                                    calendarRows = calendarRows +
                                         `
-                      <div class="event">
-                        <div class="slide">
-                          <div class="date">
-                            <div class="mmm">${dayjs(entry.start.date).format(
-                                            "MMMM"
-                                        )} </div>
-                            <div class="dd">${dayjs(entry.start.date).format(
-                                            "DD"
-                                        )} </div>
-                          </div>
-                          <div class="info">
-                            <div class="info-time">
-                              <div class="day">${dayjs(entry.start.date).format(
-                                            "dddd"
-                                        )} </div>
-                            </div>
-                            <div class="title">
-                              ${entry.summary}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    `;
+                                        <div class="event">
+                                            <div class="slide">
+                                            <div class="date">
+                                                <div class="mmm">
+                                                    ${dayjs(entry.start.date).format("MMMM")} 
+                                                </div>
+                                                <div class="dd">
+                                                    ${dayjs(entry.start.date).format("DD")}
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                <div class="info-time">
+                                                <div class="day">
+                                                    ${dayjs(entry.start.date).format("dddd")}
+                                                </div>
+                                                </div>
+                                                <div class="title">
+                                                ${entry.summary}
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        `;
                                 }
                             }
                         });
@@ -297,7 +222,7 @@
     }
 
     // Loads the JavaScript client library and invokes `start` afterwards.
-    // gapi.load("client", printCalendar);
+    gapi.load("client", printCalendar);
 </script>
 <style>
     #contain {
@@ -419,7 +344,6 @@
 
 <script>
     let iconsData;
-    let eventsData;
 
     async function getIconsData() {
         fetch('calendar-icons.json')
@@ -429,67 +353,21 @@
             })
     }
 
-    async function getEventsData() {
-        fetch('calendar-events.json')
-            .then((response) => response.json())
-            .then((data) => {
-                eventsData = data;
-            })
-    }
-
     function getImageUrl(s) {
-        // path = "https://sydneytemple.org";
+        domain = "https://sydneytemple.org"
         var stringWordsList = s.split(" ");
-        var test = ""
-        // console.log('iconsData ===', iconsData)
-        // console.log('stringWordsList', stringWordsList)
+        var url = "";
         iconsData.forEach(function (arrayItem) {
-
-            // console.log('iconsData', iconsData)
-
-            //  console.log('arrayItem', arrayItem.name)
             if (stringWordsList.includes(arrayItem.name)) {
-                // arrayItem.abc =  arrayItem.imageurl;
-                // console.log('matched', arrayItem.name,  arrayItem.imageurl)
-                // return arrayItem.imageurl;
-                test = arrayItem.imageurl;
+                url = domain + arrayItem.imageurl;
             }
-            
         });
-
-        return   test;
+        return url;
     }
-
 
     function run() {
         getIconsData();
-        getEventsData();
-
-        setTimeout(() => {
-            
-            // console.log('iconsData', iconsData);
-            // console.log('eventsData', eventsData);
-
-            eventsData.forEach(function (event) {
-                // console.log('event', event)
-                // console.log('event.summary', event.summary)
-
-                event.url = getImageUrl(event.summary);
-
-                console.log('getImageUrl(event.summary)', getImageUrl(event.summary))
-
-                // event.xzc = "aaaa";
-
-                console.log(event)
-            })
-
-            // console.log('iconsData', iconsData);
-            // console.log('eventsData', eventsData);
-
-        }, "1000");
-
     }
-
     run();
 </script>
 

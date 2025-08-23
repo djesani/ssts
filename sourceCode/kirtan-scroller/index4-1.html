@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Styles</title>
+    <style id="dynamic-styles"></style>
+</head>
+<body>
+    <ul class="list" id="list"></ul>
+
+    <script>
+        const slides = ["Slide 1", "Slide 2", "Slide 3", "Slide 4", "Slide 5", "Slide 6"]; // Example slide content
+        const numLines = 3; // Number of lines you want to display
+
+        function generateDynamicStyles(numLines) {
+            let styles = "";
+            const step = 100 / numLines;
+            for (let i = 1; i <= numLines; i++) {
+                const top = step * (i - 1);
+                const opacity = (i === 1 || i === numLines) ? 0 : "var(--default-opacity)";
+                styles += `.list .list-item:nth-child(${i}) { top: ${top}vh; opacity: ${opacity}; }\n`;
+            }
+
+            styles += `.list.up .list-item:nth-child(1) { top: 0vh; opacity: 0; }\n`;
+            for (let i = 2; i <= numLines; i++) {
+                styles += `.list.up .list-item:nth-child(${i}) { top: ${step * (i - 2)}vh; opacity: ${i === 2 ? 0 : 'var(--default-opacity)'}; }\n`;
+            }
+
+            styles += `.list.down .list-item:nth-child(1) { top: ${step * 2}vh; opacity: var(--default-opacity); }\n`;
+            for (let i = 2; i <= numLines; i++) {
+                styles += `.list.down .list-item:nth-child(${i}) { top: ${step * (i - 1)}vh; opacity: ${i === numLines ? 0 : 'var(--default-opacity)'}; }\n`;
+            }
+
+            return styles;
+        }
+
+        function injectStyles(styles) {
+            const styleSheet = document.getElementById("dynamic-styles");
+            styleSheet.textContent = styles;
+        }
+
+        function renderSlides(numLines) {
+            const list = document.getElementById('list');
+            list.innerHTML = '';
+            for (let i = 0; i < numLines; i++) {
+                const li = document.createElement('li');
+                li.className = 'list-item';
+                li.innerText = slides[i] || "";
+                list.appendChild(li);
+            }
+        }
+
+        const dynamicStyles = generateDynamicStyles(numLines);
+        injectStyles(dynamicStyles);
+        renderSlides(numLines);
+    </script>
+</body>
+</html>

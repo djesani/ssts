@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Animation</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #lyrics {
+            font-size: 2em;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            color: white;
+        }
+        .visible {
+            opacity: 1;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            background: #1db954;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1em;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .controls button:hover {
+            background: #14833b;
+        }
+    </style>
+</head>
+<body>
+    <div id="lyrics">Press "Next" to start</div>
+    <div class="controls">
+        <button id="prev">Prev</button>
+        <button id="next">Next</button>
+    </div>
+    <script>
+        const lyrics = [
+            "This is the first line of the song",
+            "Here comes the second line",
+            "Now we're on the third line",
+            "Finally, this is the fourth line"
+        ];
+
+        let currentIndex = -1;
+        
+        const lyricsElement = document.getElementById('lyrics');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        function updateLyrics() {
+            if (currentIndex >= 0 && currentIndex < lyrics.length) {
+                lyricsElement.classList.remove('visible');
+                setTimeout(() => {
+                    lyricsElement.textContent = lyrics[currentIndex];
+                    lyricsElement.classList.add('visible');
+                }, 500);
+            }
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateLyrics();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < lyrics.length - 1) {
+                currentIndex++;
+                updateLyrics();
+            }
+        });
+
+        // Initial lyrics display
+        updateLyrics();
+    </script>
+</body>
+</html>

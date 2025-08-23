@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lyrics Slideshow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" id="theme">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides" id="slides">
+            <!-- Slides will be generated dynamically here -->
+            <!-- <p class="fragment">Fade in</p>
+            <p class="fragment fade-out">Fade out</p>
+            <p class="fragment highlight-red">Highlight red</p>
+            <p class="fragment fade-in-then-out">Fade in, then out</p>
+            <p class="fragment fade-up">Slide up while fading in</p> -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script>
+        async function fetchLyrics() {
+            const response = await fetch('lyrics.json');
+            const data = await response.json();
+            return data.lyrics;
+        }
+
+        function createSlides(lyrics) {
+            const slidesElement = document.getElementById('slides');
+
+            // for (let i = 0; i <= lyrics.length; i++) {
+                const slide = document.createElement('section');
+
+                // for (let j = 0; j; j++) {
+                for (let i = 0; i <= lyrics.length; i++) {
+                    const line = document.createElement('section');
+                    line.textContent = lyrics[i];
+                    slide.appendChild(line);
+                }
+
+                slidesElement.appendChild(slide);
+            // }
+        }
+
+        async function initialize() {
+            const lyrics = await fetchLyrics();
+            createSlides(lyrics);
+
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                transition: 'slide', // Choose your transition style
+                transitionSpeed: 'fast'
+            });
+        }
+
+        initialize();
+    </script>
+</body>
+
+</html>

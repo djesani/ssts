@@ -9,9 +9,7 @@ app
 - app.module.ts
 
 core
--- guard
--- interceptor
--- models
+-- auth
 core.module.ts
 
 layout
@@ -27,11 +25,6 @@ public
 -- page404
 public-routing.module.ts
 public.module.ts
-
-secure
--- admin
-secure-routing.module.ts
-secure.module.ts
 
 shared
 -- directives
