@@ -1,64 +1,222 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <% include partials/header %>
-    <title>Our Temple Deities</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Shree Swaminarayan Mandir Bhuj Sydney Sydney">
+    <meta property="og:title" content="Hindu Temple Murtis - Sacred Deities Collection">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@lovable_dev">
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+
     <style>
-      .center-image {
-        text-align: center;
-      }
-
-      figcaption {
-        text-align: center;
-      }
-
-      .deities-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 24px;
-      }
-
-      figure.deity-card {
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
         margin: 0;
+        padding: 0;
+      }
+
+      /* body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.5;
+        color: #1a1a1a;
+        background-color: #ffffff;
+      } */
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .grid-cols-1 {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      @media (min-width: 640px) {
+        .sm\:grid-cols-2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 768px) {
+        .md\:grid-cols-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .lg\:grid-cols-4 {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .xl\:grid-cols-5 {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+
+      .header {
+        padding: 1rem 0 0.25rem 0;
         text-align: center;
+      }
+
+      .title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+
+      .subtitle {
+        font-size: 1.125rem;
+        margin-bottom: 0;
+        color: #6b7280;
+      }
+
+      .main {
+        padding: 0 0 2rem 0;
+        min-height: 60vh;
+      }
+
+      .card {
+        border: 3px solid transparent;
+        border-radius: 0.75rem;
+        background: linear-gradient(135deg, #fefefe, #f9f7f4) padding-box,
+          linear-gradient(135deg, #d97706, #ea580c) border-box;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        box-shadow: 0 4px 20px -5px rgba(61, 41, 20, 0.15);
+      }
+
+      .card:hover {
+        transform: translateY(-6px) scale(1.04);
+        box-shadow: 0 15px 40px -10px rgba(234, 88, 12, 0.5);
+      }
+
+      .card-image {
+        width: 100%;
+        height: 16rem;
+        object-fit: cover;
+        border: none;
+        transition: transform 0.5s ease;
+      }
+
+      .card:hover .card-image {
+        transform: scale(1.08);
+      }
+
+      .card-content {
+        padding: 1rem;
+        text-align: center;
+        background: linear-gradient(to bottom, #f9f7f4, #fefefe);
+      }
+
+      .card-title {
+        font-weight: 700;
+        font-size: 1.125rem;
+        color: #3d2914;
+      }
+
+      .card-title b {
+        font-weight: 700;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        padding: 1rem;
+      }
+
+      .lightbox.active {
+        display: flex;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 750px;
-        box-sizing: border-box;
       }
 
-      .deity-media {
-        width: 300px;
-        height: 600px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        overflow: hidden;
-      }
-
-      .deity-media img {
-        width: 300px;
-        height: 600px;
+      .lightbox-image {
+        max-width: 100%;
+        max-height: 80vh;
         object-fit: contain;
-        display: block;
+        border: 6px solid white;
+        border-radius: 0.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        background: #fff;
       }
 
-      .deity-name {
-        flex-shrink: 0;
-        min-height: 3em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 8px;
+      .lightbox-info {
+        margin-top: 1rem;
+        text-align: center;
+        color: white;
       }
 
-      figure {
-        border: 2px solid #ccc;
-        padding: 10px;
-        border-radius: 8px;
-        background-color: #fff;
+      .lightbox-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .lightbox-counter {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .lightbox-btn {
+        position: absolute;
+        color: white;
+        cursor: pointer;
+        padding: 1rem;
+        user-select: none;
+        font-size: 2rem;
+      }
+
+      .lightbox-btn:hover {
+        color: #ffbf4d;
+      }
+
+      .lightbox-close {
+        top: 1rem;
+        right: 1rem;
+      }
+
+      .lightbox-prev,
+      .lightbox-next {
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+      }
+
+      .lightbox-prev {
+        left: 1rem;
+      }
+
+      .lightbox-next {
+        right: 1rem;
       }
     </style>
 </head>
@@ -66,93 +224,109 @@
 <body>
   <% include partials/menu %>
 
-    <div class="container bg-light">
-      <div class="row">
-        <div class="col-sm-12 other-pages">
-          <div class="shadow-sm p-3 mb-5 bg-white rounded">
-            <h1>Temple Deities</h1>
 
-            <!-- Featured Ghanshyam Maharaj -->
-            <div class="center-image">
-              <figure class="featured-deity">
-                <img src="images/murtis/GhanshyamMaharaj.png" alt="Ghanshyam Maharaj" width="800"
-                  style="height: 80vh; width: auto; object-fit: contain;" />
-                <figcaption>
-                  <h2>Ghanshyam Maharaj</h2>
-                </figcaption>
-              </figure>
-            </div>
+    <header class="header">
+      <div class="container">
+        <h1 class="title">Temple Deities</h1>
+        <p class="subtitle">Sacred Murtis</p>
+      </div>
+    </header>
 
-            <div class="deities-grid">
-              <figure>
-                <img src="images/murtis/NarnarayanDev.png" alt="Shree Narnarayan Dev" width="300" />
-                <figcaption>
-                  <h2>Shree Narnarayan Dev</h2>
-                </figcaption>
-              </figure>
+    <!-- Murtis Grid -->
+    <main class="main">
+      <div class="container">
+        <div id="murtisGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <!-- Cards populated by JavaScript -->
+        </div>
+      </div>
+    </main>
 
-              <figure>
-                <img src="images/murtis/SwaminarayanBhagwan.png" alt="Sahajanand Swami Maharaj" width="300" />
-                <figcaption>
-                  <h2>Sahajanand Swami Maharaj</h2>
-                </figcaption>
-              </figure>
+    <% include partials/footer %>
 
-              <figure>
-                <img src="images/murtis/Radhakrishna.png" alt="Shree Radhakrishna Dev" width="300" />
-                <figcaption>
-                  <h2>Shree Radhakrishna Dev</h2>
-                </figcaption>
-              </figure>
-
-              <figure>
-                <img src="images/murtis/ShivParvati.png" alt="Shree Shiva Parvati" width="300" />
-                <figcaption>
-                  <h2>Shree Shiva Parvati</h2>
-                </figcaption>
-              </figure>
-
-              <figure>
-                <img src="images/murtis/GaneshBhagwan.png" alt="Shree Ganeshji" width="300" />
-                <figcaption>
-                  <h2>Shree Ganeshji</h2>
-                </figcaption>
-              </figure>
-
-              <figure>
-                <img src="images/murtis/Shivling.png" alt="Shree Shivling" width="300" />
-                <figcaption>
-                  <h2>Shree Shivling</h2>
-                </figcaption>
-              </figure>
-
-              <figure>
-                <img src="images/murtis/LakshmanRamSita.png" alt="Shree Ram, Laxman & Sitaji" width="300" />
-                <figcaption>
-                  <h2>Shree Ram, Laxman & Sitaji</h2>
-                </figcaption>
-              </figure>
-
-              <figure>
-                <img src="images/murtis/Hanumanji.png" alt="Shree Hanumanji Maharaj" width="300" />
-                <figcaption>
-                  <h2>Shree Hanumanji Maharaj</h2>
-                </figcaption>
-              </figure>
-
-              <figure>
-                <img src="images/murtis/SuryaNarayanDev.png" alt="Shree Suryanarayan Dev" width="300" />
-                <figcaption>
-                  <h2>Shree Suryanarayan Dev</h2>
-                </figcaption>
-              </figure>
-            </div>
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox">
+        <div class="lightbox-btn lightbox-close">×</div>
+        <div class="lightbox-btn lightbox-prev">❮</div>
+        <div class="lightbox-btn lightbox-next">❯</div>
+        <div class="lightbox-content">
+          <img id="lightbox-img" class="lightbox-image" src="" alt="">
+          <div class="lightbox-info">
+            <div id="lightbox-title" class="lightbox-title"></div>
+            <div id="lightbox-counter" class="lightbox-counter"></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <% include partials/footer %>
+      <!-- Murti Script -->
+      <script>
+        const murtisData = [
+          { id: "ghanshyam-maharaj", name: "Shree Ghanshyam Maharaj", image: "images/murtis/GhanshyamMaharaj.png" },
+          { id: "narnarayan-dev", name: "Shree Nar Narayan Dev", image: "images/murtis/NarnarayanDev.png" },
+          { id: "sahajanand-swami", name: "Shree Sahajanand Swami", image: "images/murtis/SwaminarayanBhagwan.png" },
+          { id: "radhakrishna", name: "Shree Radha Krishna Dev", image: "images/murtis/Radhakrishna.png" },
+          { id: "shiva-parvati", name: "Shree Shiv Parvati", image: "images/murtis/ShivParvati.png" },
+          { id: "ganesh", name: "Shree Ganeshji", image: "images/murtis/GaneshBhagwan.png" },
+          { id: "shivling", name: "Shivling", image: "images/murtis/Shivling.png" },
+          { id: "ram-laxman-sita", name: "Shree Ram, Sita and Lakshman", image: "images/murtis/LakshmanRamSita.png" },
+          { id: "hanuman", name: "Shree Hanumanji", image: "images/murtis/Hanumanji.png" },
+          { id: "suryanarayan", name: "Shree Surya Narayan Dev", image: "images/murtis/SuryaNarayanDev.png" }
+        ];
+
+        const murtisGrid = document.getElementById('murtisGrid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        let currentIndex = 0;
+
+        function createMurtiCard(murti, index) {
+          return `
+        <div class="card" data-index="${index}" data-name="${murti.name}" data-img="${murti.image}">
+          <img src="${murti.image}" alt="${murti.name}" class="card-image"
+            onerror="this.src='https://via.placeholder.com/300x400/e5e7eb/6b7280?text=Image+Not+Found'"/>
+          <div class="card-content">
+            <h3 class="card-title"><b>${murti.name}</b></h3>
+          </div>
+        </div>`;
+        }
+
+        function renderMurtis() {
+          murtisGrid.innerHTML = murtisData.map((murti, i) => createMurtiCard(murti, i)).join('');
+          attachLightboxEvents();
+        }
+
+        function updateLightbox(index) {
+          const murti = murtisData[index];
+          lightboxImg.src = murti.image;
+          lightboxTitle.textContent = murti.name;
+          lightboxCounter.textContent = (index + 1) + " / " + murtisData.length;
+        }
+
+        function attachLightboxEvents() {
+          document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+              currentIndex = parseInt(card.dataset.index);
+              updateLightbox(currentIndex);
+              lightbox.classList.add('active');
+            });
+          });
+        }
+
+        document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.classList.remove('active'));
+        document.querySelector('.lightbox-prev').addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + murtisData.length) % murtisData.length;
+          updateLightbox(currentIndex);
+        });
+        document.querySelector('.lightbox-next').addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % murtisData.length;
+          updateLightbox(currentIndex);
+        });
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+
+        renderMurtis();
+      </script>
 </body>
 
 </html>
