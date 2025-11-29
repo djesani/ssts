@@ -13,7 +13,7 @@
     html,
     body {
       font-family: 'Poppins', sans-serif;
-      background-image: url('https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Background-scaled.webp');
+      background-image: url('/images/trivia/trivia-background.webp');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -142,8 +142,7 @@
 
 <body>
   <div class="container">
-    <img class="trivia-title" src="https://limesdigital.com/wp-content/uploads/2025/05/Trivia-Title.webp"
-      alt="Trivia Title">
+    <img class="trivia-title" src="/images/trivia/trivia-title.webp" alt="Trivia Title">
     <img id="trivia-image" src="" alt="Trivia Image">
     <div id="question" class="question"></div>
     <div id="answers" class="answers"></div>
@@ -152,53 +151,207 @@
       <div class="progress-container" style="flex-grow: 1; margin-right: 1vw;">
         <div class="progress-bar" id="progressBar"></div>
       </div>
-      <div id="countdown" style="font-size: 1.2em; font-weight: bold; color: #333;">25s</div>
+      <div id="countdown" style="font-size: 1.2em; font-weight: bold; color: #333;">30s</div>
     </div>
-
-
   </div>
 
   <script>
     const progressBar = document.getElementById('progressBar');
-    const duration = 30000;
-    const interval = 100;
+    const duration = 30000; // 30 seconds
+    const interval = 100;   // update every 0.1s
 
     const questions = [
       {
         question: "What was the childhood name of Swaminarayan Bhagwan?",
         options: ["Nilkanth Varni Maharaj", "Ghanshyam Maharaj", "Krishna Bhagwan"],
         answer: "Ghanshyam Maharaj",
-        image: "https://limesdigital.com/wp-content/uploads/2025/06/childhood.png"
+        image: "/images/trivia/trivia (8).jpg"
       },
       {
         question: "How many Ekadashis are in a year?",
         options: ["24", "26", "28"],
         answer: "24",
-        image: "https://limesdigital.com/wp-content/uploads/2025/06/ekadashi.png"
+        image: "/images/trivia/trivia (22).jpg"
       },
       {
-        question: "How many mandirs did Swaminarayan Bhagwan build?",
+        question: "How many mandirs did Maharaj build?",
         options: ["6", "8", "10"],
         answer: "6",
-        image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+        image: "/images/trivia/trivia (57).jpg"
       },
       {
         question: "Which mandir was not built by Swaminarayan Bhagwan?",
         options: ["Bhuj", "Gadhada", "Loya"],
         answer: "Loya",
-        image: "https://limesdigital.com/wp-content/uploads/2025/05/temple-image.png"
+        image: "/images/trivia/trivia (53).jpg"
       },
+      {
+        question: "What is Ghanshyam Maharaj's Mami's name?",
+        options: ["Lakshmi Mami", "Sundri Mami", "Nandu Mami"],
+        answer: "Sundri Mami",
+        image: "/images/trivia/trivia (5).jpg"
+      },
+      {
+        question: "How old was Ghanshyam Maharaj when he left for van vichran?",
+        options: [
+          "7 Years 11 Months and 3 Days",
+          "11 Years 3 Months and 1 Day",
+          "14 Years 8 Months and 21 Days"
+        ],
+        answer: "11 Years 3 Months and 1 Day",
+        image: "/images/trivia/trivia (6).jpg"
+      },
+      {
+        question: "How many items did Ghanshyam Maharaj take on van vichran?",
+        options: ["4", "7", "11"],
+        answer: "11",
+        image: "/images/trivia/trivia (26).jpg"
+      },
+      {
+        question: "When was Ghanshyam Maharaj born?",
+        options: [
+          "Chaitra Sud Nom VS 1837",
+          "Fagun Sud Nom VS 1837",
+          "Chaitra Sud Nom VS 1847"
+        ],
+        answer: "Chaitra Sud Nom VS 1837",
+        image: "/images/trivia/trivia (6).jpg"
+      },
+      {
+        question: "How many cheens does Ghanshyam Maharaj have?",
+        options: ["15", "16", "17"],
+        answer: "16",
+        image: "/images/trivia/trivia (20).jpg"
+      },
+      {
+        question: "Where did Ghanshyam Maharaj get his diksha?",
+        options: ["Loj", "Loya", "Piplana"],
+        answer: "Piplana",
+        image: "/images/trivia/trivia (35).jpg"
+      },
+      {
+        question: "Where did Nilkanth Varni meet Ramanand Swami for the first time?",
+        options: ["Piplana", "Gadhada", "Bhuj"],
+        answer: "Piplana",
+        image: "/images/trivia/trivia (34).jpg"
+      },
+      {
+        question: "Which murtis are on the left when at the entrance of the mandir?",
+        options: [
+          "Shiv, Parvati, Ganpati",
+          "Hanumanji, Ram, Lakshman, Sita, Suryanarayan"
+        ],
+        answer: "Hanumanji, Ram, Lakshman, Sita, Suryanarayan",
+        image: "/images/trivia/trivia (57).jpg"
+      },
+      {
+        question: "Where did Swaminarayan Bhagwan establish his first mandir?",
+        options: ["Ahmedabad", "Bhuj", "Jetlpur"],
+        answer: "Ahmedabad",
+        image: "/images/trivia/trivia (57).jpg"
+      },
+      {
+        question: "Where did Swaminarayan Bhagwan spend his last few years on earth?",
+        options: ["Ahmedabad", "Gadhada", "Loj"],
+        answer: "Gadhada",
+        image: "/images/trivia/trivia (51).jpg"
+      },
+      {
+        question: "Which scripture did Swaminarayan Bhagwan recommend for daily recitation?",
+        options: ["The Vedas", "Vachanamrut", "Shikshapatri"],
+        answer: "Shikshapatri",
+        image: "/images/trivia/trivia (53).jpg"
+      },
+      {
+        question: "What was the name of the village where Ghanshyam Maharaj spent most of his childhood?",
+        options: ["Chhapaiya", "Gadhada", "Loj"],
+        answer: "Chhapaiya",
+        image: "/images/trivia/trivia (10).jpg"
+      },
+      {
+        question: "What was the birth name of Swaminarayan Bhagwan?",
+        options: ["Krishna Bhagwan", "Ghanshyam Maharaj", "Swaminarayan Bhagwan"],
+        answer: "Ghanshyam Maharaj",
+        image: "/images/trivia/trivia (5).jpg"
+      },
+      {
+        question: "Which murtis are on the right when at the entrance of the mandir?",
+        options: [
+          "Shiv, Parvati, Ganpati",
+          "Hanumanji, Ram, Lakshman, Sita, Suryanarayan"
+        ],
+        answer: "Shiv, Parvati, Ganpati",
+        image: "/images/trivia/trivia (57).jpg"
+      },
+      {
+        question: "In which year was Swaminarayan Bhagwan born?",
+        options: ["VS 1837", "VS 1827", "VS 1927"],
+        answer: "VS 1837",
+        image: "/images/trivia/trivia (5).jpg"
+      },
+      {
+        question: "What was the name of Swaminarayan Bhagwan's father?",
+        options: ["Rampradha", "Vasudeva", "Dharmadev"],
+        answer: "Dharmadev",
+        image: "/images/trivia/trivia (12).jpg"
+      },
+      {
+        question: "What was the name of Swaminarayan Bhagwan's mother?",
+        options: ["Devaki", "Bhaktimata", "Radha"],
+        answer: "Bhaktimata",
+        image: "/images/trivia/trivia (9).jpg"
+      },
+      {
+        question: "At what age did Swaminarayan Bhagwan leave home to begin his spiritual journey?",
+        options: [
+          "12 Years 6 Months and 21 Days",
+          "11 Years 3 Months and 1 Day",
+          "10 Years 11 Months and 3 Days"
+        ],
+        answer: "11 Years 3 Months and 1 Day",
+        image: "/images/trivia/trivia (30).jpg"
+      },
+      {
+        question: "In which village was Swaminarayan Bhagwan born?",
+        options: ["Chhapaiya", "Gadhada", "Loj"],
+        answer: "Chhapaiya",
+        image: "/images/trivia/trivia (5).jpg"
+      },
+      {
+        question: "What name did Swaminarayan Bhagwan adopt during his travels as a child ascetic?",
+        options: ["Nilkanth Varni", "Ghanshyam", "Swaminarayan"],
+        answer: "Nilkanth Varni",
+        image: "/images/trivia/trivia (30).jpg"
+      },
+      {
+        question: "Which guru gave Swaminarayan Bhagwan the name 'Sahajanand Swami'?",
+        options: ["Nityanand Swami", "Muktanand Swami", "Ramanand Swami"],
+        answer: "Ramanand Swami",
+        image: "/images/trivia/trivia (33).jpg"
+      }
     ];
 
+
+    // Get week of year (1–52/53) based only on date
+    function getWeekOfYear(date) {
+      const firstJan = new Date(date.getFullYear(), 0, 1);
+      const pastDaysOfYear = Math.floor((date - firstJan) / 86400000); // ms in a day
+      // Adjust by the day of week of Jan 1 so weeks align to calendar weeks
+      return Math.floor((pastDaysOfYear + firstJan.getDay()) / 7) + 1;
+    }
+
+    // Always pick the question based on CURRENT week of the year
     function getStoredQuestion() {
       const now = new Date();
-      const weekNumber = Math.floor(now / (1000 * 60 * 60 * 24 * 7));
-      return questions[weekNumber % questions.length];
+      const weekOfYear = getWeekOfYear(now); // 1–52/53
+      const index = (weekOfYear - 1) % questions.length; // map to 0..questions.length-1
+      return questions[index];
     }
 
     function displayQuestion(questionObj) {
       document.getElementById('question').innerText = questionObj.question;
       document.getElementById('trivia-image').src = questionObj.image;
+
       const answersDiv = document.getElementById('answers');
       answersDiv.innerHTML = '';
 
@@ -210,29 +363,6 @@
         answersDiv.appendChild(answerDiv);
       });
     }
-
-    // function startProgressBar(question) {
-    //   let progress = 0;
-    //   progressBar.style.width = '0%';
-    //   progressBar.style.backgroundColor = '#68BD46';
-
-    //   const progressInterval = setInterval(() => {
-    //     progress += interval;
-    //     const percentage = (progress / duration) * 100;
-    //     progressBar.style.width = `${percentage}%`;
-
-    //     if (percentage >= 66) {
-    //       progressBar.style.backgroundColor = '#EF3A5D';
-    //     } else if (percentage >= 33) {
-    //       progressBar.style.backgroundColor = '#F68827';
-    //     }
-
-    //     if (progress >= duration) {
-    //       clearInterval(progressInterval);
-    //       revealAnswer(question.answer);
-    //     }
-    //   }, interval);
-    // }
 
     function startProgressBar(question) {
       let progress = 0;
@@ -266,11 +396,10 @@
       }, interval);
     }
 
-
-    startTrivia = () => {
+    function startTrivia() {
       const currentQuestion = getStoredQuestion();
       displayQuestion(currentQuestion);
-      startProgressBar(currentQuestion)
+      startProgressBar(currentQuestion);
     }
 
     function revealAnswer(correctAnswer) {
@@ -281,12 +410,14 @@
         }
       });
 
+      // After showing the answer, start again (same week's question)
       setTimeout(() => startTrivia(), 8000);
     }
 
     window.onload = () => {
+      // Delay before first question appears (for nice intro)
       setTimeout(() => startTrivia(), 11000);
-    }
+    };
   </script>
 </body>
 

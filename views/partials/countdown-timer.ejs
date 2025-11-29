@@ -1,8 +1,8 @@
-<div class="container bg-red">
-    <div class="countdown-header">Countdown to Dashabadi Mahotsav...</div>
+<div class="container bg-purple">
+    <div class="countdown-header">Countdown to Sangathan Parva - A celebration of Unity...</div>
     <div id="clockdiv" class="row col-xl-12 col-lg-12 col-md-auto col-sm-auto">
       <div>
-        <img class="countdown-img" src="images/10th-utsav-logo.png" />
+        <img class="countdown-img" src="images/25th_utsav/25th_utsav_logo.jpg" />
       </div>
       <div>
         <span class="days"></span>
@@ -21,26 +21,73 @@
         <div class="smalltext">Seconds</div>
       </div>
     </div>
-    <div class="countdown-footer">23rd - 27th December 2022</div>
+    <div class="countdown-footer">Saturday 4th - Sunday 12th July 2026</div>
   </div>
 </div>
 <br/>
 <script>
+    // Store previous values to detect changes
+    let previousValues = {
+        days: null,
+        hours: null,
+        minutes: null,
+        seconds: null
+    };
+
+    const pulseElement = (element) => {
+        element.classList.add('pulse');
+        setTimeout(() => {
+            element.classList.remove('pulse');
+        }, 600);
+    };
+
     const updateClock = () => {
-      const timer = getCountdownTimer('2022-12-23 00:00:00');
-      daysSpan.innerHTML = timer.days;
-      hoursSpan.innerHTML = timer.hours;
-      minutesSpan.innerHTML = timer.minutes;
-      secondsSpan.innerHTML = timer.seconds;
-      if (timer.total <= 0) {
-        clearInterval(timeinterval);
-      }
+        const timer = getCountdownTimer('2026-07-04 00:00:00');
+        
+        // Check for changes and apply pulse effects
+        if (previousValues.days !== null && timer.days !== previousValues.days) {
+            // Days changed - pulse all elements
+            pulseElement(daysSpan);
+            pulseElement(hoursSpan);
+            pulseElement(minutesSpan);
+            pulseElement(secondsSpan);
+        } else if (previousValues.hours !== null && timer.hours !== previousValues.hours) {
+            // Hours changed - pulse hours, minutes, seconds
+            pulseElement(hoursSpan);
+            pulseElement(minutesSpan);
+            pulseElement(secondsSpan);
+        } else if (previousValues.minutes !== null && timer.minutes !== previousValues.minutes) {
+            // Minutes changed - pulse minutes, seconds
+            pulseElement(minutesSpan);
+            pulseElement(secondsSpan);
+        }
+        // Removed seconds-only pulse - seconds will only pulse when other units change
+        
+        // Update the display
+        daysSpan.innerHTML = timer.days;
+        hoursSpan.innerHTML = timer.hours;
+        minutesSpan.innerHTML = timer.minutes;
+        secondsSpan.innerHTML = timer.seconds;
+        
+        // Store current values for next comparison
+        previousValues = {
+            days: timer.days,
+            hours: timer.hours,
+            minutes: timer.minutes,
+            seconds: timer.seconds
+        };
+        
+        if (timer.total <= 0) {
+            clearInterval(timeinterval);
+        }
     }
+    
     const clock = document.getElementById('clockdiv');
     const daysSpan = clock.querySelector('.days');
     const hoursSpan = clock.querySelector('.hours');
     const minutesSpan = clock.querySelector('.minutes');
     const secondsSpan = clock.querySelector('.seconds');
+    
     updateClock();
-    const timeinterval = setInterval(updateClock,1000);
+    const timeinterval = setInterval(updateClock, 1000);
 </script>
