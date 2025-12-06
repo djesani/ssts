@@ -13,7 +13,6 @@ core
 core.module.ts
 
 layout
--- header
 -- layout-public
 -- layout-secure
 -- page-loader
@@ -26,7 +25,12 @@ public
 public-routing.module.ts
 public.module.ts
 
+secure
+-- calendarIcons
+-- events
+
 shared
+-- components
 -- directives
 -- fontawesome
 -- services
