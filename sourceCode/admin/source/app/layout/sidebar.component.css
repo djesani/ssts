@@ -1,0 +1,33 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+}
+
+.brand h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.2rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #ccc;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a.active {
+    color: white;
+    font-weight: bold;
+}

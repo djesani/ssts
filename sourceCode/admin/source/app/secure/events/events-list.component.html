@@ -1,0 +1,24 @@
+<div class="page-header">
+    <h2>Events List</h2>
+    <button routerLink="add" class="btn btn-primary">Add Event</button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of eventsResource.value()">
+            <td>{{event.name}}</td>
+            <td>{{event.startDate}}</td>
+            <td>{{event.unpublished ? 'Draft' : 'Published'}}</td>
+            <td>
+                <button [routerLink]="['edit', event.filename]" class="btn btn-sm btn-outline">Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -4,7 +4,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-root",
-  standalone: false,
+  standalone: true,
   templateUrl: "./app.component.html",
 })
 export class AppComponent {

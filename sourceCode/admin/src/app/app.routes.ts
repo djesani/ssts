@@ -1,0 +1,51 @@
+import { Routes } from '@angular/router';
+
+import { AuthGuard } from "./core/auth/auth.guard";
+
+import { LayoutPublicComponent } from "./layout/layout-public/layout-public.component";
+import { LayoutSecureComponent } from "./layout/layout-secure/layout-secure.component";
+
+import { Page404Component } from "./public/page404/page404.component";
+
+export const routes: Routes = [
+  {
+    path: "",
+    component: LayoutSecureComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", redirectTo: "/events", pathMatch: "full" },
+      {
+        path: "events",
+        loadChildren: () =>
+          import("./secure/events/events.module").then((m) => m.EventsModule),
+      },
+    ],
+  },
+//   {
+//     path: "",
+//     component: LayoutSecureComponent,
+//     canActivate: [AuthGuard],
+//     children: [
+//       { path: "", redirectTo: "/calendarIcons", pathMatch: "full" },
+//       {
+//         path: "calendarIcons",
+//         loadChildren: () =>
+//           import("./secure/calendarIcons/calendarIcons.module").then(
+//             (m) => m.CalendarIconsModule
+//           ),
+//       },
+//     ],
+//   },
+  {
+    path: "public",
+    component: LayoutPublicComponent,
+    children: [
+      {
+        path: "",
+        loadChildren: () =>
+          import("./public/public.module").then((m) => m.PublicModule),
+      },
+    ],
+  },
+  { path: "**", component: Page404Component },
+];
