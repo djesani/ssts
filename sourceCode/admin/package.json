@@ -14,6 +14,7 @@
     "update": "  npx npm-check-updates -u"
   },
   "private": true,
+  "packageManager": "npm@11.6.2",
   "dependencies": {
     "@angular/animations": "^21.1.3",
     "@angular/common": "^21.1.3",
