@@ -16,8 +16,8 @@ router.get('/murtis', function (req, res, next) {
   res.render('murtis', { title: 'Murtis' });
 });
 
-router.get('/about-the-temple', function (req, res, next) {
-  res.render('about-the-temple', { title: 'About the Temple' });
+router.get('/about-us', function (req, res, next) {
+  res.render('about-us', { title: 'About the Temple' });
 });
 
 router.get('/mandir-history', function (req, res, next) {
