@@ -20,6 +20,18 @@ router.get('/about-us', function (req, res, next) {
   res.render('about-us', { title: 'About the Temple' });
 });
 
+router.get('/yuvak-mandal', function (req, res, next) {
+  res.render('yuvak-mandal', { title: 'Yuval Mandal' });
+});
+
+router.get('/bal-mandal', function (req, res, next) {
+  res.render('bal-mandal', { title: 'Bal Mandal' });
+});
+
+router.get('/pipe-band', function (req, res, next) {
+  res.render('pipe-band', { title: 'Nilkanth Pipe Band and Lazium' });
+});
+
 router.get('/mandir-history', function (req, res, next) {
   res.render('mandir-history', { title: 'Mandir History' });
 });
@@ -62,6 +74,10 @@ router.get('/admin/api-docs', function (req, res, next) {
 
 router.get('/trivia', function (req, res, next) {
   res.render('trivia', { title: 'Trivia' });
+});
+
+router.get('/timeline', function (req, res, next) {
+  res.render('timeline', { title: 'Timeline' });
 });
 
 module.exports = router;

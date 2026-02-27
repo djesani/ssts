@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .section-nav {
+      text-align: center;
+      padding: 20px 24px 10px;
+    }
+
+    .section-nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+      padding: 4px 0;
+    }
+
+    .section-nav a:hover { color: var(--deep); }
+
+    .section-nav .sep {
+      color: var(--gold-light);
+      margin: 0 10px;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .page-section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      scroll-margin-top: 80px;
+    }
+
+    .page-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page-section:last-child { border-bottom: none; }
+
+    .page-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      transition: color 0.3s;
+    }
+
+    .page-section:hover h2 { color: var(--deep); }
+
+    .page-section p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .page-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .page-section ul li {
+      padding: 8px 0;
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+    }
+
+    .page-section ul li::before {
+      content: '\2022';
+      color: var(--gold);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+    }
+
+    .page-section a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-light);
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .page-section a:hover {
+      color: var(--deep);
+      border-color: var(--deep);
+    }
+  </style>
+</head>
+
+<body>
+  <% include partials/menu %>
+    <div class="container bg-light">
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Youth Programs</p>
+          <h1>Shree Swaminarayan Yuvak Mandal</h1>
+        </div>
+
+        <div class="section-nav">
+          <a href="#mission">Mission</a><span class="sep">&middot;</span>
+          <a href="#objectives">Objectives</a><span class="sep">&middot;</span>
+          <a href="#contributions">Contributions</a>
+        </div>
+
+        <p class="page-intro">At the turn of the new millennium, the late Mahant Sadguru Purani Swami Hariswarupdasji
+          of Bhuj Mandir envisioned a group that would unite the youth of our religion, residing globally. His goal was
+          to empower the youth to take on the challenge of moving our satsang forward among their fellow haribhakto in
+          this materialistic world. After years of dedicated effort, this vision was realised.</p>
+
+        <div class="page-content">
+
+          <div class="page-section">
+            <h2>Introduction</h2>
+            <p>Given the youthful congregation in Sydney, Australia, it was decided that this would be the ideal launch
+              location of the international branch. In 2003, in the presence of esteemed Swamis from Bhuj, including the
+              current Mahant Sadguru Purani Swami Dharmanandandasji, Shree Swaminarayan Yuvak Mandal Sydney was
+              established, marking the beginning of Swami&rsquo;s vision.</p>
+            <p>From our humble beginnings of involving the youth in decorating hired halls for festival celebrations to
+              organising the first Shibir in Australia, SSYM Sydney has thrived over the years. Today, we are proud to
+              offer a wide range of activities that are designed to foster personal growth, community service, and
+              spiritual development among our youth.</p>
+          </div>
+
+          <div id="mission" class="page-section">
+            <h2>SSYM Sydney Mission Statement</h2>
+            <p>SARVA-JEEV-HITAAVAH | For the betterment of all living beings</p>
+          </div>
+
+          <div id="objectives" class="page-section">
+            <h2>SSYM Sydney Objectives</h2>
+            <ul>
+              <li>Promote Hindu Sanatan Dharma, as directly authenticated by Bhagwan Shree Swaminarayan and
+                authenticated by Bhuj Mandir Santo.</li>
+              <li>Grow and develop our youth to ensure the sustainability of the Sampraday for future generations.</li>
+              <li>Empower and inspire our youth to not only sustain but enrich their active engagement in satsang,
+                fostering a lifelong spiritual journey.</li>
+            </ul>
+          </div>
+
+          <div id="contributions" class="page-section">
+            <h2>Contributions to Australasian Community</h2>
+            <ul>
+              <li><strong>Weekly YM Sabha:</strong> Every Friday, we hold an interactive YM Sabha for yuvaks from 7 PM
+                to 8:45 PM, providing a space for spiritual discussions, learning, and friendship. At the same time, a
+                dedicated separate YM Sabha is held for yuvatis, fostering a supportive environment to empower our young
+                female haribhakto.</li>
+              <li><strong>Youth Support:</strong> Our dedicated youth support programs provide guidance and mentorship,
+                helping young individuals navigate the challenges of modern life while staying rooted in their spiritual
+                values.</li>
+              <li><strong>Increasing Bhakti:</strong> Through Bhakti Boosters such as bhajan mornings, Prabhat feris,
+                and other satsang sessions, we aim to deepen the spiritual connection of our youth, encouraging them to
+                embrace and practice Bhakti in their daily lives.</li>
+              <li><strong>Decoration:</strong> We actively involve our youth in creating grand decorations for all temple
+                festivals. This enhances the festive atmosphere and allows our youth to showcase their artistic
+                expression while creating engaging experiences for visiting haribhakto.</li>
+              <li><strong>Themed Events:</strong> Events such as Amazing Race, Maharaj&rsquo;s Kitchen Rules, and trivia nights
+                provide fun and engaging ways for youth to bond, challenge themselves, and apply their skills in
+                creative contexts.</li>
+              <li><strong>Social Events:</strong> Social gatherings such as barbeques and outings provide a platform for
+                youth to bond, share experiences, and build lasting friendships.</li>
+              <li><strong>Shibirs:</strong> We organise Shibirs (spiritual retreats) that offer immersive experiences in
+                satsang, personal development workshops, and opportunities for self-reflection and growth.</li>
+              <li><strong>Charity Events:</strong> We regularly organise charity initiatives such as blood drives, tree
+                planting, food drives, and step-a-thons. These events benefit the community while instilling
+                responsibility and compassion in our youth.</li>
+              <li><strong>NarNarayan Dev Cup:</strong> This annual sports event brings together young haribhakto from
+                SSMB Sydney and ISSO Sydney, promoting physical fitness, teamwork, and a healthy competitive spirit.</li>
+              <li><strong>Sports:</strong> Regular sports activities such as badminton and darts help our youth stay
+                active, healthy, and engaged in positive pursuits.</li>
+            </ul>
+            <p>Through these efforts, we aim to nurture the next generation of leaders who will carry forward the
+              legacy of our beloved Bhagwan Shree Swaminarayan.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.page-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
+  <% include partials/footer %>
+</body>
+
+</html>
