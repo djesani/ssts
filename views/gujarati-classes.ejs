@@ -3,99 +3,224 @@
 
 <head>
   <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .page-section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .page-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page-section:last-child { border-bottom: none; }
+
+    .page-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--deep);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .page-section p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .page-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .page-section ul li {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .page-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .page-section ul li strong {
+      color: var(--deep);
+      font-weight: 500;
+    }
+
+    .page-section a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.3);
+      transition: border-color 0.3s ease;
+    }
+
+    .page-section a:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    .page-tagline {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--gold);
+      padding: 20px 24px 0;
+      letter-spacing: 0.04em;
+    }
+  </style>
 </head>
 
 <body>
   <% include partials/menu %>
-
     <div class="container bg-light">
-      <div class="row other-pages gujarati">
-        <div class="col-sm-12">
-          <h1>Welcome to Ghanshyam Gujarati</h1>
-
-          <h2>About Us</h2>
-          <p>
-            Ghanshyam Gujarati is a vibrant and dynamic school that is part of
-            Shree Swaminarayan Mandir Bhuj - Sydney. Established in 2013 as a
-            volunteer-run service, it has been nurturing young minds and
-            instilling the rich cultural heritage of Gujarat into the hearts of
-            our future generations. Our school is an integral part of the
-            temple's Ghanshyam Bal Mandal group (youth group) and serves as a
-            cornerstone for preserving and passing on our cultural traditions.
-          </p>
-
-          <h2>Our Mission</h2>
-          <p>
-            Our mission is to provide a nurturing environment where children can
-            learn, grow, and connect with their Gujarati heritage. Through
-            interactive lessons, cultural activities, and language instruction,
-            we aim to foster a sense of pride in our students' cultural identity
-            and language skills.
-          </p>
-
-          <h2>Our Curriculum</h2>
-          <p>
-            At Ghanshyam Gujarati, we pride ourselves on offering an
-            internationally recognized curriculum that has stood the test of
-            time. Our curriculum is based on textbooks originally created in
-            1997 in the UK. These textbooks have been thoughtfully updated to
-            meet modern teaching standards, incorporating engaging activities to
-            keep our students actively involved in their learning journey.
-          </p>
-
-          <h2>Class Details</h2>
-          <ul>
-            <li>
-              <span class="bold">Time:</span> Saturday, 3:30 PM to 5:30 PM
-            </li>
-            <li>
-              <span class="bold">Term Dates:</span> Our classes align with the
-              NSW school term dates, offering four 10-week terms throughout the
-              year.
-            </li>
-            <li>
-              <span class="bold">Enrolment:</span> Enrolment for the upcoming
-              year opens in late November/early December. Please use our online
-              enrolment form, which will be released during this period. Please
-              note that enrolments are subject to capacity, and we do not accept
-              mid-year enrolments.
-            </li>
-            <li>
-              <span class="bold">Age:</span> Children aged 5 and above, starting
-              from Year 1 and above, are welcome to join the school.
-            </li>
-          </ul>
-
-          <h2>Become a Teacher</h2>
-          <p>
-            We are always on the lookout for dedicated individuals. If you are
-            passionate about educating and want to contribute to preserving our
-            Gujarati culture, consider becoming a teacher at Ghanshyam Gujarati!
-            To express your interest, please fill out our
-            <a href="https://tinyurl.com/GBM-Teach" target="_blank">Teacher Application Form</a>.
-            We will contact you to discuss this wonderful opportunity further.
-          </p>
-          <p>
-            <span class="bold">Note:</span> all teachers must hold a Working
-            with Children Check (WWCC).
-          </p>
-
-          <h2>Contact Us</h2>
-          <p>
-            For any inquiries or additional information, please contact us at
-            <a href="mailto:info@sydneytemple.org">info@sydneytemple.org</a>.
-          </p>
-          <p>
-            At Ghanshyam Gujarati, we are committed to fostering a love for
-            Gujarati culture, language, and traditions among our students. Join
-            us in this exciting journey of cultural preservation and education.
-          </p>
-
-          <h3 class="italics">Preserving Our Heritage, Nurturing Our Future</h3>
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Language &amp; Culture</p>
+          <h1>Ghanshyam Gujarati</h1>
         </div>
+
+        <p class="page-intro">A vibrant volunteer-run school nurturing young minds and instilling the rich cultural heritage of Gujarat into the hearts of our future generations.</p>
+
+        <div class="page-content">
+
+          <div class="page-section">
+            <h2>About Us</h2>
+            <p>Ghanshyam Gujarati is a vibrant and dynamic school that is part of Shree Swaminarayan Mandir Bhuj &ndash; Sydney. Established in 2013 as a volunteer-run service, it has been nurturing young minds and instilling the rich cultural heritage of Gujarat into the hearts of our future generations. Our school is an integral part of the temple&rsquo;s Ghanshyam Bal Mandal group (youth group) and serves as a cornerstone for preserving and passing on our cultural traditions.</p>
+          </div>
+
+          <div class="page-section">
+            <h2>Our Mission</h2>
+            <p>Our mission is to provide a nurturing environment where children can learn, grow, and connect with their Gujarati heritage. Through interactive lessons, cultural activities, and language instruction, we aim to foster a sense of pride in our students&rsquo; cultural identity and language skills.</p>
+          </div>
+
+          <div class="page-section">
+            <h2>Our Curriculum</h2>
+            <p>At Ghanshyam Gujarati, we pride ourselves on offering an internationally recognized curriculum that has stood the test of time. Our curriculum is based on textbooks originally created in 1997 in the UK. These textbooks have been thoughtfully updated to meet modern teaching standards, incorporating engaging activities to keep our students actively involved in their learning journey.</p>
+          </div>
+
+          <div class="page-section">
+            <h2>Class Details</h2>
+            <ul>
+              <li><strong>Time:</strong> Saturday, 3:30 PM to 5:30 PM</li>
+              <li><strong>Term Dates:</strong> Our classes align with the NSW school term dates, offering four 10-week terms throughout the year.</li>
+              <li><strong>Enrolment:</strong> Enrolment for the upcoming year opens in late November/early December. Please use our online enrolment form, which will be released during this period. Please note that enrolments are subject to capacity, and we do not accept mid-year enrolments.</li>
+              <li><strong>Age:</strong> Children aged 5 and above, starting from Year 1 and above, are welcome to join the school.</li>
+            </ul>
+          </div>
+
+          <div class="page-section">
+            <h2>Become a Teacher</h2>
+            <p>We are always on the lookout for dedicated individuals. If you are passionate about educating and want to contribute to preserving our Gujarati culture, consider becoming a teacher at Ghanshyam Gujarati! To express your interest, please fill out our <a href="https://tinyurl.com/GBM-Teach" target="_blank">Teacher Application Form</a>. We will contact you to discuss this wonderful opportunity further.</p>
+            <p><strong>Note:</strong> all teachers must hold a Working with Children Check (WWCC).</p>
+          </div>
+
+          <div class="page-section">
+            <h2>Contact Us</h2>
+            <p>For any inquiries or additional information, please contact us at <a href="mailto:info@sydneytemple.org">info@sydneytemple.org</a>.</p>
+            <p>At Ghanshyam Gujarati, we are committed to fostering a love for Gujarati culture, language, and traditions among our students. Join us in this exciting journey of cultural preservation and education.</p>
+          </div>
+
+        </div>
+
+        <p class="page-tagline">Preserving Our Heritage, Nurturing Our Future</p>
       </div>
     </div>
-    <% include partials/footer %>
+
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.page-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
+  <% include partials/footer %>
 </body>
 
 </html>
