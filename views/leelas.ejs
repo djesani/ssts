@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #b8a68e;
+      --text-dark: #f0e6d6;
+      --bg-dark: #1a0f00;
+      --bg-dark-card: #2a1d0e;
+      --border-dark: rgba(201, 150, 58, 0.2);
+    }
+
+    /* ---- Page wrapper (Acharyas style, dark mode) ---- */
+    .styled-page {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--text-dark);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    /* ---- View controls ---- */
+    .relief-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 20px 40px;
+    }
+
+    .relief-btn {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .relief-btn:hover, .relief-btn.active {
+      background: var(--gold);
+      color: var(--bg-dark);
+    }
+
+    /* ---- Grid view ---- */
+    .relief-grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+      padding: 0 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .relief-grid-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg-dark-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .relief-grid-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: brightness(0.88);
+    }
+
+    .relief-grid-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1);
+    }
+
+    .relief-grid-item .number {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      background: rgba(26, 15, 0, 0.8);
+      padding: 4px 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .relief-grid-item .hover-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 16px 16px;
+      background: linear-gradient(to top, rgba(26, 15, 0, 0.95) 60%, transparent);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-dark);
+    }
+
+    .relief-grid-item:hover .hover-caption {
+      transform: translateY(0);
+      font-size: 1.08rem;
+    }
+
+    /* ---- Slideshow view ---- */
+    .relief-slideshow-view {
+      display: none;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+    }
+
+    .relief-slideshow-view.is-active {
+      display: block;
+    }
+
+    .relief-slide {
+      display: none;
+      animation: reliefFadeIn 0.5s ease;
+    }
+
+    .relief-slide.active {
+      display: block;
+    }
+
+    @keyframes reliefFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .relief-slide .slide-img-wrap {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-dark-card);
+      height: 380px;
+      max-height: calc(100vh - 380px);
+      max-height: calc(100dvh - 380px);
+    }
+
+    .relief-slide .slide-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .relief-slide .slide-meta {
+      padding: 16px 0 0;
+      text-align: center;
+    }
+
+    .relief-slide .slide-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+      opacity: 0.5;
+    }
+
+    .relief-slide .slide-caption {
+      font-size: 1.12rem;
+      line-height: 1.55;
+      color: var(--text-dark);
+      margin-top: 8px;
+    }
+
+    .relief-slide-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .relief-nav-btn {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--border-dark);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .relief-nav-btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .relief-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .relief-slide-progress {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+    }
+
+    .relief-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .relief-dot {
+      width: 6px;
+      height: 6px;
+      background: rgba(201, 150, 58, 0.2);
+      border: 1px solid rgba(201, 150, 58, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .relief-dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ---- Lightbox ---- */
+    .relief-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 8, 5, 0.96);
+      z-index: 1050;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 20px;
+    }
+
+    .relief-lightbox.open { display: flex; }
+
+    .relief-lightbox-inner {
+      max-width: 900px;
+      width: 100%;
+      animation: reliefFadeIn 0.3s ease;
+    }
+
+    .relief-lightbox-img-wrap {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 480px;
+      max-height: calc(100vh - 200px);
+      max-height: calc(100dvh - 200px);
+      background: var(--bg-dark-card);
+    }
+
+    .relief-lightbox-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .relief-lightbox-info {
+      padding: 16px 0 0;
+      text-align: center;
+    }
+
+    .relief-lightbox-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+    }
+
+    .relief-lightbox-caption {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-dark);
+      margin-top: 8px;
+    }
+
+    .relief-lightbox-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .relief-lb-nav {
+      background: none;
+      border: 1px solid var(--border-dark);
+      color: var(--muted);
+      padding: 8px 20px;
+      cursor: pointer;
+      font-family: 'Karla', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .relief-lb-nav:hover { border-color: var(--gold); color: var(--gold); }
+
+    .relief-lb-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 4px 12px;
+      transition: color 0.3s;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      z-index: 1051;
+    }
+
+    .relief-lb-close:hover { color: var(--gold); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .page-header { padding: 32px 16px 28px; }
+
+      .relief-grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 2px;
+        padding: 0 8px 40px;
+      }
+
+      .relief-slideshow-view { padding: 0 12px 12px; }
+
+      .relief-slide .slide-img-wrap {
+        height: 280px;
+        max-height: calc(100vh - 320px);
+        max-height: calc(100dvh - 320px);
+      }
+
+      .relief-slide .slide-meta { padding-top: 10px; }
+      .relief-slide .slide-caption { font-size: 0.95rem; line-height: 1.4; }
+
+      .relief-slide-nav {
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+      }
+
+      .relief-nav-btn {
+        font-size: 0.6rem;
+        padding: 8px 12px;
+      }
+
+      .relief-dots { margin-top: 8px; }
+
+      .relief-lightbox { padding: 36px 10px 10px; }
+
+      .relief-lightbox-img-wrap {
+        height: 350px;
+        max-height: calc(100vh - 190px);
+        max-height: calc(100dvh - 190px);
+      }
+
+      .relief-lightbox-info { padding: 10px 0 0; }
+      .relief-lightbox-caption { font-size: 0.95rem; }
+      .relief-lightbox-controls { margin-top: 10px; }
+
+      .relief-lb-nav {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .relief-grid-view {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .relief-slide .slide-img-wrap {
+        height: 220px;
+        max-height: calc(100vh - 290px);
+        max-height: calc(100dvh - 290px);
+      }
+
+      .relief-slide .slide-caption { font-size: 0.85rem; }
+
+      .relief-lightbox-img-wrap {
+        height: 280px;
+        max-height: calc(100vh - 170px);
+        max-height: calc(100dvh - 170px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <% include partials/menu %>
+
+  <div class="container">
+  <div class="styled-page">
+    <div class="page-header">
+      <p class="subtitle">The Divine Stories of Shree Swaminarayan</p>
+      <h1>Leelas</h1>
+    </div>
+
+    <p class="page-intro">Miracles, compassion, and teachings that continue to inspire generations.</p>
+
+    <div class="relief-controls">
+      <button class="relief-btn active" id="btnGrid" onclick="setReliefView('grid')">Grid View</button>
+      <button class="relief-btn" id="btnSlide" onclick="setReliefView('slide')">Slideshow</button>
+    </div>
+
+    <!-- GRID VIEW (populated by JS) -->
+    <div class="relief-grid-view" id="reliefGridView"></div>
+
+    <!-- SLIDESHOW VIEW (populated by JS) -->
+    <div class="relief-slideshow-view" id="reliefSlideView">
+      <div id="reliefSlidesContainer"></div>
+      <div class="relief-slide-nav">
+        <button class="relief-nav-btn" id="reliefPrevBtn" onclick="changeReliefSlide(-1)" disabled>&larr; Previous</button>
+        <span class="relief-slide-progress" id="reliefProgress">1 / 60</span>
+        <button class="relief-nav-btn" id="reliefNextBtn" onclick="changeReliefSlide(1)">Next &rarr;</button>
+      </div>
+      <div class="relief-dots" id="reliefDotsContainer"></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="relief-lightbox" id="reliefLightbox">
+    <button class="relief-lb-close" onclick="closeReliefLightbox()">&times;</button>
+    <div class="relief-lightbox-inner">
+      <div class="relief-lightbox-img-wrap">
+        <img id="reliefLbImg" src="" alt="">
+      </div>
+      <div class="relief-lightbox-info">
+        <div class="relief-lightbox-num" id="reliefLbNum"></div>
+        <p class="relief-lightbox-caption" id="reliefLbCaption"></p>
+      </div>
+      <div class="relief-lightbox-controls">
+        <button class="relief-lb-nav" id="reliefLbPrev" onclick="reliefLbNav(-1)">&larr; Prev</button>
+        <button class="relief-lb-nav" id="reliefLbNext" onclick="reliefLbNav(1)">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 60 leela images
+    var reliefFiles = [
+      { file: 'lord-krishna-giving-spiritual-knowledge-to-uddhava.jpg', caption: 'Lord Krishna Giving Spiritual Knowledge to Uddhava' },
+      { file: 'the-curse-of-sage-durvasa.jpg', caption: 'The Curse of Sage Durvasa' },
+      { file: 'lord-krishna-giving-divine-darshan-to-dharmabhakti-in-vrindavan.jpg', caption: 'Lord Krishna Giving Divine Darshan to Dharmabhakti in Vrindavan' },
+      { file: 'the-curse-of-ashwatthama-and-blessings-of-lord-hanuman-to-dharmabhakti.jpg', caption: 'The Curse of Ashwatthama and Blessings of Lord Hanuman to Dharmabhakti' },
+      { file: 'birth-of-ghanshyam-and-divine-darshan-of-lord-krishna.jpg', caption: 'Birth of Ghanshyam and Divine Darshan of Lord Krishna' },
+      { file: 'darshan-of-child-ghanshyam-swinging-in-the-cradle.jpg', caption: 'Darshan of Child Ghanshyam Swinging in the Cradle' },
+      { file: 'child-ghanshyam-protected-by-lord-hanuman.jpg', caption: 'Child Ghanshyam Protected by Lord Hanuman' },
+      { file: 'child-ghanshyam-calling-the-moon.jpg', caption: 'Child Ghanshyam Calling the Moon' },
+      { file: 'first-hair-cutting-ceremony-of-ghanshyam.jpg', caption: 'First Hair Cutting Ceremony of Ghanshyam' },
+      { file: 'destruction-of-the-demon-kalidatta.jpg', caption: 'Destruction of the Demon Kalidatta' },
+      { file: 'naming-ceremony-by-sage-markandeya.jpg', caption: 'Naming Ceremony by Sage Markandeya' },
+      { file: 'testing-of-child-ghanshyam.jpg', caption: 'Testing of Child Ghanshyam' },
+      { file: 'ghanshyam-taking-suvasini-bhabhi\'s-ring.jpg', caption: 'Ghanshyam Taking Suvasini Bhabhi\'s Ring' },
+      { file: 'ghanshyam-taking-sweets-at-the-confectioners-shop.jpg', caption: 'Ghanshyam Taking Sweets at the Confectioner\'s Shop' },
+      { file: 'mounting-the-golden-cannon-at-makhota-ghat.jpg', caption: 'Mounting the Golden Cannon at Makhota Ghat' },
+      { file: 'journey-on-the-river-sarayu.jpg', caption: 'Journey on the River Sarayu' },
+      { file: 'sacred-thread-ceremony-of-ghanshyam.jpg', caption: 'Sacred Thread Ceremony of Ghanshyam' },
+      { file: 'ghanshyam-restoring-sight-to-sudaras.jpg', caption: 'Ghanshyam Restoring Sight to Sudaras' },
+      { file: 'ghanshyam-studying-the-knowledge-gained-from-dharmadev.jpg', caption: 'Ghanshyam Studying the Knowledge Gained from Dharmadev' },
+      { file: 'ghanshyam-serving-his-mother-bhaktimata.jpg', caption: 'Ghanshyam Serving His Mother Bhaktimata' },
+      { file: 'kaushik-datta-pushes-nilkanth-varni-into-the-saryu-river.jpg', caption: 'Kaushik Datta Pushes Nilkanth Varni into the Saryu River' },
+      { file: 'lord-hanuman-offering-fruit-to-nilkanthvarni.jpg', caption: 'Lord Hanuman Offering Fruit to Nilkanth Varni' },
+      { file: 'the-himalayas-guiding-nilkanth-varni.jpg', caption: 'The Himalayas Guiding Nilkanth Varni' },
+      { file: 'nilkanth-varni-resisting-the-queen-of-butolpur.jpg', caption: 'Nilkanth Varni Resisting the Queen of Butolpur' },
+      { file: 'nilkanth-varni-performing-penance-at-pulhashram.jpg', caption: 'Nilkanth Varni Performing Penance at Pulhashram' },
+      { file: 'nilkanth-varni-entering-a-cave.jpg', caption: 'Nilkanth Varni Entering a Cave' },
+      { file: 'nilkanth-varni-learning-ashtanga-yoga-from-gopal-yogi.jpg', caption: 'Nilkanth Varni Learning Ashtanga Yoga from Gopal Yogi' },
+      { file: 'lord-shiva-and-parvati-blessing-nilkanth-varni.jpg', caption: 'Lord Shiva and Parvati Blessing Nilkanth Varni' },
+      { file: 'nilkanth-varni-serving-the-sadhu-sevakram.jpg', caption: 'Nilkanth Varni Serving the Sadhu Sevakram' },
+      { file: 'nilkanth-varni-among-fierce-animals.jpg', caption: 'Nilkanth Varni Among Fierce Animals' },
+      { file: 'meeting-sukhanand-swami-at-loj.jpg', caption: 'Meeting Sukhanand Swami at Loj' },
+      { file: 'nilkanth-varni-performs-a-miracle-in-loj.jpg', caption: 'Nilkanth Varni Performs a Miracle in Loj' },
+      { file: 'mayaram-bhatt-meeting-ramanand-swami-in-bhuj.jpg', caption: 'Mayaram Bhatt Meeting Ramanand Swami in Bhuj' },
+      { file: 'first-meeting-of-ramanand-swami-and-varniraj.jpg', caption: 'First Meeting of Ramanand Swami and Varniraj' },
+      { file: 'ramanand-swami-answering-the-questions-of-varniraj.jpg', caption: 'Ramanand Swami Answering the Questions of Varniraj' },
+      { file: 'enthronement-of-varniraj.jpg', caption: 'Enthronement of Varniraj' },
+      { file: 'sahajanand-swami-asking-for-a-blessing-from-ramanand-swami.jpg', caption: 'Sahajanand Swami Asking for a Blessing from Ramanand Swami' },
+      { file: 'sahajanand-swami-giving-darshan-in-multiple-divine-forms.jpg', caption: 'Sahajanand Swami Giving Darshan in Multiple Divine Forms' },
+      { file: 'first-aarti-performed-by-muktanand-swami.jpg', caption: 'First Aarti Performed by Muktanand Swami' },
+      { file: 'festival-of-colours-in-bhuj.jpg', caption: 'Festival of Colours in Bhuj' },
+      { file: 'shriji-maharaj-arranging-wrestling-in-bhuj.jpg', caption: 'Shriji Maharaj Arranging Wrestling in Bhuj' },
+      { file: 'shriji-maharaj-rescuing-natha-the-carpenter.jpg', caption: 'Shriji Maharaj Rescuing Natha the Carpenter' },
+      { file: 'sahajanand-swami-selling-vegetables-in-kankariya.jpg', caption: 'Sahajanand Swami Selling Vegetables in Kankariya' },
+      { file: 'sahajanand-swami-eating-food-prepared-by-jivuba.jpg', caption: 'Sahajanand Swami Eating Food Prepared by Jivuba' },
+      { file: 'sahajanand-swami-serving-and-blessing-the-saints.jpg', caption: 'Sahajanand Swami Serving and Blessing the Saints' },
+      { file: 'sahajanand-swami-riding-his-horse-manki.jpg', caption: 'Sahajanand Swami Riding His Horse Manki' },
+      { file: 'preparing-ghee-for-annakut-and-giving-charity-in-jetpur.jpg', caption: 'Preparing Ghee for Annakut and Giving Charity in Jetpur' },
+      { file: 'shriji-maharaj-holding-an-assembly-in-gadhpur.jpg', caption: 'Shriji Maharaj Holding an Assembly in Gadhpur' },
+      { file: 'shriji-maharaj-having-scriptures-written-by-the-saints.jpg', caption: 'Shriji Maharaj Having Scriptures Written by the Saints' },
+      { file: 'sahajanand-swami-blessing-the-british-government.jpg', caption: 'Sahajanand Swami Blessing the British Government' },
+      { file: 'assembly-of-500-paramhansas-in-vadtal.jpg', caption: 'Assembly of 500 Paramhansas in Vadtal' },
+      { file: 'swing-festival-at-gangaram-maldev\'s-home-in-bhuj.jpg', caption: 'Swing Festival at Gangaram Maldev\'s Home in Bhuj' },
+      { file: 'writing-the-shikshapatri-in-vadtal.jpg', caption: 'Writing the Shikshapatri in Vadtal' },
+      { file: 'the-horse-thief-jobanpagi-of-vadtal.jpg', caption: 'The Horse Thief Jobanpagi of Vadtal' },
+      { file: 'Aubergine-vegetable-festival-in-loya.jpg', caption: 'Aubergine Vegetable Festival in Loya' },
+      { file: 'appointment-of-the-acharyas.jpg', caption: 'Appointment of the Acharyas' },
+      { file: 'establishing-the-murti-of-hari-narayan-dev-in-bhuj.jpg', caption: 'Establishing the Murti of Hari Narayan Dev in Bhuj' },
+      { file: 'divine-departure-to-akshardham.jpg', caption: 'Divine Departure to Akshardham' },
+      { file: 'darshan-to-dada-khachar-after-departing-to-akshardham.jpg', caption: 'Darshan to Dada Khachar After Departing to Akshardham' },
+      { file: 'manifesting-from-the-murti-of-gopinathji-and-garlanding-bhagatji-swami-after-akshardham.jpg', caption: 'Manifesting from the Murti of Gopinathji and Garlanding Bhagatji Swami After Akshardham' }
+    ];
+
+    var reliefItems = reliefFiles.map(function(item, idx) {
+      return {
+        src: '/images/leela-images/' + item.file.replace(/'/g, '%27'),
+        num: idx < 9 ? '0' + (idx + 1) : '' + (idx + 1),
+        caption: item.caption
+      };
+    });
+
+    // Build grid — images use loading="lazy" so browser only fetches visible ones
+    var gridHtml = '';
+    reliefItems.forEach(function(item, idx) {
+      gridHtml += '<div class="relief-grid-item" onclick="openReliefLightbox(' + idx + ')">' +
+        '<img src="' + item.src + '" alt="' + item.caption + '" loading="lazy">' +
+        '<div class="number">' + item.num + '</div>' +
+        '<div class="hover-caption">' + item.caption + '</div>' +
+        '</div>';
+    });
+    document.getElementById('reliefGridView').innerHTML = gridHtml;
+
+    // Slideshow — built on demand (not at page load)
+    var slidesBuilt = false;
+    var currentReliefSlide = 0;
+    var currentReliefLb = 0;
+
+    function buildSlides() {
+      if (slidesBuilt) return;
+      slidesBuilt = true;
+      // Build slide shells with no img src — loaded per-slide
+      var slidesHtml = '';
+      reliefItems.forEach(function(item, idx) {
+        slidesHtml += '<div class="relief-slide' + (idx === 0 ? ' active' : '') + '">' +
+          '<div class="slide-img-wrap"><img data-src="' + item.src + '" alt="' + item.caption + '"></div>' +
+          '<div class="slide-meta"><div class="slide-number">' + item.num + '</div>' +
+          '<p class="slide-caption">' + item.caption + '</p></div></div>';
+      });
+      document.getElementById('reliefSlidesContainer').innerHTML = slidesHtml;
+      var dotsHtml = '';
+      reliefItems.forEach(function(item, idx) {
+        dotsHtml += '<div class="relief-dot' + (idx === 0 ? ' active' : '') + '" onclick="goToReliefSlide(' + idx + ')"></div>';
+      });
+      document.getElementById('reliefDotsContainer').innerHTML = dotsHtml;
+      loadSlideImage(0);
+    }
+
+    function loadSlideImage(idx) {
+      var slides = document.querySelectorAll('.relief-slide');
+      if (!slides[idx]) return;
+      var img = slides[idx].querySelector('img');
+      if (img && !img.src && img.dataset.src) {
+        img.src = img.dataset.src;
+      }
+      // Preload next slide
+      if (slides[idx + 1]) {
+        var next = slides[idx + 1].querySelector('img');
+        if (next && !next.src && next.dataset.src) next.src = next.dataset.src;
+      }
+    }
+
+    function setReliefView(view) {
+      document.getElementById('reliefGridView').style.display = view === 'grid' ? 'grid' : 'none';
+      var slideView = document.getElementById('reliefSlideView');
+      if (view === 'slide') {
+        buildSlides();
+        slideView.classList.add('is-active');
+        slideView.style.display = '';
+      } else {
+        slideView.classList.remove('is-active');
+        slideView.style.display = 'none';
+      }
+      document.getElementById('btnGrid').classList.toggle('active', view === 'grid');
+      document.getElementById('btnSlide').classList.toggle('active', view === 'slide');
+    }
+
+    function changeReliefSlide(dir) {
+      var slides = document.querySelectorAll('.relief-slide');
+      var dots = document.querySelectorAll('.relief-dot');
+      slides[currentReliefSlide].classList.remove('active');
+      dots[currentReliefSlide].classList.remove('active');
+      currentReliefSlide = Math.max(0, Math.min(slides.length - 1, currentReliefSlide + dir));
+      slides[currentReliefSlide].classList.add('active');
+      dots[currentReliefSlide].classList.add('active');
+      loadSlideImage(currentReliefSlide);
+      document.getElementById('reliefProgress').textContent = (currentReliefSlide + 1) + ' / ' + slides.length;
+      document.getElementById('reliefPrevBtn').disabled = currentReliefSlide === 0;
+      document.getElementById('reliefNextBtn').disabled = currentReliefSlide === slides.length - 1;
+    }
+
+    function goToReliefSlide(i) {
+      changeReliefSlide(i - currentReliefSlide);
+    }
+
+    function openReliefLightbox(i) {
+      currentReliefLb = i;
+      renderReliefLb();
+      document.getElementById('reliefLightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReliefLightbox() {
+      document.getElementById('reliefLightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function reliefLbNav(dir) {
+      currentReliefLb = Math.max(0, Math.min(reliefItems.length - 1, currentReliefLb + dir));
+      renderReliefLb();
+    }
+
+    function renderReliefLb() {
+      var it = reliefItems[currentReliefLb];
+      document.getElementById('reliefLbImg').src = it.src;
+      document.getElementById('reliefLbNum').textContent = it.num;
+      document.getElementById('reliefLbCaption').textContent = it.caption;
+      document.getElementById('reliefLbPrev').disabled = currentReliefLb === 0;
+      document.getElementById('reliefLbNext').disabled = currentReliefLb === reliefItems.length - 1;
+    }
+
+    document.getElementById('reliefLightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeReliefLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (document.getElementById('reliefLightbox').classList.contains('open')) {
+        if (e.key === 'ArrowRight') reliefLbNav(1);
+        if (e.key === 'ArrowLeft') reliefLbNav(-1);
+        if (e.key === 'Escape') closeReliefLightbox();
+      }
+    });
+  </script>
+
+  <% include partials/footer %>
+</body>
+
+</html>

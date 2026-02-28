@@ -32,8 +32,12 @@ router.get('/history', function (req, res, next) {
   res.render('history', { title: 'History' });
 });
 
-router.get('/our-activities/gujarati-classes', function (req, res, next) {
+router.get('/gujarati-classes', function (req, res, next) {
   res.render('gujarati-classes', { title: 'Gujarati Classes' });
+});
+
+router.get('/leelas', function (req, res, next) {
+  res.render('leelas', { title: 'Leelas - The Divine Stories of Shree Swaminarayan' });
 });
 
 router.get('/donations', function (req, res, next) {
