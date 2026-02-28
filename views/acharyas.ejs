@@ -3,79 +3,234 @@
 
 <head>
   <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .page-section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .page-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page-section:last-child { border-bottom: none; }
+
+    .page-section p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .page-section img.float-left {
+      float: left;
+      max-width: 200px;
+      height: auto;
+      margin: 0 24px 16px 0;
+      border-radius: 4px;
+    }
+
+    .page-section::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .gadi-tables {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .gadi-tables .gadi-column {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .gadi-tables h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.3);
+    }
+
+    .gadi-tables ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .gadi-tables ul li {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text);
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .gadi-tables ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    @media (max-width: 576px) {
+      .page-section img.float-left {
+        float: none;
+        max-width: 100%;
+        margin: 0 0 16px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <% include partials/menu %>
-  <div class="container bg-light">
-    <div class="row other-pages">
-      <div class="col-sm-12">
-        <div>
-          <!--<h1>'Our temple'</h1>-->
+    <div class="container bg-light">
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Spiritual Leadership</p>
           <h1>Acharyas</h1>
-          <img src="images/acharyashree.jpg" alt="acharyashree"  width="200px" height="200px" align="left" class="staticPage-images">
-          <p>Swaminarayan Sampraday Guru Parampara is said to have started from Shree Ramanuj Archarya and his successor
-            was Sadguru Shree Ramanand Swami and he gave diksha and appointed Shree Sahajanand Swami (Shree Swaminarayan
-            Bhagwan) as his successor. One of the purposes of Shree Swamianarayan Bhagwan’s life was to continue and
-            preserve the virtues of the Dharma, Bhakti, Gnan and Vairagya that He established, after He had gone to
-            Akshardham. So after discussions with the leading Saints at the time he established the Acharyaship of
-            Swaminarayan Sampraday on Kartak Sud Ekadashi (Prabodhini Ekadashi)1882 (Tuesday 21-11-1825) in Vadtal.<br><br>
-            He adopted and appointed his elder brother Rampratapbhai’s third son Ayodhya Prasadji as the Acharya of
-            Narnarayan Desh (Northern Division) and his younger brother Ichharambhai’s second son Raghuvir Prasadji as
-            the Acharya of Laxminarayan Desh (Southern Division). Ahmedabad was the HQ of Narnarayan Dev Gadi and Vadtal
-            for Laxminarayan Dev Gadi. Swaminarayan Bhagwan announced that only these two Acharyas (and their Successor)
-            are to install murtis in the His Temples and to give diksha to the disciples in their respective divisions.
-            He promised that he will reside in the Murtis installed by the Acharyas. No one else, regardless of his/her
-            high religious or spiritual status, is authorised to install the Murtis and give Diksha to disciples of
-            Swaminarayan Sampraday.<br><br>
-            The two Acharyas are authorized to initiate the male disciples and their wives with the consent of their
-            husbands are to initiate the female disciples. The jurisdiction of the management of the Divisions and the
-            roles of the Acharyas are stipulated in Desh Vibhag Lekh, which was dictated by Shreeji Maharaj Himself to
-            Swami Sukhanand and handed to the two Acharyas on the Magsar Sud Poonam 1883 (1827 AD).</p>
+        </div>
+
+        <p class="page-intro">The Acharyaship established by Lord Shree Swaminarayan ensures the continuation of Dharma, Bhakti, Gnan and Vairagya for generations to come.</p>
+
+        <div class="page-content">
+
+          <div class="page-section">
+            <img src="images/acharyashree.jpg" alt="Acharya Maharajshree" class="float-left">
+            <p>Swaminarayan Sampraday Guru Parampara is said to have started from Shree Ramanuj Acharya and his successor was Sadguru Shree Ramanand Swami and he gave diksha and appointed Shree Sahajanand Swami (Shree Swaminarayan Bhagwan) as his successor. One of the purposes of Shree Swaminarayan Bhagwan&rsquo;s life was to continue and preserve the virtues of the Dharma, Bhakti, Gnan and Vairagya that He established, after He had gone to Akshardham.</p>
+            <p>So after discussions with the leading Saints at the time he established the Acharyaship of Swaminarayan Sampraday on Kartak Sud Ekadashi (Prabodhini Ekadashi) 1882 (Tuesday 21-11-1825) in Vadtal.</p>
+            <p>He adopted and appointed his elder brother Rampratapbhai&rsquo;s third son Ayodhya Prasadji as the Acharya of Narnarayan Desh (Northern Division) and his younger brother Ichharambhai&rsquo;s second son Raghuvir Prasadji as the Acharya of Laxminarayan Desh (Southern Division). Ahmedabad was the HQ of Narnarayan Dev Gadi and Vadtal for Laxminarayan Dev Gadi.</p>
+            <p>Swaminarayan Bhagwan announced that only these two Acharyas (and their Successors) are to install murtis in His Temples and to give diksha to the disciples in their respective divisions. He promised that he will reside in the Murtis installed by the Acharyas. No one else, regardless of his/her high religious or spiritual status, is authorised to install the Murtis and give Diksha to disciples of Swaminarayan Sampraday.</p>
+            <p>The two Acharyas are authorized to initiate the male disciples and their wives with the consent of their husbands are to initiate the female disciples. The jurisdiction of the management of the Divisions and the roles of the Acharyas are stipulated in Desh Vibhag Lekh, which was dictated by Shreeji Maharaj Himself to Swami Sukhanand and handed to the two Acharyas on the Magsar Sud Poonam 1883 (1827 AD).</p>
           </div>
-          <br />
-          <div class="tabular gadi">
-            <div class="row">
-              <div class="col-sm-6">
-                <table class="table">
-                  <thead>
-                    <tr><th>Amdavad Gadi</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Acharya Shree Ayodhyaprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Keshavprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Purshottamprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Vasudevprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Devendraprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Tejendraprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree KoshalendraPrasadjiMaharaj</td></tr>
-                  </tbody>
-                </table>
+
+          <div class="page-section">
+            <div class="gadi-tables">
+              <div class="gadi-column">
+                <h3>Ahmedabad Gadi</h3>
+                <ul>
+                  <li>Acharya Shree Ayodhyaprasadji Maharaj</li>
+                  <li>Acharya Shree Keshavprasadji Maharaj</li>
+                  <li>Acharya Shree Purshottamprasadji Maharaj</li>
+                  <li>Acharya Shree Vasudevprasadji Maharaj</li>
+                  <li>Acharya Shree Devendraprasadji Maharaj</li>
+                  <li>Acharya Shree Tejendraprasadji Maharaj</li>
+                  <li>Acharya Shree Koshalendraprasadji Maharaj</li>
+                </ul>
               </div>
-              <div class="col-sm-6">
-                <table class="table">
-                  <thead>
-                    <tr><th>Vadtal Gadi</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Acharya Shree Raghuvirji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Bhagvatprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Viharilalji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Laxmiprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Shripatiprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Anandprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Narendraprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Ajendraprasadji Maharaj</td></tr>
-                    <tr><td>Acharya Shree Rakesh Prashadji Maharaj</td></tr>
-                  </tbody>
-                </table>
+              <div class="gadi-column">
+                <h3>Vadtal Gadi</h3>
+                <ul>
+                  <li>Acharya Shree Raghuvirji Maharaj</li>
+                  <li>Acharya Shree Bhagvatprasadji Maharaj</li>
+                  <li>Acharya Shree Viharilalji Maharaj</li>
+                  <li>Acharya Shree Laxmiprasadji Maharaj</li>
+                  <li>Acharya Shree Shripatiprasadji Maharaj</li>
+                  <li>Acharya Shree Anandprasadji Maharaj</li>
+                  <li>Acharya Shree Narendraprasadji Maharaj</li>
+                  <li>Acharya Shree Ajendraprasadji Maharaj</li>
+                  <li>Acharya Shree Rakeshprasadji Maharaj</li>
+                </ul>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-  </div>
+
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.page-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
   <% include partials/footer %>
 </body>
 

@@ -3,71 +3,196 @@
 
 <head>
   <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .page-section {
+      padding: 32px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .page-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .links-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .links-list li:last-child {
+      border-bottom: none;
+    }
+
+    .links-list .link-label {
+      font-size: 1.1rem;
+      color: var(--deep);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .links-list .link-value {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .links-list .link-value a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.3);
+      transition: border-color 0.3s ease;
+    }
+
+    .links-list .link-value a:hover {
+      border-bottom-color: var(--gold);
+    }
+  </style>
 </head>
 
 <body>
   <% include partials/menu %>
+    <div class="container bg-light">
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Resources</p>
+          <h1>Useful Links</h1>
+        </div>
 
-  <div class="container bg-light">
-    <div class="row">
-      <div class="col-sm-12  other-pages">
-        <!--<h1>'Contact Information'</h1>-->
-        <h1>Useful Links</h1>
-        <table border="5px" class="table">
-          <tr>
-            <td>Justice of the Peace</td>
-            <td>Ravi Halai – Tel: 0423300840<br />
-              Nitin Patel – Tel: 0433692219</td>
-            </tr>
-            <tr>
-              <td>Brahmin:</td>
-              <td>Narendra Maharaj – Tel:0403226364</td>
-            </tr>
-            <tr>
-              <td>India High Commission:</td>
-              <td>http://www.hcindia-au.org/</td>
-            </tr>
-            <tr>
-              <td>Consulate General of India Sydney:</td>
-              <td>http://www.indianconsulatesydney.org/</td>
-            </tr>
-            <tr>
-              <td>India Passport And Visa Services Centre:</td>
-              <td>http://www.vfs-in-au.net/</td>
-            </tr>
-            <tr>
-              <td>Kenyan High Commission:</td>
-              <td>http://www.kenya.asn.au/</td>
-            </tr>
-            <tr>
-              <td>British High Commission:</td>
-              <td>http://ukinaustralia.fco.gov.uk/en/</td>
-            </tr>
-            <tr>
-              <td>Australian Immigration Department:</td>
-              <td>http://www.immi.gov.au/</td>
-            </tr>
-            <tr>
-              <td>CentreLink:</td>
-              <td>http://www.centrelink.gov.au/</td>
-            </tr>
-            <tr>
-              <td>Recommended Migration Agents:</td>
-              <td>http://www.macquariepartnership.com.au</td>
-            </tr>
-            <tr>
-              <td>Vegetarian Network Victoria:</td>
-              <td>http://www.vnv.org.au/site/</td>
-            </tr>
-            <tr>
-              <td>Vegetarian and Vegan Information:</td>
-              <td>http://www.goveg.org/</td>
-            </tr>
-          </table>
+        <div class="page-content">
+          <div class="page-section">
+            <ul class="links-list">
+              <li>
+                <span class="link-label">Justice of the Peace</span>
+                <span class="link-value">Ravi Halai &ndash; Tel: 0423300840<br>Nitin Patel &ndash; Tel: 0433692219</span>
+              </li>
+              <li>
+                <span class="link-label">Brahmin</span>
+                <span class="link-value">Narendra Maharaj &ndash; Tel: 0403226364</span>
+              </li>
+              <li>
+                <span class="link-label">India High Commission</span>
+                <span class="link-value"><a href="http://www.hcindia-au.org/" target="_blank">www.hcindia-au.org</a></span>
+              </li>
+              <li>
+                <span class="link-label">Consulate General of India Sydney</span>
+                <span class="link-value"><a href="http://www.indianconsulatesydney.org/" target="_blank">www.indianconsulatesydney.org</a></span>
+              </li>
+              <li>
+                <span class="link-label">India Passport And Visa Services Centre</span>
+                <span class="link-value"><a href="http://www.vfs-in-au.net/" target="_blank">www.vfs-in-au.net</a></span>
+              </li>
+              <li>
+                <span class="link-label">Kenyan High Commission</span>
+                <span class="link-value"><a href="http://www.kenya.asn.au/" target="_blank">www.kenya.asn.au</a></span>
+              </li>
+              <li>
+                <span class="link-label">British High Commission</span>
+                <span class="link-value"><a href="http://ukinaustralia.fco.gov.uk/en/" target="_blank">ukinaustralia.fco.gov.uk</a></span>
+              </li>
+              <li>
+                <span class="link-label">Australian Immigration Department</span>
+                <span class="link-value"><a href="http://www.immi.gov.au/" target="_blank">www.immi.gov.au</a></span>
+              </li>
+              <li>
+                <span class="link-label">CentreLink</span>
+                <span class="link-value"><a href="http://www.centrelink.gov.au/" target="_blank">www.centrelink.gov.au</a></span>
+              </li>
+              <li>
+                <span class="link-label">Recommended Migration Agents</span>
+                <span class="link-value"><a href="http://www.macquariepartnership.com.au" target="_blank">www.macquariepartnership.com.au</a></span>
+              </li>
+              <li>
+                <span class="link-label">Vegetarian Network Victoria</span>
+                <span class="link-value"><a href="http://www.vnv.org.au/site/" target="_blank">www.vnv.org.au</a></span>
+              </li>
+              <li>
+                <span class="link-label">Vegetarian and Vegan Information</span>
+                <span class="link-value"><a href="http://www.goveg.org/" target="_blank">www.goveg.org</a></span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <% include partials/footer %>
-  </body>
 
-  </html>
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.page-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
+  <% include partials/footer %>
+</body>
+
+</html>
