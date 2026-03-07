@@ -4,10 +4,6 @@ const router = express.Router();
 
 router.use('/', events);
 
-router.get('/about-us', function (req, res, next) {
-  res.render('about-us', { title: 'About Us' });
-});
-
 router.get('/about-lordSwaminarayan', function (req, res, next) {
   res.render('about-lordSwaminarayan', { title: 'About Lord Swaminarayan' });
 });
@@ -30,10 +26,6 @@ router.get('/acharyas', function (req, res, next) {
 
 router.get('/history', function (req, res, next) {
   res.render('history', { title: 'History' });
-});
-
-router.get('/our-activities/gujarati-classes', function (req, res, next) {
-  res.render('gujarati-classes', { title: 'Gujarati Classes' });
 });
 
 router.get('/donations', function (req, res, next) {

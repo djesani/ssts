@@ -1,332 +1,330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <% include partials/header %>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Shree Swaminarayan Mandir Bhuj Sydney Sydney">
-    <meta property="og:title" content="Hindu Temple Murtis - Sacred Deities Collection">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@lovable_dev">
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
 
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    .murtis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 32px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .murti-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 2px 12px rgba(26, 15, 0, 0.08);
+      border: 1px solid rgba(201, 150, 58, 0.15);
+    }
+
+    .murti-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(201, 150, 58, 0.2);
+    }
+
+    .murti-card-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .murti-card:hover .murti-card-img {
+      transform: scale(1.04);
+    }
+
+    .murti-card-info {
+      padding: 14px 16px;
+      text-align: center;
+      border-top: 1px solid rgba(201, 150, 58, 0.15);
+    }
+
+    .murti-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--deep);
+      letter-spacing: 0.03em;
+    }
+
+    /* Lightbox */
+    .murti-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 8, 5, 0.95);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .murti-lightbox.open {
+      display: flex;
+    }
+
+    .murti-lightbox-inner {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .murti-lightbox-img-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 70vh;
+      background: rgba(26, 15, 0, 0.5);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .murti-lightbox-img-wrap img {
+      max-width: 100%;
+      height: 70vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .murti-lightbox-info {
+      padding: 20px 0 0;
+    }
+
+    .murti-lightbox-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #f5ead8;
+      letter-spacing: 0.04em;
+    }
+
+    .murti-lightbox-counter {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 6px;
+      letter-spacing: 0.1em;
+    }
+
+    .murti-lb-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #d4c4a0;
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.3s;
+      z-index: 1;
+    }
+
+    .murti-lb-close:hover { color: var(--gold); }
+
+    .murti-lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(61, 51, 34, 0.5);
+      color: #d4c4a0;
+      font-size: 1.6rem;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .murti-lb-nav:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .murti-lb-prev { left: 20px; }
+    .murti-lb-next { right: 20px; }
+
+    @media (max-width: 640px) {
+      .murti-lb-nav {
+        font-size: 1.2rem;
+        padding: 6px 10px;
       }
-
-      /* body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        line-height: 1.5;
-        color: #1a1a1a;
-        background-color: #ffffff;
-      } */
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-
-      .grid {
-        display: grid;
-        gap: 1.5rem;
-      }
-
-      .grid-cols-1 {
-        grid-template-columns: repeat(1, 1fr);
-      }
-
-      @media (min-width: 640px) {
-        .sm\:grid-cols-2 {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (min-width: 768px) {
-        .md\:grid-cols-3 {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .lg\:grid-cols-4 {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-
-      @media (min-width: 1280px) {
-        .xl\:grid-cols-5 {
-          grid-template-columns: repeat(5, 1fr);
-        }
-      }
-
-      .header {
-        padding: 1rem 0 0.25rem 0;
-        text-align: center;
-      }
-
-      .title {
-        font-size: 2.25rem;
-        font-weight: 700;
-        margin-bottom: 0.25rem;
-      }
-
-      .subtitle {
-        font-size: 1.125rem;
-        margin-bottom: 0;
-        color: #6b7280;
-      }
-
-      .main {
-        padding: 0 0 2rem 0;
-        min-height: 60vh;
-      }
-
-      .card {
-        border: 3px solid transparent;
-        border-radius: 0.75rem;
-        background: linear-gradient(135deg, #fefefe, #f9f7f4) padding-box,
-          linear-gradient(135deg, #d97706, #ea580c) border-box;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-        box-shadow: 0 4px 20px -5px rgba(61, 41, 20, 0.15);
-      }
-
-      .card:hover {
-        transform: translateY(-6px) scale(1.04);
-        box-shadow: 0 15px 40px -10px rgba(234, 88, 12, 0.5);
-      }
-
-      .card-image {
-        width: 100%;
-        height: 16rem;
-        object-fit: cover;
-        border: none;
-        transition: transform 0.5s ease;
-      }
-
-      .card:hover .card-image {
-        transform: scale(1.08);
-      }
-
-      .card-content {
-        padding: 1rem;
-        text-align: center;
-        background: linear-gradient(to bottom, #f9f7f4, #fefefe);
-      }
-
-      .card-title {
-        font-weight: 700;
-        font-size: 1.125rem;
-        color: #3d2914;
-      }
-
-      .card-title b {
-        font-weight: 700;
-      }
-
-      /* Lightbox */
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.9);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        padding: 1rem;
-      }
-
-      .lightbox.active {
-        display: flex;
-      }
-
-      .lightbox-content {
-        position: relative;
-        max-width: 90vw;
-        max-height: 90vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .lightbox-image {
-        max-width: 100%;
-        max-height: 80vh;
-        object-fit: contain;
-        border: 6px solid white;
-        border-radius: 0.5rem;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        background: #fff;
-      }
-
-      .lightbox-info {
-        margin-top: 1rem;
-        text-align: center;
-        color: white;
-      }
-
-      .lightbox-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-      }
-
-      .lightbox-counter {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      .lightbox-btn {
-        position: absolute;
-        color: white;
-        cursor: pointer;
-        padding: 1rem;
-        user-select: none;
-        font-size: 2rem;
-      }
-
-      .lightbox-btn:hover {
-        color: #ffbf4d;
-      }
-
-      .lightbox-close {
-        top: 1rem;
-        right: 1rem;
-      }
-
-      .lightbox-prev,
-      .lightbox-next {
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 3rem;
-      }
-
-      .lightbox-prev {
-        left: 1rem;
-      }
-
-      .lightbox-next {
-        right: 1rem;
-      }
-    </style>
+      .murti-lb-prev { left: 8px; }
+      .murti-lb-next { right: 8px; }
+    }
+  </style>
 </head>
 
 <body>
   <% include partials/menu %>
-
-
-    <header class="header">
-      <div class="container">
-        <h1 class="title">Temple Deities</h1>
-        <p class="subtitle">Sacred Murtis</p>
-      </div>
-    </header>
-
-    <!-- Murtis Grid -->
-    <main class="main">
-      <div class="container">
-        <div id="murtisGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          <!-- Cards populated by JavaScript -->
+    <div class="container bg-light">
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Sacred Deities</p>
+          <h1>Murtis</h1>
         </div>
+
+        <p class="page-intro">The divine murtis installed and consecrated at Shree Swaminarayan Mandir Bhuj &ndash; Sydney.</p>
+
+        <div class="murtis-grid" id="murtisGrid"></div>
       </div>
-    </main>
+    </div>
 
-    <% include partials/footer %>
-
-      <!-- Lightbox -->
-      <div id="lightbox" class="lightbox">
-        <div class="lightbox-btn lightbox-close">×</div>
-        <div class="lightbox-btn lightbox-prev">❮</div>
-        <div class="lightbox-btn lightbox-next">❯</div>
-        <div class="lightbox-content">
-          <img id="lightbox-img" class="lightbox-image" src="" alt="">
-          <div class="lightbox-info">
-            <div id="lightbox-title" class="lightbox-title"></div>
-            <div id="lightbox-counter" class="lightbox-counter"></div>
-          </div>
-        </div>
+  <!-- Lightbox -->
+  <div class="murti-lightbox" id="murtiLightbox">
+    <button class="murti-lb-close" onclick="closeMurtiLb()">&times;</button>
+    <button class="murti-lb-nav murti-lb-prev" onclick="murtiLbNav(-1)">&lsaquo;</button>
+    <button class="murti-lb-nav murti-lb-next" onclick="murtiLbNav(1)">&rsaquo;</button>
+    <div class="murti-lightbox-inner">
+      <div class="murti-lightbox-img-wrap">
+        <img id="murtiLbImg" src="" alt="">
       </div>
+      <div class="murti-lightbox-info">
+        <div class="murti-lightbox-title" id="murtiLbTitle"></div>
+        <div class="murti-lightbox-counter" id="murtiLbCounter"></div>
+      </div>
+    </div>
+  </div>
 
-      <!-- Murti Script -->
-      <script>
-        const murtisData = [
-          { id: "ghanshyam-maharaj", name: "Shree Ghanshyam Maharaj", image: "images/murtis/GhanshyamMaharaj.png" },
-          { id: "narnarayan-dev", name: "Shree Nar Narayan Dev", image: "images/murtis/NarnarayanDev.png" },
-          { id: "sahajanand-swami", name: "Shree Sahajanand Swami", image: "images/murtis/SwaminarayanBhagwan.png" },
-          { id: "radhakrishna", name: "Shree Radha Krishna Dev", image: "images/murtis/Radhakrishna.png" },
-          { id: "shiva-parvati", name: "Shree Shiv Parvati", image: "images/murtis/ShivParvati.png" },
-          { id: "ganesh", name: "Shree Ganeshji", image: "images/murtis/GaneshBhagwan.png" },
-          { id: "shivling", name: "Shivling", image: "images/murtis/Shivling.png" },
-          { id: "ram-laxman-sita", name: "Shree Ram, Sita and Lakshman", image: "images/murtis/LakshmanRamSita.png" },
-          { id: "hanuman", name: "Shree Hanumanji", image: "images/murtis/Hanumanji.png" },
-          { id: "suryanarayan", name: "Shree Surya Narayan Dev", image: "images/murtis/SuryaNarayanDev.png" }
-        ];
+  <script>
+    var murtisData = [
+      { name: 'Shree Ghanshyam Maharaj', image: 'images/murtis/GhanshyamMaharaj.png' },
+      { name: 'Shree Nar Narayan Dev', image: 'images/murtis/NarnarayanDev.png' },
+      { name: 'Shree Sahajanand Swami', image: 'images/murtis/SwaminarayanBhagwan.png' },
+      { name: 'Shree Radha Krishna Dev', image: 'images/murtis/Radhakrishna.png' },
+      { name: 'Shree Shiv Parvati', image: 'images/murtis/ShivParvati.png' },
+      { name: 'Shree Ganeshji', image: 'images/murtis/GaneshBhagwan.png' },
+      { name: 'Shivling', image: 'images/murtis/Shivling.png' },
+      { name: 'Shree Ram, Sita and Lakshman', image: 'images/murtis/LakshmanRamSita.png' },
+      { name: 'Shree Hanumanji', image: 'images/murtis/Hanumanji.png' },
+      { name: 'Shree Surya Narayan Dev', image: 'images/murtis/SuryaNarayanDev.png' },
+      { name: 'Shree Harikrishna Maharaj', image: 'images/murtis/Harikrishna Maharaj.png' },
+      { name: 'Shree Saligram', image: 'images/murtis/saligram.png' },
+      { name: 'Shree Saligram (Top View)', image: 'images/murtis/saligam-top-view.png' },
+      { name: 'Shree Kurma', image: 'images/murtis/kurma.png' },
+      { name: 'Nandi', image: 'images/murtis/nandi.png' }
+    ];
 
-        const murtisGrid = document.getElementById('murtisGrid');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxTitle = document.getElementById('lightbox-title');
-        const lightboxCounter = document.getElementById('lightbox-counter');
-        let currentIndex = 0;
+    var currentMurti = 0;
 
-        function createMurtiCard(murti, index) {
-          return `
-        <div class="card" data-index="${index}" data-name="${murti.name}" data-img="${murti.image}">
-          <img src="${murti.image}" alt="${murti.name}" class="card-image"
-            onerror="this.src='https://via.placeholder.com/300x400/e5e7eb/6b7280?text=Image+Not+Found'"/>
-          <div class="card-content">
-            <h3 class="card-title"><b>${murti.name}</b></h3>
-          </div>
-        </div>`;
-        }
+    // Build grid
+    var gridHtml = '';
+    murtisData.forEach(function(murti, idx) {
+      gridHtml += '<div class="murti-card" onclick="openMurtiLb(' + idx + ')">' +
+        '<img src="' + murti.image + '" alt="' + murti.name + '" class="murti-card-img">' +
+        '<div class="murti-card-info"><div class="murti-card-name">' + murti.name + '</div></div>' +
+        '</div>';
+    });
+    document.getElementById('murtisGrid').innerHTML = gridHtml;
 
-        function renderMurtis() {
-          murtisGrid.innerHTML = murtisData.map((murti, i) => createMurtiCard(murti, i)).join('');
-          attachLightboxEvents();
-        }
+    function openMurtiLb(i) {
+      currentMurti = i;
+      renderMurtiLb();
+      document.getElementById('murtiLightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-        function updateLightbox(index) {
-          const murti = murtisData[index];
-          lightboxImg.src = murti.image;
-          lightboxTitle.textContent = murti.name;
-          lightboxCounter.textContent = (index + 1) + " / " + murtisData.length;
-        }
+    function closeMurtiLb() {
+      document.getElementById('murtiLightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-        function attachLightboxEvents() {
-          document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-              currentIndex = parseInt(card.dataset.index);
-              updateLightbox(currentIndex);
-              lightbox.classList.add('active');
-            });
-          });
-        }
+    function murtiLbNav(dir) {
+      currentMurti = (currentMurti + dir + murtisData.length) % murtisData.length;
+      renderMurtiLb();
+    }
 
-        document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.classList.remove('active'));
-        document.querySelector('.lightbox-prev').addEventListener('click', () => {
-          currentIndex = (currentIndex - 1 + murtisData.length) % murtisData.length;
-          updateLightbox(currentIndex);
-        });
-        document.querySelector('.lightbox-next').addEventListener('click', () => {
-          currentIndex = (currentIndex + 1) % murtisData.length;
-          updateLightbox(currentIndex);
-        });
-        lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) lightbox.classList.remove('active');
-        });
+    function renderMurtiLb() {
+      var m = murtisData[currentMurti];
+      document.getElementById('murtiLbImg').src = m.image;
+      document.getElementById('murtiLbImg').alt = m.name;
+      document.getElementById('murtiLbTitle').textContent = m.name;
+      document.getElementById('murtiLbCounter').textContent = (currentMurti + 1) + ' / ' + murtisData.length;
+    }
 
-        renderMurtis();
-      </script>
+    document.getElementById('murtiLightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeMurtiLb();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (document.getElementById('murtiLightbox').classList.contains('open')) {
+        if (e.key === 'ArrowRight') murtiLbNav(1);
+        if (e.key === 'ArrowLeft') murtiLbNav(-1);
+        if (e.key === 'Escape') closeMurtiLb();
+      }
+    });
+  </script>
+
+  <% include partials/footer %>
 </body>
 
 </html>
