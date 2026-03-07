@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .section-nav {
+      text-align: center;
+      padding: 20px 24px 10px;
+    }
+
+    .section-nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+      padding: 4px 0;
+    }
+
+    .section-nav a:hover { color: var(--deep); }
+
+    .section-nav .sep {
+      color: var(--gold-light);
+      margin: 0 10px;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .page-section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      scroll-margin-top: 80px;
+    }
+
+    .page-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page-section:last-child { border-bottom: none; }
+
+    .page-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      transition: color 0.3s;
+    }
+
+    .page-section:hover h2 { color: var(--deep); }
+
+    .page-section p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .page-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .page-section ul li {
+      padding: 8px 0;
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+    }
+
+    .page-section ul li::before {
+      content: '\2022';
+      color: var(--gold);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+    }
+
+    .page-section a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-light);
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .page-section a:hover {
+      color: var(--deep);
+      border-color: var(--deep);
+    }
+  </style>
+</head>
+
+<body>
+  <% include partials/menu %>
+    <div class="container bg-light">
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Youth Programs</p>
+          <h1>Ghanshyam Bal Mandal</h1>
+        </div>
+
+        <div class="section-nav">
+          <a href="#dharmik">Dharmik</a><span class="sep">&middot;</span>
+          <a href="#gujarati">Gujarati</a><span class="sep">&middot;</span>
+          <a href="#music">Music</a><span class="sep">&middot;</span>
+          <a href="#team">Team</a><span class="sep">&middot;</span>
+          <a href="#additional-activities">Additional Activities</a>
+        </div>
+
+        <p class="page-intro">When Ghanshyam Maharaj took residence in Sydney in 2013, we committed to fully utilising
+          our Mandir&rsquo;s facilities to serve the new generation of children. Today, we offer a wide range of activities,
+          including Ghanshyam Dharmik, Ghanshyam Gujarati, and Ghanshyam Music classes. As of 2024, with 210 students
+          enrolled, GBM continues to provide diverse and enriching programs that nurture the spiritual, cultural, and
+          personal growth of our young haribhakto.</p>
+
+        <div class="page-content">
+
+          <div id="dharmik" class="page-section">
+            <h2>Ghanshyam Dharmik</h2>
+            <p>In 2014, we launched Ghanshyam Dharmik classes using materials from Bhuj Mandir. As the number of
+              first-generation Australian children grew, we recognised the need for a more tailored approach. As part
+              of the GBM refresh in 2018, we developed interactive, colourful workbooks and teacher support materials
+              specifically for our local students.</p>
+            <p>Building on the success of our local content, we contributed to the making of an international
+              syllabus. With the blessings of Bhagwan Shree Swaminarayan, Bhuj Mahant Swami, and esteemed Vadil Santo,
+              we introduced the Svadhyay syllabus in 2022, developed with contributions from the UK and Australia.
+              This world-class framework, designed for youth aged 6 to 16, promotes self-improvement, Vedic study, and
+              self-reflection, alongside core interpersonal and life skills. The Svadhyay syllabus empowers children
+              to understand and appreciate satsang, ensuring the strength and continuity of our religion for future
+              generations.</p>
+          </div>
+
+          <div id="gujarati" class="page-section">
+            <h2>Ghanshyam Gujarati</h2>
+            <p>Established in 2003, Ghanshyam Gujarati has been dedicated to nurturing young minds and instilling the
+              rich cultural heritage of Gujarat into the hearts of future generations. Our mission is to create a
+              supportive environment where children can learn, grow, and connect with their Gujarati roots. Through
+              interactive lessons, cultural activities, and language instruction, we aim to foster pride in our
+              students&rsquo; cultural identity and enhance their language skills, enabling them to preserve their mother
+              tongue and read sacred shastras.</p>
+            <p>Our curriculum, originally based on textbooks created in 1997 by Willesden Mandir in the UK, has been
+              thoughtfully updated to meet modern teaching standards. It incorporates engaging activities that keep
+              our students actively involved in their learning journey.</p>
+          </div>
+
+          <div id="music" class="page-section">
+            <h2>Ghanshyam Music</h2>
+            <p>In 2019, we expanded our offerings to include music classes, featuring tabla, keyboard, and singing
+              classes. These classes are designed to nurture and develop musical talent, instilling a deep appreciation
+              for Indian classical music among our youth. Ghanshyam Music provides a comprehensive cultural education
+              that enriches the spiritual and cultural lives of our young haribhakto. Our music program not only fosters
+              artistic growth but also strengthens their connection to the rich musical heritage of our Sampraday.</p>
+          </div>
+
+          <div id="team" class="page-section">
+            <h2>Teaching Team</h2>
+            <p>We are always seeking dedicated individuals to join our teaching team. If you have a passion for
+              education and a desire to teach Dharmik, Gujarati or Music, consider becoming a teacher with us! To
+              express your interest, please fill out our
+              <a href="https://tinyurl.com/GBM-Teach" target="_blank">Teacher Application Form</a>,
+              and we will reach out to discuss this wonderful opportunity further.</p>
+          </div>
+
+          <div id="additional-activities" class="page-section">
+            <h2>Additional Activities of GBM Sydney</h2>
+            <p>In addition to our classes, we conduct many other activities for our youngest haribhakto.</p>
+            <ul>
+              <li><strong>Public Speaking Training:</strong> We provide training to help our youth develop their public
+                speaking skills, boosting their confidence and communication abilities.</li>
+              <li><strong>Youth Parayan in English:</strong> These sessions allow our youth to explore and listen to
+                religious texts in English, making them more accessible and engaging.</li>
+              <li><strong>Annual Cultural Show:</strong> This vibrant event showcases the talents of our youth in dance,
+                singing, instrumental music, drama, and pyramids, celebrating our rich cultural heritage.</li>
+              <li><strong>Camps:</strong> We organise immersive camps every year that combine fun activities with life
+                skills and spiritual education.</li>
+              <li><strong>School Holiday Outings:</strong> These outings offer fun and educational experiences, helping
+                children bond and learn in a relaxed environment.</li>
+              <li><strong>Weekly Sports:</strong> Regular sports activities ensure that our youth stay active and
+                healthy, fostering teamwork and discipline.</li>
+              <li><strong>Teacher Training Sessions:</strong> Our teaching team participates in training sessions to
+                stay abreast of the latest educational methods and to enhance their teaching skills.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.page-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
+  <% include partials/footer %>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .styled-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .page-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .page-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .page-section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .page-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page-section:last-child { border-bottom: none; }
+
+    .page-section p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <% include partials/menu %>
+    <div class="container bg-light">
+      <div class="styled-page">
+        <div class="page-header">
+          <p class="subtitle">Music &amp; Culture</p>
+          <h1>Nilkanth Pipe Band and Lazium</h1>
+        </div>
+
+        <p class="page-intro">Under the banner of SSYM, the Nilkanth Pipe Band and Lazium stand as vibrant symbols of
+          cultural pride and musical excellence at our Mandir.</p>
+
+        <div class="page-content">
+
+          <div class="page-section">
+            <p>Established in 2005 with a modest number of members playing drums and Lazium, the group has grown
+              significantly alongside our expanding congregation, attracting new talent to enhance performances during
+              the Mandir&rsquo;s major Utsavs.</p>
+            <p>During the Mandir&rsquo;s construction phase in 2012, a group of dedicated boys began mastering their musical
+              skills on recorders, later advancing to bagpipes. Their dedication intensified as they prepared for the
+              Murti Pran Pratistha Mahotsav, with both the Lazium group and Pipe Band committing to regular rehearsals.
+              This commitment culminated in the official launch of the Nilkanth Pipe Band during the Nilkanth Mahotsav
+              &ndash; Murti Pratistha in January 2013.</p>
+            <p>Today, the Nilkanth Pipe Band boasts a talented ensemble comprising 18 bagpipe players, 6 snare drum
+              players, 2 bass drum players, and 4 tenor drum players. Supported by over 100 boys and girls who
+              contribute to the Lazium performances at major events, the band has woven itself into the cultural fabric
+              of our community.</p>
+            <p>The Pipe Band takes centre stage at all major Mandir events and has collaborated with Mandirs across
+              Australia for international performances. Their crowning achievement was performing with other Mandirs at
+              the 200-year anniversary of Bhuj Mandir in 2023 in India. Beyond temple grounds, the band also actively
+              engages in diverse community events, enriching lives with their music and spreading cultural joy far
+              beyond our Mandir&rsquo;s walls.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.page-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
+  <% include partials/footer %>
+</body>
+
+</html>
