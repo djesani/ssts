@@ -64,4 +64,24 @@ router.get('/trivia', function (req, res, next) {
   res.render('trivia', { title: 'Trivia' });
 });
 
+router.get('/yuvak-mandal', function (req, res, next) {
+  res.render('yuvak-mandal', { title: 'Yuvak Mandal' });
+});
+
+router.get('/bal-mandal', function (req, res, next) {
+  res.render('bal-mandal', { title: 'Bal Mandal' });
+});
+
+router.get('/pipe-band', function (req, res, next) {
+  res.render('pipe-band', { title: 'Pipe Band' });
+});
+
+router.get('/timeline', function (req, res, next) {
+  res.render('timeline', { title: 'Timeline' });
+});
+
+router.get('/leelas', function (req, res, next) {
+  res.render('leelas', { title: 'Leelas' });
+});
+
 module.exports = router;

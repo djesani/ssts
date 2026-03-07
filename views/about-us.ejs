@@ -3,95 +3,285 @@
 
 <head>
   <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .about-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    .about-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .about-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .about-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .about-header .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Section navigation */
+    .section-nav {
+      text-align: center;
+      padding: 20px 24px 10px;
+    }
+
+    .section-nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+      padding: 4px 0;
+    }
+
+    .section-nav a:hover {
+      color: var(--deep);
+    }
+
+    .section-nav .sep {
+      color: var(--gold-light);
+      margin: 0 10px;
+    }
+
+    /* Content sections */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .about-section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      scroll-margin-top: 80px;
+    }
+
+    .about-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-section:last-child {
+      border-bottom: none;
+    }
+
+    .about-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      transition: color 0.3s;
+    }
+
+    .about-section:hover h2 {
+      color: var(--deep);
+    }
+
+    .about-section p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .about-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-section ul li {
+      padding: 8px 0;
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: var(--text);
+    }
+
+    .about-section ul li::before {
+      content: '\2022';
+      color: var(--gold);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+    }
+
+    .about-section a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-light);
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .about-section a:hover {
+      color: var(--deep);
+      border-color: var(--deep);
+    }
+
+    /* Intro section special styling */
+    .about-intro {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px 10px;
+      line-height: 1.85;
+    }
+  </style>
 </head>
 
 <body>
   <% include partials/menu %>
     <div class="container bg-light">
-    <div style="text-align: center; padding-top: 10px">
-        <a href="#history">History</a> | <a href="#construction">Construction</a> | <a href="#festivals">Festivals</a> | <a href="#contributions">Contributions</a> | <a href="#unity">Unity</a> | <a href="#objectives">Objectives</a> 
-    </div>
-      <div class="row other-pages">
-        <div class="col-sm-12">
-          <div class="shadow-sm p-3 mb-5 bg-white rounded">
-            <h1>Shree Swaminarayan Mandir Bhuj - Sydney</h1>
-            <h2>About us</h2>
-            <p>Members of the Swaminarayan Sampraday started migrating to Sydney in the early 2000s, seeking better
-              lives and to promote the glory of Lord Shree Swaminarayan. Guided by His Holiness Acharya Maharajshree and
-              the Saints of Shree Swaminarayan Mandir- Bhuj, devotees brought with them the invaluable treasure of
-              Satsang. </p>
-          </div>
-          <div id="history" class="shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="about-page">
+        <div class="about-header">
+          <p class="subtitle">About The Temple</p>
+          <h1>Shree Swaminarayan Mandir Bhuj &mdash; Sydney</h1>
+        </div>
+
+        <div class="section-nav">
+          <a href="#history">History</a><span class="sep">&middot;</span>
+          <a href="#construction">Construction</a><span class="sep">&middot;</span>
+          <a href="#festivals">Festivals</a><span class="sep">&middot;</span>
+          <a href="#contributions">Contributions</a><span class="sep">&middot;</span>
+          <a href="#unity">Unity</a><span class="sep">&middot;</span>
+          <a href="#objectives">Objectives</a>
+        </div>
+
+        <p class="about-intro">Members of the Swaminarayan Sampraday started migrating to Sydney in the early 2000s,
+          seeking better lives and to promote the glory of Lord Shree Swaminarayan. Guided by His Holiness Acharya
+          Maharajshree and the Saints of Shree Swaminarayan Mandir &ndash; Bhuj, devotees brought with them the
+          invaluable treasure of Satsang.</p>
+
+        <div class="about-content">
+
+          <div id="history" class="about-section">
             <h2>Temple History and Growth</h2>
             <p>In the year 2000, devotees began congregating in Sydney, performing daily rituals and sabhas in their
               homes. By 2001, guided and blessed by the Late Pujya Mahant Sadguru Purani Swami Hariswarupdasji of Bhuj
-              Mandir, "Shree Swaminarayan Temple Sydney Inc. (Under Shree Nar-Narayan Dev, Bhuj Kutch)" was formally
+              Mandir, &ldquo;Shree Swaminarayan Temple Sydney Inc. (Under Shree Nar-Narayan Dev, Bhuj Kutch)&rdquo; was formally
               registered as a non-profit organisation. Weekly sabhas were held in hired halls in addition to regular
               festivals like Thakarthali and Raasotsav, and grand celebrations of Ramnavmi, Janmashtami, and
-              Diwali.<br><br>In 2003, the arrival of Upmahant Sadguru Purani Swami Dharmanandandasji, Sadguru Purani
+              Diwali.</p>
+            <p>In 2003, the arrival of Upmahant Sadguru Purani Swami Dharmanandandasji, Sadguru Purani
               Swami ShriHaridasji, Shastri Swami Devcharandasji and Shastri Swami Bhaktvatsaldasji from Bhuj Mandir
-              marked the establishment of the first overseas branch of the Shree Swaminarayan Yuvak Mandal enhancing
+              marked the establishment of the first overseas branch of the Shree Swaminarayan Yuvak Mandal, enhancing
               spiritual growth and community unity.</p>
           </div>
-          <div id="construction" class="shadow-sm p-3 mb-5 bg-white rounded">
+
+          <div id="construction" class="about-section">
             <h2>Temple Construction and Expansion</h2>
             <p>Following initial setbacks with the purchased land in 2006, a more suitable site was secured in 2012.
               Bhoomi Poojan was conducted in the esteemed presence of His Holiness Mota Maharajshree Tejendraprasadji
               Maharaj, Mahant Sadguru Purani Swami Dharmanandandasji Swami, Sadguru Purani Swami Keshavprasaddasji, and
               other prominent saints from Bhuj Mandir and Kalupur Mandir, took place on April 14, 2012. The auspicious
-              Khat Muhurat ceremony followed the next day.
-              <br><br>The temple construction was completed swiftly within 9 months, culminating in its grand opening.
+              Khat Muhurat ceremony followed the next day.</p>
+            <p>The temple construction was completed swiftly within 9 months, culminating in its grand opening.
               On January 18, 2013, His Holiness 1008 Acharya Maharajshree Koshalendraprasadji presided over the Murti
               Pran Pratishtha ceremony together with Mahant Sadguru Purani Swami Dharmanandandasji Swami, Sadguru Purani
-              Swami Keshavprasaddasji and other prominent saints from Bhuj Mandir & Kalupur Mandir, officially welcoming
-              the divine presence of Bhagwan to reside in Sydney.
-              <br><br>In 2018, significant renovations were undertaken, transforming the temple into a shikhar bandh
+              Swami Keshavprasaddasji and other prominent saints from Bhuj Mandir &amp; Kalupur Mandir, officially welcoming
+              the divine presence of Bhagwan to reside in Sydney.</p>
+            <p>In 2018, significant renovations were undertaken, transforming the temple into a shikhar bandh
               structure adorned with a beautiful pink stone facade. These enhancements expanded both educational and
-              community spaces, reinforcing the temple's role as a spiritual and cultural hub.
-            </p>
+              community spaces, reinforcing the temple&rsquo;s role as a spiritual and cultural hub.</p>
           </div>
-          <div id="festivals" class="shadow-sm p-3 mb-5 bg-white rounded">
+
+          <div id="festivals" class="about-section">
             <h2>Major Festivals and Community Engagement</h2>
             <p>The temple hosts a diverse array of festivals, including Holi Dahan, Shivratri, NarNarayan Dev Jayanti,
               Ramnavmi, Janmashtami and Diwali, attracting thousands annually. These celebrations not only strengthen
               cultural and religious ties but also foster community spirit.</p>
           </div>
-          <div id="contributions" class="shadow-sm p-3 mb-5 bg-white rounded">
+
+          <div id="contributions" class="about-section">
             <h2>Contributions to Australasian Community</h2>
-            <p> Shree Swaminarayan Mandir Bhuj - Sydney has played a pivotal role in nurturing satsang across Australia.
+            <p>Shree Swaminarayan Mandir Bhuj &ndash; Sydney has played a pivotal role in nurturing satsang across Australia.
               It supported the foundations of SSMB Adelaide, SSMB Auckland, Perth, ISSO Melbourne, and ISSO Griffith,
               and spearheaded the international syllabus rollout in this region. It regularly promotes unity nationwide
-              by sharing resources and encouraging consistency across all Mandirs. </p>
+              by sharing resources and encouraging consistency across all Mandirs.</p>
           </div>
-          <div id="unity" class="shadow-sm p-3 mb-5 bg-white rounded">
+
+          <div id="unity" class="about-section">
             <h2>New Era: Bringing Unity</h2>
             <p>In 2022, under the auspices of Mahant Sadguru Purani Swami Dharmanandandasji and Upmahant Sadguru Swami
               Bhagwadjivandasji, the temple officially came under Bhuj Mandir, promoting unity and aligning with the
-              main temple in India. Sydney was the first temple worldwide to adopt the SSMB name, pathing the way for
-              other Australian temples</p>
+              main temple in India. Sydney was the first temple worldwide to adopt the SSMB name, paving the way for
+              other Australian temples.</p>
           </div>
-          <div id="objectives" class="shadow-sm p-3 mb-5 bg-white rounded">
+
+          <div id="objectives" class="about-section">
             <h2>Objectives of the Temple</h2>
-            <p>
             <ul>
-              <li>
-                Promote Hindu Sanatan Dharma as directly authenticated by Bhagwan Shree Swaminarayan and authenticated
-                by Bhuj Mandir Santo.
-              </li>
-              <li>
-                Grow and develop our youth to ensure the sustainability of the Sampraday for future generations.
-              </li>
+              <li>Promote Hindu Sanatan Dharma as directly authenticated by Bhagwan Shree Swaminarayan and authenticated
+                by Bhuj Mandir Santo.</li>
+              <li>Grow and develop our youth to ensure the sustainability of the Sampraday for future generations.</li>
             </ul>
-            <br> Swaminarayan Mandir Bhuj - Sydney stands as more than a place of worship; it embodies cultural
-            enrichment and spiritual growth. With a history rich in devotion and guided by timeless principles, the
-            temple continues to serve as a beacon of faith and community for devotees across Australia and beyond.
-            <!-- <br>For more information about our youth and community programs, please visit the dedicated pages for [Shree
-            Swaminarayan Yuvak Mandal] and [Ghanshyam Bal Mandal]. -->
-            </p>
+            <p>Swaminarayan Mandir Bhuj &ndash; Sydney stands as more than a place of worship; it embodies cultural
+              enrichment and spiritual growth. With a history rich in devotion and guided by timeless principles, the
+              temple continues to serve as a beacon of faith and community for devotees across Australia and beyond.</p>
+            <p>For more information about our youth and community programs, please visit the dedicated pages for
+              <a href="/yuvak-mandal">Shree Swaminarayan Yuvak Mandal</a> and
+              <a href="/bal-mandal">Ghanshyam Bal Mandal</a>.</p>
           </div>
-         </div>
+
+        </div>
       </div>
     </div>
-    <% include partials/footer %>
+
+  <script>
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.about-section').forEach(function (el) { observer.observe(el); });
+  </script>
+
+  <% include partials/footer %>
 </body>
+
 </html>

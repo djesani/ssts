@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9963a;
+      --gold-light: #e8bc68;
+      --deep: #1a0f00;
+      --cream: #fdf6ec;
+      --muted: #8a7560;
+      --text: #3a2810;
+    }
+
+    .timeline-page {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      padding-bottom: 40px;
+    }
+
+    /* Header */
+    .timeline-header {
+      text-align: center;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    .timeline-header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    .temple-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--deep);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Timeline wrapper */
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 5%, var(--gold) 95%, transparent);
+      transform: translateX(-50%);
+    }
+
+    /* Each entry */
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr;
+      align-items: start;
+      gap: 0;
+      margin-bottom: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .entry.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .entry:nth-child(odd) .content {
+      grid-column: 1;
+      text-align: right;
+      padding-right: 32px;
+    }
+
+    .entry:nth-child(odd) .spacer { grid-column: 3; }
+
+    .entry:nth-child(even) .content {
+      grid-column: 3;
+      text-align: left;
+      padding-left: 32px;
+      order: 3;
+    }
+
+    .entry:nth-child(even) .spacer { grid-column: 1; order: 1; }
+
+    .node-col {
+      grid-column: 2;
+      display: flex;
+      justify-content: center;
+      padding-top: 20px;
+      order: 2;
+      position: relative;
+      z-index: 2;
+    }
+
+    .node {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .node::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .entry.active .node,
+    .node:hover {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    .entry.active .node::after,
+    .node:hover::after {
+      border-color: var(--gold-light);
+    }
+
+    .spacer { min-height: 80px; }
+
+    /* Content card */
+    .content {
+      padding-top: 8px;
+      padding-bottom: 32px;
+      cursor: pointer;
+    }
+
+    .year-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      transition: color 0.3s;
+    }
+
+    .entry:hover .year-tag,
+    .entry.active .year-tag {
+      color: var(--deep);
+    }
+
+    .title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--deep);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .detail {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-top: 6px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s;
+    }
+
+    .entry.active .detail {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+
+    .significance {
+      font-size: 0.88rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-top: 6px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease 0.1s, opacity 0.4s ease 0.1s;
+    }
+
+    .entry.active .significance {
+      max-height: 80px;
+      opacity: 1;
+    }
+
+    /* Mobile */
+    @media (max-width: 560px) {
+      .timeline::before { left: 20px; }
+      .entry { grid-template-columns: 40px 1fr; }
+      .entry:nth-child(odd) .content,
+      .entry:nth-child(even) .content {
+        grid-column: 2;
+        text-align: left;
+        padding-left: 24px;
+        padding-right: 0;
+        order: 2;
+      }
+      .node-col { grid-column: 1; order: 1; padding-top: 14px; justify-content: flex-start; padding-left: 13px; }
+      .entry:nth-child(odd) .spacer,
+      .entry:nth-child(even) .spacer { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <% include partials/menu %>
+    <div class="container bg-light">
+      <div class="timeline-page">
+        <div class="timeline-header">
+          <p class="subtitle">A Journey of Faith</p>
+          <h1 class="temple-name">Shree Swaminarayan Mandir Bhuj &mdash; Sydney</h1>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </div>
+
+  <script>
+    var milestones = [
+      {
+        year: "Early 2000s",
+        title: "Seeds of Satsang",
+        detail: "Devotees began performing daily rituals and sabhas in homes, building the foundation of a community before a dedicated space existed.",
+        significance: "The beginning of a spiritual home in Sydney."
+      },
+      {
+        year: "2001",
+        title: "Formal Registration",
+        detail: "Under guidance of Late Pujya Mahant Sadguru Purani Swami Hariswarupdasji, Shree Swaminarayan Temple Sydney Inc. was registered as a non-profit organisation.",
+        significance: "A formal structure to support growing activities and festivals."
+      },
+      {
+        year: "2003",
+        title: "Youth & Language",
+        detail: "SSYM Sydney was established in the presence of esteemed Swamis from Bhuj \u2014 the first international branch of the Yuvak Mandal. Ghanshyam Gujarati classes also began.",
+        significance: "Youth engagement and cultural education took root."
+      },
+      {
+        year: "2012",
+        title: "A Permanent Home",
+        detail: "A new site was secured after earlier setbacks. Bhoomi Poojan and Khat Muhurat were conducted in April in the presence of His Holiness Mota Maharajshree Tejendraprasadji Maharaj.",
+        significance: "A landmark step toward a permanent spiritual home."
+      },
+      {
+        year: "2013",
+        title: "Grand Opening",
+        detail: "Construction completed in nine months. On January 18, His Holiness Acharya Maharajshree Koshalendraprasadji presided over the Murti Pran Pratishtha. GBM, Gujarati classes, and the Nilkanth Pipe Band & Lazium were all established.",
+        significance: "A landmark year of inauguration and new beginnings."
+      },
+      {
+        year: "2014",
+        title: "Dharmik Education",
+        detail: "Ghanshyam Dharmik classes launched using Bhuj Mandir materials, providing structured values-based education for children.",
+        significance: "Spiritual education for the next generation commenced."
+      },
+      {
+        year: "2018",
+        title: "Shikhar Bandh Renovation",
+        detail: "Significant renovations transformed the temple into a shikhar bandh structure adorned with a beautiful pink stone facade. GBM refreshed with a new logo and updated materials.",
+        significance: "Facilities and branding updated to support future growth."
+      },
+      {
+        year: "2019",
+        title: "Music Blossoms",
+        detail: "Ghanshyam Music classes expanded to include tabla, keyboard, and singing, deepening connection to the Sampraday\u2019s heritage.",
+        significance: "Broader musical engagement for youth and community."
+      },
+      {
+        year: "2022",
+        title: "Unity & Alignment",
+        detail: "The Svadhyay international syllabus was introduced. The temple officially aligned under Bhuj Mandir \u2014 Sydney was the first temple worldwide to adopt the SSMB name.",
+        significance: "Deepening of study and formal global affiliation."
+      },
+      {
+        year: "2023",
+        title: "International Stage",
+        detail: "The Nilkanth Pipe Band performed at the 200-year anniversary of Bhuj Mandir in India. The Svadhyay syllabus continued to shape youth education.",
+        significance: "International recognition and sustained educational focus."
+      },
+      {
+        year: "2024",
+        title: "Record Enrolment",
+        detail: "210 students enrolled across GBM programmes \u2014 the highest participation ever across Dharmik, Gujarati, and Music streams.",
+        significance: "A thriving community of learners and spiritual seekers."
+      }
+    ];
+
+    var timeline = document.getElementById('timeline');
+
+    milestones.forEach(function (m) {
+      var entry = document.createElement('div');
+      entry.className = 'entry';
+      entry.innerHTML =
+        '<div class="content">' +
+          '<div class="year-tag">' + m.year + '</div>' +
+          '<div class="title">' + m.title + '</div>' +
+          '<div class="detail">' + m.detail + '</div>' +
+          '<div class="significance">' + m.significance + '</div>' +
+        '</div>' +
+        '<div class="node-col"><div class="node"></div></div>' +
+        '<div class="spacer"></div>';
+      entry.addEventListener('click', function () {
+        var isActive = entry.classList.contains('active');
+        document.querySelectorAll('.entry.active').forEach(function (e) { e.classList.remove('active'); });
+        if (!isActive) entry.classList.add('active');
+      });
+      timeline.appendChild(entry);
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.entry').forEach(function (e) { observer.observe(e); });
+  </script>
+
+  <% include partials/footer %>
+</body>
+
+</html>
