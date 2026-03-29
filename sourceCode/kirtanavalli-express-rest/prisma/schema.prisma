@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "postgresql://postgres:UK0oIrfNf3axF5Cb@db.ogzgvpqnjbjzxjsvscjh.supabase.co:5432/postgres"
+}
+
+model categories {
+  id                     Int     @id @default(autoincrement())
+  category_gujarati_name String?
+  category_english_name  String?
+  sequence               Int?    @unique
+
+  subCategory            sub_categories[]
+}
+
+model kirtans {
+  id                     Int     @id @default(autoincrement())
+  sub_category_id        Int?
+  title_gujarati         String?
+  title_english          String?
+  description_gujarati   String?
+  description_english    String?
+  kirtan_group           Int?
+  pad_no                 String?
+  sub_category_id_array  String?
+  description_lines_english   Int?
+  description_lines_gujarati  Int?
+  description_lines_synced    Int?
+
+  sub_category          sub_categories? @relation(fields: [sub_category_id], references: [id])
+
+  
+}
+
+model sub_categories {
+  id                    Int     @id @default(autoincrement())
+  sub_cat_english_name  String?
+  sub_cat_gujarati_name String?
+  category_id           Int?
+  sequence              Int?    @unique
+
+  category              categories? @relation(fields: [category_id], references: [id])
+
+  kirtans               kirtans[]
+}
