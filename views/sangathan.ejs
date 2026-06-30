@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header %>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Karla:wght@300;400;500&display=swap"
+      rel="stylesheet">
+    <style>
+      :root {
+        --gold: #c9963a;
+        --gold-light: #e8bc68;
+        --deep: #1a0f00;
+        --cream: #fdf6ec;
+        --muted: #8a7560;
+        --text: #3a2810;
+      }
+
+      .about-page {
+        background: var(--cream);
+        color: var(--text);
+        font-family: 'Karla', sans-serif;
+        padding-bottom: 40px;
+      }
+
+      .about-header {
+        text-align: center;
+        padding: 40px 24px 36px;
+        position: relative;
+      }
+
+      .about-header::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: var(--gold);
+        margin: 24px auto 0;
+      }
+
+      .about-header h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1.4rem, 4vw, 2.2rem);
+        font-weight: 300;
+        letter-spacing: 0.12em;
+        color: var(--deep);
+        text-transform: uppercase;
+      }
+
+      .about-header .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: 8px;
+        font-weight: 500;
+      }
+
+      /* Section navigation */
+      .section-nav {
+        text-align: center;
+        padding: 20px 24px 10px;
+        line-height: 2.2;
+      }
+
+      .section-nav a {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+        transition: color 0.3s;
+        padding: 4px 0;
+      }
+
+      .section-nav a:hover {
+        color: var(--deep);
+      }
+
+      .section-nav .sep {
+        color: var(--gold-light);
+        margin: 0 10px;
+      }
+
+      /* Content sections */
+      .about-content {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 20px 24px;
+      }
+
+      .about-section {
+        padding: 32px 0;
+        border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+        scroll-margin-top: 80px;
+      }
+
+      .about-section:last-child {
+        border-bottom: none;
+      }
+
+      .about-section h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--gold);
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+
+      .about-section h3 {
+        font-family: 'Cormorant Garamond', serif;
+        color: var(--deep);
+        font-size: 1.35rem;
+        margin: 0 0 8px;
+      }
+
+      .about-section p {
+        font-size: 1.1rem;
+        line-height: 1.85;
+        color: var(--text);
+        margin-bottom: 14px;
+      }
+
+      .about-section ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .about-section ul li {
+        padding: 6px 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--text);
+      }
+
+      .about-section ul li::before {
+        content: '\2022';
+        color: var(--gold);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+      }
+
+      .about-section a {
+        color: var(--gold);
+        text-decoration: none;
+        border-bottom: 1px solid var(--gold-light);
+        transition: color 0.3s, border-color 0.3s;
+      }
+
+      .about-section a:hover {
+        color: var(--deep);
+        border-color: var(--deep);
+      }
+
+      .about-intro {
+        font-size: 1.12rem;
+        font-style: italic;
+        color: var(--muted);
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 20px 24px 10px;
+        line-height: 1.85;
+      }
+
+      /* ---- Sangathan rich components (gold theme) ---- */
+      .sp-center { text-align: center; }
+      .sp-note { font-size: 0.95rem; color: var(--muted); }
+
+      .sp-btn {
+        display: inline-block; background: var(--gold); color: #fff !important;
+        border: none !important; border-radius: 30px; padding: 0.7rem 1.7rem;
+        font-weight: 600; letter-spacing: 0.02em; text-decoration: none;
+      }
+      .about-section a.sp-btn { border-bottom: none; }
+      .sp-btn:hover { background: var(--deep); color: #fff !important; }
+      .sp-btn--outline { background: transparent; color: var(--deep) !important; border: 2px solid var(--gold) !important; }
+      .sp-btn--outline:hover { background: var(--gold); color: #fff !important; }
+
+      .sp-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 14px rgba(201,150,58,0.12); margin: 8px 0; }
+      .sp-table th { background: var(--gold); color: #fff; padding: 0.6rem 0.9rem; text-align: left; font-family: 'Karla', sans-serif; font-weight: 500; }
+      .sp-table td { padding: 0.5rem 0.9rem; border-bottom: 1px solid #f0e6d6; vertical-align: top; }
+      .sp-table tr:last-child td { border-bottom: none; }
+      .sp-time { white-space: nowrap; font-weight: 700; }
+
+      .sp-grid { display: grid; gap: 1.25rem; margin: 10px 0; }
+      .sp-grid--2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .sp-grid--4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+      @media (max-width: 900px){ .sp-grid--4 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+      @media (max-width: 600px){ .sp-grid--2, .sp-grid--4 { grid-template-columns: 1fr; } }
+
+      .sp-card { background: #fff; border-radius: 10px; padding: 1.1rem 1.25rem; border-top: 3px solid var(--gold); }
+
+      .sp-gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin-top: 1rem; }
+      @media (max-width: 600px){ .sp-gallery { grid-template-columns: 1fr; } }
+      .about-section .sp-gallery a { border-bottom: none; }
+      .sp-gallery img { width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 3px 12px rgba(0,0,0,0.12); }
+
+      .sp-guest { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; background: #fff; border-radius: 10px; padding: 1.25rem; border-top: 3px solid var(--gold); }
+      .sp-guest img { width: 160px; height: auto; border-radius: 10px; flex-shrink: 0; }
+      .sp-guest .info { flex: 1; min-width: 220px; }
+      @media (max-width: 560px){ .sp-guest { flex-direction: column; text-align: center; } }
+
+      .sp-poster { display: block; margin: 1rem auto 0; max-width: 460px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+      .sp-figures { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      @media (max-width: 560px){ .sp-figures { grid-template-columns: 1fr; } }
+      .sp-figures img { width: 100%; height: auto; border-radius: 8px; }
+      .sp-figures figcaption { text-align: center; font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
+      .sp-quote { background: #fff; border-left: 4px solid var(--gold); padding: 1.1rem 1.4rem; border-radius: 0 8px 8px 0; margin-top: 1.25rem; }
+    </style>
+</head>
+
+<body>
+  <% include partials/menu %>
+    <div class="container bg-light">
+      <div class="about-page">
+        <div class="about-header">
+          <p class="subtitle">25 Years of Sydney Satsang &middot; 4&ndash;12 July 2026</p>
+          <h1>Sangathan Parva</h1>
+        </div>
+
+        <div class="section-nav">
+          <a href="#about">About</a><span class="sep">&middot;</span>
+          <a href="#journey">Our Journey</a><span class="sep">&middot;</span>
+          <a href="#schedule">Schedule</a><span class="sep">&middot;</span>
+          <a href="#uniform">Uniform</a><span class="sep">&middot;</span>
+          <a href="#meals">Meals</a><span class="sep">&middot;</span>
+          <a href="#register">Register</a><span class="sep">&middot;</span>
+          <a href="#travel">Getting Here</a><span class="sep">&middot;</span>
+          <a href="#donate">Donate</a><span class="sep">&middot;</span>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <p class="about-intro">Join us as we celebrate 25 years of Sydney Satsang with a special week of bhakti, and sangathan, featuring Satsangi Jeevan Parayan, cultural programs and Bal Mahotsav, with something for children, youth and adults alike.</p>
+
+        <div class="about-content">
+
+          <!-- About -->
+          <div id="about" class="about-section">
+            <h2>The Celebration</h2>
+            <ul>
+              <li><strong>Event:</strong> Sangathan Parva &mdash; A Celebration of Unity</li>
+              <li><strong>Dates:</strong> 4 July &ndash; 12 July 2026</li>
+              <li><strong>Milestone:</strong> 25 Years of Establishment</li>
+              <li><strong>Honoured Guests:</strong> 1008 Acharya Shree Koshalendraprasadji Maharaj &amp; santo from Shree Swaminarayan Mandir Bhuj</li>
+            </ul>
+
+            <h3 style="margin-top:1.25rem;">Our Honoured Guests</h3>
+            <div class="sp-guest">
+              <img src="https://manjulakerai.github.io/sangathan-webpage/images/acharya-koshalendraprasadji.jpg" alt="1008 Acharya Shree Koshalendraprasadji Maharaj">
+              <div class="info">
+                <h3 style="margin:0 0 4px;">1008 Acharya Shree Koshalendraprasadji Maharaj</h3>
+                <p style="margin:0;">Acharya Maharajshree of Shree Nar Narayan Dev Gadi</p>
+                <p class="sp-note" style="margin-top:6px;">Present throughout the celebrations. We are further blessed to welcome santo from Shree Swaminarayan Mandir Bhuj &mdash; a rare opportunity to receive their blessings and enjoy their divine company.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Our Journey -->
+          <div id="journey" class="about-section">
+            <h2>Our Journey &mdash; 25 Years of Faith &amp; Unity</h2>
+            <div class="sp-figures">
+              <figure>
+                <img src="https://manjulakerai.github.io/sangathan-webpage/images/swami-hariswarupdasji.png" alt="Aksharnivasi Mahant Sadguru Shree Hariswarupdasji Swami">
+                <figcaption>Aksharnivasi Mahant Sadguru Shree Hariswarupdasji Swami</figcaption>
+              </figure>
+              <figure>
+                <img src="https://manjulakerai.github.io/sangathan-webpage/images/swami-dharmandandasji.png" alt="Mahant Sadguru Shree Dharmandandasji Swami">
+                <figcaption>Mahant Sadguru Shree Dharmandandasji Swami</figcaption>
+              </figure>
+            </div>
+            <blockquote class="sp-quote">
+              <p lang="gu" style="font-size:1.05rem;line-height:1.9;margin:0;">ત્યાં આપણા ઇષ્ટદેવ શ્રી સ્વામિનારાયણ ભગવાનનું મંદિર બનાવો છો. અને હરિભક્તો અરસપરસ પ્રેમ અને ભાઈચારો વધે અને <strong>સંગઠન</strong> ભાવના પેદા થાય, ધર્મના પ્રસાર થાય તેને અનુલક્ષને બંધારણ તૈયાર કરાવીને અે મોકલાવેલ છે.</p>
+              <footer class="sp-note" style="margin-top:6px;">&mdash; Typed version of the handwritten blessing letter</footer>
+            </blockquote>
+            <p style="margin-top:1.25rem;">In December 2000, with the blessings of Mahant Sadguru Shree Hariswarupdasji Swami, the journey to establish a spiritual home for Kutchi Haribhakto in Sydney began.</p>
+            <p>On 31 May 2001, Upmahant Sadguru Shree Dharmanandandasji Swami penned a heartfelt letter blessing the vision of building a Mandir in Sydney, fostering a deep sense of <strong>sangathan</strong> (unity). On <strong>26 June 2001</strong>, Shree Swaminarayan Temple Sydney Inc. was officially registered &mdash; the beginning of a remarkable 25-year journey of satsang in Sydney.</p>
+          </div>
+
+          <!-- Schedule -->
+          <div id="schedule" class="about-section">
+            <h2>Schedule at a Glance</h2>
+            <table class="sp-table">
+              <thead><tr><th>Date</th><th>Highlight</th></tr></thead>
+              <tbody>
+                <tr><td class="sp-time">Sat 4 July &mdash; PM</td><td>Pothi Yatra</td></tr>
+                <tr><td class="sp-time">Sun 5 July &mdash; AM</td><td>Darshan of Prasadi Items</td></tr>
+                <tr><td class="sp-time">Sun 5 July &mdash; PM</td><td>Ladies Cultural Night</td></tr>
+                <tr><td class="sp-time">Tue 7 July &mdash; PM</td><td>Games Night</td></tr>
+                <tr><td class="sp-time">Thu 9 July &mdash; PM</td><td>Raas Utsav</td></tr>
+                <tr><td class="sp-time">Fri 10 July &mdash; PM</td><td>Gents Cultural Night</td></tr>
+                <tr><td class="sp-time">Sat 11 July &mdash; AM</td><td>Kesar Jal Abhishek &amp; Ankoot Darshan</td></tr>
+                <tr><td class="sp-time">Sat 11 July &mdash; PM</td><td>Blessing of NCC &amp; Ekadashi Jagran Bhajan Night</td></tr>
+                <tr><td class="sp-time">Sun 12 July &mdash; AM</td><td>Rath Yatra</td></tr>
+              </tbody>
+            </table>
+
+            <h3 class="sp-center" style="margin-top:1.5rem;">Katha Timings</h3>
+            <div class="sp-grid sp-grid--2">
+              <div class="sp-card">
+                <h3>Weekend</h3>
+                <ul><li>Morning Aarti &mdash; 8:00 AM</li><li>Morning Katha &mdash; 9:00 AM</li><li>Evening Aarti &mdash; 5:30 PM</li><li>Evening Katha &mdash; 7:30 PM</li></ul>
+              </div>
+              <div class="sp-card">
+                <h3>Weekday</h3>
+                <ul><li>Morning Aarti &mdash; 8:00 AM</li><li>Morning Katha &mdash; 9:00 AM</li><li>Evening Aarti &mdash; 6:00 PM</li><li>Evening Katha &mdash; 7:00 PM</li></ul>
+              </div>
+            </div>
+
+            <h3 style="margin-top:1.5rem;">Full Schedule</h3>
+            <p>The full daily schedule as issued by Shree Swaminarayan Mandir Bhuj, Sydney. Tap any page to enlarge.</p>
+            <div class="sp-gallery">
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-01.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-01.jpg" alt="Schedule — cover" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-02.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-02.jpg" alt="Schedule — overview" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-03.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-03.jpg" alt="Schedule — Saturday 4 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-04.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-04.jpg" alt="Schedule — Sunday 5 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-05.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-05.jpg" alt="Schedule — Monday 6 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-06.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-06.jpg" alt="Schedule — Tuesday 7 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-07.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-07.jpg" alt="Schedule — Wednesday 8 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-08.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-08.jpg" alt="Schedule — Thursday 9 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-09.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-09.jpg" alt="Schedule — Friday 10 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-10.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-10.jpg" alt="Schedule — Saturday 11 July" loading="lazy"></a>
+              <a href="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-11.jpg" target="_blank" rel="noopener"><img src="https://manjulakerai.github.io/sangathan-webpage/images/schedule/page-11.jpg" alt="Schedule — Sunday 12 July" loading="lazy"></a>
+            </div>
+          </div>
+
+          <!-- Uniform -->
+          <div id="uniform" class="about-section">
+            <h2>Daily Uniform &amp; Dress Code</h2>
+            <img class="sp-poster" src="https://manjulakerai.github.io/sangathan-webpage/images/uniform-daily.jpeg" alt="Sangathan Parva daily uniform colours for gents and ladies, 4-12 July 2026">
+          </div>
+
+          <!-- Meals -->
+          <div id="meals" class="about-section">
+            <h2>Mealtimes &amp; Bhojan</h2>
+            <p>Meals will be served during Sangathan Parva. All food is pure vegetarian (satvik).</p>
+            <div class="sp-card">
+              <h3>Meal Times</h3>
+              <ul><li><strong>Lunch</strong> &mdash; 12:30 PM &ndash; 1:30 PM</li><li><strong>Dinner</strong> &mdash; From 6:30 PM</li><li>Prasad will be served after evening aarti</li></ul>
+            </div>
+          </div>
+
+          <!-- Register -->
+          <div id="register" class="about-section">
+            <h2>Register &mdash; Visiting Guests</h2>
+            <p>Travelling to Sydney for Sangathan Parva? Please register so we can better plan and accommodate all visiting Haribhakto.</p>
+            <p class="sp-center"><a class="sp-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdSqV-cw0FkpkCLV2ojfkSRWYZ_z5wmVfn1B_eGZ_dkwESUJg/viewform" target="_blank" rel="noopener">Register as a Visiting Guest</a></p>
+          </div>
+
+          <!-- Getting Here -->
+          <div id="travel" class="about-section">
+            <h2>Getting Here</h2>
+            <div class="sp-card">
+              <h3>Shree Swaminarayan Mandir Bhuj, Sydney</h3>
+              <p style="margin-bottom:8px;">1/3 Tasha Place<br>Kings Park, NSW 2148<br>Australia</p>
+              <p style="margin:0;"><a class="sp-btn sp-btn--outline" href="https://maps.google.com/maps?q=1/3+Tasha+Place,+Kings+Park,+NSW+2148,+Australia" target="_blank" rel="noopener">Open in Google Maps</a></p>
+            </div>
+          </div>
+
+          <!-- Donate -->
+          <div id="donate" class="about-section">
+            <h2>Donate &amp; Seva</h2>
+            <div class="sp-grid sp-grid--4">
+              <div class="sp-card"><h3>Financial Donation</h3><p>Help cover venue hire, decorations, sound &amp; lighting, and guest accommodation.</p></div>
+              <div class="sp-card"><h3>Sponsor a Meal</h3><p>Fund prasad or a community bhojan during the nine-day celebration.</p></div>
+              <div class="sp-card"><h3>In-Kind Support</h3><p>Donate supplies, equipment, or professional services.</p></div>
+              <div class="sp-card"><h3>Sponsor Printing</h3><p>Fund invitations, banners, signage, and event materials.</p></div>
+            </div>
+
+            <h3 style="margin-top:1.5rem;">Seva Opportunities</h3>
+            <table class="sp-table">
+              <thead><tr><th>Seva</th><th>Contribution</th></tr></thead>
+              <tbody>
+                <tr><td>Parayan Mukhya Yajman</td><td class="sp-time">$5,025</td></tr>
+                <tr><td>Parayan Sah Yajman</td><td class="sp-time">$3,025</td></tr>
+                <tr><td>Daily Prasad Roopi Bhojan</td><td class="sp-time">$2,525</td></tr>
+                <tr><td>Ankoot Yajman</td><td class="sp-time">$525</td></tr>
+                <tr><td>Kesar Jal Abhishek Yajman (Hari Krishna Maharaj)</td><td class="sp-time">$125</td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:10px;"><strong>Seva also accepted:</strong> airline tickets / visa for santos &amp; dharmakul, kids &amp; youth activities, ladies &amp; gents stage performance gifts, flowers seva, Nilkanth Pipeband instruments (male &amp; female), and Pothi Yatra male / youth / kids t-shirts.</p>
+            <img class="sp-poster" src="/images/seva-list.jpeg" alt="Sangathan Parva Seva List">
+            <p class="sp-center" style="margin-top:1.25rem;"><a class="sp-btn" href="https://www.vaishnavs.sydney/events" target="_blank" rel="noopener">Donate Online</a></p>
+          </div>
+
+          <!-- Contact -->
+          <div id="contact" class="about-section">
+            <h2>Contact &amp; Find Us</h2>
+            <div class="sp-card">
+              <h3>Shree Swaminarayan Mandir Bhuj, Sydney</h3>
+              <p style="margin-bottom:6px;">1/3 Tasha Place<br>Kings Park, NSW 2148<br>Australia</p>
+              <p style="margin:0;">&#128222; <a href="tel:+61296764480">(02) 9676 4480</a><br>
+                 &#127760; <a href="https://sydneytemple.org" target="_blank" rel="noopener">sydneytemple.org</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <% include partials/footer %>
+</body>
+
+</html>

@@ -16,6 +16,10 @@ router.get('/about-us', function (req, res, next) {
   res.render('about-us', { title: 'About the Temple' });
 });
 
+router.get('/sangathan', function (req, res, next) {
+  res.render('sangathan', { title: 'Sangathan' });
+});
+
 router.get('/mandir-history', function (req, res, next) {
   res.render('mandir-history', { title: 'Mandir History' });
 });
