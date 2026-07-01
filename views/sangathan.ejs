@@ -202,6 +202,10 @@
       @media (max-width: 560px){ .sp-guest { flex-direction: column; text-align: center; } }
 
       .sp-poster { display: block; margin: 1rem auto 0; max-width: 460px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+      .about-section a.sp-poster-link { display: block; border-bottom: none; }
+      .about-section a.sp-poster-link:hover { border-bottom: none; }
+      .sp-poster-link img { cursor: zoom-in; transition: transform 0.25s, box-shadow 0.25s; }
+      .sp-poster-link:hover img { transform: scale(1.02); box-shadow: 0 8px 26px rgba(0,0,0,0.22); }
 
       .sp-figures { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
       @media (max-width: 560px){ .sp-figures { grid-template-columns: 1fr; } }
@@ -328,7 +332,10 @@
           <!-- Uniform -->
           <div id="uniform" class="about-section">
             <h2>Daily Uniform &amp; Dress Code</h2>
-            <img class="sp-poster" src="https://manjulakerai.github.io/sangathan-webpage/images/uniform-daily.jpeg" alt="Sangathan Parva daily uniform colours for gents and ladies, 4-12 July 2026">
+            <a class="sp-poster-link" href="https://manjulakerai.github.io/sangathan-webpage/images/uniform-daily.jpeg" target="_blank" rel="noopener">
+              <img class="sp-poster" src="https://manjulakerai.github.io/sangathan-webpage/images/uniform-daily.jpeg" alt="Sangathan Parva daily uniform colours for gents and ladies, 4-12 July 2026">
+            </a>
+            <p class="sp-note sp-center" style="margin-top:0.6rem;">Tap the image to enlarge</p>
           </div>
 
           <!-- Meals -->
@@ -379,7 +386,10 @@
                 <tr><td>Kesar Jal Abhishek Yajman (Hari Krishna Maharaj)</td><td class="sp-time">$125</td></tr>
               </tbody>
             </table>
-            <img class="sp-poster" src="/images/seva-list.jpeg" alt="Sangathan Parva Seva List">
+            <a class="sp-poster-link" href="/images/seva-list.jpeg" target="_blank" rel="noopener">
+              <img class="sp-poster" src="/images/seva-list.jpeg" alt="Sangathan Parva Seva List">
+            </a>
+            <p class="sp-note sp-center" style="margin-top:0.6rem;">Tap the image to enlarge</p>
             <p class="sp-center" style="margin-top:1.25rem;"><a class="sp-btn" href="https://www.vaishnavs.sydney/events" target="_blank" rel="noopener">Donate Online</a></p>
           </div>
 
