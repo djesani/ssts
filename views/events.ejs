@@ -29,7 +29,7 @@
     <% include partials/top-grid %>
 
     <% if(streamEvent.isEnabled) { %>
-    <div class="container bg-red">
+    <div class="container <%= streamEvent.bgcolour || 'bg-purple' %>">
         <div class="row">
             <div class="col-xl12 col-md-12 col-sm-12" style="text-align: center; padding: 20px; color: #e9e9e9;">
                 <%= streamEvent.title %><br>
@@ -48,6 +48,9 @@
                 <% if(streamEvent.day4) { %> | <a href="<%= streamEvent.day4 %>" target="_blank">Day 4</a><% } %>
                 <% if(streamEvent.day5) { %> | <a href="<%= streamEvent.day5 %>" target="_blank">Day 5</a><% } %>
                 <% if(streamEvent.day6) { %> | <a href="<%= streamEvent.day6 %>" target="_blank">Day 6</a><% } %>
+                <% if(streamEvent.day7) { %> | <a href="<%= streamEvent.day7 %>" target="_blank">Day 7</a><% } %>
+                <% if(streamEvent.day8) { %> | <a href="<%= streamEvent.day8 %>" target="_blank">Day 8</a><% } %>
+                <% if(streamEvent.day9) { %> | <a href="<%= streamEvent.day9 %>" target="_blank">Day 9</a><% } %>
                 <% if(streamEvent.playlist) { %>View playlist <a href="<%= streamEvent.playlist %>" target="_blank">here</a><% } %>
             </div>
         </div>
