@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kirtans</title>
+    <style>
+        body {
+            background-color: #fff2e6;
+            color: #990101;
+            overflow: hidden;
+        }
+
+        :root {
+            --default-color: #990101;
+            --highlight-color: #ff6a00;
+            --highlight-font-size: 40px;
+            --transition-duration: 500ms;
+        }
+
+        #title {
+            font-size: 40px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 5px 0;
+            font-size: 30px;
+            width: 100%;
+            text-align: center;
+            color: var(--default-color);
+            font-weight: normal;
+            transition: all var(--transition-duration) ease-in-out;
+            position: absolute;
+        }
+
+        .no-animation {
+            transition: none;
+        }
+
+        #l0 { top: 10%; opacity: 0; }
+        #l1 { top: 30%; opacity: 1; }
+        #l2 { top: 50%; font-size: var(--highlight-font-size); font-weight: bold; color: var(--highlight-color); }
+        #l3 { top: 70%; opacity: 1; }
+        #l4 { top: 90%; opacity: 0; }
+
+        .list.grow #l0 { transform: translateY(-20%); opacity: 0; }
+        .list.grow #l1 { transform: translateY(-20%); opacity: 0; }
+        .list.grow #l2 { transform: translateY(-20%); font-size: 30px; }
+        .list.grow #l3 { transform: translateY(-20%); font-size: var(--highlight-font-size); }
+        .list.grow #l4 { transform: translateY(-20%); opacity: 1; }
+
+        .list.shrink #l0 { transform: translateY(20%); opacity: 1; }
+        .list.shrink #l1 { transform: translateY(20%); font-size: var(--highlight-font-size); color: var(--highlight-color); }
+        .list.shrink #l2 { transform: translateY(20%); font-size: 30px; }
+        .list.shrink #l3 { transform: translateY(20%); opacity: 0; }
+        .list.shrink #l4 { transform: translateY(20%); opacity: 0; }
+    </style>
+</head>
+
+<body>
+    <h1 id="title"></h1>
+    <ul id="list" class="list">
+        <li id="l0">Line 0</li>
+        <li id="l1">Line 1</li>
+        <li id="l2">Line 2</li>
+        <li id="l3">Line 3</li>
+        <li id="l4">Line 4</li>
+    </ul>
+
+    <script>
+        let kirtanJson;
+        let slides;
+        let index = 0;
+
+        document.addEventListener('keydown', (event) => {
+            if (event.keyCode === 38 && index > 0) {
+                prev();
+            } else if (event.keyCode === 40 && (index + 3) < slides.length) {
+                next();
+            }
+        });
+
+        async function loadData() {
+            const response = await fetch("data.json");
+            kirtanJson = await response.json();
+            const id = getUrlParamsId();
+            const kirtan = getKirtanById(id);
+            document.getElementById('title').innerText = kirtan.title_english;
+            slides = kirtan.description_english.split("\n");
+            renderSlides();
+        }
+
+        function getKirtanById(id) {
+            return kirtanJson.data.find(x => x.id == id) || kirtanJson.data.find(x => x.id == 1);
+        }
+
+        function getUrlParamsId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || 1;
+        }
+
+        function renderSlides() {
+            const slideElements = [document.getElementById('l0'), document.getElementById('l1'), document.getElementById('l2'), document.getElementById('l3'), document.getElementById('l4')];
+            slideElements.forEach((el, i) => {
+                el.innerHTML = slides[index - 1 + i] || "";
+            });
+        }
+
+        function updateList(className) {
+            const list = document.getElementById('list');
+            list.classList.remove("grow", "shrink");
+            list.classList.add(className);
+            setTimeout(() => {
+                // list.classList.remove(className);
+                renderSlides();
+            }, 500);
+        }
+
+        function prev() {
+            updateList("shrink");
+            index--;
+        }
+
+        function next() {
+            updateList("grow");
+            index++;
+        }
+
+        loadData();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .lyrics-container {
+            text-align: center;
+            overflow: hidden;
+            width: 80%;
+        }
+
+        .lyric {
+            opacity: 0;
+            transform: scale(1.2);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            margin: 20px 0;
+        }
+
+        .lyric.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .lyric.size-100 {
+            font-size: 100%;
+        }
+
+        .lyric.size-150 {
+            font-size: 150%;
+        }
+
+        .lyric.size-200 {
+            font-size: 200%;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .control-button {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="lyrics-container">
+        <p class="lyric size-100">This is the first line of the song</p>
+        <p class="lyric size-150">Here's the second line coming in</p>
+        <p class="lyric size-200">And now the third line appears</p>
+        <p class="lyric size-150">Next, the fourth line shows up</p>
+        <p class="lyric size-100">Finally, the fifth line is here</p>
+        <p class="lyric size-100">The sixth line continues</p>
+        <p class="lyric size-150">Seventh line in the sequence</p>
+        <p class="lyric size-200">Eighth line appears prominently</p>
+        <p class="lyric size-150">Ninth line shows up now</p>
+        <p class="lyric size-100">The tenth line finishes this part</p>
+        <p class="lyric size-100">Eleventh line starts here</p>
+        <p class="lyric size-150">Twelfth line coming in</p>
+        <p class="lyric size-200">Thirteenth line is next</p>
+        <p class="lyric size-150">Fourteenth line follows</p>
+        <p class="lyric size-100">And finally, the fifteenth line</p>
+    </div>
+
+    <div class="controls">
+        <button class="control-button" id="previous">Previous</button>
+        <button class="control-button" id="next">Next</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lyrics = document.querySelectorAll('.lyric');
+            const previousButton = document.getElementById('previous');
+            const nextButton = document.getElementById('next');
+            let index = 0;
+
+            function showLyrics() {
+                lyrics.forEach((lyric, i) => {
+                    lyric.classList.remove('active');
+                });
+
+                for (let i = index; i < index + 5; i++) {
+                    if (lyrics[i]) {
+                        lyrics[i].classList.add('active');
+                    }
+                }
+            }
+
+            function nextLyrics() {
+                if (index + 5 < lyrics.length) {
+                    index++;
+                    showLyrics();
+                }
+            }
+
+            function previousLyrics() {
+                if (index > 0) {
+                    index--;
+                    showLyrics();
+                }
+            }
+
+            nextButton.addEventListener('click', nextLyrics);
+            previousButton.addEventListener('click', previousLyrics);
+
+            showLyrics();
+        });
+    </script>
+</body>
+</html>

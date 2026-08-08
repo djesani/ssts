@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Presenter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css" id="theme">
+    <style>
+        .line {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            position: relative;
+            opacity: 1;
+        }
+        .line:nth-child(1), .line:nth-child(5) {
+            font-size: 60%;
+        }
+        .line:nth-child(2), .line:nth-child(4) {
+            font-size: 80%;
+        }
+        .line:nth-child(3) {
+            font-size: 100%;
+        }
+        .move-up {
+            transform: translateY(-100%);
+            /* opacity: 0; */
+        }
+        .move-down {
+            transform: translateY(100%);
+            /* opacity: 0; */
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <div id="line1" class="line"></div>
+                <div id="line2" class="line"></div>
+                <div id="line3" class="line"></div>
+                <div id="line4" class="line"></div>
+                <div id="line5" class="line"></div>
+            </section>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize();
+
+        const lyrics = [
+            "Line 1 of lyrics", "Line 2 of lyrics", "Line 3 of lyrics", "Line 4 of lyrics", "Line 5 of lyrics",
+            "Line 6 of lyrics", "Line 7 of lyrics", "Line 8 of lyrics", "Line 9 of lyrics", "Line 10 of lyrics",
+            "Line 11 of lyrics", "Line 12 of lyrics", "Line 13 of lyrics", "Line 14 of lyrics", "Line 15 of lyrics",
+            "Line 16 of lyrics", "Line 17 of lyrics", "Line 18 of lyrics", "Line 19 of lyrics", "Line 20 of lyrics"
+        ];
+
+        let currentIndex = 0;
+
+        function updatePresenter(direction) {
+            for (let i = 0; i < 5; i++) {
+                const line = document.getElementById(`line${i + 1}`);
+                line.classList.remove('move-up', 'move-down');
+                void line.offsetWidth; // Trigger reflow to restart animation
+                if (direction === 'next') {
+                    line.classList.add('move-up');
+                } else if (direction === 'previous') {
+                    line.classList.add('move-down');
+                }
+
+                // Event listener to clean up after the transition ends
+                line.addEventListener('transitionend', function handler() {
+                    line.classList.remove('move-up', 'move-down');
+                    line.style.opacity = 1; // Reset opacity to make text visible again
+                    line.style.transform = 'translateY(0)'; // Reset position to normal
+                    line.innerText = lyrics[(currentIndex + i) % lyrics.length];
+                    line.removeEventListener('transitionend', handler); // Remove the event listener
+                });
+            }
+        }
+
+        function next() {
+            currentIndex = (currentIndex + 1) % lyrics.length;
+            updatePresenter('next');
+        }
+
+        function previous() {
+            currentIndex = (currentIndex - 1 + lyrics.length) % lyrics.length;
+            updatePresenter('previous');
+        }
+
+        // Bind next and previous functions to Reveal.js navigation
+        Reveal.addEventListener('slidechanged', (event) => {
+            if (event.indexh > currentIndex) {
+                next();
+            } else if (event.indexh < currentIndex) {
+                previous();
+            }
+        });
+
+        // Initial display
+        updatePresenter();
+    </script>
+</body>
+</html>

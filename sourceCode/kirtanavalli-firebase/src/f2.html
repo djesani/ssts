@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Parcel Sandbox</title>
+	<meta charset="UTF-8" />
+
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	<!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> -->
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+	<script>
+		// Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: 'AIzaSyCCNCFjCCNlEhTmMjvokNanoh12pN7OwTU',
+            authDomain: 'popkorn-18f8b.firebaseapp.com',
+            databaseURL: 'https://popkorn-18f8b.firebaseio.com',
+            projectId: 'popkorn-18f8b',
+            storageBucket: 'popkorn-18f8b.appspot.com',
+            messagingSenderId: '762845453825',
+            appId: '1:762845453825:web:691639682a78a29e646a00',
+            measurementId: 'G-LFHQG844KS'
+        };
+		firebase.initializeApp(firebaseConfig);
+
+		// make auth and firestore references
+		// const auth = firebase.auth()
+		const db = firebase.firestore()
+
+        const users = db.collection('usersz');
+
+        console.log('db', db)
+
+        console.log('users', users)
+
+        // Get a list of cities from your database
+        async function getCities(db) {
+
+            
+
+           
+            // const citySnapshot = await getDocs(citiesCol);
+            // const cityList = citySnapshot.docs.map(doc => doc.data());
+            // return cityList;
+        }
+        // getCities();
+
+	</script>
+</body>
+
+</html>

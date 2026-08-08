@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist/out-tsc",
+        "moduleResolution": "bundler",
+        "types": []
+    },
+    "files": [
+        "source/main.ts"
+    ],
+    "include": [
+        "source/**/*.d.ts"
+    ]
+}

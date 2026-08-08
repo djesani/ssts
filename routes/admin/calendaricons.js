@@ -4,8 +4,8 @@ const express = require('express');
 const { calendarIconsFilePath } = require('../../config');
 const router = express.Router();
 
-const externalImagePath = "/images/calendaricons/";
-const externalImagePathRegex = "^\/images\/calendaricons\/";
+const externalImagePath = "/images/events/";
+const externalImagePathRegex = "^\/images\/events\/";
 
 const getDateFromTimestamp = timestamp => {
     const date = new Date(timestamp);

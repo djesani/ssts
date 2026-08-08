@@ -30,6 +30,19 @@ router.post('/basic',
     }
 });
 
+router.post('/basic2', function(req, res, next) {
+    const user = req.body;
+    console.log(user);
+
+    if( user.username === 'admin' && user.password === 'Swaminarayan19'){
+        console.log('Password matched!');
+        res.send('OK');
+    }else{
+        console.log('User not matched. Returning 401 error!');
+        res.status(401).send({status: 'UNAUTHORIZED', message: 'Unauthorized to login. Check credentials are correct.'});
+    }
+});
+
 router.post('/local',
     localAuth.authenticate('local'), function(req, res, next) {
     console.log(req.user);

@@ -1,0 +1,9 @@
+<div ng-controller="kirtanSearchCtrl">
+  Search: <input type="text" ng-model="query" />
+  <ul>
+    <li ng-repeat="kirtan in kirtans | filter: query">
+      {{kirtan.title_english}}
+      <a href="kirtans/{{kirtan.id}}">{{kirtan.id}}</a>
+    </li>
+  </ul>
+</div>

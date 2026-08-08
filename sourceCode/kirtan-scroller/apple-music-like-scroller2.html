@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .lyrics-container {
+            text-align: center;
+            overflow: hidden;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        .lyric {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            margin: 20px 0;
+        }
+
+        .lyric.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .lyric.size-100 {
+            font-size: 100%;
+        }
+
+        .lyric.size-150 {
+            font-size: 150%;
+        }
+
+        .lyric.size-200 {
+            font-size: 200%;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .control-button {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="lyrics-container">
+        <p class="lyric size-100"></p>
+        <p class="lyric size-150"></p>
+        <p class="lyric size-200"></p>
+        <p class="lyric size-150"></p>
+        <p class="lyric size-100"></p>
+    </div>
+
+    <div class="controls">
+        <button class="control-button" id="previous">Previous</button>
+        <button class="control-button" id="next">Next</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lyricsArray = [
+                "This is the first line of the song",
+                "Here's the second line coming in",
+                "And now the third line appears",
+                "Next, the fourth line shows up",
+                "Finally, the fifth line is here",
+                "The sixth line continues",
+                "Seventh line in the sequence",
+                "Eighth line appears prominently",
+                "Ninth line shows up now",
+                "The tenth line finishes this part",
+                "Eleventh line starts here",
+                "Twelfth line coming in",
+                "Thirteenth line is next",
+                "Fourteenth line follows",
+                "And finally, the fifteenth line",
+                "Sixteenth line in the song",
+                "Seventeenth line coming through",
+                "Eighteenth line showing up",
+                "Nineteenth line follows here",
+                "And finally, the twentieth line"
+            ];
+
+            const lyricsElements = document.querySelectorAll('.lyric');
+            const previousButton = document.getElementById('previous');
+            const nextButton = document.getElementById('next');
+            let index = 0;
+
+            function showLyrics() {
+                lyricsElements.forEach((lyric, i) => {
+                    lyric.textContent = lyricsArray[index + i] || '';
+                    lyric.classList.add('active');
+                });
+            }
+
+            function nextLyrics() {
+                if (index + 5 < lyricsArray.length) {
+                    index++;
+                    updateLyrics();
+                }
+            }
+
+            function previousLyrics() {
+                if (index > 0) {
+                    index--;
+                    updateLyrics();
+                }
+            }
+
+            function updateLyrics() {
+                lyricsElements.forEach(lyric => lyric.classList.remove('active'));
+                setTimeout(showLyrics, 100);
+            }
+
+            nextButton.addEventListener('click', nextLyrics);
+            previousButton.addEventListener('click', previousLyrics);
+
+            showLyrics();
+        });
+    </script>
+</body>
+</html>

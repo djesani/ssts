@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "kirtanavalli-firebase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fe": "npx ws --spa index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.8.0",
+    "local-web-server": "^5.3.1"
+  }
+}

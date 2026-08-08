@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reveal.js Lyrics Presentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
+</head>
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <!-- Slide with lyrics -->
+        <section id="lyrics-slide">
+            <h2>Lyrics</h2>
+            <ul id="lyrics-list"></ul>
+        </section>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script>
+    // Initialize Reveal.js
+    Reveal.initialize();
+
+    // Lyrics array with 20 items
+    const lyrics = [
+        "Line 1 of the song",
+        "Line 2 of the song",
+        "Line 3 of the song",
+        "Line 4 of the song",
+        "Line 5 of the song",
+        "Line 6 of the song",
+        "Line 7 of the song",
+        "Line 8 of the song",
+        "Line 9 of the song",
+        "Line 10 of the song",
+        "Line 11 of the song",
+        "Line 12 of the song",
+        "Line 13 of the song",
+        "Line 14 of the song",
+        "Line 15 of the song",
+        "Line 16 of the song",
+        "Line 17 of the song",
+        "Line 18 of the song",
+        "Line 19 of the song",
+        "Line 20 of the song"
+    ];
+
+    // Populate the lyrics slide
+    const lyricsList = document.getElementById('lyrics-list');
+    lyrics.forEach(line => {
+        const listItem = document.createElement('li');
+        listItem.textContent = line;
+        lyricsList.appendChild(listItem);
+    });
+</script>
+
+</body>
+</html>
